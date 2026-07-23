@@ -1,0 +1,60 @@
+---
+title: Getting started & account
+description: Account setup, workspace, billing, and integrations.
+---
+
+Everything you need to go from a fresh signup to a working workspace with your first integration connected.
+
+<Callout kind="tip">
+  New here? Work through the quickstart below in order. Each step takes a few minutes and unblocks the next one.
+</Callout>
+
+## Quickstart
+
+<Steps>
+  <Step title="Create your workspace" icon="building">
+    Sign up, name your workspace, and pick a region. Region cannot be changed later, so choose the one closest to your team.
+  </Step>
+
+  <Step title="Invite teammates" icon="users">
+    Open **Workspace settings → Members → Invite**. Enter one email per line and assign a role before sending. Invites expire after 7 days.
+  </Step>
+
+  <Step title="Connect an integration" icon="plug">
+    Go to **Developer settings → Apps** and create an OAuth app, or install a partner connector from the directory.
+  </Step>
+</Steps>
+
+## Roles
+
+| Role | Billing | Members | Projects |
+|---|---|---|---|
+| Owner | Full control | Manage all | Full access |
+| Admin | View only | Manage all | Full access |
+| Member | No access | View only | Assigned projects |
+
+## Billing and plans
+
+Upgrades take effect immediately and are prorated against the remainder of the current cycle. Downgrades apply at the start of the next cycle, so paid features stay available until then.
+
+Invoices are available under **Billing → Invoices** as downloadable PDFs. The billing contact receives a copy by email when each invoice is issued.
+
+## Developer integrations
+
+<ExpandableGroup>
+  <Expandable title="OAuth apps">
+    Create an app to receive a client ID and secret. At least one redirect URI must be registered before an authorization flow can complete.
+  </Expandable>
+
+  <Expandable title="Webhooks">
+    Webhooks are registered per project. Endpoints must be HTTPS and return a 2xx status within 5 seconds. Failed deliveries retry with exponential backoff for 24 hours.
+  </Expandable>
+
+  <Expandable title="API keys">
+    Keys can be rotated without downtime. Create the replacement key, deploy it, confirm traffic has moved, then revoke the old one.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="alert">
+  Never commit API keys or client secrets to version control. Store them in your platform's secret manager.
+</Callout>

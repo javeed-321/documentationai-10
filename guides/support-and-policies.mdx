@@ -1,0 +1,50 @@
+---
+title: Support & policies
+description: Help, status, troubleshooting, data, and policies.
+---
+
+Where to go when something breaks, and what the platform commits to on data and compliance.
+
+## Troubleshooting
+
+<ExpandableGroup>
+  <Expandable title="Login and session issues">
+    Clear the session cookie and retry in a private window. This resolves most cases where a stale token is being replayed.
+
+    If the problem persists across browsers, the account may be locked after repeated failed attempts. Locks clear automatically after 30 minutes.
+  </Expandable>
+
+  <Expandable title="Slow page loads">
+    Check the status page first. When status is green, disable browser extensions one at a time. Content blockers are the most common cause.
+
+    Persistent slowness on a single project usually points at a workflow with a wait-for-all merge holding runs open.
+  </Expandable>
+
+  <Expandable title="Webhook deliveries failing">
+    Confirm the endpoint is HTTPS, returns 2xx, and responds within 5 seconds. Deliveries retry with exponential backoff for 24 hours before being dropped.
+  </Expandable>
+</ExpandableGroup>
+
+## Contacting support
+
+Include your workspace ID and the request ID shown in the error banner. Those two values let support find the exact trace without a back and forth.
+
+| Plan | Channel | First response |
+|---|---|---|
+| Free | Community forum | Best effort |
+| Team | Email | 1 business day |
+| Enterprise | Email and shared channel | 4 business hours |
+
+## Data handling
+
+Deleted workspaces are purged from primary storage within 30 days and from backups within 90 days. Until purge completes, a workspace can be restored by support.
+
+## Privacy and GDPR
+
+Data subject requests are handled through the data request form and acknowledged within 72 hours. Export and erasure are both supported.
+
+Regional data residency is available on Enterprise, with EU and US regions selectable at workspace creation. Region cannot be changed after creation.
+
+<Callout kind="info">
+  These pages are demo content for this template. Replace them with your own policies before publishing to real users.
+</Callout>
