@@ -1,64 +1,62 @@
 ---
-title: Product guides
-description: Interface, projects, editor, automation, and workflows.
+title: Enterprise Users
+description: 'What the Enterprise model offers, and how to register for it.'
 ---
+## 1. Overview
 
-How the product is organized and how to build with it day to day.
+AlgoShack offers an Enterprise model for large-scale enterprise or business. An enterprise user account is associated with large-scale business and enterprise that has six or more users. As an enterprise user, you can upgrade to the paid version or renew your existing version by clicking on Upgrade/Renew button in the My Subscription page. To upgrade or renew your service, navigate to the My Subscription page by clicking your Profile name in the bottom-left corner of the Main screen and click the Upgrade/Renew button. As an enterprise user, you will be able to generate unlimited test cases and unlimited projects, with a default 1000 MB storage limit. You can contact sales to customize the storage.
 
-## Projects
+## 2. How to register as an Enterprise user
 
-Projects are the unit of work. Each one carries its own members, integrations, and automation rules, so permissions and configuration never leak between them.
+Enterprise users can register on the algoQA Platform using the Free Trial button available in the Pricing page. Perform the following:
 
 <Steps>
-  <Step title="Create a project" icon="plus">
-    From the dashboard, choose **New project**, give it a name, and pick the members who need access.
+  <Step title="New Step" title-type="p">
+    Enter the URL [algoshack.com](https://algoshack.com/) into the browser address bar.
   </Step>
 
-  <Step title="Configure integrations" icon="plug">
-    Attach the connectors this project needs. Integrations are scoped per project, not per workspace.
+  <Step title="Click the Pricing button in the navigation bar." title-type="p">
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070015532738/original/Tv6KRxKT-w1Ogc9f915mL74kE5NyNJuw2Q.png?1733465020" width="526" height="89" alt="algoshack.com navigation bar with URL field and Pricing menu item highlighted" caption=" " />
   </Step>
 
-  <Step title="Archive or restore" icon="archive">
-    Archiving hides a project without deleting data. Restore it at any time from **Settings → Archived**.
+  <Step title="The Pricing page appears." title-type="p">
+    In the Pricing page, click the Free Trial button to subscribe as an Enterprise Trial user. For more information, visit the [Pricing](https://algoshack.net/pricing/) page.
+  </Step>
+
+  <Step title="The Sign Up for Enterprise Trial page appears." title-type="p">
+    On this page, enter the required details, select the Terms and Privacy checkbox. The left pane of the page displays the list of features included in your plan.
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070030128757/original/QGeUd1e7WMGQdyLMrinnzGk2DXMCYXdcaw.png?1758027770" width="501" height="442" alt="Enterprise Trial sign up form with name, email, password, company fields and Continue button" caption=" " />
+  </Step>
+
+  <Step title="Click Continue, then select the required automation types in the selection window." title-type="p">
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070030128853/original/RUkE3X-yLsbN6M3TD-bk1nhMm3pNhLN5ig.png?1758027877" width="500" height="333" alt="Enterprise Trial requirements page with automation type checkboxes and disabled Create button" caption=" " />
+  </Step>
+
+  <Step title="Click Create to register as an Enterprise user." title-type="p">
+
+  </Step>
+
+  <Step title="If you wish to upgrade to Paid version, then click the Contact Sales button available in the Pricing page." title-type="p">
+    A pop-up window appears for you to enter your details, such as full name, email address, mobile number, organization name, job title and select the required automation types.
+  </Step>
+
+  <Step title="After entering all the details, click the Submit button." title-type="p">
+
+  </Step>
+
+  <Step title="You will receive an email at the registered email address stating that your account is being processed, and you will receive a confirmation email." title-type="p">
+
+  </Step>
+
+  <Step title="You can sign in after that." title-type="p">
+    Note: When a new user logs in via SSO to application, they are automatically signed up in the application without being prompted to fill out any forms or provide additional details. After sign-up, subscription details are automatically assigned to the user. Existing users remain unaffected, and there is no impact on their accounts or workflows.
+  </Step>
+
+  <Step title="f the same account is used on a different device, a pop-up notification appears indicating that an active session already exists." title-type="p">
+    You will be prompted to confirm whether you want to continue. If you choose to continue, the new session is activated and the previous session is logged out automatically. A notification email is then sent to the registered email address with the login details, prompting you to review the activity if it was not initiated by you.
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070030612494/original/o5ipSl4BzTajlngzoD6G3fiDA4gmsMyo8g.png?1758783137" width="376" height="199" alt="Account signed in elsewhere warning popup with Cancel and Continue Login buttons" caption=" " />
   </Step>
 </Steps>
 
-## Workflows
-
-A workflow is a directed graph of nodes. Runs enter at a trigger, flow through transforms, and end at one or more outputs.
-
-```mermaid
-graph TD
-    A[Trigger] --> B{Condition}
-    B -->|Match| C[Transform]
-    B -->|No match| D[Skip]
-    C --> E[Merge]
-    D --> E
-    E --> F[Output]
-```
-
-### Conditions and branches
-
-A condition node splits the run into branches that are evaluated top to bottom. The first match wins, and remaining branches are skipped.
-
-Branches rejoin at a merge node. By default a merge waits for every inbound path to settle. Set it to first-arrival when you want the fastest branch to continue immediately.
-
-<Callout kind="alert">
-  A branch that never resolves will hold a wait-for-all merge open until the run times out. Give every branch a terminal path.
-</Callout>
-
-## Editor
-
-<Tabs>
-  <Tab title="Canvas" icon="layout-dashboard">
-    Drag nodes from the palette onto the canvas. Connect them by dragging from an output port to an input port.
-  </Tab>
-
-  <Tab title="Inspector" icon="settings">
-    Select any node to edit its configuration in the right panel. Changes apply to the draft until you publish.
-  </Tab>
-
-  <Tab title="Runs" icon="play">
-    The runs tab replays past executions node by node, with the payload at each step.
-  </Tab>
-</Tabs>
