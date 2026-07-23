@@ -8,152 +8,93 @@ show-parent-label: false
 content-width: wide
 ---
 
-<div id="dai-help-center">
-  <div className="hc-shell">
-    <div className="hc-hero">
-      <h1 className="hc-hero__title">How can we help?</h1>
-      <p className="hc-hero__subtitle">Search the Help Center for setup guides, product how-tos, automation tips, and policies, all in one place.</p>
-      <div className="hc-hero__actions">
-        <div className="hc-search" data-hc-search role="button" tabIndex={0} aria-label="Search for articles">
-          <svg className="hc-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.5" y2="16.5" /></svg>
-          <input className="hc-search__input" type="text" placeholder="Search for articles" readOnly aria-hidden="true" tabIndex={-1} />
-          <span className="hc-search__kbd">⌘K</span>
-        </div>
-        <button className="hc-askai" type="button" data-hc-askai aria-label="Ask AI">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#166534" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 15.6l-1.7-4.6L6 9.3l4.3-1.7z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" /></svg><span>Ask AI</span>
-        </button>
+<div id="dai-help-center" className="dai-help-center">
+  <div className="hc-hero">
+    <h1 className="hc-hero__title">How can we help?</h1>
+    <p className="hc-hero__subtitle">Search the Help Center for setup guides, product how-tos, automation tips, and policies, all in one place.</p>
+    <div className="hc-hero__actions">
+      <div className="hc-search" data-hc-search role="button" tabIndex={0} aria-label="Search for articles">
+        <svg className="hc-search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2" strokeLinecap="round"><circle cx="11" cy="11" r="7" /><line x1="21" y1="21" x2="16.5" y2="16.5" /></svg>
+        <input className="hc-search__input" type="text" placeholder="Search for articles" readOnly aria-hidden="true" tabIndex={-1} />
+        <span className="hc-search__kbd">⌘K</span>
       </div>
-      <div className="hc-popular">
-        <span className="hc-popular__label">Popular searches</span>
-        <span className="hc-tag" data-hc-tag role="button" tabIndex={0}>INTEGRATIONS</span>
-        <span className="hc-tag" data-hc-tag role="button" tabIndex={0}>WORKSPACE</span>
-        <span className="hc-tag" data-hc-tag role="button" tabIndex={0}>BILLING</span>
-      </div>
+      <button className="hc-askai" type="button" data-hc-askai aria-label="Ask AI">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#166534" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3l1.7 4.6L18 9.3l-4.3 1.7L12 15.6l-1.7-4.6L6 9.3l4.3-1.7z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" /></svg><span>Ask AI</span>
+      </button>
     </div>
-    <div className="hc-section hc-section--featured">
-      <h2 className="hc-section__title">Featured guides</h2>
-      <div className="hc-grid hc-grid--3">
-        <a className="hc-feature" href="/guides/getting-started-and-account">
-          <span className="hc-feature__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.18 2.18 0 0 0-2.9-.1z" /><path d="M12 15l-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.9 7.5-6 11a22.4 22.4 0 0 1-4 2z" /><path d="M9 12H4s.6-3.3 2-4.5c1.6-1.4 5-1 5-1" /><path d="M12 15v5s3.3-.6 4.5-2c1.4-1.6 1-5 1-5" /></svg>
-          </span>
-          <span className="hc-feature__body">
-            <span className="hc-feature__title">Getting started &amp; account</span>
-            <span className="hc-feature__desc">Account setup, workspace, billing, and integrations</span>
-          </span>
-        </a>
-        <a className="hc-feature" href="/guides/product-guides">
-          <span className="hc-feature__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M2 4h6a4 4 0 0 1 4 4v12a3 3 0 0 0-3-3H2z" /><path d="M22 4h-6a4 4 0 0 0-4 4v12a3 3 0 0 1 3-3h7z" /></svg>
-          </span>
-          <span className="hc-feature__body">
-            <span className="hc-feature__title">Product guides</span>
-            <span className="hc-feature__desc">Interface, projects, editor, automation, and workflows</span>
-          </span>
-        </a>
-        <a className="hc-feature" href="/guides/support-and-policies">
-          <span className="hc-feature__icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" /><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" /><path d="M4.9 4.9l4.3 4.3" /><path d="M14.8 14.8l4.3 4.3" /><path d="M14.8 9.2l4.3-4.3" /><path d="M9.2 14.8l-4.3 4.3" /></svg>
-          </span>
-          <span className="hc-feature__body">
-            <span className="hc-feature__title">Support &amp; policies</span>
-            <span className="hc-feature__desc">Help, status, troubleshooting, data, and policies</span>
-          </span>
-        </a>
-      </div>
-    </div>
-    <div className="hc-divider" />
-    <div className="hc-section">
-      <h2 className="hc-section__title">All guides</h2>
-      <div className="hc-grid hc-grid--3">
-        <a className="hc-guide" href="/guides/getting-started-and-account">
-          <span className="hc-guide__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" /><path d="M2 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2" /><path d="M16 3.1a4 4 0 0 1 0 7.8" /><path d="M22 21v-2a4 4 0 0 0-3-3.9" /></svg>
-          </span>
-          <span className="hc-guide__title">Workspace</span>
-          <span className="hc-guide__desc">Invites, roles, and organization settings</span>
-          <span className="hc-guide__meta"><span>3 articles</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-guide" href="/guides/getting-started-and-account">
-          <span className="hc-guide__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" /><path d="M2 10h20" /></svg>
-          </span>
-          <span className="hc-guide__title">Billing &amp; plans</span>
-          <span className="hc-guide__desc">Compare plans, upgrades, and invoices</span>
-          <span className="hc-guide__meta"><span>3 articles</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-guide" href="/guides/getting-started-and-account">
-          <span className="hc-guide__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M16 18l6-6-6-6" /><path d="M8 6l-6 6 6 6" /></svg>
-          </span>
-          <span className="hc-guide__title">Developer integrations</span>
-          <span className="hc-guide__desc">OAuth apps, webhooks, and API keys</span>
-          <span className="hc-guide__meta"><span>3 articles</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-guide" href="/guides/product-guides">
-          <span className="hc-guide__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" /><path d="M8 10v4" /><path d="M12 10v2" /><path d="M16 10v4" /></svg>
-          </span>
-          <span className="hc-guide__title">Projects</span>
-          <span className="hc-guide__desc">Create projects and archive or restore them</span>
-          <span className="hc-guide__meta"><span>2 articles</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-guide" href="/guides/support-and-policies">
-          <span className="hc-guide__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" /></svg>
-          </span>
-          <span className="hc-guide__title">Troubleshooting</span>
-          <span className="hc-guide__desc">Login issues and performance troubleshooting</span>
-          <span className="hc-guide__meta"><span>2 articles</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-guide" href="/guides/support-and-policies">
-          <span className="hc-guide__icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3v18" /><path d="M8 21h8" /><path d="M6 7l-4 7c0 1.7 1.8 3 4 3s4-1.3 4-3l-4-7z" /><path d="M18 7l-4 7c0 1.7 1.8 3 4 3s4-1.3 4-3l-4-7z" /><path d="M4 7h16" /></svg>
-          </span>
-          <span className="hc-guide__title">Legal &amp; compliance</span>
-          <span className="hc-guide__desc">Terms of service, privacy &amp; GDPR, and regional specifics</span>
-          <span className="hc-guide__meta"><span>7 articles</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-      </div>
-    </div>
-    <div className="hc-divider" />
-    <div className="hc-section">
-      <h2 className="hc-section__title hc-section__title--tight">Suggested articles</h2>
-      <p className="hc-section__subtitle">Popular starting points from the Help Center</p>
-      <div className="hc-grid hc-grid--2">
-        <a className="hc-article" href="/guides/getting-started-and-account">
-          <span className="hc-article__thumb">
-            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" /><path d="M12 13V9" /><path d="M10 2h4" /></svg>
-          </span>
-          <span className="hc-article__title">Quickstart: get set up in under 15 minutes</span>
-          <span className="hc-article__desc">A fast path from signup to first project: invites, roles, and your first integration.</span>
-          <span className="hc-article__cta"><span>Read article</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-article" href="/guides/product-guides">
-          <span className="hc-article__thumb">
-            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /><path d="M18 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" /><path d="M6 9v12" /><path d="M18 15a9 9 0 0 0-9-6" /></svg>
-          </span>
-          <span className="hc-article__title">Conditions and branches</span>
-          <span className="hc-article__desc">Model conditional paths and merge strategies in workflows.</span>
-          <span className="hc-article__cta"><span>Read article</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-article" href="/guides/support-and-policies">
-          <span className="hc-article__thumb">
-            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M8 21h12a2 2 0 0 0 2-2v-2H10v2a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v3h4" /><path d="M19 17V5a2 2 0 0 0-2-2H4" /><path d="M15 8h-5" /><path d="M15 12h-5" /></svg>
-          </span>
-          <span className="hc-article__title">Privacy policy</span>
-          <span className="hc-article__desc">Demo privacy policy for this help center.</span>
-          <span className="hc-article__cta"><span>Read article</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-        <a className="hc-article" href="/guides/getting-started-and-account">
-          <span className="hc-article__thumb">
-            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h2" /><path d="M18 14h-8" /><path d="M15 18h-5" /><path d="M10 6h8v4h-8z" /></svg>
-          </span>
-          <span className="hc-article__title">Connect your CRM</span>
-          <span className="hc-article__desc">Link Salesforce or HubSpot through partner connectors or a custom sync strategy.</span>
-          <span className="hc-article__cta"><span>Read article</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b746e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 6l6 6-6 6" /></svg></span>
-        </a>
-      </div>
+    <div className="hc-popular">
+      <span className="hc-popular__label">Popular searches</span>
+      <span className="hc-tag" data-hc-tag role="button" tabIndex={0}>INTEGRATIONS</span>
+      <span className="hc-tag" data-hc-tag role="button" tabIndex={0}>WORKSPACE</span>
+      <span className="hc-tag" data-hc-tag role="button" tabIndex={0}>BILLING</span>
     </div>
   </div>
 </div>
+
+## Featured guides
+
+<Columns cols="3">
+  <Card title="Getting started & account" href="/guides/getting-started-and-account" icon="rocket" horizontal="false">
+    Account setup, workspace, billing, and integrations
+  </Card>
+
+  <Card title="Product guides" href="/guides/product-guides" icon="book-open" horizontal="false">
+    Interface, projects, editor, automation, and workflows
+  </Card>
+
+  <Card title="Support & policies" href="/guides/support-and-policies" icon="life-buoy" horizontal="false">
+    Help, status, troubleshooting, data, and policies
+  </Card>
+</Columns>
+
+---
+
+## All guides
+
+<Columns cols="3">
+  <Card title="Workspace" href="/guides/getting-started-and-account" icon="users" horizontal="false">
+    Invites, roles, and organization settings
+  </Card>
+
+  <Card title="Billing & plans" href="/guides/getting-started-and-account" icon="credit-card" horizontal="false">
+    Compare plans, upgrades, and invoices
+  </Card>
+
+  <Card title="Developer integrations" href="/guides/getting-started-and-account" icon="code" horizontal="false">
+    OAuth apps, webhooks, and API keys
+  </Card>
+
+  <Card title="Projects" href="/guides/product-guides" icon="folder-kanban" horizontal="false">
+    Create projects and archive or restore them
+  </Card>
+
+  <Card title="Troubleshooting" href="/guides/support-and-policies" icon="wrench" horizontal="false">
+    Login issues and performance troubleshooting
+  </Card>
+
+  <Card title="Legal & compliance" href="/guides/support-and-policies" icon="scale" horizontal="false">
+    Terms of service, privacy & GDPR, and regional specifics
+  </Card>
+</Columns>
+
+---
+
+## Suggested articles
+
+<Columns cols="2">
+  <Card title="Quickstart: get set up in under 15 minutes" href="/guides/getting-started-and-account" icon="timer" horizontal="false">
+    A fast path from signup to first project: invites, roles, and your first integration.
+  </Card>
+
+  <Card title="Conditions and branches" href="/guides/product-guides" icon="git-branch" horizontal="false">
+    Model conditional paths and merge strategies in workflows.
+  </Card>
+
+  <Card title="Privacy policy" href="/guides/support-and-policies" icon="scroll" horizontal="false">
+    Demo privacy policy for this help center.
+  </Card>
+
+  <Card title="Connect your CRM" href="/guides/getting-started-and-account" icon="newspaper" horizontal="false">
+    Link Salesforce or HubSpot through partner connectors or a custom sync strategy.
+  </Card>
+</Columns>
