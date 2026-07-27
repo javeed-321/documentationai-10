@@ -1,62 +1,93 @@
 ---
-title: Enterprise Users
-description: 'What the Enterprise model offers, and how to register for it.'
+title: Executing Selenium Scripts Using Docker
+description: >-
+  Install Docker, build the image, and run algoQA Selenium scripts inside a
+  container.
 ---
+## Executing Selenium Scripts Using Docker Container
+
 ## 1. Overview
 
-AlgoShack offers an Enterprise model for large-scale enterprise or business. An enterprise user account is associated with large-scale business and enterprise that has six or more users. As an enterprise user, you can upgrade to the paid version or renew your existing version by clicking on Upgrade/Renew button in the My Subscription page. To upgrade or renew your service, navigate to the My Subscription page by clicking your Profile name in the bottom-left corner of the Main screen and click the Upgrade/Renew button. As an enterprise user, you will be able to generate unlimited test cases and unlimited projects, with a default 1000 MB storage limit. You can contact sales to customize the storage.
+Docker is an open source platform that helps you in developing, shipping and running applications. Docker allows you to package and run applications in a loosely isolated environment known as a container.
 
-## 2. How to register as an Enterprise user
+When working with Docker, you create and use images, containers, and various other components. A container is an operational instance of an image that can be executed. For more information, refer to [Docker Overview](https://docs.docker.com/guides/docker-overview/) document.
 
-Enterprise users can register on the algoQA Platform using the Free Trial button available in the Pricing page. Perform the following:
+## 2. Installing Docker
+
+To install Docker Desktop installer for windows, click [here](/automation-by-application/web-application-test-automation/executing-selenium-scripts-using-docker-container/installing-docker-container).
+
+## 3. Executing Selenium Scripts on Windows
+
+### 3.1 Setting the Browser Type in the Application Settings File
+
+Perform the following:
 
 <Steps>
-  <Step title="New Step" title-type="p">
-    Enter the URL [algoshack.com](https://algoshack.com/) into the browser address bar.
+  <Step title="After generating the script, download it to your local folder." title-type="p">
+    This folder must contain the script file that you have generated.
   </Step>
 
-  <Step title="Click the Pricing button in the navigation bar." title-type="p">
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070015532738/original/Tv6KRxKT-w1Ogc9f915mL74kE5NyNJuw2Q.png?1733465020" width="526" height="89" alt="algoshack.com navigation bar with URL field and Pricing menu item highlighted" caption=" " />
+  <Step title="Open the folder where you downloaded the script." title-type="p">
+    For example, if your script is located at AlgoAFScript\_202402121131\src\test\java, navigate to this folder. Applications.xml file will be available in the Java folder as shown:
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008616380/original/Mi4z1FxY3YhsKobE3sqxeEu938p-53Bw2g.png?1719925630" data-local-src="/images-algoshack/1070000063726-assertions-p3-2.png" alt="File explorer listing with ApplicationSettings.xml file highlighted among project folders" caption=" " width="491" height="211" />
   </Step>
 
-  <Step title="The Pricing page appears." title-type="p">
-    In the Pricing page, click the Free Trial button to subscribe as an Enterprise Trial user. For more information, visit the [Pricing](https://algoshack.net/pricing/) page.
-  </Step>
+  <Step title="Open the Application Settings file and locate the setting related to the Browser Type." title-type="p">
+    Set this setting to Headless Chrome to run the script in the headless mode. Note: You can run scripts in incognito mode in chrome and firefox, to run scripts in incognito mode in edge, please add webdriver path in application settings
 
-  <Step title="The Sign Up for Enterprise Trial page appears." title-type="p">
-    On this page, enter the required details, select the Terms and Privacy checkbox. The left pane of the page displays the list of features included in your plan.
-
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070030128757/original/QGeUd1e7WMGQdyLMrinnzGk2DXMCYXdcaw.png?1758027770" width="501" height="442" alt="Enterprise Trial sign up form with name, email, password, company fields and Continue button" caption=" " />
-  </Step>
-
-  <Step title="Click Continue, then select the required automation types in the selection window." title-type="p">
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070030128853/original/RUkE3X-yLsbN6M3TD-bk1nhMm3pNhLN5ig.png?1758027877" width="500" height="333" alt="Enterprise Trial requirements page with automation type checkboxes and disabled Create button" caption=" " />
-  </Step>
-
-  <Step title="Click Create to register as an Enterprise user." title-type="p">
-
-  </Step>
-
-  <Step title="If you wish to upgrade to Paid version, then click the Contact Sales button available in the Pricing page." title-type="p">
-    A pop-up window appears for you to enter your details, such as full name, email address, mobile number, organization name, job title and select the required automation types.
-  </Step>
-
-  <Step title="After entering all the details, click the Submit button." title-type="p">
-
-  </Step>
-
-  <Step title="You will receive an email at the registered email address stating that your account is being processed, and you will receive a confirmation email." title-type="p">
-
-  </Step>
-
-  <Step title="You can sign in after that." title-type="p">
-    Note: When a new user logs in via SSO to application, they are automatically signed up in the application without being prompted to fill out any forms or provide additional details. After sign-up, subscription details are automatically assigned to the user. Existing users remain unaffected, and there is no impact on their accounts or workflows.
-  </Step>
-
-  <Step title="f the same account is used on a different device, a pop-up notification appears indicating that an active session already exists." title-type="p">
-    You will be prompted to confirm whether you want to continue. If you choose to continue, the new session is activated and the previous session is logged out automatically. A notification email is then sent to the registered email address with the login details, prompting you to review the activity if it was not initiated by you.
-
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070030612494/original/o5ipSl4BzTajlngzoD6G3fiDA4gmsMyo8g.png?1758783137" width="376" height="199" alt="Account signed in elsewhere warning popup with Cancel and Continue Login buttons" caption=" " />
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008617804/original/KSo4bLsqrJlEytiNpmn4u3_3hXsP3ANuIQ.png?1719927393" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p2-1.png" alt="ApplicationSettings file with BrowserType set to Headless Chrome highlighted" caption=" " width="490" height="256" />
   </Step>
 </Steps>
 
+### 3.2 Adding the Docker files into the algoQA Script Generated Folder
+
+Perform the following:
+
+1. Download the attached Docker file which creates an environment in a Docker container for running Maven tests using Cucumber. This Docker file creates an image and adds the required files and helps in running the container.
+2. Navigate to the Downloads folder > open the Docker file and save the Docker file into same folder where your script is generated, as shown:
+   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008619492/original/qdViKQBID6W01L6IICom5i0f1SWFAQndZw.png?1719929796" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p2-2.png" alt="File explorer view of project folder with Dockerfile highlighted among src, target and pom.xml" caption=" " width="442" height="303" />
+
+### 3.3 Running the Container
+
+To the run the container, you need to first build the Docker image and then execute the Docker image. Perform the following:
+
+<Steps>
+  <Step title="To build the docker image, run the following command in the command prompt:" title-type="p">
+    ```bash
+    docker build -t <name>
+    ```
+
+    Replace name with actual name (for example, test1). This command builds an image, as shown:
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008656922/original/F_Yi0g1_fsmd6OnNxpfMxN6VcnB96Co8rw.png?1720007205" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p3-1.png" alt="Terminal showing docker build -t test1 command output with build finished steps" caption=" " width="490" height="145" />
+  </Step>
+
+  <Step title="To verify if the image has been created successfully, run the following command in the command prompt:" title-type="p">
+    ```bash
+    Docker images
+    ```
+
+    ```bash
+    The following screenshot represents the docker image created, as shown:
+    ```
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008654105/original/qBUzGekH5gJNl62UW9GFi2JgN22dVlgnTA.png?1720004746" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p3-3.png" alt="Command prompt showing docker images command output listing test1 latest image" caption=" " width="398" height="119" />
+  </Step>
+
+  <Step title="To execute the docker image, run the following command in the command prompt:" title-type="p">
+    ```bash
+    docker run <image name>
+    ```
+
+    Replace image name with the actual name (for example, test1, as shown). This command executes the Docker image and downloads all the necessary dependencies'.
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008655985/original/pFZx8FOPaujtlEX26B2D4Da24OYAd499Xw.png?1720006274" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p3-2.png" alt="Command prompt running docker run test1 with Maven build log showing warnings and downloads" caption=" " width="490" height="174" />
+  </Step>
+</Steps>
+
+## Attachment
+
+<Card title="Dockerfile .txt" href="https://algoshack-support.freshdesk.com/helpdesk/attachments/1070008659608" icon="download" horizontal="true">
+  TXT, 144 Bytes
+</Card>
