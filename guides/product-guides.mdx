@@ -6,88 +6,21 @@ description: >-
 ---
 ## Executing Selenium Scripts Using Docker Container
 
-## 1. Overview
-
-Docker is an open source platform that helps you in developing, shipping and running applications. Docker allows you to package and run applications in a loosely isolated environment known as a container.
-
-When working with Docker, you create and use images, containers, and various other components. A container is an operational instance of an image that can be executed. For more information, refer to [Docker Overview](https://docs.docker.com/guides/docker-overview/) document.
-
-## 2. Installing Docker
-
-To install Docker Desktop installer for windows, click [here](/automation-by-application/web-application-test-automation/executing-selenium-scripts-using-docker-container/installing-docker-container).
-
-## 3. Executing Selenium Scripts on Windows
-
-### 3.1 Setting the Browser Type in the Application Settings File
-
-Perform the following:
-
 <Steps>
-  <Step title="After generating the script, download it to your local folder." title-type="p">
-    This folder must contain the script file that you have generated.
+  <Step title="Accessing the Application:" title-type="p">
+    Ensure that you have access to the application.
   </Step>
 
-  <Step title="Open the folder where you downloaded the script." title-type="p">
-    For example, if your script is located at AlgoAFScript\_202402121131\src\test\java, navigate to this folder. Applications.xml file will be available in the Java folder as shown:
+  <Step title="Navigating to the SIM Cards section:" title-type="p">
 
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008616380/original/Mi4z1FxY3YhsKobE3sqxeEu938p-53Bw2g.png?1719925630" data-local-src="/images-algoshack/1070000063726-assertions-p3-2.png" alt="File explorer listing with ApplicationSettings.xml file highlighted among project folders" caption=" " width="491" height="211" />
   </Step>
 
-  <Step title="Open the Application Settings file and locate the setting related to the Browser Type." title-type="p">
-    Set this setting to Headless Chrome to run the script in the headless mode. Note: You can run scripts in incognito mode in chrome and firefox, to run scripts in incognito mode in edge, please add webdriver path in application settings
+  <Step title="Click on the &#x22;Mobiles&#x22; section on the online shopping site in India." title-type="p">
 
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008617804/original/KSo4bLsqrJlEytiNpmn4u3_3hXsP3ANuIQ.png?1719927393" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p2-1.png" alt="ApplicationSettings file with BrowserType set to Headless Chrome highlighted" caption=" " width="490" height="256" />
+  </Step>
+
+  <Step title="Within the mobile phones section, locate and click on SIM Cards." title-type="p">
+
   </Step>
 </Steps>
 
-### 3.2 Adding the Docker files into the algoQA Script Generated Folder
-
-Perform the following:
-
-1. Download the attached Docker file which creates an environment in a Docker container for running Maven tests using Cucumber. This Docker file creates an image and adds the required files and helps in running the container.
-2. Navigate to the Downloads folder > open the Docker file and save the Docker file into same folder where your script is generated, as shown:
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008619492/original/qdViKQBID6W01L6IICom5i0f1SWFAQndZw.png?1719929796" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p2-2.png" alt="File explorer view of project folder with Dockerfile highlighted among src, target and pom.xml" caption=" " width="442" height="303" />
-
-### 3.3 Running the Container
-
-To the run the container, you need to first build the Docker image and then execute the Docker image. Perform the following:
-
-<Steps>
-  <Step title="To build the docker image, run the following command in the command prompt:" title-type="p">
-    ```bash
-    docker build -t <name>
-    ```
-
-    Replace name with actual name (for example, test1). This command builds an image, as shown:
-
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008656922/original/F_Yi0g1_fsmd6OnNxpfMxN6VcnB96Co8rw.png?1720007205" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p3-1.png" alt="Terminal showing docker build -t test1 command output with build finished steps" caption=" " width="490" height="145" />
-  </Step>
-
-  <Step title="To verify if the image has been created successfully, run the following command in the command prompt:" title-type="p">
-    ```bash
-    Docker images
-    ```
-
-    ```bash
-    The following screenshot represents the docker image created, as shown:
-    ```
-
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008654105/original/qBUzGekH5gJNl62UW9GFi2JgN22dVlgnTA.png?1720004746" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p3-3.png" alt="Command prompt showing docker images command output listing test1 latest image" caption=" " width="398" height="119" />
-  </Step>
-
-  <Step title="To execute the docker image, run the following command in the command prompt:" title-type="p">
-    ```bash
-    docker run <image name>
-    ```
-
-    Replace image name with the actual name (for example, test1, as shown). This command executes the Docker image and downloads all the necessary dependencies'.
-
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070008655985/original/pFZx8FOPaujtlEX26B2D4Da24OYAd499Xw.png?1720006274" data-local-src="/images-algoshack/1070000068313-executing-selenium-scripts-using-docker-container-p3-2.png" alt="Command prompt running docker run test1 with Maven build log showing warnings and downloads" caption=" " width="490" height="174" />
-  </Step>
-</Steps>
-
-## Attachment
-
-<Card title="Dockerfile .txt" href="https://algoshack-support.freshdesk.com/helpdesk/attachments/1070008659608" icon="download" horizontal="true">
-  TXT, 144 Bytes
-</Card>
