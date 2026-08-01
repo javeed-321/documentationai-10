@@ -40,7 +40,12 @@
             "expandable": false,
             "pages": [
               {
-                "title": "Getting started & account",
+                "title": "checking-using-actions",
+                "path": "checking-using-actions",
+                "icon": "album-icon"
+              },
+              {
+                "title": "using-actions",
                 "path": "guides/getting-started-and-account",
                 "icon": "rocket"
               },

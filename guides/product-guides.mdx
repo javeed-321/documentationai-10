@@ -1,13 +1,156 @@
 ---
-title: Executing Selenium Scripts Using Docker
+title: algoScraper as an Extension for Web Applications
 description: >-
-  Install Docker, build the image, and run algoQA Selenium scripts inside a
-  container.
+  algoScraper, available as a extension for web applications, captures all User
+  Interface (UI) elements and their corresponding XPaths.
 ---
-## Executing Selenium Scripts Using Docker Container
+Applicable to Chrome and Edge Browsers
+
+## 1. Overview
+
+algoScraper, available as a extension for web applications, captures all User Interface (UI) elements and their corresponding XPaths. algoScraper can also be used in VM environment.
+
+## 2. Prerequisite
+
+To integrate this tool into your Chrome or Edge browser, Click [**here**](https://chromewebstore.google.com/detail/algoscraper/jalheggejiokjibkjhegkbabogmgnlmm?pli=1). Select the  icon corresponding to the extension to view it on your browser bar, as shown:
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070005188776/original/kIiXS1rm8rn4m9l9gRtiOLxcvTEC5cXcRg.png?1710485391" width="350" height="58" alt="Chrome toolbar with algoScraper extension icon highlighted next to address bar" caption=" " />
+
+## 3. Understanding Scraper Tool Window
+
+| Click the extension to view the following window | Select the page you wish to scrape  and click Scrape UI button to view the following window |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------- |
+|                                                  |                                                                                             |
+
+### 3.1 Tool Functionality Summary
+
+| Field                                                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|                                                                                                                                                                              | Captures and displays the URL of Page name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|                                                                                                                                                                              | Click this button to scrape all the UI elements at once displayed on the particular page. While using scrape UI button ensure to select the control type and provide a meaningful name without additional spaces. If you don't enter the control name, a error message is displayed saying Control name is required. Similarly, if you don't enter the Control Type, then you will see an error message saying Control type cannot be blank. Note: Iframe elements can also be scraped using algoScraper.                                                                                                                                                                                                                        |
+|                                                                                                                                                                              | After scraping all the UI elements, you can search for a particular UI element using search bar. If you use invalid values in the search bar, then there will be no data, Ensure that your search criteria are accurate and relevant to the data you are trying to retrieve.                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|  Reset window secondary window                                                                                                                                               | Click this button to reset all the scraped UI elements listed in the table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+|  Customize Table secondary screen.   Edit URL in the secondary window                                                                                                        | Customize Table -Select this option if you wish to select or unselect the listed items in a table.  **Edit URL** - choose this option to change the application URL if needed. This is the only method available to modify the URL.  Hover over a specific XPath to verify it. This action highlights the corresponding UI element and displays the XPath count.                                                                                                                                                                                                                                                                                                                                                                 |
+|                                                                                                                                                                              | Select this button to download the scraped UI elements table in a CSV format. If you have edited the control names from the scraper then the edi will reflect in CSV file.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|                                                                                                                                                                              | This helps in monitoring the metrices, such as Response status code, Response time and load time along with the given URL, date and time. This helps in finding the fixes and issues in a given application. By keeping track of these metrics, you can make sure your web services are performing well. For more information, refer to [PingLink](/automation-by-application/web-application-test-automation/scraping-user-interface-elements/website-performance-monitoring-using-pinglink) article.                                                                                                                                                                                                                           |
+|                                                                                                                                                                              | You can set up multiple XPath expressions for each UI element in the web scraper tool. If one XPath fails, the tool will automatically try another, reducing the need for manual updates to the scraped CSV file. Note: This needs to be toggled before scraping.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+|                                                                                                                                                                              | If you are unable to scrape the XPaths of the UI elements in certain application, then you can use the screenShot functionality to scrape the XPaths of the UI elements in the Scraper window.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|                                                                                                                                                                              | Select '+ Row' button to add a new row to a scraped element table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|                                                                                                                                                                              | Select Delete button if you wish to delete a particular row in a scraped UI element table.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| JS Path helps testers extract specific data from JSON responses, such as retrieving names from a list of products: `Products[*].name`, where `Products [*] name` is a query. | Let's consider an example where a user wants to search for a specific product by entering its name using a text input field and retrieving its details from a JSON response. In this example:  The user enters the name of a product they want to search for in the text input field.  Upon clicking the "Search" button, the `searchProduct()` function is called.  The function retrieves the user input, constructs a JSPath query to find the product details by name, and applies this query to the JSON response.  If a matching product is found, its details (name, price, and availability) are displayed in the UI. If no matching product is found, a message indicating that the product was not found is displayed. |
 
 <Callout kind="info" collapsed="false">
-  **Note:** CodeBot answers questions based on the code files available in the project's Utility folder. When you ask a question, CodeBot analyzes the utility files within the project and provides responses based on the content and context of those files.
+  algoScraper supports the extraction of XPaths for text containing special characters from websites. For example, if you are ordering a cheese pizza with Jalapeño toppings from a pizza website. The word 'Jalapeño' contains a special character. After downloading the scraped file, ensure to manually update the XPaths if they have changed. Test cases are automatically generated to handle such scenarios, and you can access detailed reports after executing the scripts.
 </Callout>
 
-Download the latest JDK.exe installer [**here**](https://www.oracle.com/java/technologies/downloads/#jdk21-windows). In this case, Java 21.0.1 version is used.
+### 3.2 Scraping the Application Using algoScraper extension
+
+Perform the following:
+
+<Steps>
+  <Step title="Open the application and if you wish to scrape the entire page at one go, click the extension on your application described in the prerequisite to view the algoScraper window and click Scrape UI button." title-type="p">
+    All the UI element details with corresponding XPath expression of the scraped UI page details will be listed. Upon successful completion, you will see the Scraping completed message.
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070038206933/original/mSX3Uu75nZwomOF3nptCkvufG-s81LcgGw.png?1771584700" width="336" height="291" alt="algoScraper window with Scrape UI button highlighted and control list table below" caption=" " />
+  </Step>
+
+  <Step title="If you wish to scrape element by element, perform the following:" title-type="p">
+
+  </Step>
+
+  <Step title="Navigate to a particular UI element, right-click to capture the XPath expression of that UI element." title-type="p">
+    The captured details are added to the scraped element table list.
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070019280454/original/RV4CyEUy7qHsAosnSClVpa5lbDxSIS12Tw.png?1740041663" width="477" height="177" alt="Product page title Antique Bangle 182426 with Unique Xpath List panel showing matching XPath expression" caption=" " />
+  </Step>
+
+  <Step title="Common XPath refers to frequently used XPath expressions that are used to locate elements." title-type="p">
+    If you wish to capture Common XPath expression, perform the following: Navigate to the particular category on a webpage, right-click the category to view the following screen which displays the Common XPath.
+
+    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070005361489/original/Fb-xLQzYNkQ34omXr1uStn7aQk2mpa0Kmw.png?1710997853" width="397" height="170" alt="Common Xpath List popup showing Unique and Common Xpath entries for Electronics category" caption=" " />
+  </Step>
+</Steps>
+
+Usage of common XPath expression: Common XPaths can be used across different web pages or applications to locate similar types of elements, such as buttons, input fields, or links.
+
+<Steps>
+  <Step title="After scraping UI elements, download the file in the CSV format." title-type="p">
+    Upon successful download, a "File downloaded successfully" message is displayed, and click close button to close the Scraper window.
+  </Step>
+
+  <Step title="If you wish to scrape UI elements in a pop-up window, perform the following:" title-type="p">
+
+  </Step>
+
+  <Step title="In the pop-up window, navigate to a particular UI element." title-type="p">
+
+  </Step>
+
+  <Step title="Right-click on the UI element to capture its XPath expression." title-type="p">
+
+  </Step>
+
+  <Step title="The captured details are added to the scraped elements table list." title-type="p">
+
+  </Step>
+
+  <Step title="You can also select the XPath from dropdown available in XPath column." title-type="p">
+
+  </Step>
+
+  <Step title="You can also add feature name for a control To add a feature name for a" title-type="p">
+
+  </Step>
+</Steps>
+
+control, [How to Create Feature Section from Scraper](/automation-by-application/web-application-test-automation/scraping-user-interface-elements/how-to-create-a-feature-section-from-scraper).
+
+<Callout kind="info" collapsed="false">
+  You can access algoScraper directly from the browser bar in Chrome. However, if you face any issues while using this extension, you can also find algoScraper within the Developer Tools Panel in the Chrome. To access Developer Tools Panel, right-click on the application to select Inspect > Properties >algoScraper. For more information on usage of this extension, refer to [Using algoScraper in the Developer Tools Panel](/automation-by-application/web-application-test-automation/scraping-user-interface-elements/using-algoscraper-in-the-developer-tools-panel). If right click functionality is disabled in webpage then you can use Record Scenario feature to scrape the XPaths as you perform the action. To know more about Record Scenario feature, refer to [Record a Scenario Using Online Recorder](http://Record%20a%20Scenario%20Using%20Online%20Recorder). You can also use algoScraper in Developer Tools Panel. When there is a update in algoScraper, the algoScraper which is in your machine gets updated automatically. The latest version of algoScraper is 2.0.8.
+</Callout>
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070038212933/original/21H5p3a0mNl4SIUKP2lJpvdB6m61FeGwnw.png?1771589620" width="528" height="166" alt="algoScraper DevTools tab with Scrape UI button and control table columns" caption=" " />
+
+For more information on usage of this extension, refer to [Using algoScraper in the Developer Tools Panel](/automation-by-application/web-application-test-automation/scraping-user-interface-elements/using-algoscraper-in-the-developer-tools-panel). If right click functionality is disabled in webpage then you can use Record Scenario feature to scrape the XPaths as you perform the action. To know more about Record Scenario feature, refer to [Record a Scenario Using Online Recorder](/automation-by-application/web-application-test-automation/scraping-user-interface-elements/record-a-scenario-using-online-recorder). You can also use algoScraper in Developer Tools Panel.
+
+When there is a update in algoScraper, the algoScraper which is in your machine gets updated automatically. The latest version of algoScraper is 2.0.8.
+
+## 4. Limitations of algoScraper
+
+1. Re-scraping for FF to script conversion is not supported Re-scraping is not available for FF (Feature File) to script conversion at this time.
+
+## 5. Related Articles
+
+<Columns cols="2">
+  <Card title="Using Multiple XPath Expressions for Each UI Element" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/using-multiple-xpath-expressions-for-each-ui-element-in-a-web-scraper-extension-tool" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="How to Upload Existing Scraped File" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/how-to-upload-scraped-file-for-existing-project" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="Website Performance Monitoring using PingLink" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/website-performance-monitoring-using-pinglink" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="How to create a Project using algoScraper Tool" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/how-to-create-a-project-using-algoscraper-extension" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="How To Launch Scraper Using algoQA And Scrape the UI elements" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/how-to-launch-scraper-using-algoqa-and-scrape-the-ui-elements" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="Scrape UI using algoScraper" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/scrape-ui-using-algoscraper" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="Feature File to Script Conversion" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/feature-file-to-script-conversion" icon="file-text" horizontal="false">
+
+  </Card>
+
+  <Card title="Record a Scenario Using Online Recorder" href="/automation-by-application/web-application-test-automation/scraping-user-interface-elements/record-a-scenario-using-online-recorder" icon="file-text" horizontal="false">
+
+  </Card>
+</Columns>

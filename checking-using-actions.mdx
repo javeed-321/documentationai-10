@@ -4,8 +4,6 @@ description: Create a custom action and wire it into node configuration.
 ---
 ## Custom Action Overview
 
-<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070005093323/original/N-ajngsnSmePXilkK7_H4ka-iBVEBJOsqA.png?1710239485" width="48" height="103" alt="Custom Action ribbon graphic with blue puzzle piece icon" caption=" " />
-
 Custom action is needed when you want to extend the functionality of your automation framework beyond what default actions provided. Automation engineers and developers can write custom actions for incorporating any application specific requirements.
 
 You can create custom actions in algoQA to simplify complex processes. For example, you can merge multiple steps into a single action, such as logging in with just one step instead of entering a username, password, and clicking the login button separately. Custom actions provide flexibility to extend the functionality of algoQA. You can import your existing methods into algoQA and use them as custom actions to enhance your automation capabilities.
@@ -35,7 +33,7 @@ Perform the following:
      <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044040298/original/-o68grcZ2ZHTawKRmo4CDG4bPRnbDSx4iA.png?1781518551" width="1491" height="765" />
 6. Use this report to review duplicate logic, identify reusable components, and optimize custom action creation.
 7. The Code Analysis Report can also be accessed directly from the Custom Actions List screen by clicking View Analysis Report. This allows you to review previously generated analysis results, including exact matches, similar matches, unused methods, and analyzed files, without needing to run the analysis again.
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044040736/original/yPidfbTtqtl1tm5B2YqQyZrQqDOau89MHg.png?1781518838" width="1544" height="639" />
+
    \\
    <Callout kind="alert" collapsed="false">
      In the Custom Action List screen, if a method name is displayed in red, it indicates that the method is no longer mapped to the custom action. This can occur when there are changes to the method parameters. In such cases, the mapping must be manually corrected.
@@ -43,69 +41,85 @@ Perform the following:
    Similarly, if a file name is displayed in red, it indicates that the corresponding file has been deleted from the project.\\
 8. If the analysis report identifies duplicate or similar methods, you can click Optimize All to automatically consolidate and optimize them into reusable methods. This helps reduce code duplication, improve maintainability, and streamline the custom action library across the project.\\
    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044041101/original/2KtESPL1ksuUIeHCLqZfgx4muqIeKYO6yA.png?1781519058" width="857" height="483" />
-9. After the optimization process is completed, an Optimize All Exact Matches confirmation pop-up is displayed. The pop-up summarizes the optimization results, including the number of groups consolidated and methods processed. All identified duplicate methods are replaced with reference calls to the consolidated custom actions, reducing code duplication and improving maintainability. Click Done to close the pop-up and return to the analysis report.
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044041307/original/xcwgo86G6f6qqnihxtgLNuSqdERMwjkqqA.png?1781519224" width="491" height="351" />
+
+After the optimization process is completed, an Optimize All Exact Matches confirmation pop-up is displayed. The pop-up summarizes the optimization results, including the number of groups consolidated and methods processed. All identified duplicate methods are replaced with reference calls to the consolidated custom actions, reducing code duplication and improving maintainability. Click Done to close the pop-up and return to the analysis report.
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044041307/original/xcwgo86G6f6qqnihxtgLNuSqdERMwjkqqA.png?1781519224" width="491" height="351" />
+
+\\
+
+
+
+<Callout kind="info" collapsed="false">
+  Utility files will not be included during script generation for custom actions if their actions are not used in any scenarios; only files containing custom methods that are actively used in scenarios are considered and included.
+</Callout>
+
+\
+You can edit an existing custom action by clicking the method name. This will take you directly to the method name in the code editor, where you can make changes and save it.
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044042837/original/pyPUqmugxMoB9sR3jbFTBT9uUtsLTDZI0Q.png?1781520475" width="1538" height="831" />
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044042910/original/N2vg7Q9t_S9eaM2qcK4s54uVHKnT66k31A.png?1781520530" width="1545" height="885" />
+
+\\
+
+<Callout kind="info" collapsed="false">
+  When you edit a method, the system first validates the code for syntax errors. If any errors are detected, they will be displayed so that you can review and correct them before saving.
+</Callout>
+
+Any changes made to a custom method are applied globally. Therefore, if the same custom method is used by multiple custom actions within the project, the updated method will automatically be reflected across all associated custom actions.\
+A method that is currently mapped to a custom action cannot be deleted. To delete the method, you must first remove its association with all custom actions that reference it.\
+The Utilities section is read-only. You cannot make any modifications to methods or files from Utilities.\
+\
+\
+To create new custom action:-\
+In Custom Method Mapping call the file name which is created or you can also upload the customutil file by clicking Upload file on File Name dropdown and, enter action name, method name, description and click on Save.\\
+
+<Callout kind="info" collapsed="false">
+  The selected language contains reserved keywords that cannot be used when creating method names. When you select a method from the Method Name dropdown, the code editor automatically navigates to the corresponding method definition, allowing you to quickly view or modify the method implementation.
+</Callout>
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044046786/original/GG6mb6NMaZObSgEQGIe7G3E_Hq4ykZ-9kw.png?1781523001" width="1080" height="299" />
+
+By default, files are uploaded in the language selected by the user. In AFsettings upload, the file can be uploaded only in json format.\
+\\
+
+<Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070005130970/original/8_DNAtcaweVS9Fb9C3tVOYIOBGKVq7eRfQ.png?1710329352" width="100" height="102" style="width: 100px; height: auto; cursor: pointer;" />
+
+As a best practice it is recommended to follow coding guidelines while creating custom actions for the chosen programming language.\
+\\
+
+<Callout kind="info" collapsed="false">
+  You can create multiple custom actions with the same method name. If you later edit the method name for one of these custom actions, the updated method name will be applied to all custom actions that share that method name.
+</Callout>
+
+1. In a centralized project, multiple users collaborate on the same set of files simultaneously. To prevent conflicts, the platform offers a file locking feature. When a user begins working on a file, the platform identifies them as the active user for that file. As a result, when another user hovers over a file in the Utility folder, they will see a tool tip displaying the name of the active user who is currently working on the file. This is shown in the following screenshot. This helps prevent accidental edits.\
    \\
-   <Callout kind="tip" collapsed="false">
-     If you have already created a custom action and you want to use that action, you can search the action from search field using Action name, Method name and With description. You can also filter out by using Date, Author, File and Method.
-   </Callout>
-   <Callout kind="info" collapsed="false">
-     Utility files will not be included during script generation for custom actions if their actions are not used in any scenarios; only files containing custom methods that are actively used in scenarios are considered and included.
-   </Callout>
+2. You can create a new custom action and if needed, refer to the Code Snippet pane from right side for assistance.  Click on copy icon  to copy the code and paste it into your required file.
+   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070027228549/original/XGF7mTGLN5hy1MLEjgtynezXuXVcArG_DA.png?1753193461" width="432" height="843" />
    \
-   You can edit an existing custom action by clicking the method name. This will take you directly to the method name in the code editor, where you can make changes and save it.
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044042837/original/pyPUqmugxMoB9sR3jbFTBT9uUtsLTDZI0Q.png?1781520475" width="1538" height="831" />
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044042910/original/N2vg7Q9t_S9eaM2qcK4s54uVHKnT66k31A.png?1781520530" width="1545" height="885" />
-   \\
+   Following are the listed custom actions in the Code Snippet pane.
+   - click 
+   - enter text
+   - verify displayed
+   - verify unchecked
+   - verify checked
+   - click multiple times
+   - double click
+   - Drag And Drop
+   - unchecked
+   - checked
+   - Clear and Enter Text
+   - Right Click
+3. In the configuration step for a custom action, you can use the following basic structure for the chosen language, such as Java:\\
    <Callout kind="info" collapsed="false">
-     When you edit a method, the system first validates the code for syntax errors. If any errors are detected, they will be displayed so that you can review and correct them before saving.
+     The language selected in script generation settings should be used for coding also.
    </Callout>
-   Any changes made to a custom method are applied globally. Therefore, if the same custom method is used by multiple custom actions within the project, the updated method will automatically be reflected across all associated custom actions.\
-   A method that is currently mapped to a custom action cannot be deleted. To delete the method, you must first remove its association with all custom actions that reference it.\
-   The Utilities section is read-only. You cannot make any modifications to methods or files from Utilities.\
-   \
-   \
-   To create new custom action:-\
-   In Custom Method Mapping call the file name which is created or you can also upload the customutil file by clicking Upload file on File Name dropdown and, enter action name, method name, description and click on Save.\\
-   <Callout kind="info" collapsed="false">
-     The selected language contains reserved keywords that cannot be used when creating method names. When you select a method from the Method Name dropdown, the code editor automatically navigates to the corresponding method definition, allowing you to quickly view or modify the method implementation.
-   </Callout>
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070044046786/original/GG6mb6NMaZObSgEQGIe7G3E_Hq4ykZ-9kw.png?1781523001" width="1080" height="299" />
-   By default, files are uploaded in the language selected by the user. In AFsettings upload, the file can be uploaded only in json format.\
    \\
-   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070005130970/original/8_DNAtcaweVS9Fb9C3tVOYIOBGKVq7eRfQ.png?1710329352" width="100" height="102" style="width: 100px; height: auto; cursor: pointer;" />
-   As a best practice it is recommended to follow coding guidelines while creating custom actions for the chosen programming language.\
+   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070006378257/original/TitDHkWto10wtIQfb7d-eHwfTw2foUcMdw.png?1714136113" width="51" height="29" />
+   Java basic structure code snippet\
    \\
-   <Callout kind="info" collapsed="false">
-     You can create multiple custom actions with the same method name. If you later edit the method name for one of these custom actions, the updated method name will be applied to all custom actions that share that method name.
-   </Callout>
-10. In a centralized project, multiple users collaborate on the same set of files simultaneously. To prevent conflicts, the platform offers a file locking feature. When a user begins working on a file, the platform identifies them as the active user for that file. As a result, when another user hovers over a file in the Utility folder, they will see a tool tip displaying the name of the active user who is currently working on the file. This is shown in the following screenshot. This helps prevent accidental edits.\
-    \\
-11. You can create a new custom action and if needed, refer to the Code Snippet pane from right side for assistance.  Click on copy icon  to copy the code and paste it into your required file.
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070027228549/original/XGF7mTGLN5hy1MLEjgtynezXuXVcArG_DA.png?1753193461" width="432" height="843" />
-    \
-    Following are the listed custom actions in the Code Snippet pane.
-    - click 
-    - enter text
-    - verify displayed
-    - verify unchecked
-    - verify checked
-    - click multiple times
-    - double click
-    - Drag And Drop
-    - unchecked
-    - checked
-    - Clear and Enter Text
-    - Right Click
-12. In the configuration step for a custom action, you can use the following basic structure for the chosen language, such as Java:\\
-    <Callout kind="info" collapsed="false">
-      The language selected in script generation settings should be used for coding also.
-    </Callout>
-    \\
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070006378257/original/TitDHkWto10wtIQfb7d-eHwfTw2foUcMdw.png?1714136113" width="51" height="29" />
-    Java basic structure code snippet\
-    \\
-    <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070006378242/original/UAYIC_6gNW6LYUrvMFqNvS_hs3xyVCJZ8A.png?1714136056" width="380" height="164" style="width: 380px; height: auto; cursor: pointer;" />
+   <Image src="https://s3-ap-south-1.amazonaws.com/ind-cdn.freshdesk.com/data/helpdesk/attachments/production/1070006378242/original/UAYIC_6gNW6LYUrvMFqNvS_hs3xyVCJZ8A.png?1714136056" width="380" height="164" style="width: 380px; height: auto; cursor: pointer;" />
 
 ## Leveraging Custom Actions
 
