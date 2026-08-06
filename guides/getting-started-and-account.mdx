@@ -1,4 +1,25 @@
-<ParamField query="limit" param-type="integer" required="false" deprecated="false" show-location="true">
-  Number of records per page. Defaults to 20.
-</ParamField>
+---
+title: Getting Started and Account
+description: Get started with the API and manage your account settings.
+---
+<CodeGroup show-lines="true">
+  ```javascript
+  const response = await fetch('/api/v2/customer', {
+    headers: { Authorization: `Bearer ${apiKey}` }
+  });
+  const data = await response.json();
+  ```
+
+  ```python
+  import requests
+  response = requests.get('/api/v2/customer',
+    headers={'Authorization': f'Bearer {api_key}'})
+  data = response.json()
+  ```
+
+  ```bash
+  curl -X GET '/api/v2/customer' \
+    -H 'Authorization: Bearer YOUR_API_KEY'
+  ```
+</CodeGroup>
 
