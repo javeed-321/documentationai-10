@@ -1,63 +1,22 @@
----
-title: Getting Started and Account
-description: Get started with the API and manage your account settings.
----
-<CodeGroup show-lines="true">
-  ```javascript
-  const response = await fetch('/api/v2/customer', {
-    headers: { Authorization: `Bearer ${apiKey}` }
-  });
-  const data = await response.json();
+<CodeGroup show-lines="true" tabs={["payload-For Transaction Events, with custom fieldspayload-For Transaction Events, with custom fields","Generic Eventspayload-For Transaction Events, with custom fields","name and id would be of generic eventpayload-For Transaction Events, with custom fields","Target completed event, there will be xtra field named linkedTargetGroupVsTargetRuleIdMappayload-For Transaction Events, with custom fields","webhook payloadpayload-For Transaction Events, with custom fields"]}>
+  ```Webhook "payload-For Transaction Events, with custom fieldspayload-For Transaction Events, with custom fields"
+   
   ```
 
-  ```python
-  import requests
-  response = requests.get('/api/v2/customer',
-    headers={'Authorization': f'Bearer {api_key}'})
-  data = response.json()
+  ```For "Generic Eventspayload-For Transaction Events, with custom fields"
+   
   ```
 
-  ```bash
-  curl -X GET '/api/v2/customer' \
-    -H 'Authorization: Bearer YOUR_API_KEY'
+  ```event "name and id would be of generic eventpayload-For Transaction Events, with custom fields"
+   
   ```
 
-  ```javascript
-    const response = await fetch('/api/v2/customer', {
-      headers: { Authorization: `Bearer ${apiKey}` }
-    });
-    const data = await response.json();
+  ```For "Target completed event, there will be xtra field named linkedTargetGroupVsTargetRuleIdMappayload-For Transaction Events, with custom fields"
+   
   ```
 
-  ```python
-  import requests
-  response = requests.get('/api/v2/customer',
-    headers={'Authorization': f'Bearer {api_key}'})
-  data = response.json()
-  ```
-
-  ```bash
-  curl -X GET '/api/v2/customer' \
-    -H 'Authorization: Bearer YOUR_API_KEY'
-  ```
-
-  ```javascript
-  const response = await fetch('/api/v2/customer', {
-    headers: { Authorization: `Bearer ${apiKey}` }
-  });
-  const data = await response.json();
-  ```
-
-  ```python
-  import requests
-  response = requests.get('/api/v2/customer',
-    headers={'Authorization': f'Bearer {api_key}'})
-  data = response.json()
-  ```
-
-  ```bash
-  curl -X GET '/api/v2/customer' \
-    -H 'Authorization: Bearer YOUR_API_KEY'
+  ```Non "webhook payloadpayload-For Transaction Events, with custom fields"
+   
   ```
 </CodeGroup>
 
