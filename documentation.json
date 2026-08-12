@@ -64,6 +64,11 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Home",
+        "pages": [],
+        "path": "hello"
       }
     ]
   }
