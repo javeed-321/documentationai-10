@@ -67,7 +67,9 @@
       },
       {
         "tab": "Home",
-        "pages": [],
+       "groups":{
+         "pages":[]
+       },
         "path": "hello"
       }
     ]
