@@ -42,12 +42,14 @@
               {
                 "title": "checking-using-actions",
                 "path": "checking-using-actions",
-                "icon": "album-icon"
+                "icon": "album-icon",
+                "public": false
               },
               {
                 "title": "using-actions",
                 "path": "guides/getting-started-and-account",
-                "icon": "rocket"
+                "icon": "rocket",
+                "public": true
               },
               {
                 "title": "Product guides",
