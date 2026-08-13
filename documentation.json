@@ -67,10 +67,16 @@
       },
       {
         "tab": "Home",
-       "groups":{
-         "pages":[]
-       },
+        "groups": {
+          "pages": []
+        },
         "path": "hello"
+      },
+      {
+        "tab": "Learning Hub",
+              "icon": "external-link",
+      "href": "https://blog.example.com"
+
       }
     ]
   }
