@@ -75,43 +75,8 @@
       {
         "tab": "Learning Hub",
               "icon": "external-link",
-      "href": "https://blog.example.com",
-       "pages": [
-          {
-            "title": "Help Center",
-            "path": "help-center",
-            "icon": "home"
-          },
-          {
-            "group": "Guides",
-            "icon": "book-open",
-            "expandable": false,
-            "pages": [
-              {
-                "title": "checking-using-actions",
-                "path": "checking-using-actions",
-                "icon": "album-icon",
-                "public": false
-              },
-              {
-                "title": "using-actions",
-                "path": "guides/getting-started-and-account",
-                "icon": "rocket",
-                "public": true
-              },
-              {
-                "title": "Product guides",
-                "path": "guides/product-guides",
-                "icon": "book"
-              },
-              {
-                "title": "Support & policies",
-                "path": "guides/support-and-policies",
-                "icon": "life-buoy"
-              }
-            ]
-          }
-        ]
+      "href": "https://blog.example.com"
+      
 
       }
     ]
