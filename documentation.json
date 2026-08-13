@@ -1,84 +1,1336 @@
 {
-  "name": "Help Center",
+  "name": "SessionM",
   "initialRoute": "help-center",
   "colors": {
     "light": {
-      "brand": "#166534",
-      "heading": "#101613",
-      "text": "#414a45"
+      "brand": "#CF4500",
+      "heading": "#181821",
+      "text": "#363747"
     },
     "dark": {
-      "brand": "#4ade80",
-      "heading": "#f2f2f2",
-      "text": "#c1c1c1"
+      "brand": "#FF884D",
+      "heading": "#F2F2F5",
+      "text": "#BFC0CF"
     }
   },
-  "customCss": [
-    {
-      "src": "styles/help-center.css"
-    }
-  ],
-  "scripts": [
-    {
-      "src": "scripts/help-center.js"
-    }
-  ],
   "navigation": {
     "tabs": [
       {
         "tab": "Help Center",
-        "icon": "life-buoy",
+        "icon": "book",
+        "path": "help-center",
+        "show-sidebar": false,
+        "show-toc": false,
         "pages": [
           {
-            "title": "Help Center",
-            "path": "help-center",
-            "icon": "home"
-          },
-          {
-            "group": "Guides",
-            "icon": "book-open",
-            "expandable": false,
+            "group": "Account Management",
+            "icon": "user-cog",
+            "path": "account-management/overview",
             "pages": [
               {
-                "title": "checking-using-actions",
-                "path": "checking-using-actions",
-                "icon": "album-icon",
-                "public": false
+                "title": "Set up platform time zone",
+                "path": "account-management/set-up-platform-time-zone"
+              }
+            ]
+          },
+          {
+            "group": "Audiences",
+            "icon": "users",
+            "path": "audiences/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "group": "Create audience",
+                    "path": "audiences/create/create-audience/overview",
+                    "pages": [
+                      {
+                        "title": "Create and name your audience",
+                        "path": "audiences/create/create-audience/create-and-name-your-audience"
+                      },
+                      {
+                        "title": "Select your pre-defined attribute cards",
+                        "path": "audiences/create/create-audience/select-your-pre-defined-attribute-cards"
+                      },
+                      {
+                        "title": "Define the logic for your attribute cards",
+                        "path": "audiences/create/create-audience/define-the-logic-for-your-attribute-cards"
+                      },
+                      {
+                        "title": "Save and activate your audience",
+                        "path": "audiences/create/create-audience/save-and-activate-your-audience"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Create static snapshot",
+                    "path": "audiences/create/create-static-snapshot"
+                  }
+                ]
               },
               {
-                "title": "using-actions",
-                "path": "guides/getting-started-and-account",
-                "icon": "rocket",
-                "public": true
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Activate, pause or edit export",
+                    "path": "audiences/manage/activate-pause-or-edit-export"
+                  },
+                  {
+                    "title": "Add export destination",
+                    "path": "audiences/manage/add-export-destination"
+                  },
+                  {
+                    "title": "Create audience export template",
+                    "path": "audiences/manage/create-audience-export-template"
+                  },
+                  {
+                    "title": "Custom data attributes",
+                    "path": "audiences/manage/custom-data-attributes"
+                  },
+                  {
+                    "title": "Delete audience",
+                    "path": "audiences/manage/delete-audience"
+                  },
+                  {
+                    "title": "Duplicate audience",
+                    "path": "audiences/manage/duplicate-audience"
+                  },
+                  {
+                    "title": "Add encryption mechanism",
+                    "path": "audiences/manage/add-encryption-mechanism"
+                  },
+                  {
+                    "title": "Export audience or snapshot",
+                    "path": "audiences/manage/export-audience-or-snapshot"
+                  },
+                  {
+                    "title": "Issue bulk offer to audience",
+                    "path": "audiences/manage/issue-bulk-offer-to-audience"
+                  }
+                ]
               },
               {
-                "title": "Product guides",
-                "path": "guides/product-guides",
-                "icon": "book"
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View audience information",
+                    "path": "audiences/view/view-audience-information"
+                  },
+                  {
+                    "title": "View audience size",
+                    "path": "audiences/view/view-audience-size"
+                  },
+                  {
+                    "title": "View bulk offers issued to audience",
+                    "path": "audiences/view/view-bulk-offers-issued-to-audience"
+                  },
+                  {
+                    "title": "View export job configurations",
+                    "path": "audiences/view/view-export-job-configurations"
+                  },
+                  {
+                    "title": "View export job history",
+                    "path": "audiences/view/view-export-job-history"
+                  },
+                  {
+                    "title": "View static snapshots",
+                    "path": "audiences/view/view-static-snapshots"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Admin & Rights",
+            "icon": "shield-check",
+            "path": "admin-and-rights/overview",
+            "pages": [
+              {
+                "group": "About",
+                "icon": "info",
+                "pages": [
+                  {
+                    "title": "About Admin & Rights module",
+                    "path": "admin-and-rights/about/about-admin-and-rights-module"
+                  },
+                  {
+                    "title": "About accounts, groups, and roles",
+                    "path": "admin-and-rights/about/about-accounts-groups-and-roles"
+                  },
+                  {
+                    "title": "About messaging providers and templates",
+                    "path": "admin-and-rights/about/about-messaging-providers-and-templates"
+                  },
+                  {
+                    "title": "About Customers 2 settings",
+                    "path": "admin-and-rights/about/about-customers-2-settings"
+                  },
+                  {
+                    "title": "About customer search configuration",
+                    "path": "admin-and-rights/about/about-customer-search-configuration"
+                  },
+                  {
+                    "title": "Access rights workflow for accounts, groups, and roles",
+                    "path": "admin-and-rights/about/access-rights-workflow-for-accounts-groups-and-roles"
+                  }
+                ]
               },
               {
-                "title": "Support & policies",
-                "path": "guides/support-and-policies",
-                "icon": "life-buoy"
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Configure affiliations",
+                    "path": "admin-and-rights/create/configure-affiliations"
+                  },
+                  {
+                    "title": "Configure Customers 2 event streams for sub-tabs on Activity tab",
+                    "path": "admin-and-rights/create/configure-customers-2-event-streams-for-sub-tabs-on-activity-tab"
+                  },
+                  {
+                    "title": "Configure Customers 2 product recommendations or member profiles",
+                    "path": "admin-and-rights/create/configure-customers-2-product-recommendations-or-member-profiles"
+                  },
+                  {
+                    "title": "Configure Customers 2 quick actions for offers",
+                    "path": "admin-and-rights/create/configure-customers-2-quick-actions-for-offers"
+                  },
+                  {
+                    "title": "Configure Customers 2 profile summary",
+                    "path": "admin-and-rights/create/configure-customers-2-profile-summary"
+                  },
+                  {
+                    "title": "Configure Customers module",
+                    "path": "admin-and-rights/create/configure-customers-module"
+                  },
+                  {
+                    "title": "Configure messaging provider templates",
+                    "path": "admin-and-rights/create/configure-messaging-provider-templates"
+                  },
+                  {
+                    "title": "Configure messaging providers",
+                    "path": "admin-and-rights/create/configure-messaging-providers"
+                  },
+                  {
+                    "title": "Configure SSO and SAML settings",
+                    "path": "admin-and-rights/create/configure-sso-and-saml-settings"
+                  },
+                  {
+                    "title": "Configure event stream with Timeline Series Config tool",
+                    "path": "admin-and-rights/create/configure-event-stream-with-timeline-series-config-tool"
+                  },
+                  {
+                    "title": "Create custom user profile attributes",
+                    "path": "admin-and-rights/create/create-custom-user-profile-attributes"
+                  },
+                  {
+                    "title": "Add account",
+                    "path": "admin-and-rights/create/add-account"
+                  },
+                  {
+                    "title": "Create customer search attributes",
+                    "path": "admin-and-rights/create/create-customer-search-attributes"
+                  },
+                  {
+                    "title": "Create event category",
+                    "path": "admin-and-rights/create/create-event-category"
+                  },
+                  {
+                    "title": "Create event template",
+                    "path": "admin-and-rights/create/create-event-template"
+                  },
+                  {
+                    "title": "Create event type",
+                    "path": "admin-and-rights/create/create-event-type"
+                  },
+                  {
+                    "title": "Create group",
+                    "path": "admin-and-rights/create/create-group"
+                  },
+                  {
+                    "title": "Create rendering context",
+                    "path": "admin-and-rights/create/create-rendering-context"
+                  },
+                  {
+                    "title": "Create rendering template",
+                    "path": "admin-and-rights/create/create-rendering-template"
+                  },
+                  {
+                    "title": "Create role",
+                    "path": "admin-and-rights/create/create-role"
+                  },
+                  {
+                    "title": "Create stream type",
+                    "path": "admin-and-rights/create/create-stream-type"
+                  },
+                  {
+                    "title": "Create stream view",
+                    "path": "admin-and-rights/create/create-stream-view"
+                  },
+                  {
+                    "title": "Create stream",
+                    "path": "admin-and-rights/create/create-stream"
+                  },
+                  {
+                    "title": "Create organization profile",
+                    "path": "admin-and-rights/create/create-organization-profile"
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Edit a Timeline Series Config object",
+                    "path": "admin-and-rights/manage/edit-a-timeline-series-config-object"
+                  },
+                  {
+                    "title": "Perform basic operations for customer search settings",
+                    "path": "admin-and-rights/manage/perform-basic-operations-for-customer-search-settings"
+                  },
+                  {
+                    "title": "Perform basic operations for accounts, groups, and roles",
+                    "path": "admin-and-rights/manage/perform-basic-operations-for-accounts-groups-and-roles"
+                  },
+                  {
+                    "title": "Perform basic operations with Customers 2 settings",
+                    "path": "admin-and-rights/manage/perform-basic-operations-with-customers-2-settings"
+                  },
+                  {
+                    "title": "Edit messaging providers and templates",
+                    "path": "admin-and-rights/manage/edit-messaging-providers-and-templates"
+                  },
+                  {
+                    "title": "Manage SM Sync",
+                    "path": "admin-and-rights/manage/manage-sm-sync"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Campaigns",
+            "icon": "megaphone",
+            "path": "campaigns/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Create campaign",
+                    "path": "campaigns/create/create-campaign"
+                  },
+                  {
+                    "title": "Set campaign runtime",
+                    "path": "campaigns/create/set-campaign-runtime"
+                  },
+                  {
+                    "title": "Specify advanced settings",
+                    "path": "campaigns/create/specify-advanced-settings"
+                  },
+                  {
+                    "title": "Define behaviors",
+                    "path": "campaigns/create/define-behaviors"
+                  },
+                  {
+                    "title": "Define outcomes",
+                    "path": "campaigns/create/define-outcomes"
+                  },
+                  {
+                    "group": "Add message",
+                    "path": "campaigns/create/add-message/overview",
+                    "pages": [
+                      {
+                        "title": "Select message type",
+                        "path": "campaigns/create/add-message/select-message-type"
+                      },
+                      {
+                        "title": "Set up message delivery",
+                        "path": "campaigns/create/add-message/set-up-message-delivery"
+                      },
+                      {
+                        "title": "Add creative content",
+                        "path": "campaigns/create/add-message/add-creative-content"
+                      },
+                      {
+                        "title": "Select target for message",
+                        "path": "campaigns/create/add-message/select-target-for-message"
+                      },
+                      {
+                        "title": "Document message",
+                        "path": "campaigns/create/add-message/document-message"
+                      },
+                      {
+                        "title": "Approve and launch message",
+                        "path": "campaigns/create/add-message/approve-and-launch-message"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Target campaign",
+                    "path": "campaigns/create/target-campaign"
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Delete behavior or message",
+                    "path": "campaigns/manage/delete-behavior-or-message"
+                  },
+                  {
+                    "title": "Delete campaign",
+                    "path": "campaigns/manage/delete-campaign"
+                  },
+                  {
+                    "title": "End campaign",
+                    "path": "campaigns/manage/end-campaign"
+                  },
+                  {
+                    "title": "Launch campaign",
+                    "path": "campaigns/manage/launch-campaign"
+                  },
+                  {
+                    "title": "Pause or resume campaign",
+                    "path": "campaigns/manage/pause-or-resume-campaign"
+                  },
+                  {
+                    "title": "Relaunch campaign",
+                    "path": "campaigns/manage/relaunch-campaign"
+                  },
+                  {
+                    "title": "Review campaign",
+                    "path": "campaigns/manage/review-campaign"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View information for all campaigns",
+                    "path": "campaigns/view/view-information-for-all-campaigns"
+                  },
+                  {
+                    "title": "View bulk offers",
+                    "path": "campaigns/view/view-bulk-offers"
+                  },
+                  {
+                    "title": "View behavior or message details",
+                    "path": "campaigns/view/view-behavior-or-message-details"
+                  },
+                  {
+                    "title": "View information for specific campaign",
+                    "path": "campaigns/view/view-information-for-specific-campaign"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Catalog",
+            "icon": "package",
+            "path": "catalog/overview",
+            "pages": [
+              {
+                "group": "About",
+                "icon": "info",
+                "pages": [
+                  {
+                    "title": "About SessionM catalogs",
+                    "path": "catalog/about/about-sessionm-catalogs"
+                  },
+                  {
+                    "title": "About SessionM catalog mapping",
+                    "path": "catalog/about/about-sessionm-catalog-mapping"
+                  },
+                  {
+                    "title": "About the benefits of a unified catalog",
+                    "path": "catalog/about/about-the-benefits-of-a-unified-catalog"
+                  },
+                  {
+                    "title": "Methods of catalog ingest",
+                    "path": "catalog/about/methods-of-catalog-ingest"
+                  },
+                  {
+                    "title": "Pre-ingest: Assess catalog data",
+                    "path": "catalog/about/pre-ingest-assess-catalog-data"
+                  },
+                  {
+                    "title": "Tour catalog management interface",
+                    "path": "catalog/about/tour-catalog-management-interface"
+                  }
+                ]
+              },
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Upload disparate catalog",
+                    "path": "catalog/create/upload-disparate-catalog"
+                  },
+                  {
+                    "title": "Upload unified catalog",
+                    "path": "catalog/create/upload-unified-catalog"
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Add categories or items",
+                    "path": "catalog/manage/add-categories-or-items"
+                  },
+                  {
+                    "title": "Break mapping relationship",
+                    "path": "catalog/manage/break-mapping-relationship"
+                  },
+                  {
+                    "title": "Edit categories or items",
+                    "path": "catalog/manage/edit-categories-or-items"
+                  },
+                  {
+                    "title": "Move categories or items",
+                    "path": "catalog/manage/move-categories-or-items"
+                  },
+                  {
+                    "title": "Remove categories or items",
+                    "path": "catalog/manage/remove-categories-or-items"
+                  },
+                  {
+                    "title": "Search and view catalogs",
+                    "path": "catalog/manage/search-and-view-catalogs"
+                  },
+                  {
+                    "title": "Create master catalog",
+                    "path": "catalog/manage/create-master-catalog"
+                  },
+                  {
+                    "title": "Map store catalog to master catalog",
+                    "path": "catalog/manage/map-store-catalog-to-master-catalog"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Composer",
+            "icon": "wand-sparkles",
+            "path": "composer/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "group": "Audience",
+                    "icon": "users",
+                    "pages": [
+                      {
+                        "group": "Create new Composer audience",
+                        "path": "composer/create/audience/create-new-composer-audience/overview",
+                        "pages": [
+                          {
+                            "title": "Create and name audience",
+                            "path": "composer/create/audience/create-new-composer-audience/create-and-name-audience"
+                          },
+                          {
+                            "title": "Add attribute cards",
+                            "path": "composer/create/audience/create-new-composer-audience/add-attribute-cards"
+                          },
+                          {
+                            "title": "Group the cards and define their Boolean logic",
+                            "path": "composer/create/audience/create-new-composer-audience/group-the-cards-and-define-their-boolean-logic"
+                          },
+                          {
+                            "title": "Save and activate audience in Composer module",
+                            "path": "composer/create/audience/create-new-composer-audience/save-and-activate-audience-in-composer-module"
+                          },
+                          {
+                            "title": "Activate Composer audience in Audiences module",
+                            "path": "composer/create/audience/create-new-composer-audience/activate-composer-audience-in-audiences-module"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "group": "Query",
+                    "icon": "search",
+                    "pages": [
+                      {
+                        "group": "Create custom SQL query",
+                        "path": "composer/create/query/create-custom-sql-query/overview",
+                        "pages": [
+                          {
+                            "title": "Create and name custom SQL query",
+                            "path": "composer/create/query/create-custom-sql-query/create-and-name-custom-sql-query"
+                          },
+                          {
+                            "title": "Build and run custom SQL query",
+                            "path": "composer/create/query/create-custom-sql-query/build-and-run-custom-sql-query"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Convert Composer audience definition to SQL editor",
+                    "path": "composer/manage/convert-composer-audience-definition-to-sql-editor"
+                  },
+                  {
+                    "title": "Delete Composer audience",
+                    "path": "composer/manage/delete-composer-audience"
+                  },
+                  {
+                    "title": "Duplicate Composer audience",
+                    "path": "composer/manage/duplicate-composer-audience"
+                  },
+                  {
+                    "title": "Export Composer audience",
+                    "path": "composer/manage/export-composer-audience"
+                  },
+                  {
+                    "title": "Export Composer query",
+                    "path": "composer/manage/export-composer-query"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View Composer audience information",
+                    "path": "composer/view/view-composer-audience-information"
+                  },
+                  {
+                    "title": "View Composer query information",
+                    "path": "composer/view/view-composer-query-information"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Customers",
+            "icon": "user",
+            "path": "customers/overview",
+            "pages": [
+              {
+                "group": "About",
+                "icon": "info",
+                "pages": [
+                  {
+                    "title": "About the SessionM customer profile",
+                    "path": "customers/about/about-the-sessionm-customer-profile"
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Add customer profile",
+                    "path": "customers/manage/add-customer-profile"
+                  },
+                  {
+                    "title": "Add note to customer profile",
+                    "path": "customers/manage/add-note-to-customer-profile"
+                  },
+                  {
+                    "title": "Adjust points",
+                    "path": "customers/manage/adjust-points"
+                  },
+                  {
+                    "title": "Adjust tier levels",
+                    "path": "customers/manage/adjust-tier-levels"
+                  },
+                  {
+                    "title": "Export customer data",
+                    "path": "customers/manage/export-customer-data"
+                  },
+                  {
+                    "title": "Forget customer record",
+                    "path": "customers/manage/forget-customer-record"
+                  },
+                  {
+                    "title": "Manage stored value cards",
+                    "path": "customers/manage/manage-stored-value-cards"
+                  },
+                  {
+                    "title": "Cease marketing",
+                    "path": "customers/manage/cease-marketing"
+                  },
+                  {
+                    "title": "Sync accounts",
+                    "path": "customers/manage/sync-accounts"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "Search customer profiles",
+                    "path": "customers/view/search-customer-profiles"
+                  },
+                  {
+                    "title": "View customer profile",
+                    "path": "customers/view/view-customer-profile"
+                  },
+                  {
+                    "title": "View customer data",
+                    "path": "customers/view/view-customer-data"
+                  },
+                  {
+                    "title": "View customer activity",
+                    "path": "customers/view/view-customer-activity"
+                  },
+                  {
+                    "title": "View campaigns for customer",
+                    "path": "customers/view/view-campaigns-for-customer"
+                  },
+                  {
+                    "title": "View offers issued to customer",
+                    "path": "customers/view/view-offers-issued-to-customer"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Loyalty",
+            "icon": "award",
+            "path": "loyalty/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Build loyalty program",
+                    "path": "loyalty/create/build-loyalty-program"
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Remove rules from tiered loyalty programs",
+                    "path": "loyalty/manage/remove-rules-from-tiered-loyalty-programs"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Offers",
+            "icon": "tag",
+            "path": "offers/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "group": "Create offer",
+                    "path": "offers/create/create-offer/overview",
+                    "pages": [
+                      {
+                        "title": "Set up Booking offer",
+                        "path": "offers/create/create-offer/set-up-booking-offer"
+                      },
+                      {
+                        "title": "Set up Buy X, Get Y offer",
+                        "path": "offers/create/create-offer/set-up-buy-x-get-y-offer"
+                      },
+                      {
+                        "title": "Set up Fixed Amount Discount",
+                        "path": "offers/create/create-offer/set-up-fixed-amount-discount"
+                      },
+                      {
+                        "title": "Set up Fulfillment offer",
+                        "path": "offers/create/create-offer/set-up-fulfillment-offer"
+                      },
+                      {
+                        "title": "Set up Package offer",
+                        "path": "offers/create/create-offer/set-up-package-offer"
+                      },
+                      {
+                        "title": "Set up Percent Discount offer",
+                        "path": "offers/create/create-offer/set-up-percent-discount-offer"
+                      },
+                      {
+                        "title": "Set up Price Coupon offer",
+                        "path": "offers/create/create-offer/set-up-price-coupon-offer"
+                      },
+                      {
+                        "title": "Set up Selection offer",
+                        "path": "offers/create/create-offer/set-up-selection-offer"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Deactivate offer",
+                    "path": "offers/manage/deactivate-offer"
+                  },
+                  {
+                    "title": "Delete offer",
+                    "path": "offers/manage/delete-offer"
+                  },
+                  {
+                    "title": "Edit offer",
+                    "path": "offers/manage/edit-offer"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View offer information",
+                    "path": "offers/view/view-offer-information"
+                  }
+                ]
+              },
+              {
+                "group": "About",
+                "icon": "info",
+                "pages": [
+                  {
+                    "title": "What types of offers does SessionM support?",
+                    "path": "offers/about/what-types-of-offers-does-sessionm-support"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Points",
+            "icon": "coins",
+            "path": "points/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Create point account",
+                    "path": "points/create/create-point-account"
+                  },
+                  {
+                    "title": "Create point source",
+                    "path": "points/create/create-point-source"
+                  }
+                ]
+              },
+              {
+                "group": "Manage",
+                "icon": "settings",
+                "pages": [
+                  {
+                    "title": "Activate or deactivate point account",
+                    "path": "points/manage/activate-or-deactivate-point-account"
+                  },
+                  {
+                    "title": "Activate, pause or archive point source",
+                    "path": "points/manage/activate-pause-or-archive-point-source"
+                  },
+                  {
+                    "title": "Modify point source restrictions",
+                    "path": "points/manage/modify-point-source-restrictions"
+                  },
+                  {
+                    "title": "Edit point account",
+                    "path": "points/manage/edit-point-account"
+                  },
+                  {
+                    "title": "Edit point source",
+                    "path": "points/manage/edit-point-source"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View point accounts",
+                    "path": "points/view/view-point-accounts"
+                  },
+                  {
+                    "title": "View point audit logs",
+                    "path": "points/view/view-point-audit-logs"
+                  },
+                  {
+                    "title": "View point sources",
+                    "path": "points/view/view-point-sources"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Promo Codes",
+            "icon": "ticket",
+            "path": "promo-codes/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Create promo code",
+                    "path": "promo-codes/create/create-promo-code"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View promo code details",
+                    "path": "promo-codes/view/view-promo-code-details"
+                  },
+                  {
+                    "title": "View promo codes list",
+                    "path": "promo-codes/view/view-promo-codes-list"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Reward Stores",
+            "icon": "store",
+            "path": "reward-stores/overview",
+            "pages": [
+              {
+                "group": "Create",
+                "icon": "plus",
+                "pages": [
+                  {
+                    "title": "Create reward store",
+                    "path": "reward-stores/create/create-reward-store"
+                  }
+                ]
+              },
+              {
+                "group": "View",
+                "icon": "eye",
+                "pages": [
+                  {
+                    "title": "View reward stores",
+                    "path": "reward-stores/view/view-reward-stores"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Rules",
+            "icon": "git-branch",
+            "path": "rules/overview",
+            "pages": [
+              {
+                "title": "Create rule",
+                "path": "rules/create-rule"
+              },
+              {
+                "title": "Delete rule",
+                "path": "rules/delete-rule"
+              },
+              {
+                "title": "Duplicate rule",
+                "path": "rules/duplicate-rule"
+              },
+              {
+                "title": "View and search rules",
+                "path": "rules/view-and-search-rules"
               }
             ]
           }
-        ]
+        ],
+        "show-page-navigation": true,
+        "ask-feedback": false,
+        "public": false
       },
       {
-        "tab": "Home",
-        "groups": {
-          "pages": []
-        },
-        "path": "hello"
+        "tab": "Developer",
+        "icon": "code",
+        "path": "developer/sessionm-developer-center",
+        "show-sidebar": false,
+        "show-toc": false,
+        "pages": [
+          {
+            "group": "APIs",
+            "icon": "code",
+            "pages": [
+              {
+                "group": "SessionM API Services Overview",
+                "path": "developer/sessionm-api-services-overview",
+                "pages": [
+                  {
+                    "title": "Introduction",
+                    "path": "developer/sessionm-api-services-overview"
+                  },
+                  {
+                    "title": "Technical Summary",
+                    "path": "developer/sessionm-api-services-overview/technical-summary"
+                  },
+                  {
+                    "title": "API Domains",
+                    "path": "developer/sessionm-api-services-overview/api-domains"
+                  }
+                ]
+              },
+              {
+                "title": "Before You Begin",
+                "path": "developer/before-you-begin"
+              },
+              {
+                "group": "Customers",
+                "path": "developer/customers",
+                "pages": [
+                  {
+                    "title": "Customer Profile APIs",
+                    "path": "developer/customers/customer-profile-apis"
+                  },
+                  {
+                    "title": "Customer Accounts Merge API",
+                    "path": "developer/customers/customer-accounts-merge-api"
+                  },
+                  {
+                    "title": "Customer Account Notes API",
+                    "path": "developer/customers/customer-account-notes-api"
+                  },
+                  {
+                    "title": "Tags API",
+                    "path": "developer/customers/tags-api"
+                  },
+                  {
+                    "title": "Events API",
+                    "path": "developer/customers/events-api"
+                  },
+                  {
+                    "title": "Timeline APIs",
+                    "path": "developer/customers/timeline-apis"
+                  },
+                  {
+                    "title": "Data Privacy API",
+                    "path": "developer/customers/data-privacy-api"
+                  },
+                  {
+                    "title": "Device Tokens API",
+                    "path": "developer/customers/device-tokens-api"
+                  }
+                ]
+              },
+              {
+                "group": "Campaigns",
+                "path": "developer/campaigns",
+                "pages": [
+                  {
+                    "title": "Campaigns API",
+                    "path": "developer/campaigns/campaigns-api"
+                  },
+                  {
+                    "title": "Inbox API",
+                    "path": "developer/campaigns/inbox-api"
+                  },
+                  {
+                    "title": "Promo Code APIs",
+                    "path": "developer/campaigns/promo-code-apis"
+                  }
+                ]
+              },
+              {
+                "group": "POS",
+                "path": "developer/pos",
+                "pages": [
+                  {
+                    "title": "Overview",
+                    "path": "developer/pos"
+                  },
+                  {
+                    "title": "General DTO Definitions",
+                    "path": "developer/pos/general-dto-definitions"
+                  },
+                  {
+                    "title": "Send Transaction",
+                    "path": "developer/pos/send-transaction"
+                  },
+                  {
+                    "title": "User Lookup",
+                    "path": "developer/pos/user-lookup"
+                  },
+                  {
+                    "group": "Discounting",
+                    "path": "developer/pos/discounting",
+                    "pages": [
+                      {
+                        "title": "Immediate Redeem API",
+                        "path": "developer/pos/discounting/immediate-redeem-api"
+                      },
+                      {
+                        "title": "Lock Offer API",
+                        "path": "developer/pos/discounting/lock-offer-api"
+                      },
+                      {
+                        "title": "Unlock Offer API",
+                        "path": "developer/pos/discounting/unlock-offer-api"
+                      },
+                      {
+                        "title": "Reinstate Offer API",
+                        "path": "developer/pos/discounting/reinstate-offer-api"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "title": "Offers",
+                "path": "offers"
+              },
+              {
+                "title": "Loyalty",
+                "path": "loyalty"
+              },
+              {
+                "title": "Catalog",
+                "path": "catalog"
+              },
+              {
+                "title": "Transactions",
+                "path": "transactions"
+              },
+              {
+                "group": "Advanced",
+                "path": "developer/advanced",
+                "pages": [
+                  {
+                    "title": "Divisions API",
+                    "path": "developer/advanced/divisions-api"
+                  },
+                  {
+                    "title": "Model API",
+                    "path": "developer/advanced/model-api"
+                  },
+                  {
+                    "title": "Lockout API",
+                    "path": "developer/advanced/lockout-api"
+                  },
+                  {
+                    "title": "Limiter API",
+                    "path": "developer/advanced/limiter-api"
+                  },
+                  {
+                    "title": "Encrypting Requests",
+                    "path": "developer/advanced/encrypting-requests"
+                  }
+                ]
+              },
+              {
+                "group": "Deprecated",
+                "path": "developer/deprecated",
+                "pages": [
+                  {
+                    "title": "Orders API",
+                    "path": "developer/deprecated/orders-api"
+                  },
+                  {
+                    "title": "Points API",
+                    "path": "developer/deprecated/points-api"
+                  },
+                  {
+                    "title": "Tiers API",
+                    "path": "developer/deprecated/tiers-api"
+                  },
+                  {
+                    "title": "Core Loyalty APIs",
+                    "path": "developer/deprecated/core-loyalty-apis"
+                  },
+                  {
+                    "title": "Places API",
+                    "path": "developer/deprecated/places-api"
+                  },
+                  {
+                    "title": "Access Tokens API",
+                    "path": "developer/deprecated/access-tokens-api"
+                  },
+                  {
+                    "title": "Identity Services API",
+                    "path": "developer/deprecated/identity-services-api"
+                  },
+                  {
+                    "title": "SMS Validation API",
+                    "path": "developer/deprecated/sms-validation-api"
+                  },
+                  {
+                    "title": "Customer Affiliation API",
+                    "path": "developer/deprecated/customer-affiliation-api"
+                  },
+                  {
+                    "title": "Image Validation API",
+                    "path": "developer/deprecated/image-validation-api"
+                  },
+                  {
+                    "title": "Campaign Creation API",
+                    "path": "developer/deprecated/campaign-creation-api"
+                  },
+                  {
+                    "title": "Campaigns Management API",
+                    "path": "developer/deprecated/campaigns-management-api"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "show-page-navigation": false,
+        "ask-feedback": false,
+        "public": true
+      },
+      {
+        "tab": "Release Notes",
+        "icon": "megaphone",
+        "path": "release-notes/overview",
+        "show-sidebar": false,
+        "show-toc": false,
+        "pages": [
+          {
+            "group": "2024 Release Notes",
+            "icon": "calendar",
+            "pages": [
+              {
+                "title": "July 2024 Release Notes",
+                "path": "release-notes/2024/july-2024"
+              },
+              {
+                "title": "April 2024 Release Notes",
+                "path": "release-notes/2024/april-2024"
+              },
+              {
+                "title": "February 2024 Release Notes",
+                "path": "release-notes/2024/february-2024"
+              },
+              {
+                "title": "January 2024 Release Notes",
+                "path": "release-notes/2024/january-2024"
+              }
+            ]
+          },
+          {
+            "group": "2023 Release Notes",
+            "icon": "calendar",
+            "pages": [
+              {
+                "title": "October 2023 Release Notes",
+                "path": "release-notes/2023/october-2023"
+              },
+              {
+                "title": "August 2023 Release Notes",
+                "path": "release-notes/2023/august-2023"
+              },
+              {
+                "title": "June 2023 Release Notes",
+                "path": "release-notes/2023/june-2023"
+              },
+              {
+                "title": "April 2023 Release Notes",
+                "path": "release-notes/2023/april-2023"
+              },
+              {
+                "title": "February 2023 Release Notes",
+                "path": "release-notes/2023/february-2023"
+              },
+              {
+                "title": "January 2023 Release Notes",
+                "path": "release-notes/2023/january-2023"
+              }
+            ]
+          },
+          {
+            "group": "2022 Release Notes",
+            "icon": "calendar",
+            "pages": [
+              {
+                "title": "October 2022 Release Notes",
+                "path": "release-notes/2022/october-2022"
+              },
+              {
+                "title": "August 2022 Release Notes",
+                "path": "release-notes/2022/august-2022"
+              },
+              {
+                "title": "June 2022 Release Notes",
+                "path": "release-notes/2022/june-2022"
+              },
+              {
+                "title": "April 2022 Release Notes",
+                "path": "release-notes/2022/april-2022"
+              },
+              {
+                "title": "February 2022 Release Notes",
+                "path": "release-notes/2022/february-2022"
+              },
+              {
+                "title": "January 2022 Release Notes",
+                "path": "release-notes/2022/january-2022"
+              }
+            ]
+          }
+        ],
+        "public": true
       },
       {
         "tab": "Learning Hub",
-              "icon": "external-link",
-      "href": "https://blog.example.com"
-      
-
+        "icon": "graduation-cap",
+        "href": "https://academy.capillarytech.com/sessionm/pages/112/home",
+        "public": true
       }
     ]
-  }
+  },
+  "logo-dark": "https://blob-cdn.documentation.ai/org-a44f305a-09d8-4c5e-881d-266f10a97ab9/doc-e899af75-9c11-42e7-b892-adcdfe8015a5/1785744702779-y01qxmbd5q7-sessionm-white2x--1-.png?fm=auto&auto=compress%2Cformat",
+  "logo-light": "https://blob-cdn.documentation.ai/org-a44f305a-09d8-4c5e-881d-266f10a97ab9/doc-e899af75-9c11-42e7-b892-adcdfe8015a5/1785474333275-v7y1ypfxmf-sessionm-logo-light.png?fm=auto&auto=compress%2Cformat",
+  "favicon": "https://blob-cdn.documentation.ai/org-a44f305a-09d8-4c5e-881d-266f10a97ab9/doc-e899af75-9c11-42e7-b892-adcdfe8015a5/1785744744551-81ulw2nxsot-sessionm-favicon-270.png?fm=auto&auto=compress%2Cformat",
+  "customCss": [
+    {
+      "src": "styles/home.css"
+    },
+    {
+      "src": "styles/footer.css"
+    }
+  ]
 }
