@@ -1,0 +1,91 @@
+## Welcome to the SessionM Developer Center
+
+Find detailed specs for each SessionM API as well as some API Workflows.
+
+## APIs
+
+<Columns cols="3">
+  <Card title="SessionM API Services Overview" href="/developer/sessionm-api-services-overview" icon="book-open" horizontal="false">
+    An introduction to the SessionM Platform services, including a technical overview and brief summaries of available APIs.
+  </Card>
+
+  <Card title="Customers" href="/developer/customers" icon="user" horizontal="false">
+    APIs that manage customer data on the platform, providing programmatic access to several kinds of cloud-based marketing data.
+  </Card>
+
+  <Card title="Campaigns" href="/developer/campaigns" icon="megaphone" horizontal="false">
+    APIs that manage campaign data on the platform, providing programmatic access to promotional and message-based marketing campaigns.
+  </Card>
+
+  <Card title="POS" href="/developer/pos" icon="credit-card" horizontal="false">
+    APIs that connect the platform to third-party point of sale systems. The APIs are designed to process transactions, lookup customers, and manage discount offers.
+  </Card>
+
+  <Card title="Offers" href="https://domains-connecteast1.ent-sessionm.com/offers/swagger/ui/index#/" icon="tag" horizontal="false">
+    APIs that provide control over rewarding a user with several outcome types. Various workflows are supported, including integrating with point of sale systems, enabling fulfillment methods, and placing restrictions on the acquisition or redemption of offers.
+  </Card>
+
+  <Card title="Loyalty" href="https://domains-connecteast1.ent-sessionm.com/incentives/swagger/ui/index#/" icon="award" horizontal="false">
+    APIs that control a robust points system and loyalty rules engine to create custom loyalty programs. Point sources and accounts can be configured, managed and audited. Rules are triggered by actions taken and can deliver awards, move customers between tiers and even trigger campaigns.
+  </Card>
+
+  <Card title="Catalog" href="https://domains-connecteast1.ent-sessionm.com/catalog/swagger/ui/index#/" icon="package" horizontal="false">
+    APIs that manage the normalization of a "master catalog" of store categories and items. Includes endpoints for commands and queries to control various functions and rules with the catalog.
+  </Card>
+
+  <Card title="Transactions" href="https://domains-connecteast1.ent-sessionm.com/transactions/swagger/ui/index#/" icon="receipt" horizontal="false">
+    APIs that handle transactions procedurally, storing items and payments. Endpoints are available that retrieve transaction information as single transactions or as pageable, sortable lists. The publishing feature can broadcast to accomplish point economy operations.
+  </Card>
+
+  <Card title="Advanced" href="/developer/advanced" icon="settings" horizontal="false">
+    APIs that manage advanced APIs accessing organiztion divisions, models, lockouts, limiters and request encryption.
+  </Card>
+
+  <Card title="Deprecated" href="/developer/deprecated" icon="archive" horizontal="false">
+    APIs that have been deprecated in favor of newer API versions or because suport for the respective products is ending soon.
+  </Card>
+</Columns>
+
+## API Workflows
+
+The following PDF documents detail how to use the platform APIs to accomplish common SessionM workflows:
+
+- [API Workflow: Customer Signup and Login for S2S Implementations](https://docs.sessionm.com/developer/Technical%20Docs/workflows/API_Workflow_S2S_Customer_Signup_and_Login.pdf)
+- [API Workflow: Customer Signup and Login for C2S Implementations](https://docs.sessionm.com/developer/Technical%20Docs/workflows/API_Workflow_C2S_Customer_Signup_and_Login.pdf)
+- [API Workflow: Customer Password Reset](https://docs.sessionm.com/developer/Technical%20Docs/workflows/API_Workflow_Customer_Password_Reset.pdf)
+- [API Workflow: Timeline](https://docs.sessionm.com/developer/Technical%20Docs/workflows/APIWorkflowTimeline.pdf)
+- [API Workflow: User Points Management](https://docs.sessionm.com/developer/Technical%20Docs/workflows/APIWorkflowUserPointsManagement.pdf)
+- [API Workflow: Offer Management](https://docs.sessionm.com/developer/Technical%20Docs/workflows/APIWorkflowOfferManagement.pdf)
+- [API Workflow: Reward Store Management](https://docs.sessionm.com/developer/Technical%20Docs/workflows/APIWorkflowRewardStoreManagement.pdf)
+- [API Workflow: Loyalty](https://docs.sessionm.com/developer/Technical%20Docs/workflows/API_Workflow_Loyalty_Data.pdf)
+
+<Callout kind="info" collapsed="false">
+  The [S2S Authentication: Providing OAuth2 Clients Access to the SessionM Platform](https://docs.sessionm.com/developer/Technical%20Docs/workflows/OAuthClientApps.pdf) document supports some of the workflows above.
+</Callout>
+
+<footer className="sessionm-footer">
+  <div className="sessionm-footer__inner">
+    <div className="sessionm-footer__cols">
+      <div className="sessionm-footer__col">
+        <p className="sessionm-footer__heading">Company</p>
+
+        <div className="sessionm-footer__links">
+          <a href="https://www.sessionm.com/" target="_blank">SessionM</a>
+          <a href="https://www.capillarytech.com/careers/" target="_blank">Careers</a>
+          <a href="https://www.capillarytech.com/contact-us/" target="_blank">Contact Us</a>
+        </div>
+      </div>
+
+      <div className="sessionm-footer__col">
+        <p className="sessionm-footer__heading">Resources</p>
+
+        <div className="sessionm-footer__links">
+          <a href="/developer/sessionm-developer-center">Developer Docs</a>
+          <a href="/release-notes/overview">Release Notes</a>
+        </div>
+      </div>
+    </div>
+
+    <p className="sessionm-footer__legal">©2026 SessionM | All rights reserved. Specifications for features or functionality herein may be dependent on a customer's environment; third-party software used and/or needed to be used; and may require professional services, integration services or other services.</p>
+  </div>
+</footer>

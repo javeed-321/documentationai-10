@@ -1,0 +1,40 @@
+---
+title: "Group the cards and define their Boolean logic"
+description: "Apply Boolean AND/OR logic within a single attribute card, between two cards, and across grouped cards in the Composer builder."
+---
+
+An important aspect of defining an audience is applying Boolean logic (AND/OR) for your segments. These Boolean operators are defined as:
+
+- **AND**: When attributes are combined with the AND operator, users must meet BOTH criteria. This will make your target audience smaller, as users must meet multiple criteria. For example, you may want to build an audience where users have spent greater than $200 in the past month AND made more than four purchases in the past six months.
+
+- **OR**: When attributes are combined with an OR operator, users can meet EITHER of the criteria. This will expand the number of users in your target audience, as they are only required to meet the criteria for one attribute or the other. For example, you may build an audience where users have spent greater than $200 in the past month OR made more than four purchases in the past six months.
+
+<ExpandableGroup>
+  <Expandable title="Logic within a single attribute card" default-open="false">
+    If there are multiple values entered into an attribute card field, those values will be combined with OR operators. For example, the custom attribute for 'favorite color' below has the option to enter multiple values. Entering 'green, red, yellow' into this field creates an audience of users whose favorite color is green OR red OR yellow.
+
+    <Image src="https://docs.sessionm.com/Resources/Images/Procedures/comp_group_1.png" width="780" height="188" alt="Custom attribute card with multiple values combined using OR operators" caption="" />
+  </Expandable>
+
+  <Expandable title="Logic between two or more attribute cards" default-open="false">
+    Once you have two or more attribute cards added to the audience builder, you'll notice AND/OR operators between the cards. Toggle this option between each of the attribute cards based on whether you want users to meet the criteria for BOTH attribute cards (AND operator), or if they can meet the criteria for one or the other (OR operator).
+
+    <Image src="https://docs.sessionm.com/Resources/Images/Procedures/comp_group_2.png" width="780" height="529" alt="AND/OR operator toggle between two attribute cards" caption="" />
+  </Expandable>
+
+  <Expandable title="Logic among three or more attribute cards" default-open="false">
+    In addition to being able to toggle AND/OR between each attribute card, you can also select cards to group together by clicking the **Create Card Group** button. Note that you will not be able to select this until you have at least three attribute cards added to your builder page.
+
+    Each card will display a checkbox you can enable to assign the segment to the attribute group. Once you've selected the cards being added to the group, click **Done**. This will group the selected cards together with an OR operator; a red line appears to the left of the group members.
+
+    Note that non-adjacent cards selected via the **Add Attribute Group** button are moved so they become adjacent. You can continue to toggle the AND/OR option between cards as needed. Use the **All/Any** toggle to change the relationship between all attribute cards at once.
+
+    In the image below, the attribute cards for 'Current Tier' have been grouped together. This audience would consist of users whose birthday is next month AND the user is in the Fanatic tier OR the VIP tier.
+
+    <Image src="https://docs.sessionm.com/Resources/Images/Procedures/comp_group_3.png" width="758" height="599" alt="Grouped Current Tier attribute cards in the audience builder" caption="" />
+  </Expandable>
+</ExpandableGroup>
+
+## Next step
+
+Continue with [Save and activate audience in Composer module](/composer/create/audience/create-new-composer-audience/save-and-activate-audience-in-composer-module).

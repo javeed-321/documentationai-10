@@ -1,0 +1,371 @@
+---
+title: "Divisions API"
+description: "Retrieve the organization management configuration for a SessionM tenant, including the full division hierarchy."
+---
+
+This API returns the organization management configuration for a SessionM tenant. It contains header-level attributes and a *divisions* object, which contains one or many child divisions.
+
+"Division" is the internal SessionM name for an organization, which can represent an organization, country, region, brand, business unit, or other representation of a client's organization or program structure.
+
+Divisions may contain child divisions, enabling a hierarchical relationship between them. Each division object contains attributes that describe settings and select program components associated with that division, including:
+
+- Division identifier.
+- Access permissions.
+- Associated reward stores used to contain the offers associated with the division.
+- Associated point sources.
+- Associated tier systems.
+- Associated venue tags used to link store locations with divisions.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  Organization management currently needs to be enabled and configured by your SessionM implementation team. Consult with your customer success representative to see if "org management" is a good fit for you and begin setting it up in your tenancy.
+</Callout>
+
+## Retrieve an Organization Hierarchy
+
+Fetches the configuration schema that governs an SMP platform environment for the current division, or organization.
+
+### Endpoints
+
+This method offers the following endpoint:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/divisions
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+Not applicable.
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+The response object returned by the method contains several identification attributes describing the division as well as multiple *divisions* objects, which is shown below:
+
+**JSON Response**
+
+```json
+{
+    "version": 3,
+    "enabled": true,
+    "preferred_name": "Division ID",
+    "appended_data_attr": "market",
+    "appended_data_type": "string",
+    "divisions": {
+        "division_id": "all",
+        "display_name": "All-division",
+        "visual_code": "",
+        "currency": "EUR",
+        "permissions": [
+            {
+                "type": "authz",
+                "group_name": "all_user_group"
+            },
+            {
+                "type": "authz",
+                "group_name": "ext_system_admin"
+            }
+        ],
+        "rewards_store_ids": [
+            "7450d306-9e28-43ff-a004-7d832b100275"
+        ],
+        "point_source_ids": [
+            "a932ce8c-c031-4a3f-8d9f-43b922590bee"
+        ],
+        "tier_system_ids": [
+            "d6c21469-ffaf-4add-b4a0-1ce5bcc6fd4b"
+        ],
+        "venue_tags": [
+            "all_venue_tag1",
+            "all_venue_tag2",
+            "all_venue_tag3_all"
+        ],
+        "divisions": [
+            {
+                "division_id": "test",
+                "display_name": "Test",
+                "visual_code": "1F1EA 1F1FA",
+                "currency": "EUR",
+                "permissions": [
+                    {
+                        "type": "authz",
+                        "group_name": "test_user_group"
+                    },
+                    {
+                        "type": "authz",
+                        "group_name": "ext_system_admin"
+                    }
+                ],
+                "rewards_store_ids": [
+                    "dc4d88dd-7b7f-4348-823e-f94145707ba7"
+                ],
+                "point_source_ids": [
+                    "c8a5fd93-f05a-4ffc-8114-0164f71bc18d"
+                ],
+                "tier_system_ids": [
+                    "d6c21469-ffaf-4add-b4a0-1ce5bcc6fd4b"
+                ],
+                "venue_tags": [
+                    "test_venue_tag1",
+                    "test_venue_tag2"
+                ]
+            },
+            {
+                "division_id": "gbr",
+                "display_name": "United Kingdom",
+                "visual_code": "1F1EC 1F1E7",
+                "currency": "GBP",
+                "permissions": [
+                    {
+                        "type": "authz",
+                        "group_name": "gbr_user_group"
+                    },
+                    {
+                        "type": "authz",
+                        "group_name": "ext_system_admin"
+                    }
+                ],
+                "rewards_store_ids": [
+                    "a613862f-8ea7-4b52-ab14-cd0feeb03a63"
+                ],
+                "point_source_ids": [
+                    "c8a5fd93-f05a-4ffc-8114-0164f71bc18d"
+                ],
+                "tier_system_ids": [
+                    "6bd73806-7159-47b2-9893-4aff15d4cb78"
+                ],
+                "venue_tags": [
+                    "online_japan_gbr1",
+                    "online_japan_gbr_123"
+                ]
+            },
+            {
+                "division_id": "fra",
+                "display_name": "France",
+                "visual_code": "1F1EB 1F1F7",
+                "currency": "EUR",
+                "permissions": [
+                    {
+                        "type": "authz",
+                        "group_name": "fra_user_group"
+                    },
+                    {
+                        "type": "authz",
+                        "group_name": "ext_system_admin"
+                    }
+                ],
+                "rewards_store_ids": [
+                    "35756588-3d11-4284-b316-173f1ef16218"
+                ],
+                "point_source_ids": [
+                        "66c3579a-c42f-4a8b-994b-6e54dc0c4c35"
+                ],
+                "tier_system_ids": [
+                    "d3702955-617b-4992-80af-d8bb95ad790b"
+                ],
+                "venue_tags": [
+                    "online_japan_fra1"
+                ]
+            },
+            {
+                "division_id": "esp",
+                "display_name": "Spain",
+                "visual_code": "1F1EA 1F1F8",
+                "currency": "EUR",
+                "permissions": [
+                    {
+                        "type": "authz",
+                        "group_name": "esp_user_group"
+                    },
+                    {
+                        "type": "authz",
+                        "group_name": "ext_system_admin"
+                    }
+                ],
+                "rewards_store_ids": [
+                    "f95860d9-b9a3-4f6c-8a44-6fd6ab2f038f"
+                ],
+                "point_source_ids": [
+                    "97c107fa-aeae-4648-947d-2344bfb7e536"
+                ],
+                "tier_system_ids": [
+                    "a34e0834-eeca-4d18-8939-400fd888aa8f"
+                ],
+                "venue_tags": [
+                    "esp_venue_tag1",
+                    "esp_venue_tag2"
+                ]
+            },
+            {
+                "division_id": "franchise",
+                "display_name": "Franchise",
+                "visual_code": "",
+                "currency": "",
+                "permissions": [
+                    {
+                        "type": "authz",
+                        "group_name": "ext_system_admin"
+                    },
+                    {
+                        "type": "authz",
+                        "group_name": "franchise_user_group"
+                    }
+                ],
+                "rewards_store_ids": [
+                    "eeb03e49-e899-4896-a301-1c72208c8f30",
+                    "e5778c90-71fa-4b07-b6c0-bab850d69479"
+                ],
+                "point_source_ids": [
+                    "03ca57c2-1bfb-496a-bca6-267709c090f6"
+                ],
+                "tier_system_ids": [
+                    "febf0236-1293-425b-935b-ba1084752988",
+                    "0a85ba7c-59c4-43fb-88f1-b64d75985730"
+                ],
+                "venue_tags": [
+                    "franchise_venue_tag1",
+                    "franchise_venue_tag2",
+                    "uae_venue_tag1",
+                    "sau_venue_tag1",
+                    "kwt_venue_tag1",
+                    "kwt_venue_tag2"
+                ],
+                "divisions": [
+                    {
+                        "division_id": "uae",
+                        "display_name": "United Arab Emirates",
+                        "visual_code": "1F1E6 1F1EA",
+                        "currency": "AED",
+                        "permissions": [
+                            {
+                                "type": "authz",
+                                "group_name": "uae_user_group"
+                            },
+                            {
+                                "type": "authz",
+                                "group_name": "ext_system_admin"
+                            }
+                        ],
+                        "rewards_store_ids": [
+                            "bacae1aa-7abd-488d-a631-8c19a4aef9c3"
+                        ],
+                        "point_source_ids": [
+                            "a623a88e-7854-408a-9ee2-24853f04cf5c"
+                        ],
+                        "tier_system_ids": [
+                            "e7640178-6bbd-46ee-ab3e-b04466ce3649"
+                        ],
+                        "venue_tags": [
+                            "uae_venue_tag1",
+                            "uae_venue_tag2"
+                        ]
+                    },
+                    {
+                        "division_id": "sau",
+                        "display_name": "Saudi Arabia",
+                        "visual_code": "1F1F8 1F1E6",
+                        "currency": "SAR",
+                        "permissions": [
+                            {
+                                "type": "authz",
+                                "group_name": "sau_user_group"
+                            },
+                            {
+                                "type": "authz",
+                                "group_name": "ext_system_admin"
+                            }
+                        ],
+                        "rewards_store_ids": [
+                            "e70f0591-37cf-4e55-b1d2-5a04f187ecb5"
+                        ],
+                        "point_source_ids": [
+                            "f82bf9e9-f713-4bc3-98a8-177179480655"
+                        ],
+                        "tier_system_ids": [
+                            "a80e1913-7ff1-4467-9b54-371e5781aab1"
+                        ],
+                        "venue_tags": [
+                            "sau_venue_tag1",
+                            "sau_venue_tag2"
+                        ]
+                    },
+                    {
+                        "division_id": "kwt",
+                        "display_name": "Kuwait",
+                        "visual_code": "1F1F0 U1F1FC",
+                        "currency": "KWD",
+                        "permissions": [
+                            {
+                                "type": "authz",
+                                "group_name": "kwt_user_group"
+                            },
+                            {
+                                "type": "authz",
+                                "group_name": "ext_system_admin"
+                            }
+                        ],
+                        "rewards_store_ids": [
+                            "e5778c90-71fa-4b07-b6c0-bab850d69479"
+                        ],
+                        "point_source_ids": [
+                            "90dc30b7-4533-4a99-ac9c-1db4839a96fd"
+                        ],
+                        "tier_system_ids": [
+                            "39896c2d-7506-4f5f-81da-f2e16e1ff8ab"
+                        ],
+                        "venue_tags": [
+                            "kwt_venue_tag1",
+                            "kwt_venue_tag2"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
+```
+
+The following table documents these objects:
+
+**Response Attributes**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *version* | integer | Version of organization management configuration schema that the environment is using. |
+| *enabled* | boolean | Specifies if multi-org feature is enabled: *true* enables multi-org; *false* disables multi-org. |
+| *preferred_name* | string | Name of organization that best describes client's use case for using organization management feature. Value here is substituted throughout UI to customize interface. |
+| *appended_data_attr* | string | Custom profile attribute that determines which organization a customer profile belongs to. |
+| *appended_data_attr_type* | string | Describes profile attribute's data type. Must be either *string* or *array*. |
+| *divisions* | object | Contains one or more divisions representing each organization that has been defined. |
+| *divisions.division_id* | string | Unique identifier for organization. Defined during configuration. |
+| *divisions.display_name* | string | Name for organization that is displayed in SMP UI. |
+| *divisions.visual_code* | string | Unicode or emoji code: [https://unicode.org/emoji/charts/full-emoji-list.html](https://unicode.org/emoji/charts/full-emoji-list.html). |
+| *divisions.currency* | string | <p>ISO 4217 currency code. Only used in reporting and data science models.</p><p>For leaf-level divisions, this attribute defines the currency that every transaction uses coming from stores associated with that division.</p><p>For parent-level divisions, this attribute defines the currency used for reporting and for the models that normalize the child divisions related to any rolled-up metrics.</p> |
+| *divisions.permissions* | array of objects | Contains a list of objects consisting of permission type and name. Used to give permissions for SMP users requiring access to the customers and program configurations for a division. |
+| *permissions.type* | string | Type is always set to *authz*. |
+| *permissions.group_name* | string | Name of the permission group containing the roles for a given division. |
+| *divisions.rewards_store_ids* | array of strings | <p>SessionM uses reward stores as a mapping construct to associate offers with division, or organizations. Currently no support exists for associating consumer-facing reward stores with organizations.</p><p>If present, this array contains the IDs for reward stores that contain the offers assigned to the organization.</p> |
+| *divisions.point_source_ids* | array of strings | <p>If present, contains the point source_IDs assigned to the organization.</p><p>Note: Point account assignment to division is inferred by the association of point source to an account in point management configuration.</p> |
+| *divisions.tier_system_ids* | array of strings | If present, contains the tier system IDs assigned to the organization. |
+| *divisions.venue_tags* | array of strings | <p>If present, contains the venue tags assigned to the organization. It is assumed that there is a process in place to add venue tags to venues.</p><p>Note: Not supported for category-level organizations; only leaf-level is supported.</p> |
+| *divisions.divisions* | array of objects | If present, contains a child organization. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *multiorg not configured* | Indicates that multi-org hierarchy has not been implemented for organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

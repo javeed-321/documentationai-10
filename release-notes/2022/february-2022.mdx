@@ -1,0 +1,35 @@
+---
+title: "February 2022 Release Notes"
+description: "SessionM platform release notes for February 2022 (release version 2022.2)."
+---
+
+**DETAILS**
+
+| Release to Staging | Release to Production | Release Version |
+|---|---|---|
+| February 7, 2022 | February 22 - 23, 2022 | 2022.2 |
+
+*No downtime is required for the release.*
+
+## Customer Data Activation
+
+### Bug Fixes
+
+**Catalog Performance** – Fixed the search functionality for clients having more than 5 million SKUs. We reduced the time for the catalog search and sorting, thus minimizing the possibility of timeouts. We also improved catalog usability and performance by minimizing the loading time of the categories and items, resulting in a faster user interface.
+
+## Loyalty And Offers
+
+### Improvements
+
+**Security**:
+
+- Enhanced security coverage where https responses are no longer stored locally by the browsers, thus adding additional protection against exposing sensitive data.
+- Enhanced security coverage where error messages are not revealing compromising details about the application.
+
+### Bug Fixes
+
+**APIs**:
+
+- Fixed a bug that was causing a failure when multiple concurrent calls were used for various endpoints that can create or update a user offer, such as `issue_offer`, `manual_claim_offer`, `purchase_reward_store_offer`.
+- Fixed a fraud issue being exploited when a user offer was revoked. Now multiple endpoints (`/lock`, `/redeem`, `/verify`) are returning a validation error of 400 when they are applied to a revoked user offer.
+- To fix a performance issue, we have limited the number of records the `get_user_offers` endpint can return to 1000 records and fixed the endpoint to only return the first 1000 records whenever the request for offers exceeds 1000. If more than 1000 records are needed, pagination can be used via the `skip` and `take` parameters, described in the [Offers API documentation](https://domains-connecteast1.ent-sessionm.com/offers/swagger/ui/index#!/InfoV232583210323232323232323232323232This32API32allows32for32the32querying32of32information32about32offers32in32a32read45only32fashion4610323232323232323232323232May32be32initiated32by32the32dashboard32or32the32mobile32app4610323232323232323232323232/InfoV2_GetUserOffers).

@@ -1,0 +1,27 @@
+---
+title: "Add encryption mechanism"
+description: "Set up a PGP encryption mechanism that can be applied to audience export files before they are sent to an SFTP destination."
+---
+
+Add an encryption mechanism that can be used to encrypt the data in an audience export.
+
+## About this task
+
+Audience export files are plain text. SessionM strongly recommends that you encrypt the export file before sending it to an SFTP destination. Use this task to set up the encryption mechanism for your site. You then select that mechanism when you define an export job.
+
+## Steps
+
+1. On the Audience dashboard, click **Manage Exports**.
+2. Click the **Encryptions** tab. A page that contains all of the current encryption methods that can be applied to an export opens.
+3. Click **Add Encryption**.
+4. On the Settings tab, enter or select data. All fields are required.
+
+   | Setting | Description |
+   | --- | --- |
+   | Name | Name the encryption scheme. |
+   | Type | Select the encryption type. Currently, only PGP is supported. |
+   | Keys | Enter the PGP keys to use for encryption. More than one key can be entered. For example, a key for a specific cloud implementation and a key for each user of the cloud. |
+
+5. Click **Save**.
+
+The new encryption mechanism appears on the Encryptions tab and is available for use in export jobs.

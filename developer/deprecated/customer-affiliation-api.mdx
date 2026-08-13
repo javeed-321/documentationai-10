@@ -1,0 +1,872 @@
+---
+title: "Customer Affiliation API"
+description: "Build and manage hierarchies, or affiliation trees, of customers represented in the platform as nodes."
+---
+
+<Callout kind="warning">
+  The Customer Affiliation API is no longer supported for new integrations.
+</Callout>
+
+This API builds and manages hierarchies, or affiliation trees, of customers represented in the platform as "nodes."
+
+There are two types of nodes that can appear in a user affiliation tree - "collection" and "user." A collection node is represented externally only as an object containing customers and/or other collection nodes - not represented as customers themselves. User nodes, on the other hand, are synonymous with current players/customers, but they can reside in an affiliation with either a collection node or a parent user node.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  The Customer Affiliation API supports the creation and maintenance of affiliation trees that represent hierarchies of related customers. As such, you do need to create the customers that populate these affiliations using the [Standard Profile API](/developer/customers/customer-profile-apis#standard-profile-api).
+</Callout>
+
+This API provides a set of methods that do the following:
+
+- [Create an affiliation](#create-an-affiliation)
+- [Retrieve all affiliations](#retrieve-all-affiliations)
+- [Retrieve an affiliation](#retrieve-an-affiliation)
+- [Creating a root node](#create-a-root-node)
+- [Add a collection child node to a parent collection node](#add-a-collection-child-node-to-a-parent-collection-node)
+- [Add a customer to a parent collection node](#add-a-customer-to-a-parent-collection-node)
+- [Delete a child customer from a parent node](#delete-a-child-customer-from-a-parent-node)
+- [Retrieve all affiliations for a customer](#retrieve-all-affiliations-for-a-customer)
+- [Retrieve ancestors of a customer within an affiliation](#retrieve-ancestors-of-a-customer-within-an-affiliation)
+- [Retrieve all root nodes](#retrieve-all-root-nodes)
+- [Retrieve all children](#retrieve-all-children)
+
+## Create an Affiliation
+
+Builds a new affiliation tree.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/affiliations
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a *user_affiliation* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "user_affiliation": {
+        "name": "ACME",
+        "slug": "acme_inc”
+    }
+}
+```
+
+The object's attributes are detailed in the following table:
+
+<a id="user_affiliation_request"></a>**Request Attributes for User Affiliation**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *name* | string<br />required | Name of the affiliation. |
+| *slug* | string<br />required | Primary identifier for the user, or customer, affiliation. Format: Any alphanumeric character combined with underscores and dashes. |
+
+### Response Object
+
+The response object returned by the method contains a *user_affiliation* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "user_affiliation": {
+        "name": "ACME",
+        "slug": "acme_inc”
+    }
+}
+```
+
+This response object contains attributes documented in the [Response Attributes for User Affiliation table](#affiliations_response).
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Occurs when trying to create an affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve All Affiliations
+
+Returns all affiliations for an organization.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/affiliations
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+The response object returned by the method contains a *user_affiliation* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "user_affiliation": {
+        "id": 1,
+        "name": "ACME",
+        "slug": "acme_inc”
+    }
+}
+```
+
+The following table documents this object:
+
+<a id="affiliations_response"></a>**Response Attributes for User Affiliation**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | string | Unique user ID for a customer affiliation. |
+| *name* | string | Name of the customer affiliation. |
+| *slug* | string | Primary identifier for the customer affiliation. Format: Any alphanumeric character combined with underscores and dashes. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Occurs when trying to see a specific affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve an Affiliation
+
+Returns a specific affiliation by an ID or a slug.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/affiliations/:affiliation_slug_or_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with the slug, which is the primary identifier for the user, or customer, affiliation. (Format: All caps and underscores instead of spaces.) Can also be specified with the unique user ID for the customer affiliation. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+The response object returned by the method contains a *user_affiliation* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "user_affiliation": {
+        "id": 1,
+        "name": "ACME",
+        "slug": "acme_inc”
+    }
+}
+```
+
+This response object contains the same attributes as the response object detailed in the [Response Attributes for User Affiliation table](#affiliations_response).
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Occurs when trying to see a specific affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Create a Root Node
+
+Creates a root node, which is the top-level parent in the affiliation tree.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/affiliations/:affiliation_slug_or_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a *node* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "node" : {
+        "name": "Acme",
+        "external_affiliation_type": "Company"
+    }
+}
+```
+
+The object's attributes are detailed in the [Request Attributes for Node table](#node_request).
+
+### Response Object
+
+The response object returned by the method contains a *node* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "affiliation_type": "collection",
+    "external_affiliation_type": "Company",
+    "id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3",
+    "name": "ACME"
+}
+```
+
+The object's attributes are detailed in the [Response Attributes for Node table](#node_response).
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *node_exist* | Occurs when trying to create a new node whose name or slug name was already used by an existing node. In effect, node already exists. |
+| *missing_data* | Occurs when trying to create a node without parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Add a Collection Child Node to a Parent Collection Node
+
+Creates a parent-child relationship between two nodes.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/affiliations/:affiliation_slug_or_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a *node* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "node": {
+        "name": "ACME Sales Team",
+        "external_affiliation_type": "Division",
+        "parent_id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3"
+    }
+}
+```
+
+The object's attributes are detailed in the following table:
+
+<a id="node_request"></a>**Request Attributes for Node**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *name* | string<br />required | Name of the child node. |
+| *external_affiliation_type* | string<br />required | Name of the type of group/affiliation. For example, "Company" or "Division." |
+| *parent_id* | string<br />required | Unique customer ID of the parent node. |
+
+### Response Object
+
+The response object returned by the method contains a *node* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "affiliation_type": "collection",
+    "external_affiliation_type": "Division",
+    "id": "7a987422-8b5e-11e8-9c5f-16f360c05ac3",
+    "name": "ACME Sales Team",
+    "parent_id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3"
+}
+```
+
+The following table documents this object:
+
+<a id="node_response"></a>**Response Attributes for Node**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *affiliation_type* | string | Defines the type of child node - collection or customer. In this case, always a collection. |
+| *external_affiliation_type* | string | Name of the type of group/affiliation. For example, "Company" or "Division." |
+| *id* | string | Unique customer ID of the child node. |
+| *name* | string | Name of the child node. |
+| *parent_id* | string | Unique customer ID of the parent node. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *node_exist* | Occurs when trying to add a node to a parent and that relationship already exists. In effect, user is already in this collection. |
+| *parent_does_not_exist* | Occurs when trying to add a node without specifying the parent or by using the wrong parent ID. |
+| *argument_error* | Occurs when trying to add a node to another node that is not a collection. In effect, parent must be a collection. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Add a Customer to a Parent Collection Node
+
+Adds an existing customer to a parent collection.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/users/:user_id/affiliations/:affiliation_slug_or_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a parent ID, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "parent_id": "7a987422-8b5e-11e8-9c5f-16f360c05ac3"
+}
+```
+
+The *parent_id* attribute is a required string for a unique customer ID of the parent node.
+
+### Response Object
+
+The response object contains a *status* value-pair.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *node_exist* | Occurs when trying to add a node to a parent and that relationship already exists. In effect, user is already in this collection. |
+| *parent_does_not_exist* | Occurs when trying to add a node without specifying the parent or by using the wrong parent ID. |
+| *argument_error* | Occurs when trying to add a node to another node that is not a collection. In effect, parent must be a collection. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Delete a Child Customer from a Parent Node
+
+Deletes the relationship between a child customer and its parent's collection.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+DELETE /priv/v1/apps/:api_key/users/:user_id/affiliations/:affiliation_slug_or_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a parent ID, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "parent_id": "7a987422-8b5e-11e8-9c5f-16f360c05ac3"
+}
+```
+
+The *parent_id* attribute is an optional string for a unique customer ID of the parent node.
+
+### Response Object
+
+The response object contains a *status* value-pair.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *parent_does_not_exist* | Occurs when trying to remove a node from a collection without specifying the parent. In effect, parent does not exist. |
+| *user_does_not_belong_to_this_parent* | Occurs when a node does not have a relationship with the specified parent. In effect, user does not belong to this parent. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve All Affiliations for a Customer
+
+Returns all affiliations for a customer.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/users/user_id?user[affiliations]=true
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *user[affiliations]=true* | When set to *true*, retrieves the customer and traces their relationships in the affiliations tree, returning all of the customer's parents. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains a *user* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok",
+    "user": {
+        "activated": false,
+        "affiliations": [
+            {
+                "nodes": [
+                    {
+                        "affiliation_type": "collection",
+                        "external_affiliation_type": "Division",
+                        "id": "7a987422-8b5e-11e8-9c5f-16f360c05ac3",
+                        "name": "ACME AMEA Sales Division",
+                        "parent_id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3"
+                    },
+                    {
+                        "affiliation_type": "collection",
+                        "external_affiliation_type": "Root Division",
+                        "id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3",
+                        "name": "ACME Sales Team"
+                    }
+                ],
+                "user_affiliation": {
+                    "id": 1,
+                    "name": "ACME",
+                    "slug": "ACME"
+                }
+            }
+        ],
+        "available_points": 0,
+        "id": "75af3d92-a216-11e7-8a5e-3b9f60c05ac3",
+        "opted_in": true,
+        "test_points": 0,
+        "unclaimed_achievement_count": 0
+    }
+}
+```
+
+The following table documents this object:
+
+<a id="user_customer_response"></a>**Response Attributes for User (Customer)**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *activated* | boolean | Determines if customer is verified. |
+| *nodes* | array | List of [nodes](#node_response). |
+| *user_affiliation* | object | Customer [affiliation](#affiliations_response) object. |
+| *available_points* | integer | A customer's available points. |
+| *id* | string | Unique user ID of the customer. |
+| *opted_in* | boolean | Indicates whether a customer has opted into the rewards program. |
+| *test_points* | integer | Amount of points used on a test customer. |
+| *unclaimed_achievement_count* | integer | A count of the unclaimed achievements for a customer. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Occurs when trying to see a specific affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve Ancestors of a Customer within an Affiliation
+
+Returns a list of ancestors - parent or grandparent nodes - for a specific customer.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/users/:user_id/affiliations/:affiliation_slug_or_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+The response object returned by the method contains a *nodes* array.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+  "nodes": [
+    {
+        "affiliation_type": "collection",
+        "external_affiliation_type": "Division",
+        "id": "7a987422-8b5e-11e8-9c5f-16f360c05ac3",
+        "name": "ACME Sales Division",
+        "parent_id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3"
+    },
+    {
+        "affiliation_type": "collection",
+        "external_affiliation_type": "Root Division",
+        "id": "729d9366-8b5d-11e8-822e-b5fb60c05ac3",
+        "name": "ACME Sales Team"
+    }
+  ],
+  "user_affiliation": {
+    "id": 1,
+    "name": "ACME",
+    "slug": "ACME"
+  }
+}
+```
+
+The attributes of this response are detailed within the [Response Attributes for Node table](#node_response) and the [Response Attributes for User Affiliations table](#affiliations_response).
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Occurs when trying to see a specific affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve All Root Nodes
+
+Returns all root nodes in an affiliation.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/affiliations/:affiliation_slug_or_id/root_nodes
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+The response object returned by the method contains a *user_affiliation* object and a *nodes* array.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+  "user_affiliation": {
+    "id": 13,
+    "name": "ACME",
+    "slug": "ACME"
+  },
+  "nodes": [
+    {
+      "id": "b4b2b67a-8b92-11e8-8167-244b89cb62b1",
+      "name": "ACME",
+      "external_affiliation_type": "organization",
+      "affiliation_type": "collection"
+    }
+  ]
+}
+```
+
+The attributes of this response are detailed within the [Response Attributes for User Affiliations table](#affiliations_response) and the [Response Attributes for Node table](#node_response).
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Occurs when trying to see a specific affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve All Children
+
+Returns all child nodes in a parent node.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/affiliations/:affiliation_slug_or_id/:parent_id/children
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *parent_id* | Internal identifier for the parent node of the child nodes being retrieved. |
+| *affiliation_slug_or_id* | Identifier for the affiliation. Can be specified with either the slug or the unique identifier of the affiliation. (Format: All caps and underscores instead of spaces.) |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* key-value pair and a *count* integer indicating the number of children, the response object returned by the method contains a *children* array populated with multiple child nodes.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok",
+    "count": 1,
+    "children": [
+        {
+            "id": "c65c98be-8b92-11e8-892f-a00d89cb62b1",
+            "name": "ACME Sales Division",
+            "external_affiliation_type": "division",
+            "affiliation_type": "collection",
+            "parent_id": "b4b2b67a-8b92-11e8-8167-244b89cb62b1"
+        }
+    ]
+}
+```
+
+The *children* array contains a single child *node*, the attributes for which are detailed within the [Response Attributes for Node table](#node_response).
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *node_not_in_affiliation* | Occurs when using an ID that is not apart of the affiliation. |
+| *missing_data* | Occurs when trying to see a specific affiliation without the correct parameters. |
+| *affiliation_disabled* | Occurs when the user affiliation feature is not enabled for an organization. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

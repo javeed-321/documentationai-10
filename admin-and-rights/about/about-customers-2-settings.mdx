@@ -1,0 +1,183 @@
+---
+title: "About Customers 2 settings"
+description: "Overview of the Customers 2 Settings page and how its component settings correlate to the UI displayed in the Customers Module."
+---
+
+The Customers 2 Settings page provides organizations with the ability to configure a variety of UI components that display on the SessionM Platform.
+
+## Getting to know the Customers 2 Settings page
+
+Review this section for a general introduction to the Customers 2 Settings page.
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/customers2_settings_intro.png" width="835" height="727" alt="Customers 2 Settings page with numbered callouts" caption="" />
+
+Consult the numbered sections below for the account details presented on this page:
+
+> **1 - UI Component Locations**
+>
+> The names shown in this navigation column correspond to locations in the platform UI that contain components and sub-components that can be configured. For example, the _activity/headers_ component location refers to the sub-tabs, or headers, of the Activity tab in the Customers Module. When you click a location, the items shown in the Selected Components table change to reflect the components (often sub-components) that correspond with the active component.
+>
+> **2 - Selected Components**
+>
+> The components shown in this table are associated with the location active in the navigation column of the page. When you click on a component, its corresponding details display in the Component Details area of the page. In addition, components can be clicked and dragged to new positions in the sequence, and they can be removed by clicking the red icon to their right.
+>
+> **3 - Component Details**
+>
+> The attributes shown in this area related to the component you click in the Selected Components table. The details presented does vary. For example, the details shown for _activity/headers_ components configure event streams because each of the _activity/headers_ components displays activity log data, such as the points for a particular user.
+>
+> **4 - Disable Page Settings and Save Buttons**
+>
+> The Disable Page Settings button suspends the access to and application of all Customers 2 Settings configured for the Customers Module. When clicked, the system reverts to a default configuration and the Enable Page Settings button displays. The Save button applies the configured settings to the Customers Module.
+>
+> **5 - Available Components**
+>
+> The components shown here are available for inclusion in the Selected Components table, and, as such, in the presentation of tabs within a specific part of the Customers Module. Double-click a component to include it. If you want to add a new component, click the Create New Component button.
+
+## How settings correlate to components
+
+This section details the correlations between settings configured in the Customers 2 Settings page and the actual appearance of the UI components in the Customers Module.
+
+The following components can be customized:
+
+- Activity tab's sub-tabs (_activity/headers_)
+- Activity tab's Activity Log sub-tab side panels (_activity/side_panels_)
+- Data Privacy tab's sub-tabs (_data_privacy/headers_)
+- Customer profile summary data for active customer (_headers_)
+- Navigation links (_nav_links_)
+- Navigation bar containing main tabs (_navbars_)
+- Offers tab's sub-tabs (_offers/headers_)
+- Offers tab's quick actions (_offers/quickactions_)
+
+Many of the components in this list are specified by tab and sub-tab. Therefore component names can contain a slash to make that distinction. Note that the appearance of these components is subject to default system formatting that can be modified. For more information, consult your SessionM client services team.
+
+### Activity headers
+
+The Activity tab contains an array of sub-tabs on the details page that display activity log information for customer transactions across loyalty programs, point economies, and campaigns.
+
+The _activity/headers_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/activity_headers_settings_annot.png" width="476" height="451" alt="activity/headers components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/activity_headers_UI_annot.png" width="937" height="313" alt="Activity tab sub-tabs as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports the arrangement of _activity/headers_ components as well as the configuration of their event streams.
+</Callout>
+
+### Activity log side panels
+
+The Activity tab's Activity Log sub-tab on the details page contains side panels for performance metrics and notes associated with the active customer.
+
+The _activity/side_panels_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/activity_sidepanels_settings_annot.png" width="550" height="269" alt="activity/side_panels components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/activity_sidepanels_UI_annot.png" width="936" height="455" alt="Activity Log side panels as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports only the arrangement of _activity/side_panels_ components.
+</Callout>
+
+### Data privacy headers
+
+The Data Privacy tab on the details page contains an Overview sub-tab for performing data privacy actions and a History sub-tab detailing the actions taken with respect to the active customer.
+
+The _data_privacy/headers_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/data_privacy_settings_annot.png" width="640" height="312" alt="data_privacy/headers components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/data_privacy_ui_annot.png" width="938" height="441" alt="Data Privacy tab sub-tabs as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports the arrangement of _data_privacy/headers_ components. For instructions on using the Component Details section of the UI to configure an event stream for the _history_ sub-component, consult your SessionM integration engineer.
+</Callout>
+
+### Headers
+
+The summary row of data near the top of the details page contains profile data for the active customer.
+
+The _headers_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/headers_settings_annot.png" width="624" height="544" alt="headers components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/headers_ui_excerpt_annot.png" width="934" height="239" alt="Customer profile summary row as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports the arrangement of existing _headers_ components as well as the addition and formatting of new ones.
+</Callout>
+
+### Navigation links
+
+The navigation links at the top of all pages in the module support adding customers, searching customers, and synching a customer's account.
+
+The _nav_links_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/nav_links_settings_annot.png" width="658" height="363" alt="nav_links components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/nav_links_ui_annot.png" width="928" height="187" alt="Navigation links as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports only the arrangement of _nav_links_ components.
+</Callout>
+
+### Navigation bars
+
+The primary navigation bar contains the major tabs of the Customers Module.
+
+The _navbars_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/nav_bars_settings_annot.png" width="635" height="607" alt="navbars components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/nav_bars_ui_annot.png" width="936" height="249" alt="Primary navigation bar as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports the arrangement of existing _navbars_ components as well as the configuration of the Recommendations (_recommendations_) and Member Profile (_dynamic_profile_) sub-components.
+</Callout>
+
+### Offers headers
+
+The Offers tab contains an array of sub-tabs on the details page that display customer transactions associated with offers.
+
+The _offers/headers_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/nav_offers_headers_settings_annot.png" width="568" height="415" alt="offers/headers components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the following display in the Customers Module:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/nav_offers_headers_ui_annot.png" width="927" height="258" alt="Offers tab sub-tabs as displayed in the Customers Module" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports only the arrangement of _offers_headers_ components.
+</Callout>
+
+### Offers quick actions
+
+The actions associated with offers available on the sub-tabs of the Offers tab.
+
+The _offers/quickactions_ components and their sequence are shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/offers_quick_actions_settings_annot.png" width="644" height="488" alt="offers/quickactions components and their sequence in Customers 2 Settings" caption="" />
+
+This component configuration generates the options that display when the user clicks the quick options button at the far right of a table row for the active sub-tab. Those that display can differ per sub-tab. For example, the following image depicts the quick actions available on the Issued tab:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/offers_quick_actions_ui_annot.png" width="934" height="494" alt="Quick actions available on the Issued sub-tab" caption="" />
+
+Alternatively, the Available sub-tab contains the quick action shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/AdminRights/offers_quick_actions_ui_annot_2.png" width="935" height="522" alt="Quick action available on the Available sub-tab" caption="" />
+
+<Callout kind="info">
+  Note that the SessionM Platform UI supports the arrangement of existing _offers/quickactions_ components as well as modifications to their titles.
+</Callout>

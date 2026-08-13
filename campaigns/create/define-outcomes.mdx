@@ -1,0 +1,64 @@
+---
+title: "Define outcomes"
+description: "Define the offer or tag outcome that occurs when a customer performs a specific behavior in a promotional campaign."
+---
+
+Define the outcome that occurs when a customer performs a specific behavior. Outcomes include:
+
+- **Offers** – Awards and offers entice customers to perform specific behaviors. Choose from a number of offers that have been created within the platform, such as digital or physical goods, loyalty points, discounts or coupons.
+- **Tags** – Attach a text string to the customer's profile when the customer completes the defined behaviors. The format for a tag is:
+
+  `tag_name;;seconds`
+
+  where _seconds_ is the number of seconds after which the tag is removed from a customer's profile.
+
+<ExpandableGroup>
+  <Expandable title="Define outcome with offers" default-open="false">
+    Use an offer as the outcome when a customer completes the associated behavior during a promotional campaign.
+
+    ## Prerequisite steps
+
+    - Define the customer behavior for which this outcome will apply. See [Define behaviors](/campaigns/create/define-behaviors).
+    - Make sure that the necessary offers are configured in the Offers module.
+
+    ## Steps
+
+    1. On the behavior builder page for your promotional campaign, find the behavior for which you are defining an outcome. Displayed on the right hand side of the page, adjacent to the behavior you defined, is the Outcomes area.
+    2. In the Outcomes area, click **Add Outcomes**. The Add Outcome section opens, displaying the Awards & Offers tab.
+    3. Expand **+ Offer**. The Select Offer dropdown opens and displays a list of offer type options.
+    4. Select an offer type. (Unless noted otherwise, you can select any combination of the following offer types.)
+
+       | Offer Type | Description |
+       | --- | --- |
+       | Offers | An adjacent field opens in which you can search and then select the name of an existing offer. |
+       | Assign Promo Code | The Select promo codes field opens, displaying a list of promo codes. Note that only one outcome of this type can be configured for the behavior. |
+       | Triggered Event | An adjacent field opens in which you can enter the name of the triggered event. |
+       | Points (Incentives) | The Award Details and Source/Destination fields display. First choose either a Fixed Amount or Per Dollar and define the associated points for the award. Then specify source and destination accounts for the points being awarded. |
+
+    5. Click **Save**. You return to the behavior builder page. The behavior's new outcomes are displayed in its corresponding Outcomes area.
+    6. Save the behavior so that the outcomes you just configured are saved to the behavior.
+  </Expandable>
+
+  <Expandable title="Define outcome with tags" default-open="false">
+    Use a tag as the outcome for a completed customer behavior. Attach a text string to the customer's profile that indicates the behaviors that a customer has performed and the events that a customer has participated in over the course of her lifetime with a brand. Once appended to the profile, tags can be used elsewhere in the platform to target campaigns, messages, and offers toward or away from specific audiences.
+
+    ## About this task
+
+    Complete this task only when you are defining a promotional campaign.
+
+    ## Prerequisite steps
+
+    - Define the customer behavior for which this outcome will apply. See [Define behaviors](/campaigns/create/define-behaviors).
+    - Make sure that you have defined the necessary tags in the Customers Module.
+
+    ## Steps
+
+    1. On the behavior builder page for your promotional campaign, find the behavior for which outcome. Displayed on the right hand side of the page, adjacent to the behavior you defined, is the Outcomes area.
+    2. In the Outcomes area, click **Add Outcomes**. The Add Outcome section opens, displaying the Awards & Offers tab.
+    3. Click **Advanced**. The Tags field displays on the left side of the page.
+    4. Begin typing in the **Tags** field until the tag you want displays. Then select the tag. You can repeat for additional tags. Each tag you select is published in the "Outcomes selected" area.
+    5. Click **Save**.
+
+    You return to the behavior builder page. The behavior's new outcomes are displayed in its corresponding Outcomes area.
+  </Expandable>
+</ExpandableGroup>

@@ -1,0 +1,228 @@
+---
+title: "Custom data attributes"
+description: "Extract and manipulate data from SessionM standard and custom user profiles for audience exports, including helper functions and time stamps."
+---
+
+A **_custom data attribute_** allows you to extract data from the SessionM user and custom profiles and manipulate that data to determine how it appears in the export file. For example, you can force the first and last name to all uppercase.
+
+This page contains details on working with custom data as it pertains to:
+
+- [Standard user profile](#standard-user-profile)
+- [Custom user profile](#custom-user-profile)
+- [Using static strings as custom data attributes](#using-static-strings-as-custom-data-attributes)
+- [Helper functions for custom data attributes](#helper-functions-for-custom-data-attributes)
+- [Including a time stamp in the export file name](#including-a-time-stamp-in-the-export-file-name)
+
+## Standard user profile
+
+The following table identifies the fields that in the standard user profile that you can use as custom data attributes:
+
+| Custom Attribute | Input Value for Custom Attribute Field |
+| --- | --- |
+| ID (SessionM internal user ID) | `__platform.user.standard.id` |
+| Email | `__platform.user.standard.email` |
+| First name | `__platform.user.standard.first_name` |
+| Last name | `__platform.user.standard.last_name` |
+| Gender | `__platform.user.standard.gender` |
+| Date of Birth (DOB) | `__platform.user.standard.dob` |
+| Account status | `__platform.user.standard.account_status` |
+| City | `__platform.user.standard.city` |
+| State | `__platform.user.standard.state` |
+| Zip | `__platform.user.standard.zip` |
+| Country | `__platform.user.standard.country` |
+
+### Formatting user profile fields as custom attributes
+
+Use the following format for fields from the standard user profile:
+
+- Specify a field name from the standard user profile as: `__platform.user.standard.<field_name>`. Note that this value has two underscores (\_\_) prepended to it.
+- Enclose the entire value with three opening handlebars ( `{{{` ) and three closing handlebars ( `}}}` ).
+
+### Examples
+
+Examples of formatting a user profile field as a custom attribute follow.
+
+#### User ID in the SessionM Platform
+
+Internal identifier for the customer within the SessionM Platform, which is a string:
+
+`{{{ __platform.user.standard.id }}}` yields _c6f59836-bb9b-453b-af02-8747e83cf6fa_
+
+#### Email Address
+
+Email address for the user, which is a string:
+
+`{{{ __platform.user.standard.email }}}` yields _jonathan@example.com_
+
+## Custom user profile
+
+You can use any field from the custom user profile (appended data) as a custom attribute. Use the following format for fields from the custom user profile:
+
+- Specify a field name from the custom profile (appended data) as: `__platform.user.custom.<data_model>.<field_name>`. Note that this value has two underscores (\_\_) prepended to it.
+- Enclose the entire value with three opening handlebars ( `{{{` ) and three closing handlebars ( `}}}` ). For example:
+
+`{{{ __platform.user.custom.user_profile1.title }}}` returns the title field from the user_profile1 data model in the custom profile.
+
+## Using static strings as custom data attributes
+
+You can use static string data as a customer data attribute in an audience export. For example, you can set the value for every row in a column to have the literal string SessionM User ID. Instead of using a handlebars expression, you simply enter the value of "SessionM User ID" in the Custom Attribute text box.
+
+You can mix and match static string data with custom variables in a single field in an audience export. For example, you can set the value of a column in the export to the literal string SessionM User ID: with some other field appended to it, for example,
+
+`SessionM User ID: {{{__platform.user.standard.gender}}}`
+
+The resulting column has the value "SessionM User ID" with the user's SessionM ID appended to it.
+
+## Helper functions for custom data attributes
+
+The Audiences Module provides a set of helper functions that you can use to format the data in a custom data attribute.
+
+### \_\_platform_external_id
+
+Selects an external identifier from the user profile. Can select either an external ID that was added with a given type, or one added without a type. Check with your client team to get a list of valid types.
+
+#### Example with type:
+
+`{{{ __platform_external_id __platform.user.standard.identifiers 't2' }}}`
+
+#### Example without type:
+
+`{{{ __platform_external_id __platform.user.standard.identifiers nil }}}`
+
+### \_\_platform_escape_json_str
+
+Escapes a string for inclusion in a JSON string. For example:
+
+`{"name": "Ms. {{{ __platform_escape_json_str __platform.user.standard.first_name }}}"}`
+
+### \_\_platform_escape_url_path
+
+Escapes a string for inclusion in the path portion of a URL. For example:
+
+`https://example.com/{{{ __platform_escape_url_path __platform.user.standard.first_name }}}/xyz`
+
+### \_\_platform_escape_url_query
+
+Escapes a string for inclusion in the query portion of a URL. For example:
+
+`https://example.com/xyz?fname={{{ __platform_escape_url_query __platform.user.standard.first_name }}}`
+
+### \_\_platform_escape_xml
+
+Escapes a string for inclusion in XML. For example:
+
+```
+{{{ __platform_escape_xml __platform.user.standard.first_name }}}
+
+<note>
+
+<to>{{{ __platform_escape_xml __platform.user.standard.email }}}</to>
+
+</note>
+```
+
+### \_\_platform_phone_filter_verified
+
+Filters the phone numbers from the user profile to just those that are verified. Returns an array with a subset of entries of the array that was passed in. The following example shows using:
+
+- `__platform_phone_filter_verified` to grab the list of verified phone numbers
+- handlebars `#with` expression to grab the first element in the returned array
+
+`{{#with (__platform_phone_filter_verified __platform.user.standard.phone_numbers) as |filtered|}}{{{filtered.[0].phone_number}}}{{/with}}`
+
+### \_\_platform_to_json
+
+Returns the JSON representation of the object passed in. For example, the following returns the entire contents of `__platform.user` in JSON form:
+
+`{{{ __platform_to_json __platform.user }}}`
+
+### \_\_platform_to_lowercase
+
+Returns the passed string forced to lowercase. The following example returns the user's first name as all lowercase:
+
+`{{{ __platform_to_lowercase __platform.user.standard.first_name }}}`
+
+### \_\_platform_to_uppercase
+
+Returns the passed string forced to uppercase. The following example returns the user's first name as all uppercase:
+
+`{{{ __platform_to_uppercase __platform.user.standard.first_name }}}`
+
+### \_\_platform_truncate
+
+Truncates the passed string into a specified number of characters, optionally replacing with another string. For example:
+
+`{{{ __platform_truncate 3 "123456789 '' }}}` returns _"123"_
+
+`{{{ __platform_truncate 3 "123456789 '...' }}}` returns _"123..."_
+
+### \_\_platform_unix_time_with_offset
+
+Calculates a new Unix time with offset; the base time is also in Unix time format.
+
+Offset supports d/h/m/s with no space between them (1d2h3m4s). For example:
+
+`{{{ __platform_unix_time_with_offset( 1498751136 '10h10m10s') }}}` returns _1498787746_.
+
+### \_\_platform_trim
+
+Trims a string parameter, removing leading and trailing spaces. For example:
+
+`ABC{{{ __platform_trim ' def '}}}GHI` returns _ABCdefGHI_
+
+### \_\_platform_remove_email_filters
+
+Removes email filters in the 'local part' of an email address based on RFC 5233 standard (https://tools.ietf.org/html/rfc5233). The separator is pre-defined to be the plus sign (+) in compliance with Salesforce DMP. This implementation removes filters up to first @ encountered from left to right order if an @ exists. No assumption is made on validity of email address format.
+
+For example: `{{{ __platform_remove_email_filters 'joesmith+filter1+filter2@abc.com' }}}` returns _joesmith@abc.com_.
+
+`{{{ __platform_remove_email_filters 'joesmith+filter1@xyz@abc.com' }}}` returns _joesmith@xyz@abc.com_.
+
+### \_\_platform_sha256hex
+
+Returns the hex-encoded SHA256 hash value of the specified string.
+
+For example: `{{{ __platform_sha256hex 'user1@xyz.com'}}}` returns _5fcb0935edecd5a85eccad55d4a4cb843e82225e7d08e18a2ce7c4f7e9fe2160_.
+
+`{{{ __platform_sha256hex ''}}}` returns _e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855_.
+
+### \_\_platform_sfmc_dmp_hash
+
+Returns the hex-encoded SHA256 hash value of the specified email address string by following Salesforce DMP's normalization and hashing steps:
+
+1. Take the input email address.
+2. Lower case it.
+3. Trim any leading/trailing spaces, remove any filters, that is, jane.doe+ \{filter\}@gmail.com. Remove \{+filter\}.
+4. sha256 hash the resulting value.
+5. hex encode the hash.
+6. Lowercase the hex encoding.
+
+`__platform_sfmc_dmp_hash` is the compact form of
+
+```
+{{{ __platform_to_lowercase(
+
+__platform_sha256hex(
+
+__platform_remove_email_filters(
+
+__platform_trim(
+
+__platform_to_lowercase <email>)))) }}}
+```
+
+For example:
+
+`{{{ __platform_sfmc_dmp_hash ' User1+abc+DEF+ghi@xYz.COM '}}}` returns _5fcb0935edecd5a85eccad55d4a4cb843e82225e7d08e18a2ce7c4f7e9fe2160_.
+
+## Including a time stamp in the export file name
+
+SessionM recommends that you include a time stamp in the output file created by an audience export job. Including a time stamp allows you to identify the exact date and time that an export file was generated.
+
+Include the following string to append a timestamp to the export file name:
+
+_%y%m%d\_%H%M%S_
+
+to append the _"year month day _ hour min sec"_ to the file name, where the date values are calculated based on the time that the audience export job starts writing to the SFTP destination.
+
+For example, _BulkOfferMarch\_%/%y%m%d\_%H%M%S_ yields _BulkOfferMarch2019321_082354_.

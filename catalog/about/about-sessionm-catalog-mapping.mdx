@@ -1,0 +1,27 @@
+---
+title: "About SessionM catalog mapping"
+description: "Why mapping store items to a single master catalog item is essential in a disparate catalog scenario, with a worked example."
+---
+
+This article introduces a quick use case along with the concepts you need to understand to map a store to the master catalog, in a disparate catalog scenario. If you need clarification on these scenarios, see [Disparate Catalog vs. Unified Catalog](/catalog/about/pre-ingest-assess-catalog-data#disparate-catalog-vs-unified-catalog).
+
+The purpose of mapping within the Catalog Management tool is to establish a relationship between the same items that have different Item IDs or varying names. Here is an example of a situation where mapping is leveraged to form a common bond between items:
+
+- **Store 5** - Large Diet Coke (Item ID - 43443)
+- **Store 22** - Lg. Diet Coca-Cola (Item ID - 12994)
+
+Even though the item names and IDs are different across stores, it is essential for the items to be linked to a single item within the master catalog. Let's assume that this item exists within the master catalog:
+
+- **Master Catalog** - Large Diet Coca-Cola (Master Item ID - 12487)
+
+The mapping process which is explained in detail in the Map Store Catalog to Master Catalog article will work to map each varying like-item (the Cokes across stores in the above example) to the single representation of the item in the master catalog.
+
+<Callout kind="info">
+  NOTE: When a SessionM Platform user is working with a catalog across applicable areas of the platform (Offers, Campaigns, etc.), they are only viewing the **master** catalog.
+</Callout>
+
+Mapping allows a platform user to build an offer that is eligible for the Large Diet Coca-Cola (Master) that is applicable across all of the other items that have been mapped to it (including the Cokes in Stores 5 and 22).
+
+Mapping is essential because of how the SessionM Platform communicates with the point-of-sale systems. When a point-of-sale system calls SessionM to ensure that a discount the customer has presented applies to the correct item, it is speaking in that store's specific item ID. For SessionM to validate and approve the discount, the platform is checking the mapping relationship of the store item ID received via the [POS API](https://docs.sessionm.com/pos/) call to the master item ID that the offer was originally designed for. Because of this feature, the SMP user is able to design the offer for multiple stores using a single (masterf) catalog.
+
+In summary, to ensure that the everyday functions an SMP user will be using across the platform, including Offers, Campaigns, and reporting, it is absolutely critical to ensure that the mapping process is performed and verified as accurate in a disparate catalog scenario.

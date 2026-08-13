@@ -1,0 +1,33 @@
+---
+title: "Unlock Offer API"
+description: "Release a previously locked offer back to the customer's wallet."
+---
+
+Allows an offer to be "unlocked" once it had been locked. The response to this API is the [General Response](/developer/pos/general-dto-definitions#general-response-container) contract above, with no payload.
+
+For more information on this API's process flow, consult your Customer Success contact.
+
+## Endpoint
+
+This API offers the following endpoint:
+
+**REST Endpoint**
+
+```http
+POST /api/2.0/unlock
+```
+
+## Endpoint Parameters
+
+Not applicable.
+
+## Request Object
+
+When this endpoint runs, it passes in an Unlock Offer request object. When using this API, pass in the *request_payload* as the Unlock Offer object, which is detailed in the following tables:
+
+**Request Properties for Unlock Offer**
+
+| Property | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *user_offer_id* | string<br />required | User offer ID being unlocked.  This will be what is passed back as the reference ID to any prior offer lookup request for SessionM serviced offers. |
+| *employee_id* | string<br />required | Employee ID who triggered the action to unlock the user offer. |

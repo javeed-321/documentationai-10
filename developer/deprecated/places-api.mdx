@@ -1,0 +1,320 @@
+---
+title: "Places API"
+description: "Retrieve places near a location coordinate and submit check-in requests for a particular place."
+---
+
+<Callout kind="warning">
+  The Places API is no longer supported for new integrations.
+</Callout>
+
+The Places API manages geographic data about places using location objects. These objects allow a third-party system to retrieve a list of places in proximity to a location coordinate and submit a check-in request to a particular place. Note that all distances are specified in meters.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  Since places can be associated with customers, you must create the customers for that association. Use the [Standard Profile API](/developer/customers/customer-profile-apis#standard-profile-api) to create customers and specify the attributes for their standard profiles.
+</Callout>
+
+This API provides the following methods:
+
+- [Retrieve a list of places](#retrieve-a-list-of-places)
+- [Check-in to a place](#check-in-to-a-place)
+
+## Retrieve a List of Places
+
+Retrieve a list of places around a specified location coordinate. The list of places can be scoped to particular region by specifying a radius around the coordinate. Note that the endpoints that utilize only the *api_key*, with (or without) a *user_id* or an *external_id*, are available for registered customers (users); however, *GET /api/v1/apps/:api_key/places?auth_token=xxxxx* applies to unregistered, anonymous customers.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/places
+GET /priv/v1/apps/:api_key/users/:user_id/places
+GET /priv/v1/apps/:api_key/external/users/:external_id/places
+GET /api/v1/apps/:api_key/places?auth_token=xxxxx
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+
+### Request Object
+
+When this method runs, it passes in a *location* request object, as follows:
+
+**JSON Request**
+
+```json
+{
+  "location": {
+      "latitude": 42.3493505,
+      "longitude": -71.0492305,
+      "limit": 50,
+      "radius": 50
+    }
+}
+```
+
+The request object can also contain a *filter_by* attribute, as shown below:
+
+**JSON Request (Filter by Creative ID)**
+
+```json
+{
+  "location": {
+      "latitude": 42.3493505,
+      "longitude": -71.0492305,
+      "limit": 50,
+      "radius": 50
+    },
+  "filter_by": 123
+}
+```
+
+This attribute is an optional integer that uses the creative ID to filter, or narrow down, ad units, which are pieces of content that carry their own metadata. The argument specified is the *UUID* of the ad unit. When used, the attribute returns valid locations that are part of the specified ad unit.
+
+The *location* object contains several attributes, which are detailed in the following table:
+
+**Request Attributes for Location**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *latitude* | float<br />required | Latitude coordinate. |
+| *longitude* | float<br />required | Longitude coordinate. |
+| *limit* | integer<br />optional | Maximum number of venues to return. |
+| *radius* | integer<br />optional | Maximum radius of returned venues. |
+
+### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains the *places* object, as follows:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "places": [
+    {
+      "id": "0504d69e-899c-11e6-973f-2a7fc1d29f66",
+      "name": "A Fast Food Store",
+      "state": "checkable",
+      "distance": 0,
+      "distance_label": "You're Here!",
+      "accepted_distance": 125,
+      "promoted": false,
+      "points": 10,
+      "icon": "http://host/images/image.png",
+      "location": {
+        "lat": 41.235166,
+        "lng": -88.94473,
+        "address": "123, Main St",
+        "city": "Boston",
+        "state": "MA"
+      },
+      "check_in": {
+        "place_id": "0504d69e-899c-11e6-973f-2a7fc1d29f66",
+        "venue_id": 10288,
+        "creative_id": null,
+        "state": "checkable",
+        "distance": 0
+      }
+    },
+    {
+      "id": "0504dab8-899c-11e6-958b-b4fec1d29f66",
+      "name": "Convenience Store",
+      "state": "toofar",
+      "distance": 1402,
+      "distance_label": "0.9 miles",
+      "accepted_distance": 125,
+      "promoted": false,
+      "points": 10,
+      "icon": "http://host/images/m-place.png",
+      "location": {
+        "lat": 42.847594,
+        "lng": -88.947569,
+        "address": "456 Second St",
+        "city": "Boston",
+        "state": "MA"
+      },
+      "check_in": {
+        "place_id": "0504dab8-899c-11e6-958b-b4fec1d29f66",
+        "venue_id": 21157,
+        "creative_id": null,
+        "state": "toofar",
+        "distance": 1402
+      }
+    }
+  ]
+}
+```
+
+#### Places Object
+
+The Places object contains several attributes, some of which are other "child" objects, such as *location* and *check_in*.
+
+The following table provides details on the *places* object:
+
+**Response Attributes for Places**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | string | UUID of place. |
+| *name* | float | Name of the place. |
+| *state* | float | Check-in state. Can include:<ul><li><em>checkable</em> - Can check in to the place now.</li><li><em>alreadycheckedin_checkable</em> - Checked in once, but the place supports multiple checkins.</li><li><em>alreadycheckedin_toofar</em> - Already checked in to the place, and it is too far from the current location.</li><li><em>blocked_checkable</em> - Customer is blocked from checking in to the place but it is with in check in radius.</li><li><em>blocked_toofar</em> -  Customer is blocked from checking in to the place and it is outside check in radius.</li><li><em>blocked_limithit</em> - Customer is blocked from checking in to the place because the customer reached check in limit.</li><li><em>toofar</em> - Place is too far from the current location.</li></ul> |
+| *distance* | integer | Distance from specified coordinate. |
+| *distance_label* | integer | Distance label. |
+| *accepted_distance* | integer | Accepted distance to be able to check-in. |
+| *promoted* | boolean | Determines if place is promoted with an ad. Value of *true* for yes; *false* for no. |
+| *points* | integer | Points customer receives for check-in; points can vary based on location. |
+| *icon* | string | Icon for the place. |
+| *location* | object | See table below. |
+| *check_in* | object | See table below. |
+
+##### Location Object
+
+The following table provides details on the *places* object:
+
+**Response Attributes for Location**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *lat* | float | Latitude of the location. |
+| *lng* | float | Longitude of the location. |
+| *address* | string | Street address of the location. |
+| *city* | string | City of the location. |
+| *state* | string | State/province/region of customer's residence. |
+
+##### Check_In Object
+
+The following table provides details on the *check_in* object:
+
+**Response Attributes for Check-In**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *place_id* | string | ID associated with the check-in. |
+| *venue_id* | integer | ID of the place. |
+| *creative_id* | integer | Platform-generated ID of the ad unit content, or creative content. |
+| *state* | string | Check-in state. Can include:<ul><li><em>checkable</em> - Can check in to the place now.</li><li><em>alreadycheckedin_checkable</em> - Checked in once, but the place supports multiple checkins.</li><li><em>alreadycheckedin_toofar</em> - Already checked in to the place, and it is too far from the current location.</li><li><em>blocked_checkable</em> - Customer is blocked from checking in to the place but it is with in check in radius.</li><li><em>blocked_toofar</em> -  Customer is blocked from checking in to the place and it is outside check in radius.</li><li><em>blocked_limithit</em> - Customer is blocked from checking in to the place because the customer reached check in limit.</li><li><em>toofar</em> - Place is too far from the current location.</li></ul> |
+| *distance* | integer | Distance away from being able to check-in. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|---|
+| *access_denied* | Loyalty setting for mPlaces not enabled in current tenant. |
+| *check_in_limit_reached* | Check-in limit reached by the customer for this application. |
+| *check_in_too_far_away* | Check in location is not in the check-in radius. |
+| *check_in_not_available* | Already checked in to this place or check-in attempt is blocked. |
+| *missing_data* | Query did not contain location or check-in data. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Check-in to a Place
+
+This method allows the submittal of a check-in request for a particular place.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/places/:place_id/check_ins
+POST /priv/v1/apps/:api_key/users/:user_id/places/:place_id/check_ins
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *place_id* | UUID of the *check_in*. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a *check_in* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+  "check_in": {
+    "place_id": "f3812fae-ebb1-11e5-953d-67031dd065be",
+    "venue_id": 2289136,
+    "creative_id": 1234,
+    "state": "checkable",
+    "distance": 111
+  }
+}
+```
+
+This object is detailed in the following table:
+
+**Request Attributes for Check-In**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *place_id* | string<br />required | UUID of the *check_in*. |
+| *venue_id* | integer<br />required | ID of the place. |
+| *creative_id* | integer<br />optional | Platform-generated ID of the ad unit content; also called creative content. |
+| *state* | string<br />required | Check-in state. Can include:<ul><li><em>checkable</em> - Can check in to the place now.</li><li><em>alreadycheckedin_checkable</em> - Checked in once, but the place supports multiple checkins.</li><li><em>alreadycheckedin_toofar</em> - Already checked in to the place, and it is too far from the current location.</li><li><em>blocked_checkable</em> - Customer is blocked from checking in to the place but it is with in check in radius.</li><li><em>blocked_toofar</em> -  Customer is blocked from checking in to the place and it is outside check in radius.</li><li><em>blocked_limithit</em> - Customer is blocked from checking in to the place because they reached check in limit.</li><li><em>toofar</em> - Place is too far from the current location.</li></ul> |
+| | | |
+| *distance* | integer<br />required | Distance away from being able to check-in |
+
+### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains two other objects, *check_in* and *user*, which are shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "check_in": {
+    "place_id": "f3812fae-ebb1-11e5-953d-67031dd065be",
+    "state": "alreadycheckedin_checkable",
+    "can_check_in_again_at": "2016-03-02T17:08:29Z"
+  },
+  "user": {
+    "id": "xxxxx"
+  }
+}
+```
+
+The following table provides details on the *check_in* object:
+
+**Response Attributes for Check In**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *place_id* | string | UUID of the customer. |
+| *state* | string | Check-in state. Can include:<ul><li><em>checkable</em> - Can check in to the place now.</li><li><em>alreadycheckedin_checkable</em> - Checked in once, but the place supports multiple checkins.</li><li><em>alreadycheckedin_toofar</em> - Already checked in to the place, and it is too far from the current location.</li><li><em>blocked_checkable</em> - Customer is blocked from checking in to the place but it is with in check in radius.</li><li><em>blocked_toofar</em> -  Customer is blocked from checking in to the place and it is outside check in radius.</li><li><em>blocked_limithit</em> - Customer is blocked from checking in to the place because they reached check in limit.</li><li><em>toofar</em> - Place is too far from the current location.</li></ul> |
+| *can_check_in_again_at* | string | When the customer can check-in again at the place. |
+
+The second object returned is the [*user*](#user) object.
+
+### Statuses and Errors
+
+Since this method's statuses and errors are identical to what can be returned for the method that retrieves a list of places, see the "Statuses and Errors" section in [Retrieve a List of Places](#retrieve-a-list-of-places) for more information.

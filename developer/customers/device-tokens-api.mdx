@@ -1,0 +1,171 @@
+---
+title: "Device Tokens API"
+description: "Register and de-register device tokens so the SessionM platform can send mobile push notifications through Firebase."
+---
+
+Device tokens allow the SessionM platform to send mobile push notifications to customers using third-party APIs, which is currently Firebase.
+
+This API acts as middleware between a mobile application and Firebase, and it manages the level of persistence for the related data.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  - Before working with this API, ensure that the client's Firebase credentials have been imported into the SessionM system. This information is required so that device tokens can be registered to individual customers.
+  - The Firebase credentials allow SessionM to use the Firebase API on behalf of the client, allowing them to use the Campaigns module to send notifications to customers. For more information on Firebase configuration, consult your SessionM integration team.
+</Callout>
+
+This API facilitates the registration and de-registration of device tokens. It provides the following methods:
+
+- [Register a device token](#register-a-device-token)
+- [De-register a device token](#de-register-a-device-token)
+
+## Register a Device Token
+
+Enable SessionM to send push messages to a customer. To do so, you must register a device token to a third-party API (currently Firebase) on behalf of the customer.
+
+When the token is not present in the database, this API registers the token to Firebase. If successful, this API's endpoint returns a response and does the following:
+
+- Saves a device token as a record in the database.
+- Saves the *notification_key* in the database if the customer doesn't already have one. This key functions as an identifier for the customer.
+
+If you want to fetch the identifier, see the [Customer Profile APIs](/developer/customers/customer-profile-apis) for additional details.
+
+Alternatively, if the  token - which can belong to a customer - is already present in the database, the API does the following:
+
+- When the device token is already attached to a customer that is NOT the user making the API call, it removes the device token from the customer making the API call via Firebase, and it marks the token "deleted." In addition, the platform saves the token to the current customer.
+- If the token is already saved for the current customer, it updates the *updated_at* timestamp for the token. This is important because Firebase recommends the tokens be marked as stale and slated to be deleted after 2 months. Note that a SessionM background job implements this policy automatically for any stale device tokens.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/users/:user_id/devices
+POST /priv/v1/apps/:api_key/external/users/:external_id/devices
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoints Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+
+### Request Object
+
+When this method runs, it can pass in a request object that contains a device token object with two attributes, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "token": "dBKDgzylSFioeJYNY7-5nD:APA91bGpMv6i1w_juopBmoFpvKE_5Z5RWIzKki_lXXnyd9VlYszYszNbg-z3AkW-R11slJ_hbKk7kdjEKOmi_RJTCeZNfzpW2QpQMZrUgLS5yWKwL4U1yhOYfUrqzHftC0tCr29L1Kqu",
+    "platform": "fcm"
+}
+```
+
+These attributes are detailed in the following table:
+
+<a id="access_token_request"></a>**Request Attributes for Device Token**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *token* | string<br />required | Customer's device token. |
+| *platform* | string<br />required | Platform identifier. Allowed values include: *fcm* for Android, and *apn* for iOS. |
+
+### Response Object
+
+The response object returned by this method contains only a *status* value-pair for the registration.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. This platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | This is a generic status, and it means that the request is missing some required data or that the environment requires further setup. Refer to the message for further information. Currently possible message values are the following:<ul><li><em>missing token</em> - Token request attribute is missing.</li><li><em>platform is not supported</em> - Either <em>platform</em> request attribute is missing or it is not an allowed value.</li><li><em>environment not set up</em> - SessionM Platform is not yet set up and thus it cannot contact Firebase.</li></ul> |
+| *token_invalid* | Firebase has been contacted and it doesn't recognize the provided token value. |
+| *bad_gateway* | Server has encountered issues when communicating with a 3rd party API (Firebase). |
+
+For more information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## De-register a Device Token
+
+Disable SessionM from sending push messages to a customer. To do so, you must de-register a customer's device token from the third-party API (currently Firebase) used to register the token.
+
+When the token is present in the database and the active customer matches the token's owner, the API attempts to remove the token from Firebase. If successful, this API's endpoint removes the token, marking it "deleted" within the database. Note that the endpoint's response may indicate that the token was already removed via some other means, one that does not utilize a Firebase API.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+DELETE /priv/v1/apps/:api_key/users/:user_id/devices/:token
+DELETE /priv/v1/apps/:api_key/external/users/:external_id/devices/:token
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customers within the SessionM Platform. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+| *token* | Customer's device token. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+The response object returned by this method contains only a *status* value-pair for the de-registration.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. This platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | This is a generic status, and it means that the request is missing some required data or that the environment requires further setup. Refer to the message for further information. Currently possible message values are the following:<ul><li><em>missing token</em> - Token request attribute is missing.</li><li><em>environment not set up</em> - SessionM Platform is not yet set up and thus it cannot contact Firebase.</li></ul> |
+| *token_invalid* | Refer to the message for further information. Currently, possible message values include:<ul><li><em>token was not found</em> - Token is not present in the database.</li><li><em>token is not assigned to the given user</em> - Token is present in the database but it is not assigned to the given user.</li></ul> |
+| *bad_gateway* | Server has encountered issues when communicating with a 3rd party API (Firebase). |
+
+For more information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

@@ -1,0 +1,322 @@
+/*
+  SessionM — custom stylesheet.
+
+  Registered in documentation.json under "customCss" only -- the key the working
+  AlgoShack project uses. Setting both "customCss" and "css" loaded nothing.
+
+  In the editor: Site Config → Custom CSS → Add Stylesheet → styles/home.css.
+
+  Selectors are FLAT on purpose -- no native CSS nesting, no "&", so no build
+  step can drop a whole block by failing to parse newer syntax.
+
+  Home-page scoping uses the id the platform generates from each page's H2:
+    help-center.mdx        ## Welcome to the SessionM Help Center
+      -> <h2 id="welcome-to-the-sessionm-help-center">
+    developer/sessionm-developer-center.mdx
+                     ## Welcome to the SessionM Developer Center
+      -> <h2 id="welcome-to-the-sessionm-developer-center">
+  Those ids exist nowhere else. CAVEAT: the id comes from the heading TEXT, so
+  rewording either H2 changes it and silently kills every rule below it.
+*/
+
+/* ── Content column: same values as the algoQA home (1280px, 24px gutter) ── */
+:root:has(#welcome-to-the-sessionm-help-center) .dai-article,
+:root:has(#welcome-to-the-sessionm-help-center) .dai-content-column,
+:root:has(#welcome-to-the-sessionm-developer-center) .dai-article,
+:root:has(#welcome-to-the-sessionm-developer-center) .dai-content-column {
+  max-width: 1280px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* ── Grid spacing under each section ── */
+:root:has(#welcome-to-the-sessionm-help-center) [data-component="Columns"],
+:root:has(#welcome-to-the-sessionm-developer-center) [data-component="Columns"] {
+  gap: 16px !important;
+}
+
+/* ── Card text: 16px/1.35 titles, 14px/1.55 descriptions (algoQA values) ── */
+:root:has(#welcome-to-the-sessionm-help-center) [data-component="Card"] .dai-card-title,
+:root:has(#welcome-to-the-sessionm-developer-center) [data-component="Card"] .dai-card-title {
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+:root:has(#welcome-to-the-sessionm-help-center) [data-component="Card"] .dai-card-description,
+:root:has(#welcome-to-the-sessionm-developer-center) [data-component="Card"] .dai-card-description {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  margin-top: 4px !important;
+}
+
+/* ── Tablet ── */
+@media (max-width: 1000px) {
+  :root:has(#welcome-to-the-sessionm-help-center) .dai-article,
+  :root:has(#welcome-to-the-sessionm-help-center) .dai-content-column,
+  :root:has(#welcome-to-the-sessionm-developer-center) .dai-article,
+  :root:has(#welcome-to-the-sessionm-developer-center) .dai-content-column {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* ── Mobile ── */
+@media (max-width: 540px) {
+  :root:has(#welcome-to-the-sessionm-help-center) .dai-article,
+  :root:has(#welcome-to-the-sessionm-help-center) .dai-content-column,
+  :root:has(#welcome-to-the-sessionm-developer-center) .dai-article,
+  :root:has(#welcome-to-the-sessionm-developer-center) .dai-content-column {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   API Starter Pack (Developer Center home)
+
+   Layout follows the live docs.sessionm.com card: title across the top, a rule
+   under it, then the Postman logo beside the copy. Written as plain markup in
+   the MDX rather than as a <Card>, because the component renders its `image`
+   prop above the title with dai-card-image (w-full h-auto object-cover) -- full
+   width by design, which is the wrong place and size for this layout.
+
+   The MDX reproduces the component's wrapper chain exactly, straight from its
+   source, so the cascade treats both cards identically:
+     Link.!border-b-0.hover:!opacity-100
+       > div[data-component=Card].bg-background.border.border-border-muted
+                                 .rounded-xl.flex.flex-col.overflow-hidden
+                                 .group.!decoration-0.hover:!opacity-100
+       > div.w-full.overflow-hidden            (image slot, empty here)
+       > div.p-5.py-4                          (all padding comes from this)
+         > div.flex.flex-col.gap-3.5
+           > div.space-y-3.5.h-full
+             > div.space-y-0.5
+               > p.dai-card-title  +  span.dai-card-description
+   Note hover:border-heading is CONDITIONAL in the component --
+   `href && !cta && !image`. This card meets all three, so it is hard-coded
+   here; add a cta and it would need removing to stay faithful.
+
+   NO COLOURS, TYPE SIZES OR PADDING ARE SET HERE. Those come from the platform's own
+   utility classes, applied in the MDX -- the exact same ones the <Card>
+   component renders:
+     shell : bg-background border border-border-muted rounded-xl
+             hover:border-heading
+     rule  : bg-border-muted
+     title : !font-semibold !text-base !text-heading
+     copy  : !text-[14px] !text-body !font-normal !leading-normal
+   That is deliberate. An earlier version hard-coded var(--body, #363747) and
+   friends; those token names were guesses, so the fallback hex silently took
+   over and this card's text drifted from the section cards -- and could never
+   follow dark mode. Borrowing the component's utilities means one source of
+   truth: the two cards cannot diverge, in either theme. Only layout below.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-starter {
+  display: block !important;
+  margin: 16px 0 !important;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-starter__title {
+  margin: 0;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-starter__rule {
+  height: 1px;
+  margin: 14px 0 16px 0;
+}
+
+/* Body: logo left, copy right */
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-starter__body {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-starter__logo {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: block;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-starter__copy {
+  margin: 0;
+  flex: 1 1 auto;
+}
+
+/* Stack on narrow screens */
+@media (max-width: 640px) {
+  :root:has(#welcome-to-the-sessionm-developer-center) .sm-starter__body {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Feature card (.sm-feature) — the same look as .sm-starter above, but built
+   from the <Card> component instead of hand-written markup.
+
+   Its own class set, kept separate from .sm-starter* on purpose: the two cards
+   have completely different DOM, so sharing hooks would mean rules that only
+   half-apply to each.
+
+   <Card> takes no className, so the MDX wraps it in <div className="sm-feature">
+   and these rules reach the component's internals through the stable dai-*
+   classes. Structure the component renders:
+     [data-component="Card"] > div.p-5.py-4 > … > p.dai-card-title
+                                                + span.dai-card-description
+                                                  > figure[data-component="Image"]
+                                                  + p
+
+   NO COLOURS, TYPE SIZES OR PADDING HERE -- the component already supplies all
+   of it (bg-background, !text-heading, !text-body, p-5 py-4), which is exactly
+   why this card cannot drift from the section cards below. These rules only add
+   the divider under the title and lay the logo out beside the copy.
+
+   That means NO divider rule under the title here: drawing one would require
+   naming a border colour, and there is no class hook on the component's own
+   title element to borrow one from. The card therefore looks exactly as <Card>
+   renders it, only with the logo placed beside the copy.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature {
+  margin: 16px 0;
+}
+
+/* Body: logo left, copy right */
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature .dai-card-description {
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  margin-top: 16px !important;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature .dai-card-description > p {
+  margin: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+/* <Image> nests the picture as figure > div > [data-rmiz] > div > img, and its
+   figure ships a !my-6 margin. Every level is pinned to 72px -- sizing only the
+   <img> leaves an ancestor holding full width, which is what blew this logo up
+   to fill the card earlier. !important is required because the component writes
+   max-width/height inline on the <img> itself. */
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature .dai-card-description > figure {
+  flex: 0 0 72px !important;
+  width: 72px !important;
+  height: 72px !important;
+  max-width: 72px !important;
+  margin: 0 !important;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature figure div {
+  width: 72px !important;
+  height: 72px !important;
+  max-width: 72px !important;
+}
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature .dai-card-description img {
+  width: 72px !important;
+  height: 72px !important;
+  max-width: 72px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
+/* <Image> renders the alt text as a visible caption; .sm-starter has none */
+:root:has(#welcome-to-the-sessionm-developer-center) .sm-feature figcaption {
+  display: none !important;
+}
+
+/* Stack on narrow screens, matching .sm-starter__body */
+@media (max-width: 640px) {
+  :root:has(#welcome-to-the-sessionm-developer-center) .sm-feature .dai-card-description {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Hide the platform page title on the two home pages.
+
+   Neither help-center.mdx nor developer/sessionm-developer-center.mdx carries a
+   frontmatter title, so the platform falls back to the tab name and renders
+   <h1 class="page-title">Help Center</h1> / <h1 class="page-title">Developer</h1>
+   above the body. Each duplicates the "Welcome to the SessionM …" H2 sitting
+   immediately below it, giving those pages two stacked titles.
+
+   Scoped the same way as everything else in this file: :has() only matches on
+   the page carrying that H2's generated id, so no other page is affected.
+   Rewording either H2 changes its id and silently disables the matching rule.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root:has(#welcome-to-the-sessionm-help-center) h1.page-title,
+:root:has(#welcome-to-the-sessionm-developer-center) h1.page-title {
+  display: none !important;
+}
+
+img {
+  border-radius: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Ask AI — hidden across the ENTIRE Help Center tab (all 178 pages).
+
+   Client request: the Help Center is legacy content, so an assistant answering
+   from it would cite outdated material. Ask AI stays live on the Developer and
+   Release Notes tabs.
+
+   TAB SCOPING — deliberately NOT the #welcome-to-the-sessionm-help-center id
+   used elsewhere in this file. That id exists only on help-center.mdx, so scoping
+   this rule that way would leave Ask AI visible on the other 177 pages.
+
+   Instead this keys off the navbar's active-tab marker. The platform renders
+   the active tab's anchor with .text-brand and the inactive ones with
+   .text-body, server-side, so it works without JS. Verified across all three
+   tabs: exactly one anchor carries text-brand, always the current tab.
+     Help Center page  -> a[href="/help-center"].text-brand
+     Developer page    -> a[href="/developer/sessionm-developer-center"].text-brand
+     Release Notes     -> a[href="/release-notes/overview"].text-brand
+
+   The .dai-navbar-tabs ancestor is REQUIRED, not decorative: .text-brand is
+   also applied to the active link in the SIDEBAR, so an unanchored
+   a[href].text-brand would match content links too.
+
+   Two entry points exist on every page, and only one carries a dai- class:
+     1. search-bar trigger -- inside .dai-navbar-search, NO dai- class of its
+        own (only generated Tailwind utilities), matched by its sparkles icon
+     2. floating button    -- .dai-ask-ai-button, fixed bottom-right
+   Hiding .dai-ask-ai-button alone is NOT enough; it leaves the search-bar
+   trigger visible, which is the more prominent of the two.
+
+   The bare token lucide-sparkles is distinct from lucide-wand-sparkles (the
+   Composer card icon) -- CSS matches whole class tokens, so that card is safe.
+
+   IMPORTANT — this hides the buttons, it does not disable the assistant.
+   Documentation.ai's "Enable AI Assistant" is a SITE-WIDE toggle with no
+   per-tab or per-page setting, so this is presentation only: the assistant
+   still indexes this content and can cite it in answers given from the other
+   tabs. A real per-tab disable needs a platform feature request.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root:has(.dai-navbar-tabs a[href="/help-center"].text-brand) .dai-ask-ai-button,
+:root:has(.dai-navbar-tabs a[href="/help-center"].text-brand) .dai-navbar-search button:has(svg.lucide-sparkles) {
+  display: none !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Prev/next page navigation — hidden on the two landing pages only.
+
+   The Help Center tab carries "show-page-navigation": true (Developer and
+   Release Notes are both false), so its landing page renders a "Next >
+   Account Management" strip below the content. On a page that is itself a
+   grid of links into every module, a single "next" pointer is noise.
+
+   Hidden here rather than by flipping the tab flag, because that flag applies
+   to the tab AND all 178 descendants -- it would also strip prev/next from
+   every content page, where it is genuinely useful. Scoped to the landing
+   pages via their H2 ids, same as every other rule in this file.
+
+   .dai-page-nav is client-rendered, so it does not appear in the server HTML;
+   confirmed only in the browser. If the platform renames it this rule stops
+   working silently -- re-check after any platform upgrade.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root:has(#welcome-to-the-sessionm-help-center) .dai-page-nav,
+:root:has(#welcome-to-the-sessionm-developer-center) .dai-page-nav {
+  display: none !important;
+}
+

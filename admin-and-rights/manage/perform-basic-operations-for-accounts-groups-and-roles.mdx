@@ -1,0 +1,83 @@
+---
+title: "Perform basic operations for accounts, groups, and roles"
+description: "Edit accounts, groups and roles, manage pending invitations, and delete groups and roles in the Admin & Rights module."
+---
+
+As you work with accounts, groups, and roles, bear in mind these basic operations:
+
+- [Editing an account](#editing-an-account)
+- [Editing a group](#editing-a-group)
+- [Editing a role](#editing-a-role)
+- [Deleting a group](#deleting-a-group)
+- [Deleting a role](#deleting-a-role)
+
+## Editing an account
+
+Edit a user account. On this page, you can edit all fields and module permission levels as well as manage pending accounts and disable active accounts.
+
+### Steps
+
+1. On the Admin & Rights 2.0 dashboard, under Management, click **Accounts**.
+2. From the All Accounts page, click the user's name. The user's account page opens.
+3. Click **Edit** to modify the user's Basic Information and Access Rights.
+4. Click **Save**.
+
+If an account has a status of "Pending," the user has yet to accept the invitation and create their password. You have the following options, which appear as buttons in the upper right of the screen:
+
+- **Resend Invite** – Opens a modal with the invitation link. If the user's email domain is white listed on the platform, it resends the invitation email to the user. Otherwise, the invitation link must be directly emailed to the user.
+- **Cancel Invite** – Sets the user account to "Disabled" and adds a Reactivate button. Click **Reactivate** returns the account to the "Pending" state.
+
+  <Callout kind="info">
+    When you reactivate a pending account that was disabled, the system does not resend the invitation email. Click **Resend Invite** to do that.
+  </Callout>
+
+An active account has a Disable button in the upper right, along with the Edit button. If you want to disable the account, click **Disable** and then confirm the action in the modal that follows. Note that disabled accounts can be reactivated by clicking the Reactivate button.
+
+## Editing a group
+
+Edit a group. Add or remove members, and edit the permission level of the group.
+
+### Steps
+
+1. From the Group tab, click the group name.
+2. Click **Edit** to add or remove group members and to edit the access rights.
+3. Click **Save**.
+
+<Callout kind="info">
+  Adding a platform user to an account group augments any permissions already defined for an individual account.
+</Callout>
+
+## Editing a role
+
+Edit a role. Add, remove or edit any rules defined for the role.
+
+### Steps
+
+1. On the Admin & Rights 2.0 dashboard, under Management, click **Roles**.
+2. On the All Roles page, locate the role you want to edit and click its name in either the Name or Display Name column.
+3. If necessary, edit the name or display name for the role.
+4. If necessary, edit any existing rules for the role. You can select a different resource for the role and/or modify the actions you want assigned to the resource, namely "get," "list," and "create."
+5. If you want to add more rules for the role, see [Create Role](/admin-and-rights/create/create-role).
+6. When you are done making changes, click **Save**.
+
+## Deleting a group
+
+Delete a group.
+
+### Steps
+
+1. On the Admin & Rights 2.0 dashboard, under Management, click **Groups**
+2. On the All Groups page, locate the group you want to delete and hover the cursor over its associated ellipses link at the right side of the table.
+3. Select the **Delete** option.
+4. Then, on the confirmation modal, click **OK** to delete the group. The group is removed from the All Groups page.
+
+## Deleting a role
+
+Delete a role.
+
+### Steps
+
+1. On the Admin & Rights 2.0 dashboard, under Management, click **Roles**
+2. On the All Roles page, locate the role you want to delete and hover the cursor over its associated ellipses link at the right side of the table.
+3. Select the **Delete** option.
+4. Then, on the confirmation modal, click **OK** to delete the role. The role is removed from the All Groups page.

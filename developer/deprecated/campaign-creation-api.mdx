@@ -1,0 +1,150 @@
+---
+title: "Campaign Creation API"
+description: "Create a campaign programmatically, setting its name, status, active window, type and template."
+---
+
+<Callout kind="warning">
+  The Creating Campaigns API is no longer supported for new integrations.
+</Callout>
+
+## Creating Campaigns
+
+Creates a campaign.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/management/campaigns
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+
+### Request Object
+
+When this method runs, it passes in a *campaign* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+  "campaign": {
+    "name":"Campaign Example",
+    "status":"live",
+    "starts_at":"2021-12-31T05:00:00Z",
+    "ends_at":"2022-01-04T05:00:00Z,
+    "campaign_type": "promotion",
+    "template": "promotion"
+  }
+}
+```
+
+This object is detailed in the following table:
+
+<a id="campaign_create_request"></a>**Request Attributes for Campaign**
+
+| Attribute | Type<br /><br />Required/Optional | Description |
+|---|:---|:---|
+| *name* | string<br /><br />required | Name of campaign. Must be unique. |
+| *status* | string<br /><br />required | Defines whether the campaign is "live," "paused," "draft," "inreview," or "completed." Should be "live" for this endpoint. Users can engage with only a live campaign via actions such as triggering behaviors and receiving outcomes. |
+| *starts_at* | datetime<br /><br />required | Timestamp when campaign becomes active. |
+| *ends_at* | datetime<br /><br />required | Timestamp when campaign becomes inactive. |
+| *external_id* | string<br /><br />optional | Client's own ID for campaign. If *external_id* parameter is not provided in request, platform generates GUID for campaign and returns it in response. This attribute serves as an alias in this API for *permalink*, which is the actual database field that contains the value for *external_id*. See more on *permalink* in the response object discussion below. |
+| *campaign_type* | string<br /><br />optional | Allowed values are "promotion" and "messaging". |
+| *template* | string<br /><br />optional | Same value as campaign_type. |
+
+<a id="campaign_response1"></a>
+
+### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *campaign* object, as shown below:
+
+**JSON Response**
+
+```json
+{
+  "campaign": {
+    "ends_at": "2020-08-19T15:02:54Z",
+    "external_id": "d4f5fc94-dcad-11ea-845e-7001986d963d",
+    "id": 721,
+    "metadata": {},
+    "name": "Campaign Example",
+    "starts_at": "2020-08-12T15:02:54Z",
+    "status": "live",
+    "total_budget": 0,
+    "weight": 5,
+    "campaign_type": "promotion",
+    "template": "promotion"
+  },
+  "status": "ok"
+}
+```
+
+This object is detailed in the following table.
+
+<a id="campaign_response"></a>**Response Attributes for Campaign**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *name* | string | Name of campaign. |
+| *status* | string | Defines whether campaign is "live," "paused," "draft," "inreview," or "completed." Should be "live" for this endpoint. Users can engage with only live campaign via actions such as triggering behaviors and receiving outcomes. |
+| *starts_at* | datetime | Timestamp when campaign becomes active. |
+| *ends_at* | datetime | Timestamp when campaign becomes inactive. |
+| *external_id* | string | Client's own ID for campaign. If *external_id* parameter is not provided in request, platform generates GUID for campaign and returns it in response. This attribute serves as an alias in this API for *permalink*, which is the actual database field that contains the value for *external_id*. See more on *permalink* in the response object discussion below. |
+| *campaign_type* | string | Allowed values are "promotion" and "messaging". |
+| *template* | string | Same value as campaign_type. |
+| *id* | integer | Database identifier. |
+| *metadata* | object | JSON object containing any data that the user might want to attach to the campaign. |
+| *total_budget* | integer | Legacy field. |
+| *weight* | integer | Legacy field. |
+| *division_id* | string | ID of the division that the campaign is assigned to. Will not be returned when multi-org is disabled. |
+
+The table below documents a set of additional optional attributes that can be part of a request and appear in the response.
+
+**Additional Response Attributes for Campaign**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *campaign_id* | integer | Campaign identifier internal to SessionM. |
+| *campaign_permalink* | string | Permanent, static hyperlink for campaign. |
+| *start_date* | string | Campaign starting date. |
+| *end_date* | string | Campaign end date. |
+| *permalink* | string | GUID that can be passed to the API instead of the *campaign_id* (integer ID) for a campaign. Returned as an *external_id* in the response. This attribute is the actual database field that contains the value for *external_id*. |
+| *optin_required* | boolean | Indicates whether or not opt-in is required for customers wanting to participate in campaign. *true* if an opt-in is required; *false* if it is not. |
+| *opt_in_starts_at* | datetime | Opt-in starting date. |
+| *opt_in_ends_at* | datetime | Opt-in ending date. |
+| *reporting_ends_at* | datetime | Timestamp when reporting data will no longer be generated for a campaign. |
+| *targeting* | object | Serialized JSON query that is used to create ad targets. |
+| *qualify_tag* | string | Tag used in targeting to indicate that the user is qualified. Must be included in targeting setup to function. |
+| *disqualify_tag* | string | Tag used in targeting to indicate the user is disqualified. Must be included in targeting setup to function. |
+| *qualified* | boolean | Current customer qualification for campaign - after domain call. For example, *false* can result from targeting that tags the customer and targeted away from the campaign. |
+| *group_id* | integer | Internal ad group identifier. |
+| *creative_id* | integer | Platform-generated ID of the ad unit content, which is also called creative content. |
+| *version* | string | Campaign version. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *argument_error* | Unknown campaign attributes test. |
+| *missing_data* | Missing campaign data. |
+| *not_found* | Parent model not found. |
+| *not_found* | Parent model not in same organization. |
+| *validation* | Validation error. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

@@ -1,0 +1,36 @@
+---
+title: "Lock Offer API"
+description: "Lock an offer to a transaction so it is redeemed when that transaction is finalized."
+---
+
+Allows an offer to be "locked" by a transaction and redeemed upon the finalization of that transaction.  The response to this API is the [Discount](/developer/pos/send-transaction#discount) object as the payload for the [General Response](/developer/pos/general-dto-definitions#general-response-container) contract.
+
+Similar to the Immediate Redeem API, the Lock Offer API should be used immediately prior to taking payment and closing the transaction. If the transaction is modified after the Lock Offer API has been called and the discount applied, the Lock Offer API should be called again, passing the exact same transaction ID, and applying the returned modified discount if it is still valid. Additionally, it is crucial that the same discount object that was the response from the Lock Offer API is also passed back in the post-finalize, "send transaction" flow. If an offer is invalid and can no longer be applied to the check, the Unlock Offer API should be called to release the offer back to the user's wallet.
+
+For more information on this process flow, consult your Customer Success contact.
+
+## Endpoint
+
+This API offers the following endpoint:
+
+**REST Endpoint**
+
+```http
+POST /api/2.0/lock
+```
+
+## Endpoint Parameters
+
+Not applicable.
+
+## Request Object
+
+When this endpoint runs, it passes in a Lock Offer request object. When using this API, pass in the *request_payload* as the Lock Offer object, described in the following tables:
+
+**Request Properties for Lock Offer**
+
+| Property | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *offer_lookup_code* | string<br />required | Lookup code for the offer. |
+| *offer_lookup_type* | string<br />required | Specifies what the *offer_lookup_code* represents. Valid values are: "TTLCode" and "UserOfferId". |
+| *transaction* | [Transaction](/developer/pos/send-transaction#transaction)<br />required | Transaction to which this discount is being applied. |

@@ -1,0 +1,292 @@
+---
+title: "Tiers API"
+description: "Retrieve tier and tier system data, including status levels, point requirements and multipliers."
+---
+
+<Callout kind="warning">
+  The Tiers API has been deprecated. While its methods are still implemented, they may be removed in future implementations. Therefore, new integrations should use the Incentives API.
+</Callout>
+
+Tiers objects support the retrieval of a variety of tier-related data, including:
+
+- Current tier status level name
+- Year and month of membership start date
+- Next tier status level name
+- Points required to reach next tier status level
+- Multiplier applied to points associated with tier status level
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  Since the Tiers API retrieves information about tiers and the structure of the tier system, you may want to understand that data with respect to customers, who can participate in tiered programs. Tier data can reside in a customer's profile. Use the [Custom Profile API](/developer/customers/customer-profile-apis#custom-profile-api) to obtain a customer's tier-related data.
+</Callout>
+
+This API provides the following methods:
+
+- [Retrieve all tiers](#retrieve-all-tiers)
+- [Retrieve all tier systems](#retrieve-all-tier-systems)
+- [Retrieve information on a specified tier](#retrieve-information-on-a-specified-tier)
+
+## Retrieve All Tiers
+
+Retrieves data associated with all tiers defined for all tier systems defined for an organization.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/tiers
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains a *tiers* array, which is shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "tiers": [
+    {
+      "id": 2,
+      "name": "bronze",
+      "identifier": "bronze",
+      "next_tier_id": 3,
+      "required_num_days_in_tier": 10,
+      "required_points": 500,
+      "required_application_achievement_ids": "1,2\n",
+      "required_num_achievements": 3,
+      "max_inactive_days": 10,
+      "required_application_achievement_id": 1,
+      "num_days_to_earn_required_achievement": 50,
+      "required_sponsor_points": 10,
+      "multiplier": "1.0",
+      "tier_system_id": 2,
+      "maintenance_required_points": 100
+    },
+    {
+      "id": 3,
+      "name": "Silver",
+      "identifier": "silver",
+      "next_tier_id": 4,
+      "required_num_days_in_tier": 2,
+      "required_points": 1000,
+      "required_application_achievement_ids": "3,4\n",
+      "required_num_achievements": 4,
+      "max_inactive_days": 5,
+      "required_application_achievement_id": 1,
+      "num_days_to_earn_required_achievement": 20,
+      "required_sponsor_points": 4,
+      "multiplier": "10.0",
+      "tier_system_id": 2,
+      "maintenance_required_points": 200
+    }
+  ]
+}
+```
+
+The array is detailed in the following table:
+
+<a id="tiers"></a>**Response Attributes for Tiers**
+
+| Attribute | Type | Description |
+|---|---|---|
+| *id* | integer | ID for current tier. |
+| *name* | string | Name of the tier. |
+| *identifier* | string | Descriptive identifier for tier. |
+| *next_tier_id* | integer | ID for tier that is available above current tier. |
+| *required_num_days_in_tier* | integer | Number of days required to achieve a particular tier status level. |
+| *required_points* | integer | Number of points required to achieve a particular tier status level. |
+| *required_application_achievement_ids* | string | Identifiers for multiple application achievements required to qualify for tier. |
+| *required_num_achievements* | integer | Number of achievements required to qualify for a tier. |
+| *max_inactive_days* | integer | Number of days customer can remain inactive before tier status level is revoked. |
+| *required_application_achievement_id* | integer | Identifier for single application achievement required to qualify for tier. |
+| *num_days_to_earn_required_achievement* | integer | Number of days required to earn achievement. |
+| *required_sponsor_points* | integer | Number of points required for a sponsor to qualify for a tier. |
+| *multiplier* | string | Factor that multiplies points per tier status level. |
+| *tier_system_id* | integer | ID of the tier system associated with the current tier. |
+| *maintenance_required_points* | integer | Minimum points required to maintain current tier level status. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve All Tier Systems
+
+Retrieves data associated with all tier systems defined for an organization. Note that this system level metadata - such as settings that reset and activate a tier system - is different than the data returned for a particular tier within a system.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/tier_systems
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains a *tier_systems* array, which is shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "tier_systems": [
+    {
+      "id": 2,
+      "name": "1",
+      "external_id": "t1",
+      "active": true,
+      "reset_at": "2017-05-27T04:00:00Z",
+      "reset_interval": "yearly",
+      "last_reset_at": "2017-05-10T20:10:33Z"
+    },
+    {
+      "id": 1,
+      "name": "test1",
+      "external_id": "test1",
+      "active": true,
+      "reset_at": "2017-05-27T04:00:00Z",
+      "reset_interval": "montly",
+      "last_reset_at": "2017-05-10T20:09:53Z"
+    }
+  ]
+}
+```
+
+This array is detailed in the following table:
+
+<a id="tier_systems"></a>**Response Attributes for Tier Systems**
+
+| Attribute | Type | Description |
+|---|---|---|
+| *id* | integer | ID for current tier system. |
+| *name* | string | Name of current tier system. |
+| *external_id* | string | External ID associated with current tier system. |
+| *active* | boolean | Determines whether tier system is active (*true*) or inactive (*false*). |
+| *reset_at* | string | Datetime at which to reset tier system. |
+| *reset_interval* | string | Interval of time between tier system resets. |
+| *last_reset_at* | string | Datetime at which the tier system was last reset. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve Information on a Specified Tier
+
+Retrieves all the details related to a specific tier, including its system information.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/tiers/:tier_ID
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *tier_ID* | Identifier that specifies the tier being retrieved. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains [*tier*](#tiers) and [*tier_system*](#tier_systems) objects, as shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "tier": {
+    "id": 2,
+    "name": "bronze",
+    "identifier": "bronze",
+    "next_tier_id": 3,
+    "required_num_days_in_tier": 10,
+    "required_points": 500,
+    "required_application_achievement_ids": "1,2\n",
+    "required_num_achievements": 3,
+    "max_inactive_days": 10,
+    "required_application_achievement_id": 1,
+    "num_days_to_earn_required_achievement": 50,
+    "required_sponsor_points": 10,
+    "multiplier": "1.0",
+    "tier_system_id": 2,
+    "maintenance_required_points": 100
+  },
+  "tier_system": {
+    "id": 2,
+    "name": "1",
+    "external_id": "t1",
+    "active": true,
+    "reset_at": "2017-05-27T04:00:00Z",
+    "reset_interval": "yearly",
+    "last_reset_at": "2017-05-10T20:10:33Z"
+  }
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|---|
+| *code* | Code not found. |
+| *message* | Tier ID does not exist. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

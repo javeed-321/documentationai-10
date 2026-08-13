@@ -1,0 +1,26 @@
+---
+title: "Configure event stream with Timeline Series Config tool"
+description: "Follow the correct sequence of configuration steps to set up every object required for a functional event stream."
+---
+
+This article provides instructions for setting up the event stream via the Timeline Series Config UI available from the Admin & Rights 2.0 module. It guides the user through the correct sequence of configuration steps required to set up all of the objects that need to exist for a functional event stream.
+
+The primary goal of this workflow is to support the presentation of event stream data for specific event types. In order to create the event type, several prerequisites need to be met. The procedure below details the high level steps for setting up the event stream, and each step is linked to the actual procedure for creating the appropriate object.
+
+## About this task
+
+When the event stream is setup and operating, it renders event data in the Activity Log, which is the default sub-tab that displays on the Activity tab for a specific customer in the Customers Module.
+
+## Steps
+
+1. Begin with a stream type. Generally, types of streams are already defined in the system on a global level. They are available for event streams associated with users and display in the activity log for users. But stream types can also be associated with applications or other platforms. If you need to create a stream for any of these types of events, [create a stream type](/admin-and-rights/create/create-stream-type).
+2. With the stream type you need selected or created, you can use that type to [create a stream](/admin-and-rights/create/create-stream).
+3. The next step in configuring an event stream is to [create an event category](/admin-and-rights/create/create-event-category). Although it is optional, it's an excellent way to group multiple event types under one category.
+4. With an event category defined, you are ready to [create the necessary event types](/admin-and-rights/create/create-event-type). This step ties the event type to event stream you created earlier.
+5. Now that you've set up the event stream, you can begin configuring how the events in the stream should be visualized. This work includes the following steps:
+   1. [Create an event template](/admin-and-rights/create/create-event-template) that specifies the HTML and plain text you want applied to the event stream.
+   2. [Create a rendering context](/admin-and-rights/create/create-rendering-context) that further defines what you configured earlier for the stream type. For example, if you had built a stream using the stream type "user," then you could refine this further by indicating what kind of user, "admin" or "customer."
+   3. [Create a stream view](/admin-and-rights/create/create-stream-view) for an appropriate, more manageable subset of the events being depicted in the stream.
+   4. With the event template, rendering context and stream view defined, you can tie them all together when you [create a rendering template](/admin-and-rights/create/create-rendering-template).
+
+Once you have created and configured these Timeline Series Config objects, the activity log for you user, application or platform is ready to present an event stream.

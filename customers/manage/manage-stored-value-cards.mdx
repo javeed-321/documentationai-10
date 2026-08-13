@@ -1,0 +1,175 @@
+---
+title: "Manage stored value cards"
+description: "Manage stored value cards by status — adjust balances, expire, transfer balances, report lost or stolen, and remove from an account."
+---
+
+This Stored Value Cards tab allows you to manage stored value cards. Depending on the card's status, the tab offers a set of available actions, including adjusting the card's balance, expiring a card, or reporting a card lost/stolen.
+
+Each card displayed on the tab has a quick action button that provides a set of additional actions users can take on the card. The options vary depending on the status of the card. This article is organized according to these stored value card statuses:
+
+- [Registered Cards](#registered-cards)
+- [Lost Cards](#lost-cards)
+- [Reported Stolen Cards](#reported-stolen-cards)
+- [Stolen Cards](#stolen-sards)
+- [Expired Cards](#expired-cards)
+
+## Registered cards
+
+Customers can register an active stored value card to their loyalty profile in order to realize offers and rewards that they can use as they spend the value of the card. Once the card is registered to a loyalty profile, it cannot change to another profile. Note too that a registered card cannot revert back to an active status.
+
+For registered cards, you can perform the following actions.
+
+- [Adjust Balance](#adjust-balance)
+- [Expire](#expire)
+- [Transfer Balance](#transfer-balance)
+- [Report Lost/Stolen](#report-loststolen)
+
+### Adjust balance
+
+Modifies a card's monetary balance.
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card requiring a monetary balance adjustment.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Adjust Balance** to open the Adjust Balance modal.
+4. Click either **Add** or **Deduct** and then enter the monetary amount being added or deducted.
+5. Then click **Save**.
+
+### Expire
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card you want to expire.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Expire**, which opens a dialog to confirm the action.
+4. Click **Expire**.
+
+### Transfer balance
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card requiring a monetary balance transfer.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Transfer Balance** to open the Transfer Balance modal.
+4. In the Transfer to Card field, select the account (card) to which you are transferring the balance.
+5. In the Transfer Amount field, select the amount being transferred.
+6. Then click **Transfer**.
+
+### Report lost/stolen
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card you want to report lost or stolen.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Report Lost/Stolen** to open the Report Lost/Stolen modal.
+4. Select either the **Lost** or the **Stolen** radio button.
+5. Then click **Save**.
+
+## Lost cards
+
+When customers cannot find their stored value card, they can report it lost. In this status, they can still transfer funds from the card. If the card is found, it can be reverted to a registered status and used again. Note that a customer cannot make purchases with the card when it's in the lost state.
+
+For lost cards, you can perform the following actions:
+
+- [Report Card Found](#report-card-found)
+- [Expire](#expire)
+- [Transfer Balance](#transfer-balance)
+
+### Report card found
+
+Report a lost card found.
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the lost card you want to report as found.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Report Card Found** to open the Found Confirmation dialog.
+4. Select **Yes**.
+
+### Expire
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card you want to expire.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Expire**, which opens a dialog to confirm the action.
+4. Click **Expire**.
+
+### Transfer balance
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card requiring a monetary balance transfer.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Transfer Balance** to open the Transfer Balance modal.
+4. In the Transfer to Card field, select the account (card) to which you are transferring the balance.
+5. In the Transfer Amount field, select the amount being transferred.
+6. Then click **Transfer**.
+
+## Reported stolen cards
+
+Customers can report their card stolen. If a card is reported stolen, there is a configurable fixed number of days between the report and the customer's ability to transfer funds out of the card. Once a card is reported stolen, it cannot revert back to a registered or active status. Note that a customer cannot make purchases with the card when it's in the stolen state.
+
+For cards you want to report as stolen, you can perform the following actions:
+
+- [Transfer Balance](#transfer-balance)
+- [Confirm as Stolen](#confirm-as-stolen)
+
+Note that depending on platform configuration, the "Reported Stolen" status will last for a set timeframe before the card status shifts to "Stolen." Once this occurs, you cannot transfer the card's balance.
+
+### Transfer balance
+
+Transfer a monetary balance from one card to another.
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card requiring a monetary balance transfer.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Transfer Balance** to open the Transfer Balance modal.
+4. In the Transfer to Card field, select the account (card) to which you are transferring the balance.
+5. In the Transfer Amount field, select the amount being transferred.
+6. Then click **Transfer**.
+
+### Confirm as stolen
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the card you want to report as stolen.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Confirm as Stolen** to open the Confirm as Stolen confirmation dialog.
+4. Then click **Yes**.
+
+## Stolen sards
+
+For stolen cards, there is a configurable fixed number of days between the report and the customer's ability to transfer funds out of the card. Once a card is reported stolen, it cannot revert back to a registered or active status. Note that a customer cannot make purchases with the card when it's in the stolen state.
+
+For stolen cards, you can remove the card from the account.
+
+### Remove from account
+
+Remove a stolen stored value card from the customer's SVC wallet. This action only removes the card from the UI. Card information is remains stored in the SessionM Platform - although not tied to the customer. Note that this action shifts the card's status to "Deactivated."
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the stolen card you want to remove from the account.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Remove from Account**, which opens the Removal Confirmation dialog.
+4. Click **Yes**.
+
+## Expired cards
+
+A card can move to an expired status either manually or due to transaction inactivity. The amount of time before a card automatically expires is configurable per client. Expired cards cannot be used for purchases or any other stored value card functionality. Note that once a card is expired, it cannot revert back to an active or registered status.
+
+For expired cards, you can remove it from the account.
+
+### Remove from account
+
+Remove stored value card from the customer's SVC wallet. This action only removes the card from the UI. Card information is remains stored in the SessionM Platform - although not tied to the customer. Note that this action shifts the card's status to "Deactivated."
+
+#### Steps
+
+1. On the Stored Value Cards tab, locate the expired card you want to remove from the account.
+2. Click the **Quick Action button** that displays to the far right of the table row for the card.
+3. Select **Remove from Account**, which opens the Removal Confirmation dialog.
+4. Click **Yes**.

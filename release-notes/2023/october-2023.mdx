@@ -1,0 +1,93 @@
+---
+title: "October 2023 Release Notes"
+description: "SessionM platform release notes for October 2023 (release version 2023.6)."
+---
+
+**DETAILS**
+
+| Release to Staging | Release to Production | Release Version |
+|---|---|---|
+| Oct 5 - 10, 2023 | Oct 31 - Nov 6, 2023 | 2023.6 |
+
+*No downtime is required for the release.*
+
+<Callout kind="warning">
+  **Updates for Release Notes at Production Release**
+
+  The production release has been shifted to Oct 31 - Nov 6.
+
+  We've removed three  items from this release. Each has been moved to a future release:
+
+  1. Composer Optimization features.
+  2. Message Template functionality within the Campaigns module.
+  3. The bug fix: *"Fixed an issue with updating the user standard profile that was causing the primary external id of a user with multiple external ids to be inadvertently updated."*
+</Callout>
+
+## Loyalty
+
+### Offers API Performance Improvements
+
+We optimized the offers domain to enhance the overall performance of our offers system with better response time    on the following endpoints: `ISSUE_OFFER_BULK`, `ISSUE_OFFER`, `GET_USER_ELIGIBLE_REWARD_STORES` and `MY_REWARDS`
+
+---
+
+## Campaigns & Content
+
+### Enhancements to the Messaging Providers Configuration
+
+Messaging providers can have multiple messaging templates which in turn can have multiple messaging variants. Previously, the Messaging Providers configuration only allowed you to create and edit one variant per template. We have added an index page specifically for messaging variants that allows you to easily create and edit multiple variants per template. This will also make it easier to distinguish between messaging templates and variants in the UI. This configuration is found in the Admin & Rights module.
+
+---
+
+#### Improvements
+
+- **Campaign Settings** - We have introduced a “Message Types” tab within the Campaign settings. This tab allows you to easily configure which message types show up in the message creation modal.
+  **180 Day Timeframe Restriction** - Previously in campaigns, the timeframe restriction had pre-set options that jumped from 90 days to 365 days. This prevented you from setting a timeframe restriction between 3 months and 1 year. Moving forward, there will be a 180 day option which allows for more flexible configurations of longer running campaigns.
+- **Campaign Creation Modal** - The redesigned campaign creation modal aims to improve and streamline the user experience. Now, you start by entering the campaign name before selecting the desired campaign type.
+- **Relocation of Advanced Settings** - Advanced Settings was relocated to its own tab to enhance user proficiency. You can now find it in the far right when on a Campaign page.
+
+---
+
+#### Bug Fixes
+
+- Fixed an issue where the automatically-triggered message in the points outcome was being created or saved when the user checked the box. Moving forward, this message will only be created or deleted if the user saves the associated behavior which is consistent with all other outcomes.
+
+---
+
+## Integrations
+
+### Salesforce Service Cloud, Moraine, Version 2.7
+
+#### Enhancements
+
+- Added tooltips with help text for most fields on the package configuration page.
+- Admin users have now control over which records to sync with SessionM. We added a new field on the package configuration page, **Criteria for Syncing Records to SessionM**, where admins can input custom criteria.
+- Made the email field on the parent object (Account/Contact) optional for record syncing with SessionM. For package upgrades, the new  **Criteria for Syncing Records to SessionM** field will be automatically updated to `{parent_object_email_field} != NULL` for seamless backward compatibility.
+- Record matching between Salesforce and SessionM is now done by external ID or email, prioritizing the external ID if not empty, irrespective of the setting for **Lookup by External ID** on the package configuration page. The **Lookup by External ID** field is now exclusively applicable to API calls for the customer merge functionality and Points Balance, Reward Store, and all Offers components – by internal user ID or external ID – with no impact on the record matching process.
+- Introduced a new field on the package configuration page, **Allow Multiple Update Trigger Runs**, to allow the process to evaluate a record multiple times before syncing with SessionM. This setting was implemented for organizations where the existing customization updates the parent record (Account/Contact) multiple times in one transaction. **Be Aware:** Enabling this will increase the number of trigger executions and might impact your organization's resources.
+- Several packaged fields have been renamed for better clarity:
+  - **Enroll in Loyalty** on the parent object (Account/Contact) is now **Opt in Loyalty**. This field is mapped by default with the opt_in attribute in SessionM profiles, but the mapping can be changed if needed.
+  - **Sync Customer Changes with Loyalty** is now **Auto Sync Customer Changes with SessionM**
+  - **Search by External ID** on the package configuration page is now **Lookup by External ID** as it has no effect on customer search, but it determines how to look up customers in other API calls (see note above).
+- Added categories to all the custom labels for better filtering
+
+#### Fixes
+
+- Fixed a bug causing the auto-sharing flow to fail when inactive users, queues, or the automated process user had access to accounts.
+- Implemented a workaround to overcome a Salesforce limitation that prevented packaged fields and other organization fields with the same API name after the namespace to be in the same SOQL query.
+
+#### Deprecated and removed features
+
+- The **Auto Enroll Enabled** flag in the SessionM Customer Profile component configuration has been deprecated. Use the **Auto Sync Customer Changes with SessionM** field on the package configuration page to automate the syncing between Salesforce records and SessionM customers.
+- Added all deprecated custom labels to a **deprecated** category
+- Added “Deprecated” to the descriptions of several deprecated Visualforce pages
+
+You can see the updated Salesforce Service Cloud Administration Guide in our [documentation center](https://docs.sessionm.com/developer/Technical%20Docs/integrations.htm).
+
+---
+
+## Announcements
+
+### Update on our new Loyalty Programs Module
+
+Upgrades for our new Loyalty Programs module, with a new loyalty rules engine, have begun! Upgrades for all customers will continue through Q3 of 2024. If you have any questions about your upgrade eligibility or timeline, please reach out to your SessionM representative.

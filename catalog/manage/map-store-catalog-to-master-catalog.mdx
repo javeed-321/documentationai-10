@@ -1,0 +1,54 @@
+---
+title: "Map store catalog to master catalog"
+description: "Create mappings between a store catalog and the master catalog automatically for all stores, for one store, or manually."
+---
+
+In disparate catalog scenarios, once the store catalog has been cloned to become the master catalog, you can create mappings between it and the store catalog. This can be done automatically using the Automapping function, which is the easiest way to map store catalog items to master catalog items. The tool can use the SKU or name of an item to do the mapping. Alternatively, you can create new mappings or modify existing ones manually - one way to manage targeted revisions that Automapping may not handle.
+
+## About this task
+
+This task applies only to a disparate catalog scenario; unified catalogs do not require any mapping.
+
+<ExpandableGroup>
+  <Expandable title="Create mappings automatically for all store locations (catalogs)" default-open="false">
+    This procedure configures the mappings from the Master Catalog tab and instructs the platform to perform the mapping process for any store catalog ingested for ANY/ALL stores. Note that this setting affects only existing stores.
+
+    ### Steps
+
+    1. From the Master Catalog tab, click **Automap Behavior**.
+    2. In the "Set Automapping at all locations" dialog, click **Enable**. You can also choose to disable this feature by clicking **Disable**. Automapping begins when the store catalog is uploaded.
+
+    Once Automapping is complete, you can apply the mapping definitions to all platform modules by clicking **Publish**.
+  </Expandable>
+
+  <Expandable title="Create mappings automatically for a specific store location (catalog)" default-open="false">
+    This procedure configures the mappings from the Store Catalog tab and instructs the platform to perform the mapping process for the displayed store automatically - whenever a catalog is ingested for the store.
+
+    ### Steps
+
+    1. From the Master Catalog tab, click **Store Automap Behavior**.
+    2. In the "Set Automap Behavior" dialog, you have two choices:
+       1. Click **Automap** to initiate automapping when this store catalog is uploaded.
+       2. Click **Manual** to initiate automapping by then clicking the **Automap Now** button. Automapping begins according to the choice you made above.
+
+    Once Automapping is complete, you can apply the mapping definitions to all platform modules by clicking **Publish**.
+  </Expandable>
+
+  <Expandable title="Create mappings manually" default-open="false">
+    This approach is appropriate when you cannot map store and master catalog items automatically or find that you need to alter existing mapping relationships.
+
+    In this case, you can perform this procedure from either the Master or Store Catalog tab. The procedure below is for a mapping performed from the Master Store Catalog tab.
+
+    ### Steps
+
+    1. On a Master Catalog tab, locate the item to which you are linking the corresponding store item.
+    2. Hover over the row for the item. The buttons for the available actions associated with the item appear.
+    3. Click the **"View/edit store mapping relationship"** (link icon). The Catalog Mapping modal opens, showing the available catalog items for the active store, the name for which is displayed in the green rectangle.
+    4. Select the store catalog item(s) you want to map to the master catalog item. A checkmark in a blue box displays for the selected item.
+    5. If you don't want the item to have a relationship with the master catalog, you can tell the system to ignore it by enabling the item with a blue checkmark and then clicking **Ignore**. Note that this action in effect silences any errors the system perceives due to an item not having a mapping relationship.
+    6. If you have additional items to map in this store or need to map items in another store, use the arrows to find and load the appropriate store. Then repeat the steps in this procedure.
+    7. Click **Save** or **Save And Next**. If the item has been mapped successfully, it displays a green checkmark.
+
+    Once your mapping changes in the master catalog are complete, you can apply the new mapping definitions to all platform modules by clicking **Publish**.
+  </Expandable>
+</ExpandableGroup>

@@ -1,0 +1,236 @@
+---
+title: About the SessionM customer profile
+description: >-
+  How the SessionM customer profile unifies member data — demographics,
+  activity, stored value cards, campaigns, offers and notes.
+---
+<Callout kind="info" collapsed="false">
+  ### At-a-glance
+
+  <Image src="https://docs.sessionm.com/Resources/Images/Explainers/AtAGlance.png" width="50" height="106" alt="At-a-glance icon" caption=" " style="width: 50px; height: auto; cursor: pointer;" />
+
+  As SessionM collects and unifies personal data from various sources, it creates a unique _customer profile_ for each member. The profile provides a single, comprehensive view of loyalty program-related activities.
+
+  Use the profile to view information for a specific member, including demographics, engagement activity, transactions, rewards and more.
+
+  Use the profile to manage program attributes, including adjusting points, changing tier levels and more.
+</Callout>
+
+## Using the customer profile to manage loyalty program members
+
+As SessionM collects and unifies personal data from various sources, it creates a unique _customer profile_ for each member. The profile provides a single, comprehensive view of loyalty program activities for this member. Use the profile to manage the members in your loyalty program. You can:
+
+- look up the information for a specific member, including demographics, engagement activity, transactions, rewards and more.
+- manage program attributes, including adjusting points, changing tier levels and more.
+
+<Callout kind="info" collapsed="false">
+  The Customer module is tailored to your brand's SessionM implementation, so the functions described in this article may differ slightly from what 's available to you. Contact your Customer Success team for information on any differences.
+</Callout>
+
+### Viewing member information
+
+The following table lists the types of personal information stored in the customer profile. Click on the link for a detailed description.
+
+| Customer profile information                                                                                                                  | Detailed description ...                                        |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| At-a-glance member data, including demographics, points balances and tier level.                                                              | [At-at-a glance member data](#at-at-a-glance-member-data)       |
+| Basic and customer profile attributes, which include demographic information provided at registration and program-specific custom attributes. | [About the SessionM customer profile](#Profile2)                |
+| Member engagement data, which describe how a member has interacted with a loyalty program, including points, rewards, tags and more.          | [Member activity information](#member-activity-information)     |
+| Stored value card information, which includes promotional and private-label debit cards associated with the program                           | [Stored value card information](#stored-value-card-information) |
+| Campaign information, which identifies all current campaigns targeting this member, and all completed campaigns.                              | [Campaign information](#campaign-information)                   |
+| Offer information, which identifies all offers issued, available, redeemed and expired.                                                       | [Offer information](#offer-information)                         |
+| Notes, where you add or edit a note associated with a member's account, including the reason for the note.                                    | [Notes](#notes)                                                 |
+| Data privacy, where you comply with member's data privacy requests.                                                                           | About data privacy in the SessionM platform                     |
+
+### Managing member attributes
+
+The following table lists the tasks that you can perform from the customer profile. Click on the link for step-by-step instructions for performing that task
+
+| Task                                                                                                                    | Step-by-step instructions ...                                                  |
+| ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Add a profile or test persona to the Customer module.                                                                   | [Add customer profile](/customers/manage/add-customer-profile)                 |
+| Add a note to a profile.                                                                                                | [Add note to customer profile](/customers/manage/add-note-to-customer-profile) |
+| Adjust loyalty points balance for a member.                                                                             | [Adjust points](/customers/manage/adjust-points)                               |
+| Adjust the tier level for a member.                                                                                     | [Adjust tier levels](/customers/manage/adjust-tier-levels)                     |
+| Submit an export data request, which returns a CSV file of the member's data.                                           | [Export customer data](/customers/manage/export-customer-data)                 |
+| Manage stored value cards, including adjusting the card's balance, expiring a card, or reporting a card lost or stolen. | [Manage stored value cards](/customers/manage/manage-stored-value-cards)       |
+| Synchronize a SessionM customer account with an external account.                                                       | [Sync accounts](/customers/manage/sync-accounts)                               |
+| Forget a customer account along with all associated data, including all personal, collected, and calculated data.       | [Forget customer record](/customers/manage/forget-customer-record)             |
+| Stop and resume processing of customer data.                                                                            | [Cease marketing](/customers/manage/cease-marketing)                           |
+
+## At-at-a glance member data
+
+The profile header, which displays across the top of the profile, contains the following information:
+
+| Information              | Description                                                                                                                                                                                                                                                          |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Member                   | Member's name, email address, external ID, date of birth, language spoken, and the current status of the account.                                                                                                                                                    |
+| Incentives point balance | Member's current balance in each point account and their lifetime earned-to-date level. Use the **Adjust** button to add or deduct points for a point source and a point account. See [Adjust Loyalty Points](/customers/manage/adjust-points) for more information. |
+| Incentives tiers         | Members current tier, including the tier entrance date and progress towards the next tier. Use the Adjust button to move a member to a different tier. See [Adjust Tier Levels](/customers/manage/adjust-tier-levels) for more information.                          |
+
+## Basic and custom profile attributes
+
+Profile attributes for a member include:
+
+- basic information that the member provides at registration, such as age or address.
+- custom attributes that you can append to the customer profile via an API. Allows you to record attributes not included in the standard demographic-based attributes supported out of the box. Examples are: gender, email address, home city, home state, and zip code.
+
+You can edit information on a customer's profile by clicking the **Edit** button.
+
+<Callout kind="info" collapsed="false">
+  Permissions can also be set by SessionM to permit only certain platform users the ability to edit the customer profile.
+</Callout>
+
+## Member activity information
+
+The Activity Log sub-tab for the Activity tab provides a view of logs that show how a customer has engaged in your loyalty program. It presents a real-time log listing data gathered across multiple customer touch points. The sub-tab shows the customer's engagement throughout the history of their account. This stream serves as the _source of truth_ for a member's record. It also is the first place to triage a support request, verify recent account activity, and examine a customer's historical engagement with your brand.
+
+Member engagement information includes:
+
+- Activity Log
+- Point Audit Log
+- Tier Progress
+- Tags
+- Rewards
+- Promo Codes
+- Account Audit Log
+
+### Activity log
+
+View each engagement recorded for this member.
+
+- **Activity Log Table**
+
+> Shows member engagement in chronological order. You can filter this list.
+>
+> Each row represents an event for the customer and provides the event's date and time, the type of activity, and additional details. The content in the Additional Details column of the table varies. For an "Incentives Point Deposit" event, details include the number of points in the deposit and the name of the account receiving the deposit. For a purchase, details includes the related transactional and financial data, which can be drilled into for more information related to the event, such as the details for associated SKU items, payments, or discounts.
+
+- **Performance Metrics**
+
+> Displays data points generated by SessionM that indicate where the member stands compared to the other members interacting with your brand. Metrics include:
+>
+> - **Customer Lifetime Value (CLV)** – Ranks the member's value as compared to the full member base, powered by the projected revenue the member will generate over their lifetime with the brand.
+> - **Risk of Churn** – Ranks the likelihood that a member stay with a brand, established by examining historical transactions at an individual level to understand their "normal" behaviors and cadence.
+> - **RFM Metrics** – Recency, frequency, and monetary spend information for the both the individual member and compared to the median of the full member base. Metrics can be toggled over a 7 day, 30 day, or account lifetime time frame.
+> - **Product Affinities Widget** – Lists product recommendations along with related probability of purchase levels, established by deconstructing historical purchase data.
+> - **Notes Widget** – Add a note to the member's account from this default view, found below the Performance Metrics widget. It contains similar features as the Notes tab.
+
+- **Notes**
+
+> Add a note to the member's activity log, See [Notes](#notes) for more information.
+
+### Point Audit log
+
+View a record of the point transactions for a member and their point accounts. Supplements the activity log by allowing you to drill down to details on points activities.
+
+- **Transaction ID** – Shows a transaction ID when the point adjustment is due to purchase activity.
+- **Point Source** – Shows which point source the modification is using.
+- **Point Account** – Shows which point account the modification is using.
+- **Modification** – Shows the movement of points in a point account. Earned points are represented with a positive number, deductions are represented with a negative number. For example "-50" would be a deduction of 50 points.
+- **Amount Spent** – Shows if any of the added points (shown in the Modification column) have been spent. Only has a value when the Modification is a positive number.
+- **Amount Expired** – Shows if any of the added points (shown in the Modification column) have expired, based on existing point expiration policies. (Only has a value when the Modification is a positive number.)
+- **Reference Type** – Summary of the type of point transaction, such as "Manual Point Adjustment".
+- **Reference ID** – Unique ID associated with the entry in the audit log.
+- **Date Time of Occurrence** – Time the transaction occurred, displayed in UTC.
+
+### Tier progress
+
+View a brief summary of each tier to which the member belongs, including their tier status and the date they advanced to that tier.
+
+The Tier Progress section includes a drop-down that describes basic point information related to the next tier, such as the current balance and the balance required to achieve the new tier, along with a short description of what that requirement entails. This data reflects events related to customers earning or using loyalty points, showing the customer earning or using loyalty points (deductions show as a negative value).
+
+### Tags
+
+View the tags added to the member's profile, based on behaviors and events throughout their life cycle in your program. From here, you can also manually add tags to the profile that may be relevant to a customer support request.
+
+A _tag_ is a free-form, custom SessionM attribute appended to a member's profile, often as the result of member activity in the loyalty program or audience profiling.
+
+- **Name**: Name of the tag that has been applied to the profile. This name can be used elsewhere in the platform to target members with campaigns, messages and offers.
+- **Count**: Number of times a tag has been appended to the profile. You can reset the a cap if needed.
+- **Add Tag**: Add a new tag to the profile.
+
+### Rewards
+
+View each reward associated with a member.
+
+- **Status** - Redemption status, which can assist when a member asks about an earned reward.
+- **Date** - Date reward was redeemed.
+- **Name** - Name of reward.
+- **Offer Type** -Offer type associated with reward, such as "incentive points."
+- **Quantity** - Number of times member can redeem reward.
+- **Points Spent** - Number of points to spend to redeem reward.
+- **Order ID** - ID of the order associated with reward once redeemed. Use this to track the delivery of the reward – something that varies based on reward type.
+
+### Promo codes
+
+View any promo codes claimed by or assigned to this member. In addition, you can view any associated claim errors or limiters. If a member is locked out from entering promo codes, use the **Reset** button in the Lockout Information section to allow the member to use promo codes again.
+
+### Account audit log
+
+Audit the logged activities for a member.
+
+During system implementation, SessionM can integrate the audit log with external support ticketing systems, providing an interface for feeding in member data that flows from your support ticketing system - data such as ticket status, type and date/time of its submission. You can filter by event type. For example, "Points Earned," "Points Used," "Note Added," or "Offer Claimed."
+
+## Stored value card information
+
+View information about promotional and private-label debit cards used by a member. Information includes:
+
+- **Status**: Possible statuses include: "Registered," "Stolen," "Reported Stolen," "Lost," and "Expired."
+- **Card Number**: Numerical identifier used by the card-processing, 3rd party integrator. This number is unique for each card.
+- **Card Type**: Pre-defined property that determines the functionality of the card.
+- **Card Design**: Description of design applied to the card. For example, "Fall Colors."
+- **Nickname**: Nickname for card.
+- **Expiration Date**: Date that card expires. Datetime format. Expiration policy is configurable.
+- **Show History**: Click the **Show History** link to open the Card History panel, which shows the card's number and its history of balance changes. Includes date of balance change, the type of activity precipitating the change, and the amount of the change.
+- **Balance**: Current balance remaining on card.
+- **Quick Action Button**: Provides a set of quick actions that varies with the card's status:
+  - **Adjust Balance**, which modifies a card's monetary balance.
+  - **Expire**, which expires a card.
+  - **Transfer Balance**, which transfers points from one card to another.
+  - **Report Lost/Stolen**, which reports a card as either lost or stolen.
+  - **Report Card Found**, which reports a card as found.
+  - **Confirm as Stolen**, which confirms a card as stolen.
+  - **Remove from Account**, which removes a card from the member's SVC wallet.
+
+See [Manage Stored Value Cards](/customers/manage/manage-stored-value-cards) for more information.
+
+## Campaign information
+
+View active campaigns targeting this member. The Completed sub-tab displays all the campaigns the member has previously engaged with and completed. Active and completed campaigns contain the following information:
+
+- **Status**: Status associated with the campaign, such as "Eligible" and "In Progress."
+- **Name**: Name of campaign.
+- **Campaign Type**: Type of campaign, such as "Promotion," "Messaging," and "Loyalty Rule."
+- **Campaign Start Date**: Date that campaign became active.
+- **Campaign End Date**: Date that campaign becomes inactive.
+
+For "Active" campaigns, you can click the **quick action button** on the right to move a campaign to the Completed sub-tab with a status of "Completed."
+
+## Offer information
+
+View the offers issued, redeemed, expired or available for the member.
+
+### Issued
+
+Lists all offers issued to this member. Use the quick action button on the right to assist a member:
+
+- **Mark as Redeemed** - Redeems the offer on behalf of the member. This field is not used for ACCR.
+- **Revoke and Exclude** - Revokes the offer from the member's wallet and returns it to inventory.
+- **Change Redemption Dates** - Overrides the redemption dates of an offer, allowing it to be redeemed after the original redemption date has expired.
+- **Update User Offer FlexField** - Adds meta data to the offer if needed by another system. Not likely to be used ACCR.
+
+### Available
+
+Lists all active offers in the Offers module that can be issued to a member. Use the **quick action button** on the right to issue an offer to a member, making it immediately available in the member's wallet and listed on the Issued tab.
+
+### Redeemed
+
+Lists all offers redeemed by this member. Use the **quick action button** on the right to return a redeemed item to the Issued state, allowing it to be shown again in the member's wallet. For example, if the offer were consumed for a transaction, but the transaction was later canceled.
+
+### Expired
+
+Lists all offers issued to a member that have expired due to the rules of the offer.
+
+## Notes
+
+Add or edit a note associated with a member's account. You can also see a history of the notes on the account and the platform users responsible for adding or updating the notes. See [Add Note to Customer Profile](/customers/manage/add-note-to-customer-profile) for more information.

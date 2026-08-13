@@ -1,0 +1,177 @@
+---
+title: "SMS Validation API"
+description: "Verify phone ownership so customers can opt in to receive loyalty program messages through SessionM."
+---
+
+<Callout kind="warning">
+  The SMS Validation API is no longer supported for new integrations.
+</Callout>
+
+The SMS Validation API contains two new complementary routes that work together to allow clients to verify phone ownership, which is necessary for opting in to receive messages about their loyalty programs through SessionM.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  You must create a customers before sending a code to that customer. Use the [Standard Profile API](/developer/customers/customer-profile-apis#standard-profile-api) to create customers and specify profile attributes.
+</Callout>
+
+This API has the following methods:
+
+- [Create an SMS Validation Request](#create-an-sms-validation-request)
+- [Create an SMS Validation Confirmation](#create-an-sms-validation-confirmation)
+
+## Create an SMS Validation Request
+
+Creates an SMS validation request for either a mobile device or a Web form. The client application sends a request to the endpoint shown below. Doing so, logs the customer's phone into our system and sends a message to the customer's phone with a code that is used in the confirmation endpoint detailed in [Create an SMS Validation Confirmation](#create-an-sms-validation-confirmation).
+
+Important to note that this API cannot send a validation request unless a global SMS campaign exists and the opt-in keyword for that global campaign is "YES".
+
+### Endpoints
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/messaging_events/sms/validation/request
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform. Necessary to authenticate any HTTP request to a SessionM API. The key is associated with an API secret, which ties the authentication to a specific application or web site within the organization. The SessionM Platform maintains each application or site as a digital property, which can be configured using the SessionM UI. |
+
+### Request Object
+
+This method supplies the SMS request validation object shown below:
+
+**JSON Request**
+
+```json
+{
+    "external_id": "twiliofeb211",
+    "to_phone_number": "13139711649",
+    “message_text”: “Some message text prefixing validation code in sms: ”
+}
+```
+
+**Request Attributes for SMS Validation Request**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *external_id* | string<br />required | External ID for customer. |
+| *to_phone_number* | string<br />required | Phone number being used to validate customer. |
+| *message_text* | string<br />optional | Whatever text you deem appropriate. "Validation Code: " is default. |
+
+### Response Object
+
+This method returns the response object shown below:
+
+**JSON Response**
+
+```json
+{
+    "status": "OK"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code and a string that indicates *ok*. However, when the string returned is *error*, returned errors can be either method-specific or generic.
+
+This method can return a few different 400-level errors in the following format:
+
+```json
+{
+    "status": "Bad Request",
+    "message": "Message text for error"
+}
+```
+
+Possible message text is detailed in this table:
+
+| Code | Reason |
+|---|---|
+| *"required parameter `to_phone_number` missing"* | Customer's phone number is missing. |
+| *"required parameter `validation_code` missing"* | Customer's validation code is missing. |
+| *"Invalid validation code"* | Validation code provided is not valid. |
+
+For information on the generic statuses and errors returned for any object, see [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Create an SMS Validation Confirmation
+
+Creates a confirmation for an SMS validation request pertaining to either a mobile device or a Web form. Once the validation request is sent to get the customer's phone number logged into the SessionM system, a message with a code is sent to the customer's phone. That code is used in the endpoint detailed below to confirm the customer's phone.
+
+### Endpoints
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/messaging_events/sms/validation/confirm
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform. Necessary to authenticate any HTTP request to a SessionM API. The key is associated with an API secret, which ties the authentication to a specific application or web site within the organization. The SessionM Platform maintains each application or site as a digital property, which can be configured using the SessionM UI. |
+
+### Request Object
+
+This method supplies the SMS request validation object shown below:
+
+**JSON Request**
+
+```json
+{
+    "external_id": "twiliofeb211",
+    "to_phone_number": "13139711649",
+    "validation_code": "383ue73733eee"
+}
+```
+
+**Request Attributes for SMS Validation Confirmation**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *external_id* | string<br />required | External ID for customer. |
+| *to_phone_number* | string<br />required | Phone number being used to validate customer. |
+| *validation_code* | string<br />required | Validation code received on the mobile device. |
+
+### Response Object
+
+This method returns the response object shown below:
+
+**JSON Response**
+
+```json
+{
+    "status": "OK"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code and a string that indicates *ok*. However, when the string returned is *error*, returned errors can be either method-specific or generic.
+
+This method can return a few different 400-level errors in the following format:
+
+```json
+{
+    "status": "Bad Request",
+    "message": "Message text for error"
+}
+```
+
+Possible message text is detailed in this table:
+
+| Code | Reason |
+|---|---|
+| *"required parameter `to_phone_number` missing"* | Customer's phone number is missing. |
+| *"required parameter `validation_code` missing"* | Customer's validation code is missing. |
+| *"Invalid validation code"* | Validation code provided is not valid. |
+
+For information on the generic statuses and errors returned for any object, see [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

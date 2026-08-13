@@ -1,0 +1,122 @@
+---
+title: "October 2022 Release Notes"
+description: "SessionM platform release notes for October 2022 (release version 2022.6)."
+---
+
+**DETAILS**
+
+| Release to Staging | Release to Production | Release Version |
+|---|---|---|
+| October 3 - 5, 2022 | October 17 - 18, 2022 | 2022.6 |
+
+*No downtime is required for the release.*
+
+## Customer Data Activation
+
+### Improved Campaigns Tab in the Insights Module
+
+We’ve updated and improved the information available on the Campaigns tab in the Insights module, allowing you to effectively generate insights about campaign performance and inform future campaign designs. Key improvements include:
+
+- Overview of engagements, completions and points awarded information per campaign and per achievement.
+- Engagement count over time, with daily aggregation.
+- Completion count over time, with daily aggregation.
+- Points awarded over time, grouped by achievement, with daily aggregation .
+- Overview of attributable transactions, aggregated by channel.
+- Attributable transactions over time, aggregated by channel.
+- Full overview of campaign metrics, including completions, engagements, unique completions, attributable transactions, etc.
+- Filtering of visuals by campaign, status, campaign type, and date range.
+
+### SalesForce Service Cloud, Tahoe, Version 2.5
+
+**Enhancements:**
+
+- Added the ability to customize which fields to display when viewing individual offers in the Available Offers, Issued Offers, Redeemed Offers, Expired Offers, or Reward Store component by populating the “Display Fields“ field in the component configuration. Any number of offer fields or user offer fields (where applicable) can be displayed, including custom_data. Please consult the [Admin Guide's Appendix A](https://docs.sessionm.com/integrations/SessionM_Loyalty_for_Service_Cloud_Admin_Guide_v2.pdf) for a full list of available fields.
+- Added the ability to extend offer redemption dates with a new button, “Edit Duration,“  for each offer in the Issued Offers component.
+- Updated the Activity Timeline component to allow a custom number of items to load by using the “Number of Timeline“ items field in the component configuration. This is especially useful when the timeline templates in SessionM are heavier and loading a high number of items can hit the Exceeded Max Size limit in Salesforce.
+
+**Fixes:**
+
+- Fixed a bug causing the Salesforce to SessionM customer sync to throw an error if the existing configuration in the subscriber org triggered multiple parent record (Account/Contact) updates and the auto sync with SessionM was enabled.
+- Fixed a bug causing the Reward Store component to throw an error if the reward store was not activated in SessionM.
+
+### Improvements
+
+**POS Cloud API** - We now support using the Business Defined Object with our Send Transaction API, allowing you to ingest a fully-defined schema to the transaction domain.
+
+### Bug Fixes
+
+**Catalog**
+
+- Large catalogs (those greater than 100,000 items) were displaying incorrect pagination. In order to fix the issue without adding a performance impact on large catalogs, we now show an approximate number of total items, rather than the exact number.
+- Fixed an issue where running Catalog ingest with large catalogs containing many categories was running out of memory. Note: It is recommend that when running the ingest you not use the catalog until the ingest is complete.
+
+**Insights** - The arrow indicating which tab is active and being viewed was stuck on the first tab. Until the issue can be fixed, the arrow has been removed to avoid confusion.
+
+## Personalized Engagement
+
+### New "Look Forward" Setting for Opt-In Campaign Evaluation
+
+Historically, campaigns that require Opt-In for participation would honor any customer activity that occurred during the Campaign Runtime window, as long as the customer opted into the campaign at some point before it ended.
+
+We're introducing a setting that will allow you to change how your campaigns evaluate customer activity when Opt-In is required. Using this new setting, you can tell your campaigns to only honor the customer activity that is processed **after** the customer opts-in to the campaign.
+
+This setting applies to all campaigns, so you can't choose to enable this evaluation logic for select campaigns.
+
+*Please contact your customer success representative if you would like to enable this new setting for your campaigns.*
+
+### Bug Fixes
+
+**Customers** - Fixed a bug where the "View Details" button in the Campaigns tab of a customer's profile didn't work. It will now correctly take you to the Campaigns module for the specific campaign selected.
+
+**Campaigns**
+
+- Fixed a bug affecting the point award calculation logic. Previously, transactions containing $0 subtotal items but *non-zero* discount amounts with null `discounted_line_id` would sometimes break the point award calculation logic. Now, the logic will sort items from greatest to least by subtotal first, then start to subtract the discount amounts away in the same order.
+- Fixed a bug where users created using the "Upsert" setting would intermittently see a profile partially created, resulting in scenarios like a profile existing but the API returning 500 and/or the "__platform.user.created" event not firing.
+- Fixed a bug where users with a February 29th (Leap year) birthday were not included in monthly birthday audiences.
+- Fixed an issue with the SKU Picker where last updated date was not being shown.
+- Fixed an issue where the “Total Number of Times” restriction was applying a default restriction of 90 days but not showing that on the UI. This has been fixed so the default is “anytime.” **Note:** for pre-existing campaigns, the previous default of 90 days still applies, but will now show in the UI and can be updated to another value if necessary.
+
+## Loyalty And Offers
+
+### Updated the Rounding Selections for the “Point Per $ Spent Outcome”
+
+The names of the rounding choices offered when setting up a “Point Per $ Spent Outcome” in an Economy Rule were confusing and have been updated for clarity. Specifically, the value of “None” didn’t operate the way customers expected. We have renamed that option to better describe how it functions, and then added a new choice that does not round at all. Below are the updated choices and how they function.
+
+*In the examples below, we are assuming the PointEconomyDecimalPlaces configuration value has been set to 2 and that we are awarding 1 point per $1 spent.*
+
+- **Round Up (Configured decimal)** – “10.777” becomes “10.78”
+- **Round Down** - “10.777” becomes “10”
+- **Round Up (whole number)** – “10.333” becomes “11”
+- **Round Up 5** – “10.777” becomes “11” whereas “10.444” becomes “10”
+- **None** – “10.777” becomes “10.77”
+
+**NOTE:**  The original choice of “None” was renamed to “Round Up (Configured decimal)” to preserve all existing outcome rules. A new choice named “None” was added with the rounding behavior expected for that label.
+
+### Improvements
+
+**Reward Store API** - Added a parameter to the `/get_reward_store_offers` endpoint called `only_in_stock` that lets you decide if you want to remove an offer once the Global Inventory Setting limit is reached. When the parameter is not sent or set to false, which is the default value, then all offers will be returned, even if there's no more inventory. Setting the parameter to true will only return offers for which there is still inventory available.
+
+### Bug Fixes
+
+**Offers API**
+
+- Fixed bug that was causing the `/get_user_offers` endpoint to return a 500 error whenever a negative value was passed in the “take” parameter. A negative value in the “take” parameter is now defaulting to the value of “1000” and returning results.
+
+**Loyalty API**
+
+- Fixed an issue that was causing users to be in more than one tier at a given time preventing us from determining which tier the user was really assigned to.
+- Fixed a bug that was causing the /spend endpoint to sometimes return a 500 error on insufficient points. This is now fixed, and the endpoint is now consistently returning a 400 error on insufficient points.
+
+## Platform Wide
+
+### Enhancements to the Catalog SKU Picker
+
+We’ve added the following enhancements to the latest version of our Catalog SKU Picker:
+
+- **Display Item Hierarchy in Search Results** - The hierarchy of all search results are visible to know what the parent of each search result is. This is done by clicking on an icon next to the search result that will bring up a tooltip that will show the path to that item. The full path is displayed, with each level of the path separated by a carrot symbol.
+- **Show Item Selection Count in Selected Column** – We implemented a feature to show the total selected item count in the SKU picker UI. This number should display in the header of the “Selected” column.
+- **Search By Multiple SKUs** – We introduced a possibility to enter multiple SKUs into the search field and have all of them searched on and return results. This only applies to the External ID search fields and not to any other fields. The values are separated by spaces and each value is shown in the results.
+
+### Bug Fixes
+
+**Store Management Access** - Fixed an issue that was preventing access to the Store Management module for customers. Now, anyone with the correct permission settings can view this module but cannot perform any actions that change store records.

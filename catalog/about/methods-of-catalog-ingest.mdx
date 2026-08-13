@@ -1,0 +1,38 @@
+---
+title: "Methods of catalog ingest"
+description: "The ways catalogs can be uploaded into the SessionM Platform — SM Sync, the Upload Catalog API and the Upload Catalog File API."
+---
+
+Catalogs can be uploaded into the SessionM Platform in a variety of ways. The usefulness of these paths can vary depending on a number of factors, including the structure of the catalog, the size of the data, and the relevant use cases. Upload options include:
+
+- **_SM Sync_** - JSON File importer that ingests catalog data and transmits to Catalog domain. Most useful with flat file catalogs. Capable of ingesting multiple store catalogs during one upload. This method is useful for the disparate catalog scenario and when there is no means to automate the ingest of multiple stores automatically.
+
+- **_Upload Catalog API_** - Direct endpoint into Catalog domain for uploading a single store's catalog per JSON API call. Most commonly used in direct POS integrations in which a disparate catalog scenario exists. Limited to less than or equal to 10K items in a catalog.
+
+- **_Upload Catalog File API_** - Direct endpoint into Catalog domain for uploading a single store's catalog per multiple CSV files. This method allows catalogs of any size to be transmitted in a split format of item, category, and relationship CSV files simultaneously. It is useful for both scenarios and when there is the means to automate the ingest of multiple stores (for the disparate catalog scenario) automatically.
+
+The following sections will elaborate on each ingest method and provide examples on how to properly structure data for successful ingest.
+
+## SM Sync catalog ingest
+
+SM Sync functions as a JSON file importer that is able to take in catalogs for multiple stores within one single file and transmit the information into the Catalog Management tool. In order to leverage this tool, catalog data must be structured in the pre-defined SM Sync format before upload. For more information, consult [SM Sync documentation](https://docs.sessionm.com/developer/Technical%20Docs/data_administration.htm).
+
+Once the file has been uploaded to SM Sync, it will be sent to the catalog processing queue for ingestion. After successful ingestion, the catalog should appear within the Catalog Management Module under the applicable store(s).
+
+Note - An indicator of "Success" within the SM Sync tool reports that the catalog was successfully loaded into SM Sync, transmitted to the Catalog Domain and successfully queued for processing. The "Success" metric does not mean that the catalog was successfully ingested into the Catalog Management tool.
+
+## Upload Catalog API
+
+The Upload Catalog API endpoint is most frequently leveraged during direct POS integrations, in which a catalog for a single store is transmitted directly to SessionM via API call. This endpoint can be implemented during a POS integration. This process should enable a call to the API whenever the store's catalog changes (either through a button push on the POS or automatically). For more information, see the [Upload Catalog API](https://docs.sessionm.com/developer/pos/#upload-catalog-api).
+
+While this path is typically leveraged directly through POS integration, this endpoint can be evoked for catalog upload during the integration process as long as these limitations are kept in mind:
+
+Each call to the API only supports the upload of a single store's catalog.
+
+This endpoint is only useful with catalogs on the smaller side of the spectrum (less than 10K items and categories) to avoid timeout during the data transmission/processing.
+
+Integrators looking to leverage this endpoint should refer to the API documentation above. Additionally, integration teams are provided with Postman examples during the Environment Standup process that should include this API call for further clarification.
+
+## Upload Catalog File API
+
+The Upload Catalog File API is a direct API route into the Catalog Domain within the SessionM Platform. The method leverages three distinct CSV files to be transmitted in as a representation of a catalog. These files are the catalog's items, categories, and relationships. Calling this API with the applicable CSV files triggers the creation of a store catalog based on the payload provided in the request. This upload approach is equipped to handle large size catalogs across verticals and implementation types, but requires the adoption of the three file CSV approach (as detailed in the documentation) to properly upload and function. For more information, consult your SessionM environment standup team.

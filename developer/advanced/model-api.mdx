@@ -1,0 +1,207 @@
+---
+title: "Model API"
+description: "Retrieve the attributes of a customer model and create organizational models, optionally scoped to a division."
+---
+
+This API uses *model* objects to facilitate the display of attributes for a specified model. Each model contains attributes that allow third-party systems to retrieve models and model attributes within the platform. These models can be fully developed in an external system and then passed to the platform. It is also possible to configure models natively within the platform and then allow any 3rd party system to retrieve or modify those models. Currently models are limited to 200 attributes per single model.
+
+The SessionM has implemented a model called *user_profiles*, which expresses data for a customers' custom profiles. This, however, is only one implementation. Ultimately, the Model API can be used to create models that represent any type of data.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  Since this model reflects the attributes defined for customers, you must create customers before you can access their associated model attributes. Use the [Standard Profile API](/developer/customers/customer-profile-apis#standard-profile-api) to create customer and specify the attributes for their standard profiles. Use the [Custom Profile API](/developer/customers/customer-profile-apis#custom-profile-api) to specify attributes for their custom profile.
+</Callout>
+
+This API supports the folllowig methods:
+
+- [Retrieve all the current attributes associated with a customer model](#retrieve-a-customer-model)
+- [Create an organization model](#create-an-organizational-model)
+
+## Retrieve a Customer Model
+
+Returns a single customer model, based on the provided model name. The model returned contains the associated custom profile.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/models/:model_name
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *model_name* | Identifier for an organization customer model in the SessionM Platform. For example: `GET /v1/apps/:api_key/models/user_profiles`. This is the default customer model for the SessionM Platform. An organization may have multiple models. |
+| *division_id* | Single ID of the division that the model is assigned to. Defined in the section of the configuration file enabling a Multi-org implementation. If this parameter is undefined, or if Multi-org is disabled, the ID will not be returned. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains a *model* object, which is shown below:
+
+**JSON Response**
+
+```json
+{
+    "model": {
+        "attributes": {
+            "nickname": {
+                "filters": [
+                    "Downcase"
+                ],
+                "length": {
+                    "maximum": 20,
+                    "minimum": 2
+                },
+                "list": false,
+                "type": "string"
+            },
+            "total_amount": {
+                "list": false,
+                "numericality": {
+                    "greater_than_or_equal_to": 0
+                },
+                "type": "integer"
+            }
+        },
+        "name": "user_profiles",
+        "request_key": "user_profile",
+        "version": "a79dd212-8b44-11e6-9a2f-322cc1d29f66",
+        "division_id": "gbr"
+    },
+    "status": "ok"
+}
+```
+
+The following table documents this object:
+
+**Response Attributes for Model**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *attributes* | object | Contains two "child" objects, *nickname* and *total_amount*. Each of these objects are client-defined custom attributes. For information on the rules governing attribute definition, see [Attribute Definition Characteristics](/developer/customers/customer-profile-apis#attribute-definition-characteristics). |
+| *name* | string | Name of the customer model. |
+| *request_key* | string | Identifier for the associated request object. |
+| *version* | string | Version of the customer model. |
+| *division_id* | string | Single ID of the division that the model is assigned to. Defined in the section of the configuration file enabling a Multi-org implementation. If this parameter is undefined, or if Multi-org is disabled, the ID will not be returned. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *not_found* | Indicates that the specified customer model was not found in the system. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Create an Organizational Model
+
+Creates an organizational model. Provides a division ID parameter when creating the model so that clients can assign models to a specific division when using the Model API. Note that the Multi-org feature must be enabled so that the division ID can be applied to a model; otherwise, the division ID is null or ignored.
+
+### Endpoints
+
+This method offers the following endpoint:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/models
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *model_name* | Identifier for an organization customer model in the SessionM Platform. For example: `GET /v1/apps/:api_key/models/user_profiles`. This is the default customer model for the SessionM Platform. An organization may have multiple models. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains the *model* object, as shown below:
+
+**JSON Request**
+
+```json
+    {
+        "model":{
+            "name": "model gbr",
+            "request_key": "model_gbr",
+            "display_name": "Model GBR",
+            "division_id": "gbr"
+        }
+    }
+```
+
+This object is detailed in the following table:
+
+**Request Attributes for Models**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *name* | string | Model name. |
+| *request_key* | string | Identifier for the associated request object. |
+| *display_name* | string | Alternative name that displays for the model. |
+| *division_id* | string | Single ID of the division that the model is assigned to. Defined in the section of the configuration file enabling a Multi-org implementation. If this parameter is undefined, or if Multi-org is disabled, the ID will not be returned. |
+
+Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains a *model* object, which is shown below:
+
+**JSON Response**
+
+```json
+    {
+        "status": "ok",
+        "model":{
+            "name": "model gbr",
+            "version": "728b3b12-a455-11f0-8ff9-5479ac11000d",
+            "request_key": "model_gbr",
+            "display_name": "Model GBR",
+            "division_id": "gbr"
+        }
+    }
+```
+
+The following table documents this object:
+
+**Response Attributes for Model**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *name* | string | Model name. |
+| *version* | string | Version of the customer model. |
+| *request_key* | string | Identifier for the associated request object. |
+| *display_name* | string | Alternative name that displays for the model. |
+| *division_id* | string | Single ID of the division that the model is assigned to. Defined in the section of the configuration file enabling a Multi-org implementation. If this parameter is undefined, or if Multi-org is disabled, the ID will not be returned. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *validation* | Can indicate the following:<ul><li>Value for name has already been taken.</li><li>Value for request key has already been taken.</li><li>Value for division ID is not one of the values. configured by multi_org_settings.</li></ul> |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

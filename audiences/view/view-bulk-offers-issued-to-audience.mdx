@@ -1,0 +1,35 @@
+---
+title: "View bulk offers issued to audience"
+description: "View status, issued counts, ineligible members and errors for the bulk offers issued to an audience on the Offer Issuance tab."
+---
+
+View information about the bulk offers that have been issued to an audience.
+
+## About this task
+
+Use the Offer Issuance tab to view the following data about bulk offers issued to an audience:
+
+- **Status**. Indicates whether the offer is in progress or completed.
+- **Offer**. Name of the issued offer
+- **Audience size**. Total size of target audience.
+- **Issued**. Number of offers that have been issued.
+- **Ineligible**. Count of members of target audience that were determined not to be eligible to receive this offer. You can download a CSV file that identifies ineligible members and the reason they are considered ineligible. The list of reasons follows:
+  - Personal frequency restriction exceeded. User can acquire up to a certain number of offers per unit time.
+  - Global frequency restriction exceeded. Retailer allows issuance of up to a certain number of offer per unit time across all users.
+  - Personal inventory restriction exceeded. User has reached their personal limit for this offer.
+  - Global inventory restriction exceeded. Global inventory for this offer has been reached.
+  - Retry limit exceeded. Offer issuance fails after the allowed number of retry attempts.
+  - Unhandled exception occurred while issuing offer.
+  - Issuance of another user offer failed, causing full rollback of all other issued user offers.
+  - Partial rollback of user offer caused child user offers to be rolled back.
+  - Wallet size restriction exceeded. User already has maximum number of offers in wallet.
+- **Errors**. Count of errors that occurred issuing the bulk offer. For example, if an invalid identifier is supplied for a member of the audience. You can download a CSV file that lists specific errors.
+- **Issued by**. SessionM platform user who issued the offer.
+- **Issued date**. Date the offer was issued.
+
+## Steps
+
+1. From the All Audiences view of the dashboard, select the desired audience.
+2. Select the **Offer Issuance** tab.
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/view_bulk_offers.PNG" width="1676" height="501" alt="Offer Issuance tab showing bulk offers issued to an audience" caption="" />

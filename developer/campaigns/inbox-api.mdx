@@ -1,0 +1,862 @@
+---
+title: "Inbox API"
+description: "Create, retrieve, update and delete application inbox notifications for a whole organization or a single customer."
+---
+
+Inbox objects create and send application inbox notifications that can be targeted to specific customers as well as, en masse, to the organization as a whole. Messages for customers are stored in a customer-specific inbox. They represent scheduled and targeted content of any kind: messaging, promotions, games and display advertising.
+
+The endpoints allow an organization to manage the typical procedural flow of notifications for its customers. In addition to messages being sent, they can be retrieved for display to customers; they can be updated and deleted; and, they can be marked "read".
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  - Before inbox messages can be sent, the customers receiving them must be created. Use the [Standard Profile API](/developer/customers/customer-profile-apis#standard-profile-api) to create customers and specify the attributes for their standard profiles.
+  - Inbox messages can be used to convey a variety of content designed to promote campaigns and loyalty program earning opportunities. For more information, see the following: [Campaigns API,](/developer/campaigns/campaigns-api) [Promo Code APIs](/developer/campaigns/promo-code-apis) or Rewards Store API.
+</Callout>
+
+This API provides the following methods:
+
+- [Create an organization inbox message](#create-an-organization-inbox-message)
+- [Update an organization inbox message](#update-an-organization-inbox-message)
+- [Retrieve organization inbox messages](#retrieve-organization-inbox-messages)
+- [Delete an organization inbox message](#delete-an-organization-inbox-message)
+- [Create a customer inbox message](#create-a-customer-inbox-message)
+- [Update a customer inbox message](#update-a-customer-inbox-message)
+- [Retrieve customer inbox messages](#retrieve-customer-inbox-messages)
+- [Delete a customer inbox message](#delete-a-customer-inbox-message)
+- [Bulk update customer inbox messages](#bulk-update-customer-inbox-messages)
+
+## Create an Organization Inbox Message
+
+Generates an inbox message for all customers in the organization.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/messages
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains the *message* object, which is the payload to create the message, as shown below:
+
+**JSON Request**
+
+```json
+{
+   "message":{
+      "subject":"Foo",
+      "external_id":"foo",
+      "image":"http://images.foo.com/sessionM_M.png",
+      "state":"live",
+      "weight":60,
+      "data":{
+         "body":"Body"
+      },
+      "metadata":{
+         "tag":"value"
+      },
+      "targeting":{
+         "user.gender":{
+            "#eq":"m"
+         }
+      }
+   }
+}
+```
+
+This object is detailed in the following table:
+
+<a id="message_request"></a>**Request Attributes for Message**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *subject* | string<br />required | Subject of the message. |
+| *external_id* | string<br />required | External message ID. Unique identifier to keep track of the message. |
+| *image* | string<br />optional | Valid URL of an icon to use for the message. Usually a square icon 50x50; or if handled by a developer, it can be any custom size. |
+| *state* | string<br />required | <p>State of the message:</p><p>Organization inbox message state, includes:<br /><em>live</em>, <em>preview</em></p><p>Customer inbox message:<br /><em>new</em>, <em>read</em>, <em>deleted</em></p> |
+| *weight* | integer<br />optional | <p>The amount of time in seconds to keep the message at the top of the list; supports selective prioritization of messages for promotions.</p><p>Default:<br />90</p> |
+| *expires_on* | datetime<br />optional | Expiration time when the message will no longer persist in the inbox. |
+| *data* | object<br />required | Body of the message specified in the *body* attribute. |
+| *metadata* | object<br />optional | Any additional metadata (key-value pairs) to add to the message; supports use of rich display. |
+| *targeting* | object<br />optional | Customer targeting settings such as gender. |
+
+### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *message* object, as shown below:
+
+**JSON Response**
+
+```json
+{
+   "status":"ok",
+   "message":{
+      "id":2,
+      "external_id":"foo",
+      "subject":"Foo",
+      "type":"inbox",
+      "state":"live",
+      "weight":60,
+      "data":{
+         "body":"Body"
+      },
+      "metadata":{
+         "tag":"value"
+      },
+      "targeting":{
+         "user.gender":{
+            "#eq":"m"
+         }
+      },
+      "created_at":"2016-10- 04 20:23:43",
+      "updated_at":"2016-10- 04 20:23:43"
+   }
+}
+```
+
+This object is detailed in the following table:
+
+<a id="message"></a>**Response Attributes for Message**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | integer | Message identifier. |
+| *external_id* | string<br />optional | External message ID. Unique identifier to keep track of the message. |
+| *subject* | string<br />optional | Subject of the message. |
+| *type* | string | Type of message, *inbox*. |
+| *state* | string | <p>State of the message:</p><p>Organization inbox message state, includes:<br /><em>live</em>, <em>preview</em></p><p>Customer inbox message:<br /><em>new</em>, <em>read</em>, <em>deleted</em></p> |
+| *weight* | integer | <p>The amount of time in seconds to keep the message at the top of the list; supports selective prioritization of messages for promotions.</p><p>Default:<br />90</p> |
+| *data* | object | Body of the message specified in the *body* attribute. |
+| *metadata* | object | Any additional metadata (key-value pairs) to add to the message; supports use of rich display. |
+| *targeting* | object | Customer targeting settings such as gender. |
+| *created_at* | datetime | The time the message was created. |
+| *updated_at* | datetime | The time the message was updated. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Update an Organization Inbox Message
+
+Updates an inbox message for all customers in an organization. One of the typical updates is setting the request object's *status* attribute to *read*.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+PUT /priv/v1/apps/:api_key/messages/:message_id
+PUT /priv/v1/apps/:api_key/external/messages/:external_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *message_id* | Internal identifier for the message. |
+| *external_id* | External message ID. Unique identifier for a message in an external system integrating with the SessionM Platform. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a [*message*](#message_request) object, as shown in two samples below:
+
+**JSON Request (Modify Message)**
+
+```json
+{
+   "message":{
+      "subject":"New Name"
+   }
+}
+```
+
+**JSON Request (Mark Message "Read")**
+
+```json
+{
+  "message":{
+    "state":"read"
+  }
+}
+```
+
+### Response Object
+
+In addition to a *status* key-value pair, this response object contains a [*message*](#message) object, as shown in the samples below:
+
+**JSON Response (Modified Message)**
+
+```json
+{
+   "status":"ok",
+   "message":{
+      "id":18,
+      "external_id":"foo",
+      "subject":"New Name",
+      "type":"inbox",
+      "state":"live",
+      "weight":0,
+      "data":{
+         "body":"body"
+      },
+      "metadata":{
+         "tag":"value"
+      },
+      "created_at":"2016-10- 03 16:53:19",
+      "updated_at":"2016-10- 05 16:55:07"
+   }
+}
+```
+
+**JSON Response (Message Marked "Read")**
+
+```json
+{
+    "message": {
+        "created_at": "2016-02-06T05:33:34Z",
+        "data": {
+            "body": "Test Body"
+        },
+        "expires_on": null,
+        "id": "2a2529ea-cc93-11e5-87bd-e59d3e4d1689",
+        "image": null,
+        "metadata": null,
+        "state": "read",
+        "subject": "Hello",
+        "type": "inbox"
+    },
+    "status": "ok"
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve Organization Inbox Messages
+
+Retrieves inbox messages for an organization; the endpoints can specify either all of the messages or one in particular. For example, adding the parameter *message_id* to the *GET /priv/v1/apps/:api_key/messages* endpoint retrieves the specified message.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/messages
+GET /priv/v1/apps/:api_key/messages/:message_id
+GET /priv/v1/apps/:api_key/external/messages/:external_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *message_id* | Returns just the specified message using the internal message ID. |
+| *external_id* | Returns just the specified message using the external message ID. |
+
+### Request Object
+
+When this method runs, it passes in a request object, as shown below:
+
+**JSON Request**
+
+```json
+{
+   "page": 1,
+   "limit": 1
+}
+```
+
+This object is detailed in the following table:
+
+**Request Attributes**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *page* | integer<br />optional | Page to return for organization message. Default is *1*. Example: *page=2*. |
+| *limit* | integer<br />optional | Maximum messages to receive for organization or customer inbox message. |
+
+### Response Object
+
+In addition to a *status* key-value pair, this object contains a *messages* array, as shown below:
+
+**JSON Response**
+
+```json
+{
+   "status":"ok",
+   "messages":[
+      {
+         "id":20,
+         "external_id":"foo2",
+         "subject":"Foo2",
+         "type":"inbox",
+         "state":"live",
+         "weight":0,
+         "created_at":"2016-10- 05 16:58:57",
+         "updated_at":"2016-10- 05 16:58:57"
+      }
+   ]
+}
+```
+
+This object is detailed in the following table:
+
+<a id="messages"></a>**Response Attributes for Messages**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | integer | Message identifier. |
+| *external_id* | string<br />optional | External message ID. Unique identifier to keep track of the message. |
+| *subject* | string<br />optional | Subject of the message. |
+| *type* | string | Type of message, *inbox*. |
+| *state* | string | <p>State of the message:</p><p>Organization inbox message state, includes:<br /><em>live</em>, <em>preview</em></p><p>Customer inbox message:<br /><em>new</em>, <em>read</em>, <em>deleted</em></p> |
+| *weight* | integer | <p>The amount of time in seconds to keep the message at the top of the list; supports selective prioritization of messages for promotions.</p><p>Default:<br />90</p> |
+| *created_at* | datetime | The time the message was created. |
+| *updated_at* | datetime | The time the message was updated. |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Delete an Organization Inbox Message
+
+Deletes inbox messages for an organization; the endpoints can specify either all of the messages or one in particular.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+DELETE /priv/v1/apps/:api_key/messages/:message_id
+DELETE /priv/v1/apps/:api_key/external/messages/:external_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *message_id* | Returns just the specified message using the internal message ID. |
+| *external_id* | Returns just the specified message using the external message ID. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a [*message*](#message) object, as shown below:
+
+**JSON Response**
+
+```json
+{
+    "message": {
+        "created_at": "2016-02-06T05:33:34Z",
+        "data": {
+            "body": "Test Body"
+        },
+        "expires_on": null,
+        "id": "2a2529ea-cc93-11e5-87bd-e59d3e4d1689",
+        "image": null,
+        "metadata": null,
+        "state": "deleted",
+        "subject": "Hello",
+        "type": "inbox"
+    },
+    "status": "ok"
+}
+```
+
+Note that if the message was successfully deleted, the *state* attribute in the response object is set to *deleted*.
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Create a Customer Inbox Message
+
+Generates an inbox message for a single customer in the organization.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/external/users/:external_id/messages
+POST /priv/v1/apps/:api_key/users/:user_id/messages
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *message_id* | Identifier for the specified message using the internal message ID. |
+| *external_id* | Identifier for a customer in an external system creating a message. |
+| *user_id* | Internal identifier for the customer whose messages are all being updated in bulk within the SessionM Platform. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a [*message*](#message_request) object, as shown below:
+
+**JSON Request**
+
+```json
+{
+   "message":{
+      "subject":"message_direct",
+      "image":"http://images.foo.com/sessionM_M.png",
+      "data":{
+         "body":"Body"
+      },
+      "metadata":{
+         "tag":"value"
+      }
+   }
+}
+```
+
+### Response Object
+
+In addition to a *status* key-value pair, this object contains a [*message*](#message) object, as shown below:
+
+**JSON Response**
+
+```json
+{
+   "status":"ok",
+   "message":{
+      "id":"9bc36976-8b11- 11e6-8932- 43f360cca317",
+      "subject":"message_direct",
+      "image":"http://images.foo.com/sessionM_M.png",
+      "data":{
+         "body":"Body"
+      },
+      "metadata":{
+         "tag":"value"
+      },
+      "state":"new",
+      "type":"inbox",
+      "created_at":"2016-10- 05T15:40:52Z"
+   }
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Update a Customer Inbox Message
+
+Updates an inbox message for a specified customer in an organization.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+PUT /priv/v1/apps/:api_key/external/users/:external_id/messages/:message_id
+PUT /priv/v1/apps/:api_key/users/:user_id/messages/:message_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *external_id* | Identifier for a customer in an external system updating a message. |
+| *message_id* | Message identifier. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform getting an updated message. |
+
+### Request Object
+
+When this method runs, it passes in a request object. This object contains a [*message*](#message_request) object, as shown below:
+
+**JSON Request**
+
+```json
+{
+   "message":{
+      "state":"read"
+}
+```
+
+### Response Object
+
+In addition to a *status* key-value pair, this object contains a [*message*](#message) object, as shown below:
+
+**JSON Response**
+
+```json
+{
+   "status":"ok",
+   "message":{
+      "id":"9bc36976-8b11- 11e6-8932- 43f360cca317",
+      "subject":"message_direct",
+      "image":"http://images.foo.com/sessionM_M.png",
+      "data":{
+         "body":"Body"
+      },
+      "metadata":{
+         "tag":"value"
+      },
+      "state":"read",
+      "type":"inbox",
+      "created_at":"2016-10- 05T15:40:52Z"
+   }
+}
+```
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve Customer Inbox Messages
+
+Retrieves inbox messages for a customer in an organization; the endpoints can specify either all of the messages or one in particular. For example, adding the parameter *message_id* to either the *GET /priv/v1/apps/:api_key/external/users/:external_id/messages* or the *GET /priv/v1/apps/:api_key/users/:id/messages* endpoint retrieves the specified message.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/external/users/:external_id/messages
+GET /priv/v1/apps/:api_key/external/users/:external_id/messages/:message_id
+GET /priv/v1/apps/:api_key/users/:user_id/messages
+GET /priv/v1/apps/:api_key/users/:user_id/messages/:message_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *external_id* | Identifier for a customer in an external system receiving a message. |
+| *message_id* | Message identifier. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform receiving a message. |
+
+### Request Object
+
+When this method runs, it passes in a request object shown below:
+
+**JSON Request**
+
+```json
+{
+   "limit": 29
+}
+```
+
+This object is detailed in the following table:
+
+**Request Attributes**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *limit* | integer<br />optional | Maximum messages to receive for organization or customer inbox message. |
+| *from* | string<br />optional | Customer inbox message time, or UUID. |
+
+### Response Object
+
+In addition to a status key-value pair, this object contains a [*messages*](#messages) array, as shown below:
+
+**JSON Response**
+
+```json
+{
+   "messages":[
+      {
+         "id":"38347820-8bdc- 11e6-82cb- b67a60cca317",
+         "subject":"message4",
+         "state":"new",
+         "type":"inbox",
+         "created_at":"2016-10- 06T15:47:43Z"
+      },
+      {
+         "id":"0db644d0-8b13- 11e6-803a- e8e460cca317",
+         "subject":"message2",
+         "state":"new",
+         "type":"inbox",
+         "created_at":"2016-10- 05T15:47:43Z"
+      }
+   ],
+   "pagination":{
+      "from":"e302804c-8a49- 11e6-89b1- 56cd60cca317"
+   },
+   "status":"ok"
+}
+```
+
+The second child object in the response is named *pagination*; this object contains the *from* attribute, which is a string that specifies the message time.
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Delete a Customer Inbox Message
+
+Deletes an inbox message for a customer in an organization.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+DELETE /priv/v1/apps/:api_key/external/users/:external_id/messages/:message_id
+DELETE /priv/v1/apps/:api_key/users/:user_id/messages/:message_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *external_id* | Identifier for a customer in an external system deleting a message. |
+| *message_id* | Message identifier. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform deleting a message. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+In addition to a *status* key-value pair, this object contains a [*message*](#message) object, as shown below:
+
+**JSON Response**
+
+```json
+{
+    "message": {
+        "created_at": "2016-02-06T05:33:34Z",
+        "data": {
+            "body": "Test Body"
+        },
+        "expires_on": null,
+        "id": "2a2529ea-cc93-11e5-87bd-e59d3e4d1689",
+        "image": null,
+        "metadata": null,
+        "state": "deleted",
+        "subject": "Hello",
+        "type": "inbox"
+    },
+    "status": "ok"
+}
+```
+
+Note that if the message was successfully deleted, the *state* attribute in the response object is set to *deleted*.
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Bulk Update Customer Inbox Messages
+
+Updates in bulk all of the messages specified in the associated array of request objects.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+PUT /priv/:api_version/apps/:api_key/users/:user_id/messages
+PUT /priv/:api_version/apps/:api_key/external/users/:external_id/messages
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_version* | Internal parameter that supports API versioning. |
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer whose messages are all being updated in bulk within the SessionM Platform. |
+| *external_id* | External identifier for the customer whose messages are all being updated in bulk in an external system integrating with the SessionM Platform. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a *messages* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+   "messages":[
+      {
+         "id":"38347820-8bdc- 11e6-82cb- b67a60cca317",
+         "state":"read"
+      }
+   ]
+}
+```
+
+This object's attributes are documented in the following table:
+
+**Request Attributes**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *id* | integer<br />required | Message identifier. |
+| *state* | string<br />required | <p>State of the message:</p><p>Organization inbox message state, includes:<br /><em>live</em>, <em>preview</em></p><p>Customer inbox message:<br /><em>new</em>, <em>read</em>, <em>deleted</em>.</p> |
+
+### Response Object
+
+In addition to a status key-value pair, this object contains a [*messages*](#messages) array, as shown below:
+
+**JSON Response**
+
+```json
+{
+   "messages":[
+      {
+         "id":"38347820-8bdc- 11e6-82cb- b67a60cca317",
+         "subject":"message4",
+         "state":"new",
+         "type":"inbox",
+         "created_at":"2016-10- 06T15:47:43Z"
+      },
+      {
+         "id":"0db644d0-8b13- 11e6-803a- e8e460cca317",
+         "subject":"message2",
+         "state":"new",
+         "type":"inbox",
+         "created_at":"2016-10- 05T15:47:43Z"
+      }
+   ],
+   "pagination":{
+      "from":"e302804c-8a49- 11e6-89b1- 56cd60cca317"
+   },
+   "status":"ok"
+}
+```
+
+The second child object in the response is named *pagination*; this object contains the *from* attribute, which is a string that specifies the message time.
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The SessionM Platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *message_not_found* | Customer message not found. Bad message ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

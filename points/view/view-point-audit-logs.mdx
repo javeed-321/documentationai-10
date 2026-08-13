@@ -1,0 +1,44 @@
+---
+title: "View point audit logs"
+description: "View and filter changes to point accounts and sources for points spent or earned — useful for troubleshooting and validation."
+---
+
+View changes to point accounts and sources related to points spent or earned. Useful for troubleshooting, testing and validating your system.
+
+## Steps
+
+1. From the main SessionM dashboard, select **Points Management**.
+2. Select **Point Audit Logs**.
+
+The Point Audit Logs tab displays detailed information, as described below.
+
+## Detailed information
+
+You can filter the data by the following parameters:
+
+- **Date Range** – Choose pre-selected time period — last 7 days, last 30 days, last month, this month — or set your own custom date range.
+- **Point Account** – Choose the point accounts you want to view.
+- **Point Source** – Choose the point sources you want to view.
+- **Transaction Type** – Select the type of transactions you want included in the report, such as Point Issuance, Point Redemption, or Point Transfer.
+- **User ID** – If you want to see behaviors for a specific customer, enter her User ID.
+- **Reference ID** – ID for the source system responsible for the point activity. For example, buying a reward from a store would display the offer ID as the Reference ID. If you have a specific Reference ID for which you want to view activity, enter it here.
+
+A table of results appears below the filters. The table contains all the fields from the search criteria, plus the following:
+
+- **Point Audit Log ID** – Unique ID associated with the entry in the audit log.
+- **Modification** – Shows movement of points in a point account. Earned points are represented with a positive number, deductions are represented with a negative number. For example "-50" is a deduction of 50 points.
+- **Amount Spent** – Indicates if any of the added points (shown in the Modification column) have been spent. This field only has a value when the Modification is a positive number.
+- **Amount Expired** – Indicates if any of the added points (shown in the Modification column) have expired, based on existing point expiration policies. As with Points Spent, this field only has a value when the Modification is a positive number.
+
+  <Callout kind="info">
+    When the Amount Spent value and the Amount Expired value add up to the Modification value, all the points associated to that audit log entry have been consumed.
+  </Callout>
+
+- **Reference Type** – Summary of the type of point transaction.
+  - **INCENT.Outcomes** – When points originate from a loyalty rule evaluation.
+  - **Behavior** – When points originate from a campaign.
+  - **Manual Point Adjustment (Add)** - When points are added manually by a service rep at your company.
+  - **Manual Point Adjustment(Deduct)** - When points are deducted manually by a service rep at your company.
+  - **custom** – When points force spend is executed.
+  - **REWARD_STORE** - When points are spent in a reward store.
+- **Time of Occurrence** – Time the transaction occurred, displayed in UTC.

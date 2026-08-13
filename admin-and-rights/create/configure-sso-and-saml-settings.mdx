@@ -1,0 +1,32 @@
+---
+title: Configure SSO and SAML settings
+description: >-
+  Configure single sign-on and SAML settings for an SSO provider from the Admin
+  & Rights module, including the identity provider certificate.
+---
+SessionM supports single sign-on (SSO) authentication schemes, which allow users to log on to the SessionM Platform with a single ID and password to any related but separate software systems. From the Admin & Rights Module, you can access the SSO & SAML page to configure and manage SSO and Security Assertion Markup Language (SAML) settings for an SSO provider.
+
+## About this task
+
+One of the important items that the client must provide to enable services from an SSO provider is the identity provider certificate, which should be formatted as an armored x509 certificate.
+
+<Expandable title="View Sample" default-open="false">
+  ```typescript wrap="true"
+  -----BEGIN CERTIFICATE----- MIIDXTCCAkWgAwIBAgIJALmVVuDWu4NYMA0GCSqGSIb3DQEBCwUAMEUxCzAJBgNV BAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEwHwYDVQQKDBhJbnRlcm5ldCBX aWRnaXRzIFB0eSBMdGQwHhcNMTYxMjMxMTQzNDQ3WhcNNDgwNjI1MTQzNDQ3WjBF MQswCQYDVQQGEwJBVTETMBEGA1UECAwKU29tZS1TdGF0ZTEhMB8GA1UECgwYSW50 ZXJuZXQgV2lkZ2l0cyBQdHkgTHRkMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIB CgKCAQEAzUCFozgNb1h1M0jzNRSCjhOBnR+uVbVpaWfXYIR+AhWDdEe5ryY+Cgav Og8bfLybyzFdehlYdDRgkedEB/GjG8aJw06l0qF4jDOAw0kEygWCu2mcH7XOxRt+ YAH3TVHa/Hu1W3WjzkobqqqLQ8gkKWWM27fOgAZ6GieaJBN6VBSMMcPey3HWLBmc +TYJmv1dbaO2jHhKh8pfKw0W12VM8P1PIO8gv4Phu/uuJYieBWKixBEyy0lHjyix YFCR12xdh4CA47q958ZRGnnDUGFVE1QhgRacJCOZ9bd5t9mr8KLaVBYTCJo5ERE8 jymab5dPqe5qKfJsCZiqWglbjUo9twIDAQABo1AwTjAdBgNVHQ4EFgQUxpuwcs/C YQOyui+r1G+3KxBNhxkwHwYDVR0jBBgwFoAUxpuwcs/CYQOyui+r1G+3KxBNhxkw DAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAAiWUKs/2x/viNCKi3Y6b lEuCtAGhzOOZ9EjrvJ8+COH3Rag3tVBWrcBZ3/uhhPq5gy9lqw4OkvEws99/5jFs X1FJ6MKBgqfuy7yh5s1YfM0ANHYczMmYpZeAcQf2CGAaVfwTTfSlzNLsF2lW/ly7 yapFzlYSJLGoVE+OHEu8g5SlNACUEfkXw+5Eghh+KzlIN7R6Q7r2ixWNFBC/jWf7 NKUfJyX8qIG5md1YUeT6GBW9Bm2/1/RiO24JTaYlfLdKK9TYb8sG5B+OLab2DImG 99CJ25RkAcSobWNF5zD0O6lgOo3cEdB/ksCq3hmtlC/DlLZ/D8CJ+7VuZnS1rR2n aQ== -----END CERTIFICATE-----
+  ```
+</Expandable>
+
+## Steps
+
+1. On the Admin & Rights 2.0 dashboard, under Platform Configurations, click **SSO & SAML**. A page containing the necessary platform settings that support SSO and SAML opens.
+2. On this page, specify values in the following fields:
+   1. **Entity ID**, which is the name, or URL, for the client's service.
+   2. **SSO URL**, which is the redirect URL when starting a request to authenticate a user.
+   3. **User Properties**, which are the IdP (Identity Provider) user properties rendered in JSON format.
+   4. **Certificate**, which is the certificate for the ID provider - formatted as an armored X509 certificate. For more information, see the discussion above.
+3. Then consult your SessionM integration engineer to obtain the appropriate values for these two fields:
+   1. **Entity ID**, which is the SessionM service. Typically, the URL of the SMP deploy.
+   2. **Assertion Consumer Service URL**, which is the URL where the SessionM Platform receives the SAML redirect from the client's IdP.
+4. Click **Save**.
+
+The SSO provider has been configured.

@@ -1,0 +1,38 @@
+---
+title: "Introduction"
+description: "How the SessionM Platform exposes its capabilities through a collection of REST APIs powered by JSON over HTTP."
+---
+
+SessionM integrates marketing automation and data management capabilities with loyalty marketing to drive personalized customer relationships through the mobile device and across channels.
+
+Central to the SessionM Platform is its collection of REST APIs. Powered by JSON data over HTTP, the APIs support both server-to-server and client-to-server transactions.
+
+For the most part, the SessionM APIs are designed to submit customer-related data to the platform, performing a set of transactions on the data for a specific customer and returning the associated results. The operations, or methods, available in each API utilize JSON requests to call a resource's URI and elicit a JSON response.
+
+These responses may confirm that some alteration has been made to the stored resource, and they may provide hypertext links to other related resources or collections of resources. Using HTTP, the kind of operations available include those predefined by the HTTP verbs GET, POST, PUT, DELETE.
+
+The platform is driven by rules that define customer actions and trigger outcomes for those actions; many are simple in nature, while others are more subtle and complex. A simple case would be a customer clicking an icon in an application and triggering the display of a message. A more complex case would be performing logical operations to express complex rules, related to digital engagement, purchase or location data.
+
+These rule sets can be configured within the SessionM Platform via the web-based administrative tool or through a managed service by which SessionM staff handle all configuration work based on client requests.
+
+Prior to implementing any platform APIs, it is important to work with your account representatives to fully understand your desired workflow and outcomes, as these impact the data that is returned in the API responses.
+
+If you want to utilize an API for managing the transactions that occur via a Point of Sale system, see our [POS API](/developer/pos). Note that this API is not designed to be used in conjunction with the SessionM Platform APIs detailed on this site.
+
+The SessionM Platform is comprised of four basic components when working with APIs:
+
+- **Services**
+
+  Comprise APIs. SessionM services hold and perform operations on objects.
+
+- **Objects**
+
+  Represent SessionM platform entities. Typically stored in a data store at rest; they are expressed as JSON objects.
+
+- **APIs**
+
+  Application Programming Interfaces. SessionM APIs allow client development teams to access methods that interface with services.
+
+- **REST Methods**
+
+  Essential offering of the SessionM API. Called to manipulate objects with operations that create (POST), retrieve (GET), update (PUT) and delete (DELETE) platform objects.

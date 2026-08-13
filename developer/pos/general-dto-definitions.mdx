@@ -1,0 +1,39 @@
+---
+title: "General DTO Definitions"
+description: "Data Transfer Object definitions for the requests and responses used across the POS APIs."
+---
+
+This section details the Data Transfer Object (DTO) definitions for the requests and responses associated with the POS APIs.
+
+## General Request Container
+
+The tables below describe the properties for required headers and the request body.
+
+**Required Headers**
+
+| Property | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *Authorization* | string<br />required | The BASIC authentication header with credentials (key/secret)  that are provided for the specific client and/or location. |
+| *Content-Type* | string<br />required | Specifies the content type of the request body. For all POS/ECom APIs this should be *application/json*. |
+
+**Request Body**
+
+| Property | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *store_id* | string<br />required | The SessionM provided store identifier for a specific location. |
+| *client_id* | string<br />required | The SessionM provided identifier assigned to the client. |
+| *request_id* | string<br />required | The unique ID of the request to enforce idempotency. (A given request will only be processed once. If a subsequent request is made with the same *request_id*, it will return the response when one had already been generated or if it bears an error code of "pending processing".) |
+| *culture* | string<br />optional | The culture to be returned for messages and display names. |
+| *request_payload* | object<br />required | The specific payload for the request. |
+
+## General Response Container
+
+The tables below describe the properties for the response body.
+
+**Response Body**
+
+| Property | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *status* | string<br />required | The status code for the response. For successful API calls, this will be "OK". |
+| *payload* | object<br />optional | The payload for the response. |
+| *errors* | object<br />optional | If status is not "OK", this property contains error details and validation details for the given API. |

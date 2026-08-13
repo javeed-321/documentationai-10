@@ -1,0 +1,105 @@
+---
+title: "View customer activity"
+description: "View the Activity, Point Audit, Tier Progress and Tags logs that show how a customer has engaged in your loyalty program."
+---
+
+View logs that show how a customer has engaged in your loyalty program, including: Activity, Point Audit, Tier Progress and Tags.
+
+## Steps
+
+1. Search and locate the customer. See [Search Customers](/customers/view/search-customer-profiles) for more information.
+2. Click the **Activity** tab. See Detailed Information below for more information.
+
+## Detailed information
+
+Beneath the Profile Header view, you can dig deeper into different kinds of information and activity associated with the customer. Organized into categories, the first tab shown (as your default view) is the Activity tab. Under this tab, there are multiple sub-categories that show the customer's engagement in your loyalty program.
+
+### Activity log
+
+The Activity Log sub-tab presents a real-time log listing data gathered across multiple customer touch points. For an introduction to the Activity Log sub-tab, see the [Activity Log section in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#Activity).
+
+It shows the customer's engagement throughout the history of their account. This stream serves as the _source of truth_ when analyzing the customer record. It also is the first place to triage a support request, verify recent account activity, and examine a customer's historical engagement with your brand.
+
+The Event Stream documents the date and time of the activity, along with the activity type. Any additional details that are specified can be seen in the Additional Details field. You can search the log and filter it by activity type.
+
+The stream has a number of processes in place to ensure a comprehensive customer view is surfaced within the Customer Profiles Module. These processes include:
+
+#### Event ingest
+
+Events flow into the SessionM platform in real time as a customer engages different facets of your loyalty program. Events can be streamed in through a number of ways, including:
+
+- **Flat File Ingest** – A common method of event data ingest is via flat file deliver to an agreed upon location.
+- **APIs** – The most common method of event data ingest, the SessionM APIs are available for various types of data models.
+- **SDKs** – Made available for a variety of platforms, including Javascript (Web), iOS, Android, and Xamarin.
+- **Point-of-Sale/Ecommerce Adapters** – Integration with various adapters for the ingest of purchase transactions and related information.
+
+When SessionM receives an event, the data is validated, matched to a customer record, and enriched with other attributes associated with the event.
+
+#### Event configuration
+
+The Event Stream configuration occurs during onboarding with the SessionM platform as client-side and SessionM integration teams assess all possible customer events and determine which should be displayed within the Customer Profiles Module.
+
+Individual event types are configured based on a schema specific to client preferences and the data available for the platform to leverage. SessionM's integration team works with clients to determine this schema.
+
+At a high level, the schema defines the following:
+
+- **Event Type** – Types of customer events that are captured and logged. The default selection of events within the SessionM Platform that can be auto-configured during integration includes:
+  - **Purchases** – Purchase made by customer along with relevant attributes (for example, purchase amount).
+  - **Offers** – Redemption of an offer by a customer.
+  - **Loyalty Rules** – Completion of a loyalty rule by a customer.
+  - **Loyalty Points** – Customer loyalty point transactions, including points earned, used, or comped by a customer care agent.
+  - **Tiers** – Customer tier activity, including promotion to a higher tier or dropping to a lower tier for lack of maintenance.
+  - **Promo Codes** – Claiming of a promo code by a customer.
+  - **Tags** – Appending a tag to the customer's profile based on certain behaviors or manually applied within the Customer Profiles Module
+- **Event Category** – Categories that each event rolls up into, such as "Purchase Related Events" or "Loyalty Tier Events."
+- **Platform View** – Templates for how each type of event is shown in the Activity Log of the SessionM Platform, including specified attributes and additional event details.
+
+#### Performance metrics
+
+Located within the Activity Log tab, the Performance Metrics section displays a number of data points showcasing where the customer stands in comparison to the rest of the customer base interacting with your brand.
+
+Metrics include:
+
+- **Customer Lifetime Value (CLV)** – A rank evaluating the customer's value as compared to the full customer base, powered by the projected revenue the customer will generate over their lifetime with the brand.
+- **Risk of Churn** – A rank evaluating the likeness that a customer will or will not return to a brand, established by examining historical transactions at an individual level to understand their "normal" behaviors and cadence.
+- **RFM Metrics** – Recency, frequency, and monetary spend information for the both the individual customer and compared to the median of the full customer base. Metrics can be toggled over a 7 day, 30 day, or account lifetime time frame.
+- **Product Affinities Widget** – A list of product recommendations along with related probability of purchase levels, established by deconstructing historical purchase data.
+- **Notes Widget** – Add a note to the customer's account from this default view, found below the Performance Metrics widget. It contains similar features as the Notes tab.
+
+### Point audit log
+
+The Point Audit Log sub-tab, found under the Activity tab, shows events specifically related to the customer earning or using loyalty points. The table allows for filtering by date and returns a list view of eligible responses. For an introduction to the Point Audit Log sub-tab, [see Point Audit Log in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#Point).
+
+### Tier progress: Added when using tiers and the Incentives domain
+
+The customer's tier status and the date when she advanced to that tier is listed on the Tier Progress sub-tab. It also includes information related to that specific tier as well as criteria for advancing to the next tier. This Tier Progress section displays in a drop-down that describes basic point information related to the next tier such as the current balance and the balance required to achieve the new tier, along with a short description of what that requirement entails.
+
+You can also see a log of tier-related events that indicates when a customer advanced to a specific tier or when she dropped to a lower tier.
+
+For an introduction to the Tier Progress sub-tab, see [Tier Progress in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#tier-progress).
+
+### Tiers: Added when using tiers and not using the Incentives domain
+
+If your program has a tier system, the customer's tier status and the date when she advanced to that tier is listed on the Tier sub-tab. It also includes information related to that specific tier as well as criteria for advancing to the next tier.
+
+You can also see a log of tier-related events that indicate when a customer advanced to a specific tier, progress towards next tier, or when the current tier status expires.
+
+### Tags: Added when tracking tags
+
+Under the Tags sub-tab, you can see a log that reflects all of the tags appended to the customer profile based on certain customer behaviors and events throughout their life cycle in your program. This section also allows you to manually add tags to the customer's profile that may be relevant to a customer support request. These tags can be used elsewhere in the platform to define a segment within the Audiences Module or target a certain subset of customers with campaigns, messages and offers based on the tag.
+
+**Tip**: You can create expiring tags in the platform by appending two semicolons and a "time to live" duration at the end of the tag. For example: _test_tag;;7days or test_tag;;48hours_.
+
+For an introduction to the Tags sub-tab, see [Tags in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#tags).
+
+### Rewards: Added when Tracking Outcomes
+
+The Rewards sub-tab gives you a view of the reward. For an introduction to the Rewards sub-tab, see [Rewards in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#rewards).
+
+### Promo codes: Added when using promo codes
+
+The Promo Codes sub-tab shows information for claimed codes, claim errors, lockout information and claim limiters. For an introduction to the Promo Codes sub-tab, see [Promo Codes in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#promo-codes).
+
+### Account audit log
+
+The Account Audit Log sub-tab allows you to audit the logged activities associated with a customer account. It supports the ability to integrate with various customer support ticketing systems, providing an interface for feeding in customer data that flows from your support ticketing system - data such as ticket status, type and date/time of its submission. For an introduction to the Account Audit Log sub-tab, see [Account Audit Log in About the Customer Profile](/customers/about/about-the-sessionm-customer-profile#account-audit-log).

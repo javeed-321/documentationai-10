@@ -1,0 +1,52 @@
+---
+title: "Create reward store"
+description: "Create a reward store that offers rewards redeemable with customer points, add offers to it, and optionally add custom data."
+---
+
+Create a reward store that offers rewards for sale, redeemable using a customer's rewards points. Customers can access multiple reward stores at the same time.
+
+## About this task
+
+Reward customers for their loyalty by giving them access to a reward store that contains offers targeted to specific members. Members can redeem offers or exchange point for rewards. Reward stores drive participation by promoting a higher level of participation from your members. SessionM provides you with the ability to build and configure a range of reward store types. Reward stores of an "exclusive" experience, one that can be used to motivate additional behaviors.
+
+For example, you can build reward stores that target specific members by offering rewards especially appealing to those members. Or you can build a reward store that includes rewards only available to members who have achieved a specific tier level, which is motivation to perform additional behaviors to attain these "exclusive" benefits.
+
+## Before you start
+
+Ensure that the:
+
+- Offers you intend to use have been [created](/offers/create/create-offer/overview) in the Offer Management module.
+- Point source you intend to use has been [created](/points/create/create-point-source) in the Point Management module.
+
+## Step 1. Create reward store
+
+1. From the Reward Store dashboard, click **Add Reward Store**.
+2. Specify a name for the reward store.
+3. Define the reward store's active period - when the store is available to customers. Specify dates and times for the start and end of the active period. Instead of an end date and time, you can enable **No End Date** to create an **_evergreen_** store - that is, a store that is available far into the future.
+4. Configure access to the reward store. By default, all customers have access. If you want to restrict access, enable **Limited** to see the types of limited access you can define: access by invitation and access by tier level. When you enable the Tier Level check box, a drop down opens, providing you with a selection of tiers.
+5. Identify the spendable point accounts from which the reward store can accept points. The reward store must be paired with a point account (or accounts) from which it can accept points. This assignment allows you to create a store that has a dedicated purpose, such as accepting only promotional points. Only selected point accounts can be used to buy items from the store.
+6. Click **Save** to save the reward store before you add offers to it.
+
+Once saved, the Edit Reward Store page reloads with an empty Reward Store Offers table.
+
+## Step 2. Add offers
+
+A reward store makes a collection of offers available to customers. To add an offer to the reward store, select it from a list of offers created for your brand in the Offer Management Module.
+
+1. Click **Add Offer** to list all offers available for the reward store.
+2. Find the offers you want to add from the Offers List and click their corresponding **add** links in the Actions column. Added offers appear in the Selected Offers section.
+3. When you have selected all the offers that you want, click **Save** to load the new offers into the Reward Store Offers table.
+
+Once an offer has been added to a reward store, you can customize that offer by changing the start/end dates or the price. Note the following tips about reward store offers:
+
+- You can add draft offers to the reward store but they do not appear until the offer is set to "Live" and the start date has passed.
+- Pay attention to offer dates. A "Live" offer with a start date still in the future does not appear in your store until that date arrives. Likewise, an offer with an end date earlier than your store's end date would be removed sooner than you may want.
+- If you add an offer to the reward store with a price of 0 points, it automatically appears as issued to all users with access to that reward store.
+
+## Step 3. Add custom data (optional)
+
+Custom data are additional attributes about the reward store that can be returned in API calls. Each attribute is defined by property and a value — a key-value pair — for the information you want to display.
+
+1. If you want to add custom data to the reward store, click **Edit** in the Custom Data section of the page.
+2. In the Edit Custom Data modal, define each attribute you want to add with a property and a value. When you are done, click **Update**. The new attributes display in the Custom Data table on the Edit Reward Store page.
+3. Click **Save**.

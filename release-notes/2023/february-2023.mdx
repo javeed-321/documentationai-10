@@ -1,0 +1,44 @@
+---
+title: February 2023 Release Notes
+description: SessionM platform release notes for February 2023 (release version 2023.2).
+---
+**DETAILS**
+
+| Release to Staging       | Release to Production         | Release Version |
+| ------------------------ | ----------------------------- | --------------- |
+| February 13 - 15, 2023\* | February 27 - March 1, 2023\* | 2023.2          |
+
+No downtime is required for the release. _Dates have been pushed back 5 days from original timeline._
+
+## Personalized Engagement
+
+### Bug Fixes
+
+- **Scheduled Messages**: Fixed an issue where the “Ends At” datetime configured for Scheduled Messages was being ignored and the Campaign Runtime End Datetime was used instead.
+- **Campaign Cache:** Improved Cache update process that was resulting in occasional issues with Campaigns requiring Opt-in.
+- **Offers updated after selected in Campaigns:** Fixed an issue where Offer data stopped returning in the Campaigns API if an Offer was modified after being initially configured as an outcome of a Campaign.
+
+## Loyalty And Offers
+
+### Additional controls on the Point Expiration process
+
+We’ve improved the level of control you have when setting a point expiration policy in the Point Management module. You can now set a precise time to determine which points will qualify for expiration when the expiration job runs. Previously, a hardcoded time of midnight UTC was used; that value will continue to be the default value in this field unless you update it.
+
+<Image src="https://docs.sessionm.com/Resources/Images/release_notes/ExpireTime.gif" width="550" height="301" alt="Additional controls on the Point Expiration process screenshot" caption=" " style="width: 550px; height: auto; cursor: pointer; margin: 0 auto;" />
+
+### Improvements
+
+- Enabled free reward store offers (that is, offers that require 0 points) to be redeemed using Cloud POS APIs.
+
+### Bug Fixes
+
+- Corrected Swagger for endpoints `/api/1.0/point_accounts/activate_point_account` and `/api/1.0/point_accounts/deactivate_point_account`. Prior to the change, Swagger incorrectly stated that the ExpirationPolicy parameter is included in the response. This has been fixed with added comments that clarify that the ExpirationPolicy parameter is not returned in the response.
+
+## Platform Wide
+
+### New navigation and header for the SessionM platform
+
+This release provides a clean new design for the side navigation panel and header, visible in all modules. You’ll find modules grouped in the same categories as they are on the homepage. In addition, you can collapse the side nav via the icon below the logo if you would like more screen real-estate. A preview of the new design is shown below:
+
+<Image src="https://docs.sessionm.com/Resources/Images/release_notes/Navigation-demo.png" width="650" height="597" alt="New navigation and header for the SessionM platform screenshot" caption=" " style="width: 650px; height: auto; cursor: pointer; margin: 0 auto;" />
+

@@ -1,0 +1,33 @@
+---
+title: "Reinstate Offer API"
+description: "Reinstate an offer after it has been redeemed through Immediate Redeem or a closed locked transaction."
+---
+
+Allows an offer to be reinstated after it has been redeemed. This needs to be used if the Immediate Redeem API was used or if the Lock Offer API was used and the transaction was closed. The response to this API is the [General Response](/developer/pos/general-dto-definitions#general-response-container) contract above, with no payload.
+
+For more information on this API's process flow, consult your Customer Success contact.
+
+## Endpoint
+
+This API offers the following endpoint:
+
+**REST Endpoint**
+
+```http
+POST /api/2.0/reinstate
+```
+
+## Endpoint Parameters
+
+Not applicable.
+
+## Request Object
+
+When this endpoint runs, it passes in an Reinstate Offer request object. When using this API, pass in the *request_payload* as the Reinstate Offer object, described in the following tables:
+
+**Request Properties for Reinstate Offer**
+
+| Property | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *user_offer_id* | string<br />required | User offer ID being reinstated.  Passed back as the reference ID to any prior offer lookup request for SessionM serviced offers. |
+| *employee_id* | string<br />required | Employee ID who triggered the action to reinstate the user offer. |

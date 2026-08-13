@@ -1,0 +1,215 @@
+---
+title: "Define behaviors"
+description: "Define the customer behaviors that trigger a campaign message or outcome, using campaign, engagement, purchase or custom events, or a template."
+---
+
+Define behaviors:
+
+- In messaging campaigns: after setting a triggered message. Behaviors are actions that, when performed by a member, trigger the delivery of the campaign's message.
+- In a promotional campaign: before defining the outcome. Behaviors are actions that, when performed by a member, trigger the presentation of an offer or award.
+
+You can define a new behavior for a campaign, or you can use a template that contains the definition of a behavior that you had defined previously.
+
+## About this task
+
+Defining a behavior can be simple or complex, depending on the number of rules associated with that behavior. Still, each behavior has the same attributes and is defined with the same core steps:
+
+1. Name the behavior.
+2. **Optional**. Apply a restriction to entire behavior.
+3. Add a rule to the behavior.
+4. Specify an event for the rule.
+5. Specify one or more restrictions for the event.
+6. Save the behavior as complete, add more rules to the behavior, or add a group to the behavior.
+
+### Specifying multiple rules within a behavior
+
+When defining more than one rule for a behavior, you need to indicate whether the behavior is considered complete if any (single) rule is completed, or if all rules must be completed. The "Any of these Events/All of these Events" toggle determines whether the rules within a behavior follow AND logic or OR logic. When AND logic is applied, each rule in the behavior must be completed independent of the other rules in the behavior.
+
+For example, if one rule is to spend $100 or more, and another rule is purchase shoes, the member 1) must purchase shoes (regardless of the amount spent) and 2) spend $100 or more on any product. The member does not have spend $100 on shoes to complete this behavior.
+
+<ExpandableGroup>
+  <Expandable title="Define behavior using campaign events" default-open="false">
+    Define a behavior triggered by a campaign event as the member action.
+
+    ## Before you start
+
+    For a messaging campaign, make sure that you have defined the messages triggered by this behavior. See [Add message](/campaigns/create/add-message/overview).
+
+    ## Steps
+
+    1. Access the behavior builder:
+       - For messaging campaigns, enable the **Triggered** delivery method on the Setup tab for the message, which expands the behavior builder fields on the existing page but does not provide an outcome builder.
+       - For promotional campaigns, click **Edit Behavior**, which opens a dedicated behavior builder page that includes an outcome builder.
+    2. Specify the name in **Set Behavior Name**.
+    3. **Optional**. Specify restrictions that apply to the entire behavior. Click on <img src="https://docs.sessionm.com/Resources/Images/Assets/actionbutton.png" alt="Action button" /> and select **Apply restrictions**, which opens the Restrictions modal and allows you to select one or more restrictions. When you are done, click **Save**.
+
+       | Restriction | Description |
+       | --- | --- |
+       | Max Times Behavior Qualifies Towards Outcome | Indicates the total number of times that the user can complete this behavior to earn the outcome. Valid values are: <ul><li>Unlimited</li><li>Up to number of times</li></ul> |
+       | Uses Same Timeframe | Indicates whether all rules must be completed in the same timeframe. Valid values are: <ul><li>Can be same or different timeframe</li><li>Must be same timeframe</li></ul> |
+
+    4. Expand **Add rule**.
+    5. On the behavior builder page, choose **Campaign Events** from the **select event** drop down and select the following event:
+
+       | Event | Triggered when member... |
+       | --- | --- |
+       | Opts-In | Indicates that the member wants to participate in the campaign. |
+
+    6. If you want to add another rule or group of rules to this behavior, complete the necessary steps now. Indicate whether the customer must complete one event (the "Any of these Events") or all events (the "All of these Events" toggle) to complete this behavior.
+    7. Click **Save**.
+
+    The behavior is saved with the same state as its campaign. For example, if the campaign is **Active**, the behavior is set to **Active**.
+
+    ## After you finish
+
+    For promotional campaigns, define the outcome associated with this behavior. See [Define outcomes](/campaigns/create/define-outcomes).
+  </Expandable>
+
+  <Expandable title="Define behavior using engagement events" default-open="false">
+    Define a behavior triggered by an engagement event.
+
+    ## Before you start
+
+    For a messaging campaign, make sure that you have defined the messages triggered by this behavior. See [Add message](/campaigns/create/add-message/overview).
+
+    ## Steps
+
+    1. Access the behavior builder:
+       - For messaging campaigns, enable the **Triggered** delivery method on the Setup tab for the message, which expands the behavior builder fields on the existing page but does not provide an outcome builder.
+       - For promotional campaigns, click **Edit Behavior**, which opens a dedicated behavior builder page that includes an outcome builder.
+    2. Specify a name in **Set Behavior Name** and click on the arrow adjacent to this name.
+    3. **Optional**. Specify restrictions that apply to the entire behavior. Click <img src="https://docs.sessionm.com/Resources/Images/Assets/actionbutton.png" alt="Action button" /> and select **Apply restrictions**, which opens the Restrictions modal and allows you to select one or more restrictions. When you are done, click **Save**.
+
+       | Restriction | Description |
+       | --- | --- |
+       | Max Times Behavior Qualifies Towards Outcome | Indicates total number of times that the user can complete this behavior to earn the outcome. Valid values are: <ul><li>Unlimited</li><li>Up to number of times</li></ul> |
+       | Uses Same Timeframe | Indicates whether all rules must be completed in the same timeframe. Valid values are: <ul><li>Can be same or different timeframe</li><li>Must be same timeframe</li></ul> |
+
+    4. Expand **Add rule**.
+    5. On the behavior builder page, choose **Engagement Events** from the **select event** dropdown and select one of the following events:
+
+       | Event | Triggered when member ... |
+       | --- | --- |
+       | Refers a Friend to Sign Up | Customer's RAF code is associated with another customer sign up. |
+       | Receives a Referral from a Friend to Sign Up . | Signs up using another customer's RAF code. |
+       | Refers a Friend to Sign Up and Make a Purchase | Customer's RAF code is associated with another customer sign up and the customer completes their first purchase. |
+       | Receives a Referral from a Friend to Sign Up and Make a Purchase | Signs up using another customer's RAF code and completes their first purchase. |
+
+    6. Expand the **Restrictions** option for the selected event. The default restrictions associated with the event appear.
+
+       | Restriction | Description |
+       | --- | --- |
+       | Total Number of Times | Total number of times member must complete event before earning outcome. |
+
+    7. Specify a value for **Total Number of Times**.
+    8. If you want to add another rule or group of rules to this behavior, complete the necessary steps now. Indicate whether the member must complete one event (the "Any of these Events") or all events (the "All of these Events" toggle) to complete this behavior.
+    9. Click **Save**.
+
+    The behavior is saved with the same state as its campaign. For example, if the campaign is **Active**, the behavior is automatically set to **Active**.
+
+    ## After you finish
+
+    For promotional campaigns, define the outcome associated with this behavior. See [Define outcomes](/campaigns/create/define-outcomes).
+  </Expandable>
+
+  <Expandable title="Define behavior using purchase events" default-open="false">
+    Define a behavior triggered by a purchase event as the customer action.
+
+    ## Before you start
+
+    For a messaging campaign, make sure that you have defined the messages triggered by this behavior. See [Add message](/campaigns/create/add-message/overview).
+
+    ## Steps
+
+    1. Access the behavior builder:
+       - For promotional campaigns, click **Edit Behavior**, which opens a dedicated behavior builder page that includes an outcome builder.
+       - For messaging campaigns, enable the **Triggered** delivery method on the Setup tab for the message, which expands the behavior builder fields on the existing page but does not provide an outcome builder.
+    2. Specify a name in **Set Behavior Name** and click on the arrow adjacent to this name.
+    3. **Optional**. Specify restrictions that apply to the entire behavior. Click on <img src="https://docs.sessionm.com/Resources/Images/Assets/actionbutton.png" alt="Action button" />, and select **Apply restrictions**, which opens the Restrictions modal and allows you to select one or more restrictions. When you are done, click **Save**.
+
+       | Restriction | Description |
+       | --- | --- |
+       | Max Times Behavior Qualifies Towards Outcome | Total number of times the user can complete this behavior to earn the outcome. |
+       | Uses Same Timeframe | All rules must be completed in the same timeframe. |
+
+    4. Expand **Add rule**.
+    5. On the behavior builder page, choose **Purchase Events** from the **select event** drop down and select one of the following events:
+
+       | Event | Triggered when member .... |
+       | --- | --- |
+       | Points Per | Purchases from a defined list. |
+       | Purchases: Any Item | Purchases any defined number of items. |
+       | Purchases: Minimum Item Count | Purchases a defined minimum amount of items. |
+       | Purchases: Minimum Item Value | Purchases an item meeting the condition of minimum item value. |
+       | Purchases: Quantity | Purchases a quantity of defined items. |
+       | Purchases: Product Pairing | Purchases a pair of defined items. |
+       | Purchases: Specific Items | Purchases designated items. |
+       | Purchases: Using Promo Code | Uses a promo code with their purchase |
+       | Reloads Card | Reloads their stored value card. |
+       | Spends | Spends a defined amount of money. |
+       | Visits | Visits a defined number of times. |
+
+    6. Expand **Restrictions** for the selected event. The default restrictions associated with the event appear. Supply a values for each restriction.
+    7. If you want to add another rule or group of rules to this behavior, complete the necessary steps now. Indicate whether the member must complete one event (the "Any of these Events") or all events (the "All of these Events" toggle) to complete this behavior.
+    8. Click **Save**.
+
+    The behavior is saved with the same state as its campaign. For example, if the campaign is **Active**, the behavior is set to **Active**.
+
+    ## After you finish
+
+    For promotional campaigns, define the outcome associated with this behavior. See [Define outcomes](/campaigns/create/define-outcomes).
+  </Expandable>
+
+  <Expandable title="Define behavior using custom events" default-open="false">
+    Define a behavior triggered by a custom event.
+
+    ## Before you start
+
+    For a messaging campaign, make sure that you have defined the messages triggered by this behavior. See [Add message](/campaigns/create/add-message/overview).
+
+    ## Steps
+
+    1. Access the behavior builder:
+       - For promotional campaigns, click **Edit Behavior**, which opens a dedicated behavior builder page that includes an outcome builder.
+       - For messaging campaigns, enable the **Triggered** delivery method on the Setup tab for the message, which expands the behavior builder fields on the existing page but does not provide an outcome builder.
+    2. Specify a name in **Set Behavior Name** and expand **Add rule**.
+    3. On the behavior builder page, choose **Custom Events** from the **select event** drop down and then select **Engages in Custom Event.**
+    4. **Optional**. Expand the **Restrictions** option for the selected event. Custom Event Name (event name as passed to the SessionM Platform).
+    5. The default restrictions associated with the event appear. Select a link in the following table for instructions on setting restrictions for a specific purchase event.
+    6. **Optional**. Expand **Add Restriction** to add global purchase restrictions or generic restrictions.
+    7. If you want to add another rule or group of rules to this behavior, complete the necessary steps now. Indicate whether the customer must complete one event (the "Any of these Events") or all events (the "All of these Events" toggle) to complete this behavior.
+    8. Click **Save**.
+
+    The behavior is saved in the database bearing the same state as its campaign. For example, if the campaign is **Active**, the behavior is automatically set to **Active**.
+
+    ## After you finish
+
+    For promotional campaigns, define the outcome associated with this behavior. See [Define outcomes](/campaigns/create/define-outcomes)
+  </Expandable>
+
+  <Expandable title="Define behavior from template" default-open="false">
+    A behavioral templates is a complete definition of customer behavior that you can reuse in different campaigns. You first create the behavioral template using the Template builder. You do this once. You can then apply that template as ofter as you want to define that behavior for a campaign.
+
+    ## Save behavior as template
+
+    1. Define the behavior.
+    2. When the behavior you are creating contains all of the data you want to define for it, select the actions list icon that displays next to the **Set Behavior Name** field on the behavior builder page.
+    3. Select **Save as template**. The Behavior Templates modal opens, showing the Save a Template tab.
+    4. Enter a template name.
+    5. Enter a template description.
+    6. Click **Save**.
+
+    The new template displays in the Select a Template sub-tab.
+
+    ## Applying template to new behavior
+
+    You can create a new behavior with an existing template. When you do, the new behavior inherits all of the data specified on the template.
+
+    1. From the behavior builder page, select the actions list icon that displays next to the Set Behavior Name field.
+    2. Choose **Apply a template**. The Behavior Templates modal opens, showing the Select a Template sub-tab.
+    3. Select the template you want by searching for it in the **Find a template** field or by simply selecting it from table in the modal.
+    4. Click **Apply**.
+
+    The system applies the template and returns you to the behavior builder page, where the new behavior is populated with values inherited from the template.
+  </Expandable>
+</ExpandableGroup>

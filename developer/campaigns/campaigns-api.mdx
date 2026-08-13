@@ -1,0 +1,1250 @@
+---
+title: "Campaigns API"
+description: "Query campaigns targeted to a customer, opt customers in, and fetch customer-specific campaign state and progress."
+---
+
+Campaign objects represent scheduled and targeted customer engagements of any kind: messaging, promotions, games and display advertising.
+
+You can create campaigns and configure their associated customer actions and outcomes. At the same time, campaigns allow you to collect data and analyze campaign effectiveness. With that data, you can trigger additional marketing activities as well as target future campaigns. Campaigns can target specific audience segments, as well as support a set of rules around campaign duration, opt-in requirements, delivery methods, creative assets and desired customer actions.
+
+The platform supports a number of campaign types, including:
+
+- Inbox - Push in-app mail messages for customers to read, engage with and delete.
+- Activity Feed - Create dynamic and targeted message tiles in a scrollable activity feed that displays for a customer. These feeds are configurable and resemble the activity feeds typical in social media platforms such as Facebook.
+- Push - Scheduled and triggered push messaging campaigns.
+- Rich Media - Create informative rich media messages to drive a call to action.
+- Video - Engage customers with video messages and a call to action.
+- Action-based Campaigns - Any of the above campaigns can be triggered when a specific action is completed.
+
+Campaign objects provide SessionM partners with the ability to query campaigns targeted to a specific customer and fetch customer-specific state information related to campaigns. In addition, some of the methods retrieve a campaign along with its data and then validate a customer's eligibility for the specified campaign.
+
+The following terms are critical to understanding campaigns and the objects they comprise:
+
+- Campaign - Object in the database called *AdCampaign*. It stores attributes such as the campaign's name, its start and end dates, and its owner. Campaigns have three "direct reports": ad bundle (always one), line items, and achievements.
+- Achievement - Also known as a "behavior," an achievement is a set of rules that define actions a customer must perform to earn an outcome. A campaign can have multiple achievements.
+- Ad Bundle - This object - *AdBundle* in the database - stores campaign level targeting data. It is used every time SessionM needs to check if a customer qualifies for a campaign. Typically, customers might trigger an achievement and earn its outcome or simply be included as part of an audience receiving a message.
+- Line Item - In the database, this object is known as an *AdLineItem* object. Generally, only one is created, and it holds all of the campaign's creative groups.
+- Group - Also called a "creative group," it is an *AdGroup* object in the platform database. It controls message level targeting. When an audience is built for a message, targeting data from the ad group is combined with the targeting data from the campaign's ad bundle. An ad group also holds the creative, which is restricted to only one creative per group.
+- Creative - Also called a "message" or an "ad unit," a creative is an *AdUnit* object in the database. These objects store a message type, delivery settings, and, based on the message type, any message-specific data. For example, a graphic display ad unit or an activity feed message (aka tile) would have everything needed to render a graphic ad. An email message ad unit would have the messaging provider and message template information.
+- Delivery Settings - Settings that define how the message is delivered. It can be one of two things: either a triggered delivery, in which case the ad unit must have the *achievement_id* of the behavior that triggers it; or, a scheduled delivery, in which case it must have the delivery date and time. Note too that it is the responsibility of a scheduled message to set up the jobs that will generate the audience for the message, using campaign and message targeting.
+
+The entities described above constitute a campaign hierarchy. Together, they represent the core types of data the platform offers for the creation and maintenance of campaigns, including the ETL activities required at the beginning of an implementation.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  - Since campaigns engage customers, you are likely to create customers to interact with campaigns. Use the [Standard Profile API](/developer/customers/customer-profile-apis#standard-profile-api) to create customers and specify the attributes for their standard profiles.
+  - The Campaigns API allows you to check a customer's status via the endpoints featured in [Updates a Customer Status for a Campaign.](#updates-a-customer-status-for-a-campaign) These statuses can reflect event requests or opt in requests that were sent via the [Events API.](https://docs.sessionm.com/developer/APIs/Core/Customers/customers_events.htm) Once the event is sent, you can use the Campaigns API to see the updated status of the customer.
+  - Campaigns can be tied to Image Validation objects, which allow a customer to submit images such as photographs and receipt captures for validation. The [Image Validation API](/developer/deprecated/image-validation-api) requires that an image undergoing validation is tied to a campaign through the campaign_id.
+</Callout>
+
+The Campaigns API provides a collection of APIs that correspond to the following areas of focus:
+
+- [Opting Customers into Campaigns](#opting-customers-into-campaigns)
+- [Retrieving Campaigns for Customers](#retrieving-campaigns-for-customers)
+- [Retrieving Campaigns](#retrieving-campaigns)
+
+## Opting Customers into Campaigns
+
+Opts a customer into a campaign for which they are eligible. This transaction updates their status and make them able to earn the incentive associated with this campaign.
+
+Note that to enable "opt-ins," a campaign must be created with *optin_required* set to "true": `optin_required=true`.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/users/:user_id/campaigns/:campaign_id/opt_in
+GET /priv/v1/apps/:api_key/external/users/:external_id/campaigns/:campaign_id/opt_in
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customers within the SessionM Platform. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+| *campaign_id* | Campaign identifier internal to SessionM. |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+Since this method's response object is identical to what is returned for the method that returns all campaigns, see the "Response Object" section in [Retrieve All Campaigns for a Customer](#get-all-campaigns-for-a-specified-customer) for more information.
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+s
+
+| Code | Reason |
+|---|:---|
+| *user_ineligible_for_campaign* | Customer is ineligible for specified campaign. |
+| *opt_in_not_started* | Opt in has not started. |
+| *opt_in_ended* | Opt in has ended. |
+| *opt_in_limit_reached* | User limit reached. |
+| *opt_in_error* | Opt in failed for unknown reason. |
+
+Note that all of the above errors apply only when a customer has opted in to a campaign.
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+<a id="Retrievi"></a>
+
+## Retrieving Campaigns for Customers
+
+This family of APIs allows you to:
+
+- [Get all campaigns for a specified customer](#get-all-campaigns-for-a-specified-customer)
+- [Get customer progress for a campaign](#get-customer-progress-for-a-campaign)
+- [Get all active campaigns eligible for a customer](#get-all-active-campaigns-eligible-for-a-customer)
+- [Get a specific campaign for a customer by internal user ID and campaign ID](#get-a-specific-campaign-for-a-customer-by-internal-user-id-and-campaign-id)
+- [Get a specific campaign for a customer by ID and either campaign permalink or ID](#get-a-specific-campaign-for-a-customer-by-id-and-either-campaign-permalink-or-id)
+
+<a id="Get"></a>
+
+### Get All Campaigns for a Specified Customer
+
+Fetches all of the campaigns associated with a specified or authorization token. Note that the endpoints that utilize a *user_id* or *external_id* are available for registered customers (users); however, *GET /api/v1/apps/:api_key/campaigns?auth_token=xxxxx* applies to unregistered, anonymous customers.
+
+#### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints (Retrieve All Campaigns for a Specified Customer)**
+
+```http
+GET /priv/v1/apps/:api_key/users/:user_id/campaigns
+GET /priv/v1/apps/:api_key/external/users/:external_id/campaigns
+GET /api/v1/apps/:api_key/campaigns?auth_token=xxxxx
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Internal identifier for the customer within the SessionM Platform. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+| *auth_token* | Specifies authorization token for operation. For example: *auth_token=4296*. |
+| *division_ids* | Optional array of division ID strings. When *division_ids* parameter is present, the endpoint filters response to include campaigns from specified divisions only. Note that if multi-org is disabled, the parameter is ignored. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *campaigns* object, which contains *tiles* and *promotions* arrays shown below:
+
+**JSON Response (Retrieve All Campaigns for a Single Customer)**
+
+```json
+{
+    "status": "ok",
+    "campaigns": {
+        "tiles": [
+            {
+                "campaign_id": 1255,
+                "name": "promotionCampaign",
+                "group_id": 2917,
+                "creative_id": 2983,
+                "start_date": "2017-07-03 19:04:18",
+                "end_date": "2017-08-03 19:04:18",
+                "opt_in_starts_at": "2017-07-03 19:04:18",
+                "opt_in_ends_at": "2017-08-03 19:04:18",
+                "permalink": "6a04f24c-6022-11e7-8c24-3bcbbae62f9c",
+                "template": {
+                    "type": "internal_tile",
+                    "message": {
+                        "points": 0
+                    },
+                    "action": {
+                        "tracking_urls": [
+                            "https://api-qa4.q-sessionm.com/api/v1/apps/70261ce1e55ee3a5c282d48bdd4fa343230c04e0/creatives/2983/stats/3726c65e-7de4-11e7-959f-f9d291045c00/seen/track?auth_token=v2--Ga0yJV7TyMJsIjOZ40MitXJQanHlX_SrG3IZl-TmYXY=--QyLCZ-H6d08Ny9dzS_xavtjKjOMT2HznmZz8nfGcOm3NXKduOSzkkJpZ4bgoPKjQsA==&xsid=48792ee2-0e5e-11e7-8716-9311a9d25bb0&locale=en-us"
+                        ],
+                        "event_meta_data": {
+                            "ad_unit_id": 2983,
+                            "ad_stat_id": "3726c65e-7de4-11e7-959f-f9d291045c00"
+                        }
+                    }
+                },
+                "progress": {
+                    "state": "completed"
+                },
+                "behaviors": {},
+                "version": 2,
+                ""
+            }
+        ],
+        "promotions": [
+            {
+                "campaign_id": 1064,
+                "name": "Launch 2",
+                "group_id": 2578,
+                "creative_id": 2640,
+                "start_date": "2017-06-15 18:35:37",
+                "end_date": "2017-07-15 18:35:37",
+                "opt_in_starts_at": "2017-06-15 18:35:37",
+                "opt_in_ends_at": "2017-07-15 18:35:37",
+                "permalink": "6ce11f7c-51f9-11e7-822a-02d3bae62f9c",
+                "template": {
+                    "type": "internal_full_page",
+                    "html_payload": "https://api-qa4.q-sessionm.com/apps/70261ce1e55ee3a5c282d48bdd4fa343230c04e0/users/48792ee2-0e5e-11e7-8716-93115045e6c0/ads/2640"
+                },
+                "progress": {
+                    "state": "completed"
+                },
+                "behaviors": {},
+                "version": 2
+            },
+            {
+                "campaign_id": 1443,
+                "name": "TEstt0714441",
+                "group_id": 3232,
+                "creative_id": 3364,
+                "start_date": "2017-07-14 20:37:16",
+                "end_date": "2017-08-14 20:37:16",
+                "opt_in_starts_at": "2017-07-14 20:37:16",
+                "opt_in_ends_at": "2017-08-14 20:37:16",
+                "permalink": "3964b522-68d4-11e7-8479-4fdfbae62f9c",
+                "template": {
+                    "type": "internal_full_page",
+                    "html_payload": "https://api-qa4.q-sessionm.com/apps/70261ce1e55ee3a5c282d48bdd4fa343230c04e0/users/48792ee2-0e5e-11e7-8716-93115045e6c0/ads/3364"
+                },
+                "progress": {
+                    "state": "in_progress",
+                    "behaviors": [
+                        {
+                            "behavior_id": 1444,
+                            "external_behavior_id": "86d77299-ed18-49ba-8fef-f8cb2241faac",
+                            "event_name": "3dac9302-68d4-11e7-9412-9e32bae62f9c",
+                            "name": "TEstt0714441 Campaign Action 1",
+                            "progress": 0,
+                            "goal": 1
+                        }
+                    ]
+                },
+                "behaviors": {
+                    "t_estt0714441 campaign action 1": {
+                        "external_behavior_id": "86d77299-ed18-49ba-8fef-f8cb2241faac",
+                        "type": "composite",
+                        "points": 0,
+                        "achieved": 4,
+                        "max_times_repeatable": null,
+                        "max_times_repeatable_per_period": null,
+                        "period": 7776000,
+                        "min_time_between_events": null,
+                        "consecutive": false,
+                        "goals": {
+                            "campaigns.1443.loaded": {
+                                "type": "goal",
+                                "points": 4,
+                                "completed": false,
+                                "required": true,
+                                "earn_count": 1,
+                                "group_id": "0",
+                                "progress": {
+                                    "event_name": "campaigns.1443.loaded",
+                                    "type": "count",
+                                    "points": 4,
+                                    "max_times_repeatable": null,
+                                    "max_times_repeatable_per_period": null,
+                                    "period": 7776000,
+                                    "min_time_between_events": null,
+                                    "consecutive": false,
+                                    "achieved": 4,
+                                    "current_count": 0,
+                                    "total_count": 1
+                                }
+                            }
+                        },
+                        "groups": {
+                            "0": {
+                                "type": "group",
+                                "current_count": 0,
+                                "total_count": 1,
+                                "num_goals": 1,
+                                "completed": false
+                            }
+                        }
+                    }
+                },
+                "version": 2
+            }
+        ]
+    }
+}
+```
+
+The attributes for each are identical and are covered in a combined section below.
+
+##### Tiles and Promotions Array
+
+The following table provides details on the *tiles* and *promotions* arrays, which can contain multiple campaigns:
+
+**Response Attributes for Campaigns in Tiles and Promotions Arrays**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *campaign_id* | integer | Campaign identifier internal to SessionM. |
+| *name* | string | Campaign name. |
+| *group_id* | integer | Internal ad group identifier. |
+| *creative_id* | integer | Platform-generated ID of the ad unit content, which is also called creative content. |
+| *start_date* | string | Campaign starting date. |
+| *end_date* | string | Campaign end date. |
+| *opt_in_starts_at* | string | Opt-in starting date. |
+| *opt_in_ends_at* | string | Opt-in ending date. |
+| *permalink* | string | Campaign permalink. |
+| *template* | object | See the [Template Object](#template-object) section. |
+| *progress* | object | Contains customer's current status for this campaign. For more information, see [Progress Object](#progress-object). |
+| *behaviors* | object | See the [Behaviors Object](#behaviors-object-2) section. |
+| *version* | string | Campaign version. |
+| *division_id* | string | ID of the division that the campaign is assigned to. Will not be returned when multi-org is disabled. |
+
+##### Template Object
+
+The following table provides details on the *template* object:
+
+**Response Attributes for Template**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *type* | string | Campaigns API returns campaigns that have ad unit with ad type set to one of the following: "internal_tile", "internal_full_page" or "internal_behavior". |
+| *message* | object | Returned only when the type equals "internal_tile". Contains configuration of the tile setup: header, sub-header, description, icon_url, app_icon_alt_text, image_url, image_alt_text, call_to_action, points, layout and video_url. |
+| *html_payload* | string | The ad unit URL for the given customer. |
+| *action* | object | See the Action Object section below. |
+
+##### Action Object
+
+The following table provides details on the *action* object:
+
+**Response Attributes for Action**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *type* | string | Type of action. Options include: "open_ad", "deep_link", "external_link", "campaign". |
+| *url* | string | URL if creative click tracking is disabled. Otherwise the action tracking URL is used. |
+| *tracking_urls* | array | Array of URLs used to track an action associated with a tile template. |
+| *section* | string | Campaign section from ad unit events. |
+| *campaign_id* | integer | Primary key of the ad campaign for the ad unit. |
+| *event_meta_data* | object | Metadata about the event, including an integer, *ad_unit_id*, which is the identifier for the ad unit, and a string, *ad_stat_id*, which is the identifier for the ad stat. |
+
+##### Behaviors Array
+
+The following table provides details on the *behaviors* array:
+
+**Response Attributes for Behaviors Array**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *behavior_id* | integer | Internal SessionM ID for the behavior. |
+| *external_behavior_id* | string | External ID for the behavior. |
+| *event_name* | string | Name of the event that triggers behavior when submitted to Events API. |
+| *goal* | integer | Number of events customer must perform to complete behavior. |
+| *name* | string | External name of behavior. |
+| *progress* | integer | Number of times customer has completed behavior. |
+
+<a id="behaviors-object-2"></a>
+
+##### Behaviors Object
+
+The following table provides details on the *behaviors* object:
+
+**Response Attributes for Behaviors Object**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *external_behavior_id* | string | External ID for the behavior. |
+| *type* | string | Behavior type: "unique", "composite", "count". |
+| *points* | integer | Number of points associated with behavior. |
+| *achieved* | integer | Number of times behavior was achieved. |
+| *max_times_repeatable* | integer | Maximum number of times behavior can be repeated. |
+| *max_times_repeatable_per_period* | integer | Maximum number of times behavior can be repeated in a specified period. |
+| *period* | integer | Period of time in which behavior can be performed. Configurable unit of measure. |
+| *min_time_between_events* | integer | Min time period between events. For example, 1 day, 1 week, 1 month, 90 days. Specify value in seconds. |
+| *consecutive* | boolean | Indicator whether events need to happen on consecutive days. |
+| *goals* | object | See the Goals Object section below. |
+| *groups* | object | See the [Groups Object](#groups-object) section. |
+
+##### Goals Object
+
+The following table provides details on the *goals* object:
+
+**Response Attributes for Goals Object**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *type* | string | Type for this object is "goal". |
+| *points* | integer | Points associated with goal. |
+| *completed* | boolean | Specifies whether goal was or wasn't completed. |
+| *required* | boolean | Specifies whether goal is or isn't required. |
+| *earn_count* | integer | Customer action (sometimes referred to as a goal) count required to complete the composite action. |
+| *group_id* | string | Identifier for group. |
+| *progress* | object | See the Progress Object section below. |
+
+##### Progress Object
+
+The following table provides details on the *progress* object:
+
+**Response Attributes for Progress Object**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *event_name* | string | Name of associated event. |
+| *type* | string | Behavior type: "unique", "composite", "count". |
+| *points* | integer | Number of points associated with behavior. |
+| *max_times_repeatable* | integer | Maximum number of times behavior can be repeated. |
+| *max_times_repeatable_per_period* | integer | Maximum number of times behavior can be repeated in a specified period. |
+| *period* | integer | Period of time in which behavior can be performed. Configurable unit of measure. |
+| *min_time_between_events* | integer | Min time period between events. For example, 1 day, 1 week, 1 month, 90 days. Specify value in seconds. |
+| *consecutive* | boolean | Indicator whether events need to happen on consecutive days. |
+| *achieved* | integer | Number of times behavior was achieved. |
+| *current_count* | integer | Event occurrences count. |
+| *total_count* | integer | Required event count. |
+
+##### Groups Object
+
+The following table provides details on the *groups* object:
+
+**Response Attributes for Groups Object**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *type* | string | Object type is "group". |
+| *current_count* | integer | Count of completed goals in the group. |
+| *total_count* | integer | Goal count required to complete the group. |
+| *num_goals* | integer | Goal count in the group. |
+| *completed* | boolean | Specifies whether the goal group been completed. |
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *No_active_campaign_found* | No campaign was found for the specified ID. |
+| *User_not_found* | No customer was found for the specified ID. |
+| *Invalid_api_key* | No application was found for the given key. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+### Get Customer Progress for a Campaign
+
+Fetches a customer's progress for a specified campaign, even after the campaign ends. Responses display the customer's state in the campaign and the progress they've made engaging in a behavior.
+
+Note that individual campaigns can be specified using either the *ad_campaign_id* or *permalink* parameters.
+
+#### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/users/:user_id/campaigns/:ad_campaign_id/progress
+GET /priv/v1/apps/:api_key/users/:user_id/external/campaigns/:permalink/progress
+GET /priv/v1/apps/:api_key/external/users/:external_id/campaigns/:ad_campaign_id/progress
+GET /priv/v1/apps/:api_key/external/users/:external_id/external/campaigns/:permalink/progress
+GET /api/v1/apps/:api_key/campaigns/:ad_campaign_id/progress?auth_token=
+GET /api/v1/apps/:api_key/external/campaigns/:permalink/progress?auth_token=
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Identifier for an internal customer. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+| *ad_campaign_id* | Internal SessionM ad campaign ID. |
+| *permalink* | Campaign permalink that can be customer-defined or auto-generated. |
+| *auth_token* | Specified authorization token. For example: *auth_token=xxxx-yyyy-zzzz*. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *campaign* object, as shown in a few samples below:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok",
+    "campaign": {
+        "state": "qualified",
+        "behaviors": [
+        {
+              "behavior_id": 525,
+              "external_behavior_id": "86d77299-ed18-49ba-8fef-f8cb2241faac",
+              "event_name": "ada7af74-9710-11e7-8803-9bbc32d1fae9",
+              "name": "my_campaign_event_name",
+              "progress": 0,
+              "goal": 1
+        }
+        ]
+    }
+}
+```
+
+**JSON Response (With Customer Opting In)**
+
+```json
+{
+    "status": "ok",
+    "campaign": {
+        "opted_in": true,
+        "state": "opted_in",
+        "behaviors": [
+            {
+                "behavior_id": 543,
+                "external_behavior_id": "86d77299-ed18-49ba-8fef-f8cb2241faac",
+                "event_name": "bce50a3c-9c8c-11e7-832f-e29b32d1fae9",
+                "name": "moose_sleep_b",
+                "progress": 0,
+                "goal": 1
+            }
+        ]
+    }
+}
+```
+
+**JSON Response (With Customer Opting Out)**
+
+```json
+{
+    "status": "ok",
+    "campaign": {
+        "opted_in": false,
+        "state": "opted_out",
+        "behaviors": [
+            {
+                "behavior_id": 525,
+                "external_behavior_id": "86d77299-ed18-49ba-8fef-f8cb2241faac",
+                "event_name": "ada7af74-9710-11e7-8803-9bbc32d1fae9",
+                "name": "pretty_llamas-b",
+                "progress": 0,
+                "goal": 1
+            }
+        ]
+    }
+}
+```
+
+This object is detailed in the following table:
+
+**Response Attributes for Campaign**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *opted_in* | boolean | Displays only if customer has specifically opted in or out of campaign. Values include: *true*/*false*. |
+| *state* | string | State related to customer. Possible values include: *qualified*, *not_qualified*, *opted_in*, *opted_out*, *in_progress* and *completed*. |
+| *behaviors* | array | List of behaviors belonging to campaign and customer's progress associated with behaviors. For more information, see [Behaviors Array](#behaviors-array). |
+| *division_id* | string | ID of the division that the campaign is assigned to. Will not be returned when multi-org is disabled. |
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *no_campaign_found* | No campaign was found for the specified ID. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+### Get All Active Campaigns Eligible for a Customer
+
+Fetches all active campaigns that a customer is eligible for by either internal or external user ID.
+
+Note that these are V2 endpoints. You can consult [Implementation Notes for Retrieving Campaigns Using V2 APIs](#implementation-notes-for-retrieving-campaigns-using-v2-apis) for additional implementation details.
+
+#### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v2/apps/:api_key/users/:user_id/campaigns
+GET /priv/v2/apps/:api_key/external/users/:external_id/campaigns
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Identifier for an internal customer. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+| *sections[]* | Controls which sections of the campaign will appear. Possible values: *progress* includes user progress through campaign; *behaviors* includes all behaviors (achievements) in campaign; *offers* includes detailed deals request; and, *redemptions* includes customer redemptions. |
+| *filters[]* | Controls which campaigns appear for associated customer. Possible values: *ineligible* includes only campaigns customer is ineligible for; *eligible* includes just campaigns customer is eligible for; and, *all* includes all active campaigns, ineligible and eligible. |
+| *creatives[]* | Controls which creatives are shown. Leaving parameter blank removes the creative section. Possible values: *promotion* includes promotion section if available; and *tile* includes tile section if available. |
+| *division_ids* | Optional array of division ID strings. When *division_ids* parameter is present, the endpoint filters response to include campaigns from specified divisions only. Note that if multi-org is disabled, the parameter is ignored. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+The response object returned by the method contains a *status* key-value pair, a few relevant attributes and a *campaigns* array, as shown in two sample below:
+
+**JSON Response**
+
+```json
+{
+  "page": 1,
+  "page_size": 20,
+  "number_of_pages": 1,
+  "status": "ok",
+  "campaigns": [
+    {
+      "campaign_id": 1,
+      "campaign_permalink": "45650900-d457-11e7-9d65-94bc328254fd",
+      "creative": {
+        "tile": {
+          "message": {
+            "header": "Test Header",
+            "subheader": "Test Subheader",
+            "description": "Test Description",
+            "icon_url": "http://bit.ly/foo.png",
+            "image_url": "http://getm.pt/foo.png",
+            "points": 20
+          },
+          "action": {
+            "type": "open_ad",
+            "url": "http://ads.host/api/v1/apps/xyz15cbf87b9068363df55fc6344e05b550e49c98060/creatives/2/stats/457869f0-d457-11e7-99dd-ee69328254fd/click/redir?auth_token=&xsid=457583c0-d457-11e7-88dd-f3698c9fdcfd&locale=en-us",
+            "tracking_urls": [
+              "http://ads.host/priv/v1/apps/xyz15cbf87b9068363df55fc6344e05b550e49c98060/users/457583c0-d457-11e7-88dd-f369328254fd/creatives/2/stats/457869f0-d457-11e7-99dd-ee69328254fd/seen/track?xsid=457583c0-d457-11e7-88dd-f3698c9fdcfd&locale=en-us"
+            ],
+            "event_meta_data": {
+              "ad_unit_id": 2,
+              "ad_stat_id": "457869f0-d457-11e7-99dd-ee69328254fd"
+            }
+          }
+        }
+      },
+      "ends_at": "2017-12-01 16:14:55",
+      "name": "Campaign 1",
+      "opt_in_ends_at": "2017-12-01 16:14:55",
+      "opt_in_starts_at": "2017-11-27 16:14:55",
+      "qualified": false,
+      "starts_at": "2017-11-27 16:14:55",
+      "status": "not_qualified"
+    }
+  ]
+}
+```
+
+This object is detailed in the following table:
+
+**Response Attributes for Campaigns Array**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *page*, *page_size*, *number_of_pages* | integers | Standard pagination feature informs API how many campaigns to return in a the response and where to start. If *page* and *page_size* were not provided in the request, a *page_size* of "20" and *page* of "1" is returned. This means the response contains the first 20 campaigns. The *number_of_pages* attribute is always the same and depends on the total number of campaigns in the database. |
+| *campaigns* | array | Array that contains a campaign. Most of the attributes of the Campaign object are described in the [Response Attributes for Campaign table](#campaign_response). But the *creative* object - which resides within the *campaign* object - does contain a *tile* object described in the table below. |
+| *division_id* | string | ID of the division that the campaign is assigned to. Will not be returned when multi-org is disabled. |
+
+**Response Attributes for Tile**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *message* | object | See the Response Attributes for Message table below. |
+| *action* | object | See the Response Attributes for Action table below. |
+
+**Response Attributes for Message**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *header* | string | Heading required to render tile ad. |
+| *subheader* | string | Sub-heading to render tile ad. |
+| *description* | string | Description in tile ad. |
+| *icon_url* | string | URL for icon in tile ad. |
+| *image_url* | string | URL for image in tile ad. |
+| *points* | string | Points awarded to customer clicking on ad. |
+
+**Response Attributes for Action**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *type* | string | Type of action. Options include: "open_ad", "deep_link", "external_link", "campaign". |
+| *url* | string | URL if creative click tracking is disabled. Otherwise the action tracking URL is used. |
+| *tracking_urls* | array | Array of URLs used to track an action associated with a tile template. |
+| *event_meta_data* | object | Metadata about the event, including an integer, *ad_unit_id*, which is the identifier for the ad unit, and a string, *ad_stat_id*, which is the identifier for the ad stat. |
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+### Get a Specific Campaign for a Customer by Internal User ID and Campaign ID
+
+Fetches a campaign that a user is eligible for by an internal user ID and a campaign ID.
+
+Note that this is a V2 endpoint. You can consult [Implementation Notes for Retrieving Campaigns Using V2 APIs](#implementation-notes-for-retrieving-campaigns-using-v2-apis) for additional implementation details.
+
+#### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v2/apps/:api_key/users/:user_id/campaigns/:ad_campaign_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Identifier for an internal customer. |
+| *ad_campaign_id* | Internal SessionM identifier for campaign. |
+| *sections[]* | Controls which sections of the campaign will appear. Possible values: *progress* includes user progress through campaign; *behaviors* includes all behaviors (achievements) in campaign; *offers* includes detailed deals request; and, *redemptions* includes customer redemptions. |
+| *filters[]* | Controls which campaigns appear for associated customer. Possible values: *ineligible* includes only campaigns customer is ineligible for; *eligible* includes just campaigns customer is eligible for; and, *all* includes all active campaigns, ineligible and eligible. |
+| *creatives[]* | Controls which creatives are shown. Leaving parameter blank removes the creative section. Possible values: *promotion* includes promotion section if available; and *tile* includes tile section if available. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *campaign* object, as shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "campaign": {
+    "campaign_id": 11,
+    "campaign_permalink": "9f86dafb-b999-4b61-8c71-59d9d45628f2",
+    "creative": {
+      "promotion": {
+        "type": "internal_full_page",
+        "html_payload": "http://ads.host/apps/xyz130d6fdeb9ef1af877dae1d3b749e842727543cc5/users/5a296e48-d458-11e7-9958-5691328254fd/ads/11"
+      }
+    },
+    "ends_at": "2017-12-01 16:22:41",
+    "name": "Campaign 11",
+    "opt_in_ends_at": "2017-12-01 16:22:41",
+    "opt_in_starts_at": "2017-11-27 16:22:41",
+    "opted_in": true,
+    "qualified": true,
+    "starts_at": "2017-11-27 16:22:41",
+    "status": "completed"
+  }
+}
+```
+
+Most of the attributes of this Campaign object are described in the [Response Attributes for Campaign table](#campaign_response). However, the *creative* object - which resides within the *campaign* object - does contain a *promotion* object that is detailed in the following table:
+
+**Response Attributes for Promotion**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *type* | string | Indicates what kind of ad the promotion is. Typically, ads being returned in the API are tiles,  *internal_tile*. |
+| *html_payload* | string | URL into SMP platform that renders tile. |
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+### Get a Specific Campaign for a Customer by ID and Either Campaign Permalink or ID
+
+Fetches a campaign that a user is eligible for by ID (internal or external) and campaign (permalink or ID).
+
+Note that these are V2 endpoints. You can consult [Implementation Notes for Retrieving Campaigns Using V2 APIs](#implementation-notes-for-retrieving-campaigns-using-v2-apis) for additional implementation details.
+
+#### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v2/apps/:api_key/users/:user_id/external/campaigns/:permalink
+GET /priv/v2/apps/:api_key/external/users/:external_id/campaigns/:permalink
+GET /priv/v2/apps/:api_key/external/users/:external_id/campaigns/:ad_campaign_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *user_id* | Identifier for an internal customer. |
+| *external_id* | Identifier for a customer in an external system integrating with the SessionM Platform. |
+| *permalink* | Campaign permalink that can be customer-defined or auto-generated. |
+| *ad_campaign_id* | Internal SessionM identifier for campaign. |
+| *sections[]* | Controls which sections of the campaign will appear. Possible values: *progress* includes user progress through campaign; *behaviors* includes all behaviors (achievements) in campaign; *offers* includes detailed deals request; and, *redemptions* includes customer redemptions. |
+| *filters[]* | Controls which campaigns appear for associated customer. Possible values: *ineligible* includes only campaigns customer is ineligible for; *eligible* includes just campaigns customer is eligible for; and, *all* includes all active campaigns, ineligible and eligible. |
+| *creatives[]* | Controls which creatives are shown. Leaving parameter blank removes the creative section. Possible values: *promotion* includes promotion section if available; and *tile* includes tile section if available. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *behaviors* object, as shown below:
+
+**JSON Response**
+
+```json
+{
+  "behaviors": {
+    "super user 12": {
+      "event_name": "Event 12",
+      "type": "count",
+      "points": 5,
+      "max_times_repeatable": null,
+      "max_times_repeatable_per_period": 1,
+      "period": 86400,
+      "min_time_between_events": null,
+      "consecutive": false,
+      "achieved": 0,
+      "current_count": 0,
+      "total_count": 1
+    },
+    "participation challenge": {
+      "event_name": "entry",
+      "type": "count",
+      "points": 0,
+      "max_times_repeatable": 1,
+      "max_times_repeatable_per_period": 1,
+      "period": 7776000,
+      "min_time_between_events": null,
+      "consecutive": false,
+      "achieved": 0,
+      "current_count": 0,
+      "total_count": 1
+    }
+  },
+  "campaign_id": 16,
+  "campaign_permalink": "d615678c-d458-11e7-8ac1-c27a328254fd",
+  "ends_at": "2017-12-01 16:26:09",
+  "name": "Campaign 16",
+  "offers": [
+  {
+    "offer_id": 1,
+    "name": "Offer 1 gift card",
+    "type": "deal",
+    "total_available": 100,
+    "deal": {
+      "percent": 10.0,
+      "offer_type_id": "percent_discount",
+      "id": "0c7af47e-12ef-4474-a0b7-3540948783bb",
+      "root_offer_id": "d616c71c-d458-11e7-9903-c0c9328254fd",
+      "retailer_id": "d616ee2c-d458-11e7-9d46-e185377754fd",
+      "offer_text": [
+        {
+          "id": "0c7af47e-12ef-4474-a0b7-3540948783bb",
+          "offer_id": "ff4b3d3c-8185-48b7-8014-dd03c2c55864",
+          "culture": "en",
+          "title": "Test for Offer796899",
+          "description": "Testing Issue Offer",
+          "terms": "Don't panic!"
+        }
+      ],
+      "valid_after_end_date": true,
+      "value_after_end_date": null,
+      "start_date": "2017-11-28T16:26:10+0000",
+      "end_date": "2017-11-29T16:26:10+0000",
+      "validity_period": 1,
+      "validity_unit": "day",
+      "points": 200,
+      "buy_count": 0,
+      "max_recurrence": 1,
+      "item_price_affinity": 0,
+      "web_redeem": false,
+      "quantity": 0,
+      "reward_store": false,
+      "offer_catalog_restrictions": null,
+      "offer_purchase_restrictions": null,
+      "offer_redemption_restrictions": null,
+      "offer_location_restrictions": null,
+      "offer_media": [
+        {
+          "id": "d617153c-d458-11e7-9ad9-8d08328254fd",
+          "uri": "http://www.example.com",
+          "category_id": "d617153c-d458-11e7-9ad9-8d08328254fd",
+          "category_name": null,
+          "content_type": 1,
+          "culture": "en"
+        }
+      ]
+    }
+  },
+  {
+    "offer_id": 2,
+    "name": "referrer points",
+    "type": "trigger",
+    "total_available": 1000000000
+  }
+],
+  "opt_in_ends_at": "2017-12-01 16:26:09",
+  "opt_in_starts_at": "2017-11-27 16:26:09",
+  "qualified": true,
+  "starts_at": "2017-11-27 16:26:09",
+  "status": "qualified"
+}
+```
+This object is detailed in the following tables:
+
+**Response Attributes for Behaviors**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *event_name* | string | Name of the event. |
+| *type* | string | Type of the object (*composite*, *count*, *unique*). |
+| *points* | integer | Amount of points completing the action is worth. |
+| *max_times_repeatable* | integer | Number of times an action can be achieved by a given customer overall. |
+| *max_times_repeatable_per_period* | integer | Number of times an action can be achieved by a customer within a defined period. |
+| *period* | integer | Time period in which you want to count events. For example, 1 day, 1 week, 1 month, 90 days. Specify value in seconds. |
+| *min_time_between_events* | integer | Min time period between events. For example, 1 day, 1 week, 1 month, 90 days. Specify value in seconds. |
+| *consecutive* | boolean | Indicator wether events need to happen on consecutive days |
+| *achieved* | integer | Total times the action has been completed by a given customer. |
+| *current_count* | integer | Event count towards completing the action. |
+| *total_count* | integer | Event count required for completing the action. |
+
+**Response Attributes for Campaigns**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *campaign_id* | integer | Campaign identifier internal to SessionM. |
+| *campaign_permalink* | string | Permanent, static hyperlink for campaign. |
+| *ends_at* | datetime | Date and time at which campaign becomes inactive. |
+| *name* | string | Name of campaign. |
+| *offers* | array | For more information, see the Response Attributes for Offers table below. |
+| *opt_in_ends_at* | datetime | Opt-in ending date. |
+| *opt_in_starts_at* | datetime | Opt-in starting date. |
+| *qualified* | boolean | Current customer qualification for campaign - after domain call. For example, *false* can result from targeting that tags the customer and targeted away from the campaign. |
+| *starts_at* | datetime | Date and time at which campaign becomes active. |
+| *status* | string | Current status of the campaign for the given customer - after domain call. For example, "completed" indicates that all behaviors in the campaign being completed. |
+| *division_id* | string | ID of the division that the campaign is assigned to. Will not be returned when multi-org is disabled. |
+
+**Response Attributes for Offers**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *offer_id* | integer | Identifier for reward (offer) tied to campaign. |
+| *name* | string | Name of the reward (offer). |
+| *type* | string | Set to *outcome_entry*, this attribute indicates offer has outcomes. |
+| *total_available* | integer | Limit on how many times the offer can be issued in total. |
+| *deal* | object | For more information, see Response Attributes for Deal table below. |
+
+**Response Attributes for Deal**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *percent* | decimal | Discount amount when offer type is *percent_discount*. |
+| *offer_type_id* | string | Can be *fixed_amount_discount* or *percent_discount*; not sure if there are more types. |
+| *id* | string | ID of the offer (GUID string). |
+| *root_offer_id* | string | ID of the parent offer (GUID string). |
+| *retailer_id* | string | ID of the retailer in the Connect database (similar to SessionM organization). Also a GUID. |
+| *offer_text* | array | See Response Attributes for Offer Text table below. |
+| *valid_after_end_date* | boolean | If *true*, the offer can still be redeemed by a customer after the end date. |
+| *value_after_end_date* | datetime | New offer value once it expires. For example, it may still be redeemable but gives 5% discount instead of 10%. |
+| *start_date* | datetime | Start of the period during which the offer may be redeemed. |
+| *end_date* | datetime | End of the period during which the offer may be redeemed. |
+| *validity_period* | integer | Period of time in days/hours/years. (See *validity_unit*.) The offer is valid once started. |
+| *validity_unit* | string | Unit measuring the validity period (days, years, etc.). |
+| *points* | integer | integer |
+| *max_recurrence* | integer | Maximum number of times this offer can recur. |
+| *item_price_affinity* | integer | Specifies whether the awarded item(s) are the higher-priced items, or the lower-priced items. 0 - Lowest priced items 1 - Highest priced items. |
+| *web_redeem* | boolean | Can the offer be redeemed via the retailer’s web site. |
+| *quantity* | integer | Number of offers remaining which can be purchased. |
+| *offer_catalog_restrictions* | array | Catalog restriction objects that define what catalog items are eligible for the offer. |
+| *offer_purchase_restrictions* | array | Purchase restriction objects that define when and where the purchase needs to be made to be eligible. |
+| *offer_redemption_restrictions* | array | Redemption restriction objects. |
+| *offer_location_restrictions* | array | Location restriction objects. |
+| \*offer_media" | array | See Response Attributes for Offer Media table below. |
+
+**Response Attributes for Offer Text**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | string | GUID of this object. |
+| *offer_id* | string | GUID of the offer it belongs to. |
+| *culture* | string | Language or locale. |
+| *title* | string | Title of the offer. |
+| *description* | string | Description of the offer. |
+| *terms* | string | Fine print governing offer. |
+
+**Response Attributes for Offer Media**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | string | ID of the offer group. |
+| *uri* | string | URI of the media object. |
+| *category_id* | string | ID of the category for which this media item belongs. |
+| *category_name* | string | Name of the media object's category. |
+| *content_type* | integer | Numeric representation of the type of media. (Not to be confused with MIME type.) Values include: 1 - Image; 2 - Video; 4 - Audio; 5 - Web Link. |
+| *culture* | string | The culture for which the requested offers should be returned. Defaults to “en” if not provided. |
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+### Implementation Notes for Retrieving Campaigns Using V2 APIs
+
+As you work with any of the V2 endpoints that get campaigns via V2 routes, consider some important implementation details.
+
+Base controller for any of the Campaigns V2 APIs: `/dev/core1/app/controllers/priv/v2/users/campaigns/base_controller.rb`
+
+Controller for the show and index routes: `/dev/core1/app/controllers/priv/v2/users/campaigns_controller.rb (edited)`
+
+Endpoints that show and index offer a few different kinds of parameters:
+
+Sections*
+
+- progress_section?
+- behaviors_section?
+- offers_section?
+- redemptions_section?
+
+Filters:
+
+- eligible_filter?
+- ineligible_filter?
+
+Creatives:
+
+- promotion_creative?
+- tile_creative?
+
+These parameters are defined in the "Endpoint Parameters" sections of [Get all active campaigns eligible for a customer](#get-all-active-campaigns-eligible-for-a-customer), [Get a specific campaign for a customer by internal user ID and campaign ID](#get-a-specific-campaign-for-a-customer-by-internal-user-id-and-campaign-id), and [Get a specific campaign for a customer by ID and either campaign permalink or ID](#get-a-specific-campaign-for-a-customer-by-id-and-either-campaign-permalink-or-id).
+
+Sample Curl:
+
+`curl -g -H 'Content-Type:application/json' -u ':redacted' 'https://api-acme.stg-sessionm.com/priv/v2/apps/64f15f67f03de170fb01dd41c0a4321e5d5dfc01/users/c4ce8a2e-bd20-11e8-83a5-ef4eff57e974/campaigns/565?sections[]=behaviors&sections[]=progress,&sections[]=offers&sections[]=redemptions'`
+
+## Retrieving Campaigns
+
+This family of APIs allows you to:
+
+- [Get All Active Campaigns](#get-all-active-campaigns)
+- [Get Information on a Specific Campaign](#get-information-on-a-specific-campaign)
+
+### Get All Active Campaigns
+
+Fetches all active campaigns within a specific platform implementation without having to provide any user-specific data.
+
+#### Endpoints
+
+This method offers the following endpoint:
+
+**REST Endpoint**
+
+```http
+GET /v1/apps/:api_key/campaigns
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *division_ids* | Optional array of division ID strings. When *division_ids* parameter is present, the endpoint filters response to include campaigns from specified divisions only. Note that if multi-org is disabled, the parameter is ignored. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *campaigns* array, as shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "campaigns": [
+    {
+      "id": 367,
+      "external_id": "cc8b6c38-b5c8-11e7-9082-dc7a60cca317",
+      "name": "Campaign Example",
+      "starts_at": "2017-10-01T18:59:00Z",
+      "ends_at": "2018-02-28T19:59:00Z",
+      "status": "draft",
+      "weight": 5,
+      "total_budget": 0,
+      "ssap_name": "10/20 test 11",
+      "reporting_ends_at": "2018-04-14T18:59:00Z",
+      "campaign_type": "messaging",
+      "metadata": {"campaign_version": 2},
+      "template": "messaging",
+      "targeting": {
+        "$and": [
+          {
+            "user.tags": {
+              "$in": ["my_tag_to_target_user"]
+            }
+          },
+          {
+            "user.tags": {
+              "$not": {
+                "$in": ["my_tag_to_target_away_from_user"]
+              }
+            }
+          }
+        ]
+      },
+      "qualify_tag": "my_tag_to_target_user",
+      "disqualify_tag": "my_tag_to_target_away_from_user"
+    }
+  ]
+}
+```
+
+This object is detailed in [Response Attributes for Campaign](#campaign_response) table.
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *missing_data* | Missing campaign data. |
+| *not_found* | Parent model not found. |
+| *validation* | Validation error. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+### Get Information on a Specific Campaign
+
+Fetches a specific campaign within a platform implementation, including its associated information without having to provide any user-specific data. Individual campaigns can be specified using either the *campaign_id* or *permalink* parameters.
+
+#### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/campaigns/:campaign_id/info
+GET /priv/v1/apps/:api_key/external/campaigns/:permalink/info
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+#### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *campaign_id* | Internal SessionM identifier for campaign. |
+| *api_version* | Internal parameter that supports API versioning. |
+| *permalink* | Campaign permalink that can be customer-defined or auto-generated. |
+
+#### Request Object
+
+Not applicable.
+
+#### Response Object
+
+In addition to a *status* key-value pair, the response object returned by the method contains a *campaign* object, as shown below:
+
+**JSON Response**
+
+```json
+{
+  "status": "ok",
+  "campaign":
+  {
+    "campaign_id": 1,
+    "permalink": "my_flock_to_unlock_campaign",
+    "starts_at": "2017-05-09 17:36:48",
+    "ends_at": "2017-05-13 17:36:48",
+    "optin_required": true,
+    "opt_in_starts_at": "2017-05-09 17:36:48",
+    "opt_in_ends_at": "2017-05-13 17:36:48"
+  }
+}
+```
+
+This object is detailed in the following tables:
+
+**Response Attributes for Campaign**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *campaign_id* | integer | Campaign identifier internal to SessionM. |
+| *permalink* | string | Campaign permalink that can be customer-defined or auto-generated. |
+| *optin_required* | boolean | Indicates whether or not opt-in is required for customers wanting to participate in campaign. *true* if an opt-in is required; *false* if it is not. |
+| *starts_at* | string | Campaign start date. |
+| *ends_at* | string | Campaign end date. |
+| *opt_in_starts_at* | string | Opt-in starting date. |
+| *opt_in_ends_at* | string | Opt-in ending date. |
+| *division_id* | string | ID of the division that the campaign is assigned to. Will not be returned when multi-org is disabled. |
+
+#### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *No_active_campaign_found* | No campaign was found for the specified ID. |
+| *User_not_found* | No customer was found for the specified ID. |
+| *Invalid_api_key* | No application was found for the given key. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

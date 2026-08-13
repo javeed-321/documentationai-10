@@ -1,0 +1,162 @@
+---
+title: "Customer Accounts Merge API"
+description: "Merge customer accounts and retrieve merge entry information after the merge completes."
+---
+
+This API allows you to merge customer accounts as well as retrieve merge entry information after the merge. Often necessary when external users being added to the SessionM Platform have existing profile data that must be merged with the newly created, internal profile on the platform. Merging profiles presumes two types of customer profiles exist: the persistent user, or primary, profile and the legacy user, or merged, profile. When the merge completes successfully, the legacy user profile is considered deleted. The profile is not returned by any queries, although it does technically still exist in the database.
+
+Strategies for what profile content is actually merged can be determined by each organization. By default, point balances, tier points (not incentive tiers), transfer transactions, external IDs, and re-process events are all merged data. However, there are other options, including event stream events for transfers.
+
+<Callout kind="info">
+  **API Contingencies and Combinations:**
+
+  The Customer Account Merge API supports the creation and retrievival of customer account merges. As such, you do need to create the customer profiles using the [Customer Profile APIs](/developer/customers/customer-profile-apis).
+</Callout>
+
+This API provides a set of methods that do the following:
+
+- [Merge customer accounts](#merge-customer-accounts)
+- [Retrieve merge information](#retrieve-merge-information)
+
+## Merge Customer Accounts
+
+Merges one customer account into another customer account. Bear in mind that the ability to undo a merge is currently **NOT** supported.
+
+Note that if the *:transfer_incentive_domain_attributes* system setting is enabled, this API request is processed asynchronously.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+POST /priv/v1/apps/:api_key/external/users/:persistent_external_id/merge_accounts
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *persistent_external_id* | External ID for the persistent, or primary, customer profile. |
+
+### Request Object
+
+When this method runs, it passes in a request object that contains a *merge_account* object, as shown below:
+
+**JSON Request**
+
+```json
+{
+    "merge_account":
+    {
+        "external_id": "legacy_external_id"
+    }
+}
+```
+
+The object's attributes are detailed in the following table:
+
+<a id="merge_account_request"></a>**Request Attributes for Merge Account**
+
+| Attribute | Type<br />Required/Optional | Description |
+|---|:---|:---|
+| *external_id* | string or integer<br />required | External ID for the legacy user, or merged, customer profile. |
+
+### Response Object
+
+In addition to a *status* value-pair for the transaction, the response object returned by the method contains a *merge_account* object.
+
+Consider the following sample:
+
+**JSON Response**
+
+```json
+{
+    "status": "ok",
+    "merge_account": {
+        "id": 2,
+        "primary_user_id": "30c556d6-c735-11e8-9e3a-831a00372c90",
+        "merged_user_id": "2070e812-c349-11e8-82f7-23d300372c90",
+        "merged_at": "2018-10-03T18:06:25Z",
+        "available_points": 31,
+        "behaviors": {},
+        "deltas": {},
+        "status": "completed"
+    }
+}
+```
+
+The following tables document this object, along with the associated account statuses:
+
+<a id="user"></a>**Response Attributes for Merged Account**
+
+| Attribute | Type | Description |
+|---|:---|:---|
+| *id* | string | Identifier of the MergeAccount record within our database. |
+| *primary_user_id* | string | Internal GUID for persistent user profile. |
+| *merged_user_id* | sting | Internal GUID for the legacy user profile. |
+| *merged_at* | string | Timestamp for the merge event. |
+| *available_points* | integer | New balance for the persistent user account after doing the merge |
+| *behaviors* | object | Same as the Events API response field. |
+| *deltas* | object | Same as the Events API API response field. |
+| *status* | string | Status of the merge. Possible values include "completed" and "in_progress". |
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. The platform returns the following error messages for this method:
+
+| Code | Reason |
+|---|:---|
+| *validation* | Can't merge same user. Occurs when legacy user and persistent user accounts are the same. |
+| *missing_data* | Missing merge data. Occurs when request body is missing merge_account data, typically  when content-type is incorrect. |
+| *access_denied* | Merge accounts not enabled. |
+
+For information on the generic statuses and errors returned for any object, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).
+
+## Retrieve Merge Information
+
+Fetches the merge entry, with its information, for the customer accounts merge.
+
+### Endpoints
+
+This method offers the following endpoints:
+
+**REST Endpoints**
+
+```http
+GET /priv/v1/apps/:api_key/external/users/:persistent_external_id/merge_accounts/:merge_account_id
+```
+
+For more information on how to specify an endpoint as part of an actual URL, see [Before You Begin](/developer/before-you-begin). The procedure in this section includes a sample URL for a customer transaction.
+
+### Endpoint Parameters
+
+The following parameters are available when specifying the endpoint for this method:
+
+| Endpoint Parameter | Description |
+|---|---|
+| *api_key* | Supplied by the SessionM Platform, the API key is necessary to authenticate any HTTP request to a SessionM API. This key is associated to an API secret, which ties the authentication to a specific application or web site within the organization. The platform maintains each application or site as a digital property, something that can be configured using the SessionM UI. |
+| *persistent_external_id* | External ID for the persistent, or primary, customer profile. |
+| *merge_account_id* | ID of the merge_account entry, which is included in the response for the POST operation discussed in [Merge customer accounts](#merge-customer-accounts). |
+
+### Request Object
+
+Not applicable.
+
+### Response Object
+
+Since this method's response object is identical to what is returned for the method that performs the customer accounts merge, see the "Response Object" section in [Merge customer accounts](#merge-customer-accounts) for more information.
+
+### Statuses and Errors
+
+When this method makes a successful call to the platform, it returns a 200-level status code. When the string returned with a 200-level status code is *ok*, the transaction did process. But, if the string returned is *error*, you need to discover what type of error occurred.
+
+Returned errors can be either method-specific or generic. No error messages are defined for this method except for the generic statuses and errors returned for any object. For more information, see the associated section in [Generic Statuses and Errors](/developer/sessionm-api-services-overview/technical-summary#generic-statuses-and-errors).

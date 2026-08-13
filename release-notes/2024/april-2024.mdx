@@ -1,0 +1,94 @@
+---
+title: "April 2024 Release Notes"
+description: "SessionM platform release notes for April 2024 (release version 2024.3)."
+---
+
+**DETAILS**
+
+| Release to Staging | Release to Production | Release Version |
+|---|---|---|
+| April 9 - 11, 2024 | April 22 - 25, 2024 | 2024.3 |
+
+*No downtime is required for the release.*
+
+**NOTE:** As of April 5, the Staging release has been pushed out four days and the Production release has been pushed out three days.
+
+<Callout kind="warning">
+  **Release Notes Updated**
+
+  As of April 9th, we added the [Reporting & Analytics](#ReportingAnalytics) section to the release notes.
+</Callout>
+
+## Customers & Audiences
+
+### Composer Enhancements
+
+We made the following updates to Composer audience queries to ensure accurate and consistent audience counts in both the Composer module as well as the Audiences module:
+
+- Updated logic to remove duplicate users
+- Updated logic to handle user IDs in both upper and lower case
+
+---
+
+### Customers Bug Fixes
+
+- Previously, there were some Offer types that had the option to be manually redeemed, but would always fail. This release fixes this issue and now all Offer types can be manually redeemed from the Customers module.
+- When initially creating a SessionM profile, a primary external id is created. In addition to this primary external id, there can be multiple other external ids associated with a customer profile. There was a bug where when making an update call with a different external id, that external id would become the primary external id, which would cause issues with other calls using the primary external id. The fix prevented the primary user id from changing because of update calls with other external ids.
+
+---
+
+## Campaigns & Content
+
+### Updated Options for Points Per Outcomes
+
+We have improved the rounding options in campaigns for points per outcomes to align with Loyalty rules. The most notable changes are:
+
+- Introduced a new setting that allows clients to control the point rounding precision on their Campaigns
+- The original choice of “No Rounding” was renamed to “Round Up (Configured Decimal)”. Previously, the option always rounded up to the 3rd decimal. Now, users will be able to define which decimal place this option rounds to based on the new setting. To start, all clients will have their setting set to 3 to maintain existing campaign functionality.
+- A new choice named “None” was added which truncates the value at the new setting.
+- Campaigns can now support outcomes that contain up to 2 decimal places (ex. 0.25 points per $1.50)
+
+Existing options were renamed and reordered to match Loyalty rules. Below are the updated choices and how they function:
+
+*In the examples below, we are assuming the point rounding precision setting has been set to 2.*
+
+- **Round Up (Configured decimal)** – “10.777” becomes “10.78”
+- **Round Down** - “10.777” becomes “10”
+- **Round Up (whole number)** – “10.777” becomes “11”
+- **Round Up 5** – “10.777” becomes “11” whereas “10.444” becomes “10”
+- **None** – “10.777” becomes “10.77”
+
+In addition to the above, we have also updated the Customers module to support the following:
+
+- Manual point adjustment up to 2 decimal places
+- Manual point adjustment of less than 1 point
+
+---
+
+### Campaigns Bug Fixes
+
+- The behavior outcome summary was being updated for most outcomes and their fields, except “Automatically trigger external message to customers when points are awarded” in “Point (Incentives)”. The text was added only after saving the behavior. With this release, the summary will update in real-time while filling in each field of the outcome form.
+- Fixed an issue where clicking on the default option in Transaction Variety Restriction reset the Total number of times to 1, or the number disappeared.
+- Fixed an issue where special characters were not displayed correctly in notifications after saving a behavior template with a name that contains special characters like `' “ / &`. Now the template will save correctly with special characters
+
+---
+
+## Loyalty
+
+### Point expiration in Loyalty 2
+
+As we continue to build out our Loyalty 2 product, we plan to release enhanced point expiration functionality for inactive users in 2025. In the interim, the ability to configure the point expiration based on user inactivity functionality is disabled in the SessionM platform interface for Loyalty 2. For clients who currently have point expiration based on user inactivity, we will continue to support the legacy functionality after you upgrade to Loyalty 2. Please contact your SessionM Customer Success representative for more information.
+
+### Qualifying items not in product catalog in Loyalty 2
+
+We’ve added support to Loyalty 2, at the rule level, to determine whether items that are on a transaction but not within the SessionM catalog qualify for the rule outcome. This only applies to rules with a catalog constraint. We’re introducing this in stages, and currently it can only be set by SessionM. In our next release we will introduce the ability to set this in the rule builder UI. Until then, please contact your SessionM Customer Success representative for more information.
+
+---
+
+<a id="ReportingAnalytics" />
+
+## Reporting & Analytics
+
+### Insights Enhancements
+
+- We've enhanced the usability of the Insights dashboard and added new visuals with daily breakdown centered on transaction counts by payment type.

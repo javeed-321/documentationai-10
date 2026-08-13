@@ -1,0 +1,30 @@
+---
+title: "Before You Begin"
+description: "Obtain the API key and S2S API secret that authenticate every call your site or application makes to the SessionM APIs."
+---
+
+Before you begin using the SessionM APIs, you need to obtain a set of authentication credentials for the web site or application you are integrating. Using these credentials, your site or application can call all of the services available with the SessionM API. Each call to the platform via an API is authenticated by an *API key* and an *S2S API secret*.
+
+These credentials are able to be generated from the Digital Properties module in Admin & Rights.
+
+To add a digital property:
+
+1. Using the account login credentials provided to you from SessionM, log in to the platform from your specified sign-in page.
+
+   The dashboard for the SessionM Platform opens.
+
+   ***Don't have account credentials?*** Consult your SessionM Customer Success contact.
+
+2. Click the Digital Properties module.
+
+   The All Digital Properties page opens.
+
+3. For a new property, click the Add Digital Property button.The Add Digital Property dialog opens.
+
+4. Click the appropriate tab for your property, typically "Server Only."
+
+5. Enter values in the tab's required fields and click the Save button. You can now view the API key and S2S API secret by clicking on the property name of your digital property, which is accessible from the All Digital Properties page. These values function as credentials, which persist indefinitely, for all your server-to-server API calls.
+
+6. With these credentials and an API endpoint, you can specify a URL for any SMP transaction. For example, when making REST API calls in support of standard profiles for customers, the URL appears as follows: **`https://{{hostname}}/priv/v1/apps/{{api_key}}/users`**.
+
+After you have established your server-to-server credentials, you can generate a client-to-server token using a server-to-server API call.

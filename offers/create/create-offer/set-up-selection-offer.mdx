@@ -1,0 +1,95 @@
+---
+title: "Set up Selection offer"
+description: "Set up a Selection offer that bundles individual offers into a collection from which a customer selects a set number."
+---
+
+Set up a Selection offer, which supports the bundling of individual offers into a single collection, from which a customer can select a set number offers from that collection.
+
+## About this task
+
+This task describes Step 2 (Set Up Offer) in creating a Selection offer. Complete [Step 1. Select Offer Type](/offers/create/create-offer/overview#step-1-select-offer-type) before completing this task. Continue with [Step 3. Define Creative Content](/offers/create/create-offer/overview#step-3-define-creative-content).
+
+The **Setup** tab includes four subsections: **Offer Config**, **Grouped Offers**, **Issuance Restrictions**, **Redemption Restrictions**. The configuration steps for each subsection are described in detail below.
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/package_offer.png" width="624" height="93" alt="Setup tab for a Selection offer" caption="" />
+
+## Step 2.1. Offer config
+
+Configure multiple attributes for the offer configuration, detailed below.
+
+1. Name the offer and provide a POS discount ID, if applicable.
+
+   | Field | Description |
+   | --- | --- |
+   | Title | Internal (non-customer-facing) name for the offer, displayed in the Offers dashboard. |
+   | POS Discount ID | **This field is optional**. Corresponding offer ID for the client point-of-sale (POS) or E-commerce system. Value is returned in the Lock API. Useful in implementations where the POS or ecom system is the system-of-record for the offer or responsible for repricing. |
+
+2. Set the issuance period, which is the time period when the offer can be acquired by the customer.
+
+   | Field | Description |
+   | --- | --- |
+   | Start Date | Date when the offer can start being acquired by customers. |
+   | End Date | Date when the offer can no longer be acquired by customers. Defaults to "No End Date", meaning the offer can be acquired until manually deactivated within this module. When the "No End Date" option is unchecked, a date field is displayed, allowing you to define a specific end date for offer availability. |
+
+3. Set the redemption period, which designates when the customer can begin using (redeeming) the offer.
+
+   | Field | Description |
+   | --- | --- |
+   | Can Be Used | Determines the time range of the redemption period. The options are: <ul><li>**Same as issuance period**: Offer can be redeemed following the same time period set for the issuance period.</li><li>**Fixed date range**: Offer can only be redeemed within a specific date range. Note that if the Issuance Period is set to "No End Date", you cannot set a redemption period end date either.</li><li>**Duration after issuance**: Set a fixed period of time (number of days, weeks, months, etc.) that a customer can redeem an offer after issuance.</li><li>**Never expires**: Offer never expires once a user has acquired it.</li></ul> |
+
+4. **Optional**. Set the offer weight & value, which sets the priority and monetary value of the offer.
+
+   | Field | Description |
+   | --- | --- |
+   | Weight | Drives offer display priority and default sorting (for example, in a reward store). Numbers can be between 1-999, with lower numbers indicating higher priority. |
+   | Monetary Value | Estimated dollar value of the offer given to the customer. Typically only used if you need to pass the offer as a separate value to other systems. |
+   | Value After End Date | After an offer expires, it can still retain the monetary value set here. For example, if you enter "2," the offer turns into a $2 Fixed Amount discount at the end of the validity period, regardless of its initial value. |
+
+5. Configure whether you want this offer to be available in a reward store. Note that an offer will still be available to add to a reward store even if these fields are not filled out.
+
+   | Field | Description |
+   | --- | --- |
+   | Reward Store Toggle | "Yes" or "No" toggle. Selection designates if the offer should be available in a reward store (for brands with a reward store). |
+   | Points | If offer is available in a reward store, the cost (in points) to purchase the offer. |
+
+6. **Optional**. Configure key value data for any miscellaneous data that should be kept with the offer.
+
+   | Field | Description |
+   | --- | --- |
+   | Requires Extended Data | "Yes" or "No" toggle for designating if the offer requires an update with 3rd party metadata as part of offer issuance to a customer. **Example**: Airline has 3rd party system that must update redemption dates to coincide with customer travel dates prior to offer issuance. |
+   | Custom Data | Fields to store miscellaneous data that should be kept with the offer. Click **Edit** to enter property fields and values. **Example**: you want an offer to automatically redeem for customers without them having to do anything. Your POS may be configured to look for an 'auto redeem' property on the offer. |
+
+7. Click **Save and Continue**.
+
+## Step 2.2. Grouped offers
+
+1. In the Number of Selections field, enter the number of offers a customer can select from the collection of offers.
+2. Select which offers are part of the collection. All offers from the Offer Management module are presented in the Offers List section. Simply click **Add** next to any Live (active) offer that you want to include. This will move the offer to the 'Selected Offers' section. To remove an offer from this section, click **Remove**.
+3. Click **Save and Continue**.
+
+## Step 2.3. Set issuance restrictions
+
+1. Select the issuance restriction(s) you'd like to apply from the dropdown and enter the necessary values.
+
+   | Restriction | Description |
+   | --- | --- |
+   | Frequency Restriction | Specify how often a customer can acquire the offer (whether it be from the reward store, campaigns, loyalty rules, and so on). Can be defined at a per user level or as a global acquisition cap (i.e. your entire customer base) for the selected time-period. |
+   | Inventory Restriction | Defines the total quantity of offers that can be issued (i.e. that are available) at a per user or global level (i.e. your entire customer base). |
+   | Quantity Restriction | **This restriction is only applicable for Selection offers**. Limits the number of offers that can be selected by Selection Offer each time. This restriction will only apply to an offer that is a child of a Selection offer, as a way to limit the number of selections available. By default, stand alone offers that are non-selection offers are incremented one at a time. |
+
+2. Click **Save and Continue**.
+
+## Step 2.4. Set redemption restrictions
+
+1. Select the redemption restriction(s) that you'd like to apply from the dropdown and enter the necessary values:
+
+   | Restriction | Description |
+   | --- | --- |
+   | Store Location Restriction | Specify locations that are included in or excluded from where the offer can be redeemed. If no store location restriction is set, the offer can be redeemed at any store |
+   | Use Restriction | Indicates how many times an offer can be used in a given time period by a customer. |
+
+2. Click **Save and Continue**.
+
+## Next step
+
+[Step 3. Define Creative Content](/offers/create/create-offer/overview#step-3-define-creative-content)

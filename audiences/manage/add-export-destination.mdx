@@ -1,0 +1,60 @@
+---
+title: "Add export destination"
+description: "Add an SFTP host, Facebook account or AWS S3 bucket as a destination for audience export delivery."
+---
+
+Add a destination to which an audience export can be delivered. You can add an SFTP host, a Facebook account or an AWS S3 bucket as a destination
+
+## Before you start
+
+- Ensure that you have network connectivity to the destination site.
+- Have credentials for the destination site.
+- Have a private key and password for the destination site.
+
+## Steps
+
+1. On the Audience dashboard, click **Manage Exports**.
+2. Click the **Destinations** tab, which displays the SFTP sub-tab and its existing destinations.
+3. Click **+Add Destination**.
+4. On the Settings tab, specify a name for the destination.
+5. Then pick a destination type. Choices include: "SFTP", "Facebook" or "AWS S3".
+6. Depending on which choice you made, enter or select destination data in one of the following sets of input fields:
+
+   <ExpandableGroup>
+     <Expandable title="SFTP" default-open="false">
+       | Setting | Description |
+       | --- | --- |
+       | Host | Host name of the server. For example, sftp.ent-smith.com. Required. |
+       | Port | Port number for a connection. Typically, this value is 22. Required. |
+       | Path | File path to where export data is directed in the SFTP directory. Required. |
+       | User Name | Name of user with permission to access the file path. For example, "theBigE". Required. |
+       | Private Key / Password | Private key or password required to access the directory. Required. |
+     </Expandable>
+
+     <Expandable title="Facebook" default-open="false">
+       | Setting | Description |
+       | --- | --- |
+       | Ad Account ID | Facebook add account ID. Required. |
+       | Access Token | Authentication access token provided by Facebook. Required. |
+       | Customer File Source | Facebook file source. Required. |
+       | Audience Name | Name of the SessionM audience being served by export. Defaults to including audience name and ext_id if not provided. |
+       | Audience Description | Description of SessionM audience being served by export. |
+       | API Version | Facebook API audience version. |
+     </Expandable>
+
+     <Expandable title="AWS S3" default-open="false">
+       | Setting | Description |
+       | --- | --- |
+       | Access Key | AWS access key. Required. |
+       | Secret Key | AWS secret access key. Required. |
+       | Region | Data center region. Required. |
+       | Endpoint | Regional endpoint hostname. |
+       | Tagging | S3 object key/value tags in URL query string format. |
+       | Bucket | Name of bucket. Required. |
+       | Key | Key/file path. Required. |
+     </Expandable>
+   </ExpandableGroup>
+
+7. Click **Save**
+
+The new destination appears in the appropriate sub-tab of the Destinations tab and is available for use in export jobs. If you want to edit an existing destination, simply click <img src="https://docs.sessionm.com/Resources/Images/Assets/actionbutton.png" alt="Action button" class="inline-image" /> in the table row that contains the destination you want to edit, and then select **Edit**.

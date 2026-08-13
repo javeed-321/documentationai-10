@@ -1,0 +1,44 @@
+---
+title: "About messaging providers and templates"
+description: "Overview of messaging providers and templates that shape the email, push and SMS messages delivered in SessionM campaigns."
+---
+
+Messaging is a critical part of building out SessionM campaigns. In short, a message is content that you want to communicate to the customer. Messages build awareness about products and promotions. They facilitate your ability to reach customers with personalized communications in their preferred channel. The SessionM Platform allows you to build and maintain a variety of messaging providers, along with templates that shape the form and content of the messages themselves. Message types vary, but most implementation use some combination of emails, push notifications, and SMS messages.
+
+## Providers
+
+Messaging providers are communication platforms that manage transactional and marketing content delivered through email, push, and SMS messages. The Message Provider Module organizes message providers in a few broad categories:
+
+- **Standard**, which include popular Email providers like SendGrid and SMS providers like OpenMarket.
+- **General Integrations**, which include a few different kinds of providers such as SMS providers like Twilio and Sailthru, email providers like Cheetah Digital, push message providers like Urban Airship, and multi-purpose providers like Bronto.
+- **Ad-Hoc Webhooks** for custom integrations.
+
+On the Admin & Rights 2.0 dashboard, under Platform Configurations, you can click the Messaging Providers tile to open the Messaging Providers page:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/Messaging/Messaging_prov-Deprecated.png" width="924" height="294" alt="Messaging Providers page listing configured providers" caption="" />
+
+From the table on this page, you can:
+
+- Review basic characteristics of all the providers configured for your implementation of the SessionM Platform, including:
+  - Provider name.
+  - Type - The type of messages provider, including "Email," "SMS," "General Integrations," and "Ad-Hoc Webhooks."
+- Access messaging provider templates via a hyperlink that displays the total number of templates defined for the provider. From the messaging templates page, you can review and edit existing templates or create new ones.
+- Edit information about the messaging provider.
+
+In addition, the page offers functions for searching, navigating and creating providers.
+
+## Templates
+
+Messaging templates determine how message content is displayed in the messages sent to customers in support of marketing campaigns and general communication. Each template can be named and defined with attributes pulled from the SessionM Platform. Once they've been added to the payload, they can be formatted and nested to achieve the desired message layout.
+
+From the Messaging Providers table, you can open the Messaging Templates table for a specific provider by locating the provider and clicking its corresponding hyperlink in the Templates column. The SessionM Platform offers several types of providers, each with its own templates; the image below is showing the templates configured for a Twilio message provider:
+
+<Image src="https://docs.sessionm.com/Resources/Images/Procedures/Messaging/Messaging_prov_twilio_template-Deprecated.png" width="939" height="228" alt="Messaging Templates table for a Twilio message provider" caption="" />
+
+From the table on this page, you can:
+
+- Review basic characteristics of all the templates configured for the provider, including:
+  - Template name.
+  - Template ID.
+  - Number of attributes defined in the template.
+- Edit the messaging template.

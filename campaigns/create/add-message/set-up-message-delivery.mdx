@@ -1,0 +1,25 @@
+---
+title: "Set up message delivery"
+description: "Indicate whether a campaign message is delivered on a schedule or triggered by a completed customer behavior."
+---
+
+Indicate whether this message is delivered on a schedule or triggered by a completed customer behavior.
+
+<ExpandableGroup>
+  <Expandable title="Set up scheduled delivery" default-open="false">
+    1. From the message's Setup tab, enable **Scheduled for Delivery Method**.
+    2. Click into the **Delivery Date/Time** field.
+    3. In delivery date/time picker, indicate when the campaign message will be delivered to the customer and click **Ok**.
+    4. If you are scheduling a delivery for push notifications, external messages, or in app notifications, you may want to repeat the message. To do so, enable **Repeat this message**. Use the fields to specify how frequently the message should be repeated.
+    5. If you are setting up a push or in app notification, select a Property to identify the application that will receive the push notification.
+  </Expandable>
+
+  <Expandable title="Set up triggered delivery" default-open="false">
+    1. From the message's Setup tab, enable **Triggered for Delivery Method**.
+    2. Click into the **Start and End Date** field.
+    3. Using the date picker, select start and end dates for the period during which the message can be delivered. Then click **Ok**.
+    4. If you are setting up an external message, skip to step 5. Otherwise, for all other message types, specify the **Trigger Type**. You have two options:
+       - Accept the default of Immediate to send the message immediately after being triggered.
+       - Click **Delayed** to delay sending the message after having been triggered. Use the Delay fields to specify when the message is to be sent after the behavior is completed.
+  </Expandable>
+</ExpandableGroup>
