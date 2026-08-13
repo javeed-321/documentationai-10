@@ -2,6 +2,52 @@
 
 Get step-by-step instructions for implementing SessionM loyalty functionality.
 
+
+
+
+<div style="width: 400px; margin: 50px auto; padding: 25px; border: 1px solid #ddd; border-radius: 10px; font-family: Arial;">
+
+    <h2 style="text-align: center; color: #333;">
+
+        User Registration
+    </h2>
+
+    <input
+        id="name"
+        type="text"
+        placeholder="Enter your name"
+        style="width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box;"
+    >
+
+    <input
+        id="email"
+        type="email"
+        placeholder="Enter your email"
+        style="width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box;"
+    >
+
+    <button
+        onclick="
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            if (name === '' || email === '') {
+                alert('Please fill in all fields');
+            } else {
+                alert('Registration successful!');
+                document.getElementById('message').innerText = 'Welcome, ' + name + '!';
+            }
+        "
+        style="width: 100%; padding: 12px; margin-top: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;"
+    >
+        Register
+    </button>
+
+    <p id="message" style="text-align: center; color: green;"></p>
+
+</div>
+
+
 ## Procedural Guides
 
 <Columns cols="3">
@@ -58,30 +104,8 @@ Get step-by-step instructions for implementing SessionM loyalty functionality.
   </Card>
 </Columns>
 
-<footer className="sessionm-footer">
-  <div className="sessionm-footer__inner">
-    <div className="sessionm-footer__cols">
-      <div className="sessionm-footer__col">
-        <p className="sessionm-footer__heading">Company</p>
-
-        <div className="sessionm-footer__links">
-          <a href="https://www.sessionm.com/" target="_blank">SessionM</a>
-          <a href="https://www.capillarytech.com/careers/" target="_blank">Careers</a>
-          <a href="https://www.capillarytech.com/contact-us/" target="_blank">Contact Us</a>
-        </div>
-      </div>
-
-      <div className="sessionm-footer__col">
-        <p className="sessionm-footer__heading">Resources</p>
-
-        <div className="sessionm-footer__links">
-          <a href="/developer/sessionm-developer-center">Developer Docs</a>
-          <a href="/release-notes/overview">Release Notes</a>
-        </div>
-      </div>
-    </div>
-
-    <p className="sessionm-footer__legal">©2026 SessionM | All rights reserved. Specifications for features or functionality herein may be dependent on a customer's environment; third-party software used and/or needed to be used; and may require professional services, integration services or other services.</p>
-  </div>
-</footer>
+<footer className="sessionm-footer"><div className="sessionm-footer__inner"><div className="sessionm-footer__cols"><div className="sessionm-footer__col"><p><p className="sessionm-footer__heading">Company</p></p><div className="sessionm-footer__links"><p><a href="https://www.sessionm.com/" target="_blank">SessionM</a>
+<a href="https://www.capillarytech.com/careers/" target="_blank">Careers</a>
+<a href="https://www.capillarytech.com/contact-us/" target="_blank">Contact Us</a></p></div></div><div className="sessionm-footer__col"><p><p className="sessionm-footer__heading">Resources</p></p><div className="sessionm-footer__links"><p><a href="/developer/sessionm-developer-center">Developer Docs</a>
+<a href="/release-notes/overview">Release Notes</a></p></div></div></div><p><p className="sessionm-footer__legal">©2026 SessionM | All rights reserved. Specifications for features or functionality herein may be dependent on a customer's environment; third-party software used and/or needed to be used; and may require professional services, integration services or other services.</p></p></div></footer>
 
