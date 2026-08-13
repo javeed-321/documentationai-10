@@ -75,7 +75,8 @@
       {
         "tab": "Learning Hub",
               "icon": "external-link",
-      "href": "https://blog.example.com"
+      "href": "https://blog.example.com",
+        "pages":[]
 
       }
     ]
