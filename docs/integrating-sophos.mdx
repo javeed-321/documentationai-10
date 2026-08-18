@@ -1,0 +1,135 @@
+---
+title: "Integrate Sophos"
+description: "Learn how to connect your Sophos Central account with Scrut."
+---
+
+The **Scrut-Sophos Integration** fetches your employees’ device/endpoint data from your [Sophos](https://www.sophos.com/en-us/products/sophos-central) account and sends it to Scrut. Upon completing the integration, Scrut will display the fetched data in the following modules:
+
+- [People → Employee](https://help.scrut.io/docs/employees)
+- [Access Review](https://help.scrut.io/docs/what-is-access-review)
+
+## How To Integrate Scrut With Sophos
+
+### Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your Sophos account:
+
+- **Account Information:** The login email address for your Sophos Central account
+- **Admin Access:** You must be a Sophos admin to grant the following permissions:
+  - **Read access:** To allow Scrut to monitor data and the organization structure
+  - **Offline access:** To enable read access to your Sophos account, even when you’re offline
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your Sophos account before starting the integration to avoid doing so later.
+</Callout>
+
+### Step 1: Copy Client ID and Client Secret from Sophos
+
+1. Sign in to Sophos Central.
+2. Go to **My Products → General Settings**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431284096-3eqjqi7mk8q-integrating-sophos__01-go-to-my-products-general-settings.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to My Products → General Settings" caption=" " />
+3. Click **API Credentials Management.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431285691-fjge1l80c1n-integrating-sophos__02-click-api-credentials-management.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click API Credentials Management" caption=" " />
+4. Click **Add Credential**.
+5. Enter a **Credential name**, such as **Scrut Automation**.
+6. For **Role**, select **Service Principal Super Admin**.
+7. Click **Add**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431287431-1spvhvzb30k-integrating-sophos__03-click-add.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add" caption=" " />
+8. Copy and save the **Client ID** and **Client Secret**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431289377-vz6dlxmene-integrating-sophos__04-copy-and-save-the-client-id-and-client-secret.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy and save the Client ID and Client Secret" caption=" " />
+
+<Callout kind="danger">
+  Note:
+
+  For security reasons, the Client Secret will be shown only once. So, make sure to save it safely for use later.
+</Callout>
+
+### Step 2: Connect Your Sophos Account in Scrut
+
+1. Log in to your Scrut account and click **Integrations** on the left navigation panel.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432297094-rk4vqrq4ip-sign-in-to-your-scrut-account-and-click-5cb4189e.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your Scrut account and click Integrations on the left navigation panel" caption=" " />
+2. Navigate to the **Integrations Library** tab and choose **Mobile Device Management Tools** in the **Categories** section.
+3. Scroll to the Sophos tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431291013-5oigwcl3azf-integrating-sophos__06-scroll-to-the-sophos-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Sophos tile and click Integrate" caption=" " />
+4. On the Sophos integration page, enter the following details from [Step 1](/v1/docs/integrating-ninjaone#step-1-copy-client-id-and-client-secret-from-ninjaone).
+  - **Client ID**
+  - **Client Secret**
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431292757-wh3zrb1h2ap-integrating-sophos__07-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431294599-5tg9qqxfd04-integrating-sophos__08-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+### Step 3: Configure Scope
+
+If you have multiple tenants in Sophos, you can select the specific ones to include in the integration.
+
+- Go to the Sophos integration page in Scrut and click the **Configure Scope** button to choose the tenants you wish to include.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431296278-i2vi9iwphq-integrating-sophos__09-go-to-the-sophos-integration-page-in-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the Sophos integration page in Scrut and click the Configure Scope button to choose the tenants you" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: On completing the integration, Scrut will sync employees’ device data from Sophos immediately.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync**: If you prefer, you can initiate a manual sync by clicking the **Sync Now** button on the Sophos integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431298182-5h7zzweaot-integrating-sophos__10-manual-sync-if-you-prefer-you-can-initiate-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: If you prefer, you can initiate a manual sync by clicking the Sync Now button on the Sophos" caption=" " />
+
+## Device Data Fetched from Sophos
+
+Scrut fetches the following data points for each employee device from Sophos:
+
+- Device name
+- Serial Number
+- OS Version
+- Last Checked Date
+- Hard Drive Encrypted (Yes/No)
+- Antivirus Installed (Names)
+- Password Manager (Names)
+- USB Disabled (Yes/No)
+- Count and List of Applications Installed on the Device (Click View Details to view the application name and version number)
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431299801-fzs8lxcjsyc-integrating-sophos__11-count-and-list-of-applications-installed-on.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Count and List of Applications Installed on the Device (Click View Details to view the application name and" caption=" " />
+
+## Viewing Sophos Data in Scrut
+
+To view Sophos data in Scrut:
+
+1. Click **People → Employees** on the left navigation panel in Scrut.
+2. Navigate to the **All Employees** tab, search, and click on a specific employee.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432283020-t190c7up3p-navigate-to-the-all-employees-tab-search-and-aa66de6a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to the All Employees tab, search, and click on a specific employee" caption=" " />
+3. On the Employee page, click the **Technicals** tab to view the data Scrut fetches from Sophos.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431301478-duky8dyg2o5-integrating-sophos__13-on-the-employee-page-click-the-technicals.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Employee page, click the Technicals tab to view the data Scrut fetches from Sophos" caption=" " />
+
+## Limitations
+
+### 1: Screen Lock and Device USB settings cannot be monitored
+
+When using Sophos as your monitoring agent in Scrut (via **People → Employees → Checklists**), please be aware that the following device security checks cannot be automatically verified:
+
+- Enable Screen Lock
+- Disable Device USB
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431303278-h0fqi0mviqa-integrating-sophos__14-disable-device-usb.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Disable Device USB" caption=" " />
+
+### 2: List of installed apps not available
+
+Sophos doesn’t share the list of all installed apps via its APIs to Scrut. So, the information on applications installed on employee devices is unavailable in the **Technicals** tab in the **People → Employees → All Employees** page.
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend using an alternative monitoring agent like [Scrut Agent](https://help.scrut.io/docs/what-is-the-scrut-agent) to verify these security measures.
+</Callout>

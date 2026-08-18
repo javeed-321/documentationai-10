@@ -1,0 +1,109 @@
+---
+title: "Integrate Gainsight PX"
+description: "Learn how to connect your Gainsight PX account with Scrut to fetch compliance data."
+---
+
+Learn how to connect your Gainsight PX account with Scrut to fetch compliance data.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details and roles from Gainsight PX for Access Reviews.
+- **Automated Tests:** Runs automated checks that continuously evaluate Gainsight PX for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- An active Gainsight PX account with administrator access
+- An API key generated from the Gainsight PX Administration panel (see Step 1 below)
+
+## Permissions and Access Requirements
+
+### For Gainsight PX
+
+- Admin access to your Gainsight PX account to generate an API key
+- Read permission scope on the API key
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permissions to the Integrations module
+
+## Data Collected
+
+- User name: Full name of the user record
+- Email address: Primary email on the user record
+- User role: User’s role as defined in Gainsight PX
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Generate an API Key in Gainsight PX
+
+1. Log in to your Gainsight PX account.
+2. Navigate to **Administration**, then select **REST API** in Integrations.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430499492-p94dw3bhbcc-integrating-gainsight-px__01-navigate-to-administration-then-select-rest.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to Administration, then select REST API in Integrations" caption=" " />
+3. Click **New API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430501221-hwb4tbmqnm-integrating-gainsight-px__02-click-new-api-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click New API Key" caption=" " />
+4. Enter a **name** and **description** for the key.
+5. Under **API Permissions**, select **Read**.
+6. Click **Generate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430502802-gwiyfwovxi-integrating-gainsight-px__03-click-generate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Generate" caption=" " />
+7. Copy the API key immediately and store it somewhere secure.
+
+**Important**: The API key is shown only once during creation. If you lose it, you must generate a new key.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430504512-61r5j5wi0s5-integrating-gainsight-px__04-important-the-api-key-is-shown-only-once.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: The API key is shown only once during creation. If you lose it, you must generate a new key" caption=" " />
+
+### Step 2: Connect Gainsight PX in Scrut
+
+1. Log in to Scrut and navigate to **Integrations** in the left sidebar.
+2. Select the **Integrations Library** tab.
+3. Search for **Gainsight PX** or browse to the **Miscellaneous** category.
+4. Click **Integrate** on the Gainsight PX card.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430506138-pr9nsjc0mi-integrating-gainsight-px__05-click-integrate-on-the-gainsight-px-card.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate on the Gainsight PX card" caption=" " />
+5. Under Credentials, paste your API key into the Api Key field.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430507864-os5fbe4ia4a-integrating-gainsight-px__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Scrut validates the credentials and establishes the connection. The status on the integration page updates to Connected.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430509732-tzgk1hn4rkq-integrating-gainsight-px__07-scrut-validates-the-credentials-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut validates the credentials and establishes the connection" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+Once the integration is connected, Scrut begins the initial data sync automatically. You can monitor sync activity and review logs by navigating to Integrations, selecting Gainsight PX, and opening the Audit Log tab.
+
+### Review synced data
+
+- Navigate to **People → Access Reviews → Applications** to view the user records fetched from Gainsight PX, including names, email addresses, and roles.
+- Navigate to **Tests → Automated Tests** to view the results of the compliance checks that Scrut runs on your Gainsight PX account.
+
+## Common Errors and Troubleshooting
+
+### Invalid API key
+
+Cause: The API key entered in Scrut is incorrect, has been revoked, or was not copied in full.
+
+Possible solutions:
+
+- Confirm you copied the entire API key at the time of creation.
+- If the key was lost or revoked, generate a new one in Gainsight PX under Administration → REST API and re-enter it in Scrut.
+- Check that the API key has the Read permission scope assigned.
+
+### User data not appearing in Access Reviews
+
+Possible solutions:
+
+- Allow up to 24 hours for the initial sync to complete.
+- Trigger a manual sync from the integration settings page and check the Audit Log for errors.
+- Confirm the users in Gainsight PX have complete records, including name and email address.
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

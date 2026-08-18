@@ -1,0 +1,127 @@
+---
+title: "Integrate Fivetran"
+description: "Connect your Fivetran account to Scrut to bring user access data into your compliance workflows and run automated security checks against your connected Fivetran environment."
+---
+
+Connect your Fivetran account to Scrut to bring user access data into your compliance workflows and run automated security checks against your connected Fivetran environment.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated checks that continuously evaluate Fivetran for security misconfigurations and compliance checks against your applicable compliance frameworks.
+- **User Access Data:** Fetches user details, roles, and permissions from Fivetran for Access Reviews.
+
+## Prerequisites
+
+- An active Fivetran account with Account Administrator access
+- API credentials (API Key and API Secret) generated from your Fivetran dashboard or a System Key with USER - READ permission.
+
+## Permissions and Access Requirements
+
+### For Fivetran
+
+Account Administrator role in your Fivetran account
+
+### For Scrut
+
+Admin access to Scrut, or Contributor access with permissions to the Integration module.
+
+## Data Collected
+
+- User name: Full name of the Fivetran user
+- User email: Primary email associated with the account
+- User role: RBAC role assigned in Fivetran
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Generate API Credentials in Fivetran
+
+There are two ways to generate credentials. Use whichever matches your access and security requirements.
+
+#### Option A: Generate a Personal API Key
+
+1. Log in to your Fivetran dashboard.
+2. Click your username in the bottom-left corner.
+3. Click **API Key**.
+4. Click **Generate API key**. If a key already exists, click Generate new API key.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430452104-b6kb092qint-integrating-fivetran__01-click-generate-api-key-if-a-key-already.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Generate API key. If a key already exists, click Generate new API key" caption=" " />
+5. Copy both the API Key and the API Secret immediately. Store them in a secure location.
+
+**Important:** The API Secret is shown only once. If you close this screen without copying it, you must generate a new key.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430453787-hbu0kg0bhh6-integrating-fivetran__02-important-the-api-secret-is-shown-only-once.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: The API Secret is shown only once" caption=" " />
+
+#### Option B: Create a System Key (Recommended for org-managed access)
+
+1. Log in to your Fivetran dashboard.
+2. Navigate to **Account Settings → General → System Keys**.
+3. Click **+Add system key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430455641-9mj2tjrfn4i-integrating-fivetran__03-click-add-system-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click +Add system key" caption=" " />
+4. Enter a name for the key.
+5. Assign the USER -- READ permission.
+6. Copy the key credentials and store them securely. Learn more about [Fivetran’s system keys here](https://fivetran.com/docs/rest-api/getting-started/system-keys).
+
+### Step 2: Connect Fivetran in Scrut
+
+1. Log in to Scrut and navigate to **Integrations → Integrations Library.**
+2. Search for Fivetran or scroll to the **Database** category and click **Integrate** on the Fivetran tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430457435-tgc7wx1cxz-integrating-fivetran__04-search-for-fivetran-or-scroll-to-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for Fivetran or scroll to the Database category and click Integrate on the Fivetran tile" caption=" " />
+3. Enter the **API Key** and **API Secret** in the corresponding fields.
+4. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430459109-lrupzr3feu-integrating-fivetran__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After the connection is saved, Scrut begins the initial data sync automatically. You can monitor sync status and review any errors in the Audit Logs section of the integration settings page.
+
+### Review synced data
+
+- Navigate to **People → Access Reviews** to create an access review for Fivetran users and roles fetched by this integration.
+- Navigate to **Tests → Automated Tests** to view the compliance checks that Scrut performs for this integration.
+
+## Common Errors and Troubleshooting
+
+### Invalid credentials
+
+Cause: The API Key or API Secret entered in Scrut does not match the active credentials in Fivetran.
+
+Possible solutions: Return to your Fivetran dashboard and regenerate your API credentials. Re-enter the updated API Key and API Secret in the Fivetran integration settings in Scrut. If using a System Key, confirm the key has not been deactivated or modified in Account Settings.
+
+### Insufficient permissions
+
+Cause: The credentials used do not have the USER -- READ scope assigned.
+
+Possible solutions: If using a personal API key, confirm your Fivetran account carries the Account Administrator role. If using a System Key, navigate to Account Settings, then General, then System Keys, and verify the USER -- READ permission is assigned.
+
+### User Data Not Appearing in Access Reviews
+
+Possible solutions: Confirm the integration status shows as Connected in Scrut's integration settings. Trigger a manual sync from the integration settings page and wait for the sync to complete. Check the Audit Logs for any sync errors or partial failures.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What types of API keys does Fivetran support, and which should I use?" default-open="false">
+
+Fivetran supports two types: a personal API Key (tied to your user account and inheriting your RBAC permissions) and a System Key (org-managed with explicit scopes). Either works for this integration. Use a System Key if you want to limit the scope to USER -- READ and avoid tying credentials to an individual user account.
+
+</Expandable>
+
+<Expandable title="2: What happens if I regenerate my API credentials in Fivetran?" default-open="false">
+
+The existing connection in Scrut will stop working. Re-enter the new API Key and API Secret in the Fivetran integration settings in Scrut to restore the connection.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

@@ -1,0 +1,132 @@
+---
+title: "Import a Policy from Google Drive"
+description: "Learn how to import policy documents stored in Google Drive directly into Scrut."
+---
+
+<Callout kind="info">
+  Who can use this feature
+
+  - Supported on **Foundation, Growth,** and **Scale** plans
+</Callout>
+
+You can import policy documents stored in Google Drive directly into Scrut. Depending on the file type, Scrut opens the document in the Scrut policy editor for editing or saves it as a reference attachment.
+
+## Before You Begin
+
+To import from Google Drive, you need to connect your Google account to Scrut. Scrut will prompt you to authenticate the first time you use this option. Once connected, Scrut remembers your account and skips the authentication step on future policy document imports.
+
+## Supported File Types
+
+| File Type | Compatible with Policy Editor | Save as Attachment |
+| --- | --- | --- |
+| Documents (.doc, .docx, .pdf) | Yes | Yes |
+| Spreadsheets (.xlsx) | No | Yes |
+| Presentations (.ppt) | No | Yes |
+| Images (.jpeg, .png) | No | Yes |
+| Others | No | No |
+
+**Important:** Files not listed above cannot be imported or added as attachments and will be rejected during the compatibility check.
+
+## How to Import a Policy from Google Drive
+
+### Method #1: From a Policy's Detail Page
+
+Use this method when the policy already exists in Scrut, and you want to attach or import a document to it.
+
+1. Navigate to **Compliance → Policies** using the left navigation panel.
+2. Click the policy you want to add a document to.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432273954-7hzl3vl7nzj-go-to-the-all-policies-tab-and-select-your-9046bb29.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the policy you want to add a document to" caption=" " />
+3. In the **Start Your Policy** section on the policy detail page, click **Upload Policy Document**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432281227-ix3lmr63y6-in-the-start-your-policy-section-on-the-468064ab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Start Your Policy section on the policy detail page, click Upload Policy Document" caption=" " />
+4. In the **Upload Policy Document** modal, click **Sync via Integration**.
+5. From the **Integration type** dropdown, select **Google Drive**.
+6. Click **Connect**.
+
+<Callout kind="alert">
+  Heads Up!
+
+  If this is your first time connecting, Scrut opens the Google sign-in screen. Select your Google account and follow the prompts to authorize access. If you have already connected your account, Scrut skips this step and opens the file browser directly.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432275818-eohk7f21qtp-if-this-is-your-first-time-connecting-scrut-88666e95.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="If this is your first time connecting, Scrut opens the Google sign-in screen" caption=" " />
+7. In the **Select a file** modal, browse your Google Drive and click the file you want to import. Click **Select**.
+8. Scrut checks whether the file is compatible with the Scrut policy editor. This typically takes 10 to 20 seconds.
+9. Once the check completes, the selected file appears under **Attachment**. Optionally, add context in the **Note** field.
+10. Under **How would you like to set up this policy?**, select one of the following:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432003010-imgq12d9t4j-import-a-policy-from-google-drive__04-under-how-would-you-like-to-set-up-this.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under How would you like to set up this policy?, select one of the following" caption=" " />
+  - **Open in editor** (Recommended): Opens the document in the Scrut policy editor. Formatting is preserved where possible*,* and versions are tracked automatically. Available for .doc, .docx, and .pdf files.
+  - **Save as attachment**: Saves the file as a non-editable reference document. It cannot be edited in Scrut.
+11. Click **Save**.
+
+The document is attached to the policy. If you chose **Open in editor**, the document is available for editing in the [Scrut policy editor](/docs/how-to-use-policy-editor).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432298836-1qlifioprji-the-document-is-attached-to-the-policy-2278695a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The document is attached to the policy" caption=" " />
+
+### Method #2: From the Add Policy Workflow
+
+Use this method when you are creating a new policy and want to import its content from Google Drive simultaneously.
+
+1. Navigate to **Compliance → Policies** using the left navigation panel.
+2. Click **Add Policy** at the top right of the page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432247126-fxsjb9m0inb-click-add-policy-at-the-top-right-of-the-page-c2cf24ab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add Policy at the top right of the page" caption=" " />
+3. On the **Policy Setup** step, select **Upload Policy Document** and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432004771-g6ueqqx4sau-import-a-policy-from-google-drive__07-on-the-policy-setup-step-select-upload.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Policy Setup step, select Upload Policy Document and click Next" caption=" " />
+4. On the **Document Setup** step, click **Sync via Integration**.
+5. From the **Integration type** dropdown, select **Google Drive**.
+6. Click **Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432006697-4nujbdlax7-import-a-policy-from-google-drive__08-click-connect.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  If this is your first time connecting, Scrut opens the Google sign-in screen. Select your Google account and follow the prompts to authorize access. If you have already connected your account, Scrut skips this step and opens the file browser directly.
+</Callout>
+7. In the **Select a file** modal, browse your Google Drive and click the file you want to import. Click **Select**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432008531-sw2b0kemone-import-a-policy-from-google-drive__09-in-the-select-a-file-modal-browse-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Select a file modal, browse your Google Drive and click the file you want to import. Click Select" caption=" " />
+8. Scrut checks whether the file is compatible with the Scrut policy editor. This typically takes 10 to 20 seconds.
+9. Once the check completes, the selected file appears under **Attachment**. Optionally, add context in the **Note** field.
+10. Under **How would you like to set up this policy?**, select one of the following:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432010171-eg5n8iiuu1v-import-a-policy-from-google-drive__10-under-how-would-you-like-to-set-up-this.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under How would you like to set up this policy?, select one of the following" caption=" " />
+  - **Open in editor** (Recommended): Opens the document in the Scrut policy editor. Formatting is preserved where possible, and versions are tracked automatically. Available for .doc, .docx, and .pdf files.
+  - **Save as attachment**: Saves the file as a non-editable reference document. It cannot be edited in Scrut.
+11. Click **Next** to proceed to the **Policy Details** step.
+12. Scrut extracts policy details from your document. This may take a few moments.
+13. Once complete, the **Policy Details** form appears. If your organization has Scrut Teammates enabled, fields like Policy Name and Requirement are pre-filled based on the imported document's content.
+
+<Callout kind="alert">
+  Heads Up!
+
+  Scrut Teammates is continuously improving. Always review the pre-filled details carefully and correct any fields before proceeding. If Scrut Teammates is not enabled for your organization, fill in the policy details manually.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432012006-rfek75wv5j9-import-a-policy-from-google-drive__11-scrut-teammates-is-continuously-improving.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut Teammates is continuously improving" caption=" " />
+14. Review and edit the policy details as needed, then click **Next**.
+15. On the **Link Requirements and Controls** step, select the controls you want to link to this policy using the Frameworks panel, then click **Next**.
+16. If your organization has Scrut Teammates enabled, Teammates will automatically suggest the relevant controls to link to the policy.
+17. On the **Review** step, verify all the details and click **Save**. If needed, hit Back to go to previous steps to make any changes.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432013866-7vky1jgyjw4-import-a-policy-from-google-drive__12-on-the-review-step-verify-all-the-details.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Review step, verify all the details and click Save" caption=" " />
+
+Scrut creates the policy and begins preparing the document.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432015732-0yx2u8z8560i-import-a-policy-from-google-drive__13-scrut-creates-the-policy-and-begins.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut creates the policy and begins preparing the document" caption=" " />
+
+Once complete, the policy moves to **Draft** state, and the document appears in the **Policy Document** section. If you chose **Open in editor**, click the document to open it in the Scrut policy editor.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432017552-95aln05zxnq-import-a-policy-from-google-drive__14-once-complete-the-policy-moves-to-draft.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once complete, the policy moves to Draft state, and the document appears in the Policy Document section" caption=" " />
+
+## Next Reads
+
+- [Create, Upload, or Link Policy Content](/docs/uploading-policy)
+- [How to Use the Scrut Policy Editor](/docs/how-to-use-policy-editor)
+- [Create a Custom Policy](/docs/creating-policy)
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

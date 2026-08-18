@@ -1,0 +1,85 @@
+---
+title: "Integrate Endpoint Central"
+description: "Learn how to connect Endpoint Central with Scrut."
+---
+
+The **Scrut-Endpoint Central Integration** enables Scrut to monitor device compliance, security settings, and patch management across your organization. It tracks device configurations and ensures that all endpoints meet your security and compliance requirements.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your Endpoint Central account:
+
+- **Account Information:** Your Endpoint Central login email address
+- **Admin Access:** You must be an Endpoint Central admin to grant the following permissions:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430431846-vyjmb36ocv-integrating-endpoint-central__01-admin-access-you-must-be-an-endpoint-central.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Admin Access: You must be an Endpoint Central admin to grant the following permissions" caption=" " />
+  - **Read access:** To allow Scrut to read your inventory data
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your Endpoint Central account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With Endpoint Central
+
+### Step 1: Copy Client ID and Client Secret from Endpoint Central
+
+1. Sign in to your **Zoho API console** and click **Add Client**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430433612-1sfjsgc1nf8-integrating-endpoint-central__02-sign-in-to-your-zoho-api-console-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to your Zoho API console and click Add Client" caption=" " />
+2. Choose **Server-based Applications**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430435309-ronuvtixru-integrating-endpoint-central__03-choose-server-based-applications.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Choose Server-based Applications" caption=" " />
+3. Enter a name for the integration, such as Scrut Automation.
+4. For **homepage URL**, enter: [**https://app.scrut.io/**](https://app.scrut.io)
+5. Enter the **Redirect URL**, based on your Scrut region:
+  - **India:** [**https://app.scrut.io/settings/integration/endpoint_central**](https://app.scrut.io/settings/integration/endpoint_central)
+  - **US:** [**https://app.us.scrut.io/settings/integration/endpoint_central**](https://app.us.scrut.io/settings/integration/endpoint_central)
+  - **EU:** [**https://app.eu.scrut.io/settings/integration/endpoint_central**](https://app.eu.scrut.io/settings/integration/endpoint_central)
+  - **Australia:** [**https://app.au.scrut.io/settings/integration/endpoint_central**](https://app.au.scrut.io/settings/integration/endpoint_central)
+6. Click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430437034-k8kz1nbs33q-integrating-endpoint-central__04-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create" caption=" " />
+7. Copy the **Client ID** and **Secret** shown on the screen. Make sure to save these credentials carefully, as you’ll need to enter them in Scrut in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430438667-mfecka0l34-integrating-endpoint-central__05-copy-the-client-id-and-secret-shown-on-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Client ID and Secret shown on the screen" caption=" " />
+
+### Step 2: Connect Your Endpoint Central Account in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and choose **Mobile Device Management Tools** in the **Categories** section.
+3. Scroll to the **Endpoint Central** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430440206-xpfrikp54zd-integrating-endpoint-central__06-scroll-to-the-endpoint-central-tile-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Endpoint Central tile and click Integrate" caption=" " />
+4. On the Endpoint Central integration page, enter the following details from [Step 1](/docs/integrating-endpoint-central#step-1-copy-client-id-and-client-secret-from-endpoint-central).
+  - **Client ID**
+  - **Client Secret**
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430441887-5ez7h0357q-integrating-endpoint-central__07-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Click **Accept** to grant the required permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430431846-vyjmb36ocv-integrating-endpoint-central__01-admin-access-you-must-be-an-endpoint-central.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Accept to grant the required permissions" caption=" " />
+7. Once authorization is done, watch out for the success toast message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430443557-jowvd1b5lcl-integrating-endpoint-central__09-once-authorization-is-done-watch-out-for-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, watch out for the success toast message and the Connected status indicator" caption=" " />
+
+### Step 3: Configure Devices
+
+The final step of the integration is to configure the devices you sync with Scrut.
+
+1. Go to the Endpoint Central integrations page and click **Configure Devices** on the top right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430445389-8ws1nce7jso-integrating-endpoint-central__10-go-to-the-endpoint-central-integrations-page.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the Endpoint Central integrations page and click Configure Devices on the top right" caption=" " />
+2. Select the devices you want to sync with Scrut, and click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430446989-5p6w20eirb5-integrating-endpoint-central__11-select-the-devices-you-want-to-sync-with.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the devices you want to sync with Scrut, and click Save" caption=" " />
+3. Watch out for the “**Scope Updated Successfully!**” notification message.
+
+## What Happens Next?
+
+Upon completing the integration, Scrut will display the fetched data in the following modules:
+
+- [Evidence Tasks](https://help.scrut.io/docs/evidence-tasks-walkthrough)
+- [Tests → Automated Evidence](https://help.scrut.io/docs/getting-started-with-tests-in-scrut)

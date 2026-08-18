@@ -1,0 +1,88 @@
+---
+title: "Scheduled Maintenance on 5 July 2025"
+description: "Scheduled downtime planned for Scrut. Discover how it affects you and what changes are being made during the downtime."
+---
+
+[Scrut](https://app.scrut.io/) will undergo scheduled maintenance on **5 July 2025**, from **10:00 AM to 7:00 PM IST** and will be temporarily unavailable during this period. We apologize for any inconvenience this may cause and have scheduled this maintenance during off-peak hours to minimize disruption to your operations.
+
+## Maintenance Schedule
+
+- **Date:** 5 July 2025
+- **Time:** 04:30 to 13:30 GMT
+- **Estimated Duration:** 9 hours
+- **Affected Services:** Entire Scrut platform
+
+## System Upgrades
+
+Our technical team will be implementing the following improvements during the downtime:
+
+### 1: Azure Integration Upgrade
+
+Scrut is moving from a broad, tenant-based approach to a more granular, **subscription-based model** for our Azure integration. Previously, the Azure integration monitored all subscriptions within a connected tenant. With this enhancement, you can now select only the Azure subscriptions that are relevant to your compliance requirements.
+
+For example, if your Azure tenant includes subscriptions for development, testing, and production environments, but only your production subscriptions are in scope for your ISO 27001 audit, you can now configure Scrut to monitor only your production subscriptions.
+
+For step-by-step instructions, [see here](/docs/azure-integration-enhancement).
+
+### 2: Depreciation of a Few Legacy Cloud Tests
+
+Scrut is deprecating the following cloud tests to enhance the overall compliance experience. After careful evaluation against current industry standards and best practices, we've identified tests that are no longer relevant. This process will streamline your Cloud module by reducing unnecessary complexity, allowing you to focus on relevant tests while maintaining a cleaner, more efficient dashboard.
+
+For Azure, these tests are being phased out starting from version 3.0. This change is because the Azure App Service now has built-in tools and alerts to monitor and manage runtime version updates for supported stacks such as Python, PHP, Java, and .NET.
+
+| **Deprecated Cloud Tests** | **App** |
+| --- | --- |
+| No Security Contact Phone Set | **Azure** |
+| Web App Running an Outdated .NET Framework Version | **Azure** |
+| Web App Running an Outdated Python Version | **Azure** |
+| Web App Running an Outdated PHP Version | **Azure** |
+| Web App Running an Outdated Java Version | **Azure** |
+| Pod Security Policy Disabled | **GCP** |
+| VPC allows all egress(Default Network) | **AWS** |
+| VPC allows all ingress(Default Network) | **AWS** |
+| VPC allows all egress(Custom Network) | **AWS** |
+| VPC allows all ingress(Custom Network) | **AWS** |
+
+### 3: Policy Editor Enhancements
+
+Scrut is optimizing the Policy Editor's revision history. This enhancement is designed to significantly reduce policy loading times and optimize overall performance within the editor. You can look forward to a smoother and faster experience when managing your policies.
+
+## What To Expect
+
+- Scrut will be temporarily unavailable during the maintenance window
+- No impact on your data
+- Services will be restored automatically once maintenance is complete
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Will my data be affected?" default-open="false">
+
+No, all your data remains secure and will not be impacted by this maintenance.
+
+</Expandable>
+
+<Expandable title="2: Can I access Scrut during maintenance?" default-open="false">
+
+No, all Scrut services will be completely unavailable during the scheduled maintenance window.
+
+</Expandable>
+
+<Expandable title="3: How will I know when services are restored?" default-open="false">
+
+Services will automatically resume after maintenance completion.
+
+</Expandable>
+
+<Expandable title="4: What if I have an urgent task during the maintenance window?" default-open="false">
+
+Please plan any critical activities outside the maintenance window.
+
+</Expandable>
+
+</ExpandableGroup>
+
+---
+
+For questions about this maintenance or any assistance during the downtime, please contact support@scrut.io.

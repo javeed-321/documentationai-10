@@ -1,0 +1,101 @@
+---
+title: "Integrate Close CRM"
+description: "Learn how to connect your Close CRM with Scrut."
+---
+
+The **Scrut - Close CRM** integration fetches user access data, permissions, and role assignments from your Close account and syncs them with the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Close flows into the **People → Access** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following credentials:
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- Close account with permissions to generate an API Key
+
+**Note:** If you don’t have access to the Developer settings in Close, you’ll need to contact your Close administrator to generate an API key.
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Close account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Close With Scrut
+
+### Step 1: Fetch API Key and URL from Close
+
+1. Log in to your Close account and click **Settings** on the left navigation panel of the Close dashboard.
+2. In the **Settings** menu, click **Developer**.
+3. In the Developer section, navigate to **API Keys** and click **+New API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430277878-sv68ychevv9-integrating-close-crm__01-in-the-developer-section-navigate-to-api.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Developer section, navigate to API Keys and click +New API Key" caption=" " />
+4. Enter a **Name** for the API key, such as Scrut Integration.
+5. Click **Create API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430279428-8e3d3l4owv5-integrating-close-crm__02-click-create-api-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create API Key" caption=" " />
+6. Copy the generated API Key and save it in a safe location. You’ll need to enter it in Scrut in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430280984-zxncdbho62m-integrating-close-crm__03-copy-the-generated-api-key-and-save-it-in-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the generated API Key and save it in a safe location. You’ll need to enter it in Scrut in the next step" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to this guide from Close for [more information on the API key and what it does](https://developer.close.com/).
+</Callout>
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Customer Relationship Management** in the **Categories** section.
+3. Scroll to the **Close CRM** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430282621-ceqqqlbkqwk-integrating-close-crm__04-scroll-to-the-close-crm-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Close CRM tile and click Integrate" caption=" " />
+4. On the integration page, paste the **API Key** obtained in Step 1.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430284195-9m237ybs1m7-integrating-close-crm__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the success toast and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430285980-n1yiq2i2j1c-integrating-close-crm__06-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the success toast and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Close. This process typically takes a few hours to complete. Check the Audit Log on the Close integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs a sync **every 24 hours** to fetch incremental data, such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430287613-u96kiywo4c-integrating-close-crm__07-manual-sync-you-can-also-click-the-sync-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: You can also click the Sync Now button to trigger an immediate data refresh" caption=" " />
+
+## Data Fetched from Close
+
+Scrut fetches the following access-related data points from Close:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Close Data in Scrut
+
+To view the data fetched from your Close account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your Close account.
+
+You can also create an Access Review (or edit an existing one) and include the Close application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Close:
+
+1. Go to **People → Access** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select Close in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Close to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting Close with Scrut, please contact the Scrut support team at support@scrut.io.

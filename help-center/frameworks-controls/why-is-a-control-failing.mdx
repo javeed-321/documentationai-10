@@ -1,0 +1,22 @@
+---
+title: "Why is a control showing as failing?"
+description: "The common reasons a control drops out of a passing state, and how to fix each."
+---
+
+A failing control almost always comes down to one of three things.
+
+## The evidence is stale
+
+- Automated checks run on a schedule. If the last run is outside the review window, the control fails until it runs again.
+
+## The integration disconnected
+
+- If credentials expired or access was revoked, Scrut cannot collect evidence. Reconnect the integration to resume.
+
+## No evidence is linked
+
+- A control with no linked artifact cannot pass. Attach a document or connect a source.
+
+<Callout kind="alert">
+  A control that has never been configured shows as failing rather than empty. Check whether it was ever set up before investigating further.
+</Callout>

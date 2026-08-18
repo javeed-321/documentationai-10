@@ -1,0 +1,185 @@
+---
+title: "Integrate Confluence"
+description: "Learn how to connect your Confluence pages with Scrut for policy management."
+---
+
+Connecting Confluence with Scrut lets you automatically import and sync policy documents into the Scrut Policies module, so your compliance program always reflects the latest versions maintained in Confluence.
+
+## What This Integration Does in Scrut
+
+- **Policy Management:** Fetches policy documents into the Policies module in Scrut. These policies can be assigned to employees for review and acceptance.
+
+## Prerequisites
+
+Before setting up this integration, make sure you have:
+
+- An active Confluence account with administrator access.
+- Policies in Confluence tagged with the relevant labels you intend to sync.
+
+## Permissions and Access Requirements
+
+### For Confluence
+
+Scrut requests the following OAuth scopes during authentication:
+
+- read:page:confluence - View page content
+- read:label:confluence - View labels associated with content or spaces
+- read:user:confluence - View user information for OAuth identity verification during setup
+- read:email-address:confluence - View email addresses of Confluence users
+- read:content-details:confluence - View detailed content metadata
+- offline_access - Maintain access without requiring repeated re-authentication
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integration module enabled.
+
+## Limitations
+
+- Confluence API v1 and v2 are supported. Confluence Server (self-hosted) is not supported.
+- Images embedded in Confluence documents are not displayed in the policy preview within Scrut.
+- Only Confluence pages tagged with the labels you configure in Scrut are eligible for sync. Pages without a matching label are not available for selection.
+
+## Data Collected
+
+- Policy document: Confluence page content (Only pages with configured labels are synced)
+- Policy name: Confluence page title (Displayed as the file name in Scrut)
+- Sync metadata: Last modified timestamp (Used to detect new versions and prompt re-sync)
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the Confluence integration settings page by clicking Sync Now.
+
+## Integration Setup
+
+### Step 1: Connect Confluence to Scrut
+
+1. From the left navigation panel, select **Integrations**.
+2. Navigate to the **Integrations Library** tab.
+3. Scroll to the **Policy Management** section and locate **Confluence**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430311005-r0dj8seo7s8-integrating-confluence__01-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. On the Confluence integration page, click **Connect**. You are redirected to Confluence's OAuth authorization page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430312859-39nukmi0erh-integrating-confluence__02-on-the-confluence-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Confluence integration page, click Connect. You are redirected to Confluence's OAuth authorization page" caption=" " />
+6. If prompted, log in to your Confluence account.
+7. Review the access permissions Scrut is requesting and click **Accept**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430315211-24w1ymeejan-integrating-confluence__03-review-the-access-permissions-scrut-is.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the access permissions Scrut is requesting and click Accept" caption=" " />
+8. After a successful authorization, you are redirected back to Scrut. The integration status updates to Connected.
+
+**Note:** Scrut requests read-only access to Confluence. It does not modify any content in your Confluence account.
+
+### Step 2: Configure Sync Labels
+
+After connecting, you need to specify which Confluence labels determine which pages are available for syncing into Scrut.
+
+1. On the Confluence integration page in Scrut, click the three-dot menu in the top-right corner.
+2. Select **Configure Labels**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430316907-f6f3t2mrz0o-integrating-confluence__04-select-configure-labels.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Configure Labels" caption=" " />
+3. Select the labels that correspond to the Confluence pages you want to make available in Scrut.
+4. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430318608-t86cj2f6dt-integrating-confluence__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  Use a dedicated Confluence label (such as "scrut-sync") for pages you want to sync. This makes it easier to control the scope and avoid inadvertently making unrelated pages available.
+</Callout>
+
+## What Happens Next?
+
+### Initial Data Sync
+
+After the integration is connected and labels are configured, Scrut begins syncing user data automatically. You can monitor sync activity by clicking Audit Log on the Confluence integration settings page.
+
+## Syncing a Policy from Confluence
+
+After the integration is connected and labels are configured, you can sync individual Confluence pages to policies in Scrut.
+
+1. Navigate to **Compliance → Policies**.
+2. Open the policy you want to attach a Confluence document to.
+3. Under Start Your Policy, click **Upload Policy Document**.
+4. In the Upload Policy Document dialog, select **Sync via Integration**.
+5. From the **Integration type** dropdown, select **Confluence**.
+6. Use the search field to find the Confluence page you want to sync, then select it.
+7. Under How would you like to set up this policy?, choose one of the following:
+  1. **Open in editor (Recommended)**: The document opens in Scrut's policy editor. Formatting is preserved where possible and versions are tracked automatically.
+  2. **Save as attachment**: The document is saved as a read-only attachment. It cannot be edited in Scrut.
+8. Optionally, add context in the **Note** field. This note is visible to approvers during the review process.
+9. Click Save. The policy status changes from Not Uploaded to Draft.
+
+<Callout kind="alert">
+  Heads Up!
+
+  After syncing, the policy goes through the standard workflow in Scrut before it can be published.
+</Callout>
+
+## Handling Policy Updates from Confluence
+
+When a published policy's source document is updated in Confluence, Scrut detects the change and notifies you.
+
+1. On the policy page, you will see the message: "New version of policy is available in Confluence." Click **View Policy** to preview the updated content.
+2. Choose one of the following:
+  - **Sync:** The policy status reverts from Published to Draft and goes through the approval process again.
+  - **Skip:** The current published version is retained and the update is dismissed.
+
+## Common Errors and Troubleshooting
+
+### Integration Not Connecting
+
+Possible solutions:
+
+- Confirm you are logged in to the correct Confluence account before clicking Connect.
+- Ensure you have administrator access on the Confluence account being authorized.
+- Clear your browser cache and cookies, then try the OAuth flow again.
+
+### No Pages Appearing When Syncing a File
+
+Cause: No Confluence pages match the labels configured in Scrut, or no labels have been configured. Possible solutions:
+
+- Go to the Confluence integration settings, open Configure Labels, and confirm the correct labels are selected.
+- In Confluence, verify that the pages you want to sync have at least one of the configured labels applied.
+
+### Policy Not Updating After a Sync
+
+Possible solutions:
+
+- Confirm the page in Confluence has been saved after the most recent edit.
+- Wait for the next automatic sync (every 24 hours) or trigger a manual sync by clicking Sync Now on the integration settings page.
+- Check the Audit Log for any error entries associated with the most recent sync attempt.
+
+### Images Not Showing in the Policy Preview
+
+Cause: Confluence document images are not available in the Scrut policy preview by design. Possible solutions:
+
+- Download the synced policy file to view the full document with images.
+- If auditors need to see embedded images, share the Confluence page link alongside the synced document.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if I change the labels configured in Scrut?" default-open="false">
+
+Updating the label configuration changes which Confluence pages are available for future syncs. Pages already synced to policies in Scrut are not removed. To sync a page under a newly added label, open the relevant policy and use Sync a File.
+
+</Expandable>
+
+<Expandable title="2: Can I sync the same Confluence page to multiple policies in Scrut?" default-open="false">
+
+Yes. You can use Sync a File on any policy and select the same Confluence page. Each policy maintains its own copy of the synced document.
+
+</Expandable>
+
+<Expandable title="3: What happens if I delete a Confluence page that has already been synced?" default-open="false">
+
+The synced document remains in Scrut. Deleting the source page in Confluence does not remove the attachment from the policy in Scrut. The next sync will not find the page and will not update the attachment.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

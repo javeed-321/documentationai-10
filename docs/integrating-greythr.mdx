@@ -1,0 +1,94 @@
+---
+title: "Integrate greytHR"
+description: "Learn how to connect greytHR with Scrut."
+---
+
+The **Scrut-greytHR integration** fetches employee data from your greytHR account and sends it to Scrut. Upon completing the integration, Scrut will display the fetched data in:
+
+- [People module](https://help.scrut.io/docs/employees-1)
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your greytHR account:
+
+- **Account Information**: Login credentials
+- **Access Level**: Admin access to greytHR
+- **Permissions**: Scrut requires read access to the following data:
+  - Read: user_profile
+  - Read: employment_info
+  - Read: manager_info (wherever applicable)
+  - Read: leave_data
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your greytHR account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With greytHR
+
+### Step 1: Generate greytHR API Credentials
+
+1. Log in to your greytHR account and navigate to **Settings** → **My Account → API Users**.
+2. On the API Users page, click **Create API User**.
+3. In the **Add API User** pop-up, enter the **User Name**, like Scrut Automation.
+4. [Optional] In the **Description** text box, you can enter a short description, such as “Integration to connect with Scrut Automation.”
+5. In the **Select Roles** section, you can select the roles of the API user. You can select multiple roles.
+6. Click **Next**.
+7. A pop-up appears with the **User Name** and **Password** for the created API user.
+
+<Callout kind="alert">
+  Heads Up!
+
+  - Make sure to save this information as it’s crucial for integrating with Scrut. Copy and paste the API User Name and Key in a safe location. You’ll need to enter it in Scrut in [Step 2](/docs/integrating-greythr#step-2-connect-your-greythr-account-in-scrut).
+  - For detailed instructions, refer to [greytHR’s documentation](https://admin-help.greythr.com/admin/answers/123842254).
+</Callout>
+
+### Step 2: Connect Your greytHR Account in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and select **Human Resource Information Systems** from the Categories section.
+3. Scroll to the greytHR tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430615690-b9gwwof8nr8-integrating-greythr__01-scroll-to-the-greythr-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the greytHR tile and click Integrate" caption=" " />
+4. On the greytHR integrations page, click the **Connect** button on the top right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430617462-h2bv8i3ttlu-integrating-greythr__02-on-the-greythr-integrations-page-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the greytHR integrations page, click the Connect button on the top right" caption=" " />
+5. Enter your **greytHR subdomain**.
+
+   **Note:** For example, if you sign in at acme.greythr.com, acme is your subdomain. Do not enter the full “acme.greythr.com.”
+6. Copy and paste the **greytHR API Username** and **API Key** that you generated in [Step 1](/docs/integrating-greythr#step-1-generate-greythr-api-credentials).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430619305-uvjtz3xws7-integrating-greythr__03-copy-and-paste-the-greythr-api-username-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy and paste the greytHR API Username and API Key that you generated in Step 1" caption=" " />
+7. Click **Submit**.
+
+Watch out for the “Connected Successfully” notification message and the Connected status tag.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employee data from your greytHR account.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the greytHR integrations page.
+
+## Data Fetched from greytHR
+
+Scrut fetches the following data for all your employees from greytHR:
+
+- Employee name
+- Email address
+- Joining date
+- Exit date (if applicable)
+- Department and Role (if available)
+- Email of reporting manager (if available)
+- Leave data (start date, end date, and status)
+
+## Viewing greytHR Data in Scrut
+
+To view greytHR data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your greytHR account with Scrut, please contact our support team at support@scrut.io for assistance.

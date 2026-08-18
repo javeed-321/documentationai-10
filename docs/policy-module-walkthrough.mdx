@@ -1,0 +1,197 @@
+---
+title: "Policies: Walkthrough"
+description: "Walkthrough of the policies module in Scrut. Learn how to navigate and manage your policy documents in Scrut."
+---
+
+Policies are written instructions that define how your organization manages security risk, meets regulatory requirements, and protects sensitive information like customer data. In Scrut, policies are a core part of your compliance program and a required component for audit readiness.
+
+Policies are written instructions that define how your organization manages security risk, meets regulatory requirements, and protects sensitive information like customer data. In Scrut, policies are a core part of your compliance program and a required component for audit readiness.
+
+## What Are Policies?
+
+Policies guide how your organization protects valuable information and technical assets from unauthorized access or harm. They create a framework for keeping data confidential, accurate, and available, and they establish the expected behaviors your team follows to guard against security threats and risks.
+
+Controls are the written rules for adhering to that framework. Policies are the detailed instructions that describe exactly how your company will follow those rules in practice.
+
+- Frameworks (such as SOC 2 or ISO 27001) define the overall compliance standard your organization is working toward.
+- Controls represent the specific rules your organization must follow to adhere to a framework. manage and reduce security risk. Each control maps to one or more framework requirements.
+- Policies are documents that explain how your organization meets those controls. They describe your company's commitments, processes, and standards in concrete terms.
+
+## How Policies Support Your Audit
+
+Auditors reviewing your compliance program check for two factors: what rules your organization has committed to following, and how you are following them. Policies answer both questions.
+
+To be audit-ready, the policies required for your target framework must be published in Scrut and accepted by the employees they apply to. Published policies become part of your compliance evidence and directly satisfy associated policy-related controls in Scrut.
+
+<Callout kind="info">
+  Different frameworks require different sets of policies. However, many policies that satisfy SOC 2 requirements also apply to frameworks like ISO 27001 and others. So completing your policy set for one framework often accelerates your readiness for others.
+</Callout>
+
+## Policy Module Tabs
+
+The policies module has two primary tabs:
+
+- The **Policy Dashboard** gives you a real-time view of all your policies across assignees, departments, frameworks, and review stages. Use it to track policy status, identify gaps, and act on policies that have upcoming reviews.
+- The **All Policies** page in the Policy module provides a comprehensive overview of all your policies.
+
+## How to Access the Policy Dashboard
+
+1. Sign in to Scrut.
+2. Navigate to **Compliance → Policies**.
+3. Click the **Dashboard** tab.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432076875-mzz2c93our-policy-module-walkthrough__01-click-the-dashboard-tab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Dashboard tab" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  Policies marked as "Not Relevant" are hidden from the dashboard by default. To include them, click the Relevance filter and select Not Relevant.
+</Callout>
+
+### Dashboard Filters
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432078467-0rjfqrhwxwxj-policy-module-walkthrough__02-dashboard-filters.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Dashboard Filters" caption=" " />
+
+Use the filters at the top of the dashboard to narrow your view by specific criteria:
+
+- **Assignee:** View policies assigned to specific users, unassigned policies, policies assigned to deactivated users, or policies assigned to you.
+- **Department:** View policies by department, or find policies with no department linked.
+- **Framework:** View policies mapped to a specific framework. Select No Framework to see all policies without a framework.
+- **Entities:** View policies by entity.
+- **Relevance:** Switch between Relevant and Not Relevant policies.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Click the circular reset icon to the right of the filters to clear all applied filters at once.
+</Callout>
+
+### Policy Status
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432080417-k8zj7o6qzwo-policy-module-walkthrough__03-policy-status.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Policy Status" caption=" " />
+
+The Policy Status widget at the top of the dashboard shows the count of policies under each review stage: Not Uploaded, Draft, Approved, Needs Review, and Published. [Learn more about policy statuses](/docs/policy-statuses).
+
+**Note:** Policies move to Approved status only when the policy approval workflow is turned on.
+
+### Policy Gap Status
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432081961-e7z9ynte1zh-policy-module-walkthrough__04-policy-gap-status.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Policy Gap Status" caption=" " />
+
+The Policy Gap Status widget gives you a snapshot of how many policies have been evaluated for content gaps. The progress bar breaks down your policies into three states:
+
+- **No Gaps:** Policies that have been evaluated and have no gaps.
+- **Gaps Detected:** Policies where one or more gaps were found.
+- **Not Evaluated:** Policies that have not yet been evaluated.
+
+The count at the top (for example, 12/586) shows how many of your total policies currently have no gaps.
+
+### Upcoming Policies for Review
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432083619-pkupies0se-policy-module-walkthrough__05-upcoming-policies-for-review.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Upcoming Policies for Review" caption=" " />
+
+This section lists [policies that are overdue for review](https://scrut.document360.io/docs/settings-a-policy-review-cycle). Click View All to see the full list of policies marked as Needs Review.
+
+### AI-Detected Policy Gaps
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432085475-0mtd46jk5bxo-policy-module-walkthrough__06-ai-detected-policy-gaps.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="AI-Detected Policy Gaps" caption=" " />
+
+The AI-Detected Policy Gaps section lists policies where Scrut Teammates has identified missing or incomplete content. Each entry shows the policy name and the number of gaps detected. Click **View** next to any policy to see the specific gaps. Click **View All** to see the complete list of policies with AI-detected gaps.
+
+### Policies by Assignee
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432087290-e5zz8x0vy98-policy-module-walkthrough__07-policies-by-assignee.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Policies by Assignee" caption=" " />
+
+The Policies by Assignee chart shows the number of policies assigned to each user, broken down by status. Click any bar to go to the All Policies page with the assignee and status filters already applied.
+
+### Policies by Department
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432088918-8xas4kme2zh-policy-module-walkthrough__08-policies-by-department.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Policies by Department" caption=" " />
+
+The Policies by Department chart shows the number of policies across each department, broken down by status. Click any bar to go to the All Policies page with the department and status filters already applied.
+
+### Policies by Framework
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432090775-iymml8znaa-policy-module-walkthrough__09-policies-by-framework.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Policies by Framework" caption=" " />
+
+The Policies by Framework chart shows how many policies are mapped to each compliance framework, broken down by status. Click any bar to go to the All Policies page with the framework and status filters already applied.
+
+<Callout kind="alert">
+  Heads Up!
+
+  Use the dropdown above each chart to switch the view between Assignee, Department, and Framework.
+</Callout>
+
+## How To Access the All Policies Page
+
+Sign in to Scrut and click **Compliance → Policies** on the left navigation panel. Click the **All Policies** tab. Once you’re on this page, you can perform the following key actions:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432092514-el78vi826sh-policy-module-walkthrough__10-sign-in-to-scrut-and-click-compliance.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to Scrut and click Compliance → Policies on the left navigation panel" caption=" " />
+
+### Create Custom Policies
+
+Click the **Add Policy** button on the top-right to create a custom policy. Refer to this guide for more information on [creating custom policies](/docs/creating-policy).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432247126-fxsjb9m0inb-click-add-policy-at-the-top-right-of-the-page-c2cf24ab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Add Policy button on the top-right to create a custom policy" caption=" " />
+
+### Status Cards
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432094220-ehmadc3p7i-policy-module-walkthrough__12-status-cards.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Status Cards" caption=" " />
+
+The **Status cards** show the number of policies under each status. See here to [learn more about each policy status](https://help.scrut.io/docs/what-is-a-policy#policy-status).
+
+<Callout kind="alert">
+  Note:
+
+  Policies move to the Approved status only when the [policy approval workflow is turned on](/docs/understanding-policy-approval-workflow).
+</Callout>
+
+### Table Filters
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432095777-6iur4o4tubg-policy-module-walkthrough__13-table-filters.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Table Filters" caption=" " />
+
+Use the filters at the top of the table to find policies based on specific criteria:
+
+- **Assignee:** Use this filter to view policies assigned to specific users. You can also check for policies that aren’t assigned to anyone, assigned to deactivated users, or assigned to you.
+- **Department:** To find policies belonging to specific departments or policies that aren’t linked to any department.
+- **Framework:** To view policies belonging to specific frameworks. Click on No Framework to display all policies not linked to any frameworks.
+- **Entities:** To view policies belonging to specific entities.
+- **Relevance:** To view policies marked as “Relevant” and “Not Relevant.”
+
+<Callout kind="info">
+  Pro Tip!
+
+  Click the circular reset icon <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432289965-1ynr1vzfzht-reset-b870f48e.png?fm=auto&auto=compress%2Cformat" width="20" height="20" alt="reset" caption=" " /> to the right of the filters to remove all applied filters.
+</Callout>
+
+### Policy Table
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432097804-tdkv7pj4rus-policy-module-walkthrough__15-policy-table.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Policy Table" caption=" " />
+
+The main focus of the All Policies page is the **Policy table**. It provides a quick snapshot of each policy, including relevant metadata such as the policy name, status, assignee, approver, department, version number, and more. Clicking on any policy in the table takes you to the corresponding Policy Details page.
+
+### Search Bar
+
+Use the search bar at the top of the table to search policies by name, entities, or approver.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432099547-yos2dse7lah-policy-module-walkthrough__16-use-the-search-bar-at-the-top-of-the-table.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Use the search bar at the top of the table to search policies by name, entities, or approver" caption=" " />
+
+### Filters
+
+Filter policies based on:
+
+- Effort Estimate: High, Medium, or Low
+- Approver, Created By, Published By
+- Next review date: Overdue, current month, next month, current quarter, next quarter, or custom range
+- Recurrence: Annually, bi-annually, quarterly, monthly, or never
+- Source: Scrut / Custom
+- Published On
+- Version Number
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432101307-l3in59xq6p-policy-module-walkthrough__17-version-number.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Version Number" caption=" " />
+
+### Column Selector
+
+Use the column selector at the top of the table to choose the columns to be visible in the table.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432102954-rlvkpgldc6f-policy-module-walkthrough__18-use-the-column-selector-at-the-top-of-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Use the column selector at the top of the table to choose the columns to be visible in the table" caption=" " />

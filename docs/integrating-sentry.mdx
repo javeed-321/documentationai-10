@@ -1,0 +1,147 @@
+---
+title: "Integrate Sentry"
+description: "Learn how to connect your organization's Sentry account with Scrut."
+---
+
+Connect your Sentry account with Scrut to sync user access data and run automated compliance checks against your applicable frameworks.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details, roles, and permissions from Sentry for Access Reviews.
+- **Automated Tests:** Runs automated checks that continuously evaluate Sentry for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+Before starting the integration, make sure you have the following in place:
+
+- An active Sentry account with permission to create [Custom Integrations](https://docs.sentry.io/api/guides/create-auth-token/)
+
+## Permissions and Access Requirements
+
+### For Sentry
+
+Scrut requires read-only access to the following scopes in Sentry:
+
+- Project: Read access to Projects, Tags, Debug Files, and Feedback
+- Member: Read access to Members within Teams
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integrations module enabled
+
+## Data Collected
+
+- User Name: Full name as listed in Sentry Email
+- User Email: Primary email address on the Sentry account
+- User Role: Organization-level role assigned in Sentry
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page in Scrut.
+
+## Integration Setup
+
+### Step 1: Generate a Custom Integration Token in Sentry
+
+1. Log in to your Sentry account.
+2. Go to **Settings** and select **Custom Integrations** from the left navigation panel under Developer Settings.
+3. Click **Create New Integration**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431194897-ntiwniydqas-integrating-sentry__01-click-create-new-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create New Integration" caption=" " />
+4. When prompted to choose an integration type, select **Internal Integration** and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431196741-nabxscofgon-integrating-sentry__02-when-prompted-to-choose-an-integration-type.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="When prompted to choose an integration type, select Internal Integration and click Next" caption=" " />
+5. Enter a name for the integration, such as Scrut.
+6. Under **Permissions**, set the following access levels:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431198732-gjkvgy4shok-integrating-sentry__03-under-permissions-set-the-following-access.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under Permissions, set the following access levels" caption=" " />
+  - Project: Read
+  - Member: Read
+  - Leave all other permissions set to No Access.
+7. Click **Save Changes**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431200595-66lze5bgmzo-integrating-sentry__04-click-save-changes.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save Changes" caption=" " />
+8. Scroll down to the **Token** section and click **+ New Token**.
+
+   **Important:** Copy the token immediately and store it in a secure location. Sentry will not display this token again after you leave the page.
+9. Click **Save Changes** to confirm.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431202252-f0l3txibz6-integrating-sentry__05-click-save-changes-to-confirm.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save Changes to confirm" caption=" " />
+
+**Note:** Refer to this guide from Sentry for more information on [how to generate an Auth token and what it does](https://docs.sentry.io/api/guides/create-auth-token/).
+
+### Step 2: Connect Sentry in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab.
+3. In the **Categories** panel on the left, select **Vulnerability Scanners**.
+4. Locate the **Sentry** tile and click Integrate.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431204178-8esm3lgkwqv-integrating-sentry__06-locate-the-sentry-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Sentry tile and click Integrate" caption=" " />
+5. On the integration page, paste the **Custom Integration Token** you copied in Step 1 into the Custom Integration Token field.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431206091-m8ecxe4232-integrating-sentry__07-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Once the connection is verified, you'll see a success toast, and the status indicator will update to Connected.
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is connected, Scrut begins syncing user data from Sentry automatically. The initial sync typically takes a few hours. To monitor the status, go to the Sentry integration page in Scrut and click the Audit Log tab.
+
+### Review synced data
+
+Once synced, check whether Sentry user data is synced in the following modules:
+
+1. Navigate to Tests and filter tests by Application → Sentry to view only automated tests for the Sentry integration.
+2. Navigate to **People → Access Reviews** and create a new Access Review, or open an existing one. In Step 2 of the Access Review setup, search for and add Sentry under Applications in Scope. Select a Reviewer and Approver, review the details, and click Save Review. From the Access Review page, click Sentry to view user name, email, and role data pulled from your Sentry account.
+
+To trigger a sync at any time, go to the Sentry integration page in Scrut and click Sync Now.
+
+## Common Errors and Troubleshooting
+
+### Integration fails, or the token is not accepted
+
+Possible solutions:
+
+- Confirm that the token was copied in full, without any extra spaces.
+- Check that the integration type in Sentry is set to Internal Integration. Tokens generated from Public Integrations are not supported.
+- Verify that the Project and Member permissions are both set to Read before saving.
+- If the token was generated but then the permissions were changed, generate a new token and resubmit.
+
+### Data is not appearing in Access Reviews
+
+Possible solutions:
+
+- Check the Audit Log on the Sentry integration page in Scrut to confirm the sync completed successfully.
+- If the initial sync is still in progress, wait a few hours and check again.
+- Confirm that Sentry is added as an application in scope in the Access Review you're checking.
+- Click Sync Now on the integration page to trigger a manual refresh.
+
+### User records are missing or incomplete
+
+Possible solutions:
+
+- Verify that the affected users exist and are active in your Sentry organization.
+- Confirm that the integration token has Member: Read permission. Without this scope, user data will not be fetched.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if I rotate or revoke the Custom Integration Token in Sentry?" default-open="false">
+
+If the token used during setup is revoked or rotated, the integration will stop syncing data. Generate a new token in Sentry, go to the Sentry integration page in Scrut, update the Custom Integration Token field, and click Submit to reconnect.
+
+</Expandable>
+
+<Expandable title="2: What data does Scrut collect from Sentry?" default-open="false">
+
+Scrut collects user name, email address, and organization-level role for each member of your Sentry organization. This data is used in Access Reviews.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

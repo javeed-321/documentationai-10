@@ -1,0 +1,173 @@
+---
+title: "Integrate ClickUp"
+description: "Learn how to connect your ClickUp account with Scrut to create compliance tasks."
+---
+
+With the Scrut-ClickUp integration, you can create project management tasks directly in ClickUp from any compliance task module in Scrut. In this article, explain how to connect your ClickUp account with Scrut.
+
+## What This Integration Does in Scrut
+
+- **Task Management:** Enables you to create project management tickets in Scrut and sync them to ClickUp.
+
+## Prerequisites
+
+Before starting the integration, make sure you have the following:
+
+- An active ClickUp account with workspace owner or admin access
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log in to your ClickUp account before starting the integration to avoid interruptions mid-setup.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For ClickUp
+
+- You must be a workspace owner or admin in ClickUp to generate the Client ID and Secret required for the integration.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permissions to the Integrations module.
+
+## Integration Setup
+
+### Step 1: Generate a Client ID and Secret in ClickUp
+
+1. Sign in to your ClickUp account and click your avatar in the top-right corner.
+2. Click **Settings**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430261620-mw3nyl2yiwa-integrating-click-up__01-click-settings.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Settings" caption=" " />
+3. Navigate to the **ClickUp API** menu on the left navigation bar.
+4. Navigate to **ClickUp API Settings** and click **Create an App**.
+5. Enter a name for the app, such as Scrut Automation.
+6. Enter the redirect URL for your Scrut region:
+  - India: [https://app.scrut.io/settings/integration/clickup](https://app.scrut.io/settings/integration/clickup)
+  - US: [https://app.us.scrut.io/settings/integration/clickup](https://app.us.scrut.io/settings/integration/clickup)
+  - EU: [https://app.eu.scrut.io/settings/integration/clickup](https://app.eu.scrut.io/settings/integration/clickup)
+  - Australia: [https://app.au.scrut.io/settings/integration/clickup](https://app.au.scrut.io/settings/integration/clickup)
+7. Click **Create App**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430263198-uvobv1bjnd-integrating-click-up__02-click-create-app.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create App" caption=" " />
+8. Copy the **Client ID** and **Secret** displayed on the screen.
+
+**Important:** Save these credentials before navigating away. You will need them in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430264767-lddqtaia1s-integrating-click-up__03-important-save-these-credentials-before.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: Save these credentials before navigating away. You will need them in the next step" caption=" " />
+
+**Note:** To know more about the API, refer to [ClickUp’s API help documentation](https://developer.clickup.com/).
+
+### Step 2: Connect ClickUp in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab.
+3. Scroll to the **Categories** section and select **Project Management Platforms**.
+4. Locate the **ClickUp** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430266342-8q8i7txp61o-integrating-click-up__04-locate-the-clickup-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the ClickUp tile and click Integrate" caption=" " />
+5. Paste the Client ID and Secret you copied from Step 1.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430268019-smjk91xc1vk-integrating-click-up__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Select the ClickUp workspace you want to connect with Scrut.
+8. Click **Connect Workspace**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430269645-5epfz2bm182-integrating-click-up__06-click-connect-workspace.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect Workspace" caption=" " />
+
+A "Connected Successfully" message confirms the integration is active, and the status indicator updates to Connected.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430271246-jxzersse3ua-integrating-click-up__07-a-connected-successfully-message-confirms.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="A 'Connected Successfully' message confirms the integration is active, and the status indicator updates to" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+The ClickUp integration does not pull data into Scrut. Instead, it pushes tasks from Scrut to ClickUp in real time when you create them. There is no background sync to monitor.
+
+### Create a ClickUp Task from Scrut
+
+Once the integration is connected, you can create a ClickUp task from any of the following modules in Scrut:
+
+- Policies
+- Evidence Tasks
+- Tests
+- Cloud
+- Risk Management
+- Audit → Audit Center → Requests
+- Audit → Audit Center → Findings
+- Audit → Audit Center → Corrective Actions
+- Vulnerabilities → Findings
+
+To create a task:
+
+1. Navigate to the relevant item in any of the modules listed above.
+2. Click the three-dots icon at the top-right of the page and select **Create ClickUp Task**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430272985-thbknq6jhn-integrating-click-up__08-click-the-three-dots-icon-at-the-top-right.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the three-dots icon at the top-right of the page and select Create ClickUp Task" caption=" " />
+3. Fill in the task details: Workspace, Space, Folder, List, Task Name, and Description. Scrut autofills the task name and description based on the compliance item. Edit them as needed.
+4. Click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430274569-gb2o6hhjhlo-integrating-click-up__09-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create" caption=" " />
+
+The task is created in ClickUp. You can open it in ClickUp to set the assignee, due date, priority and take further action.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430276178-f74dpcycqy9-integrating-click-up__10-the-task-is-created-in-clickup.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The task is created in ClickUp" caption=" " />
+
+## Common Errors and Troubleshooting
+
+### Invalid Client ID or Secret
+
+Possible solutions:
+
+- Verify that you copied both credentials in full from the ClickUp API settings page.
+- Check that no extra spaces were introduced when pasting.
+- If credentials were regenerated after the initial setup, re-enter the updated values on the ClickUp integration page in Scrut and click Submit.
+
+### Integration Status Shows "Not Connected" After Setup
+
+Possible solutions:
+
+- Confirm you selected a workspace and clicked Connect Workspace before leaving the ClickUp authorization screen.
+- Try disconnecting and reconnecting the integration from Integrations in Scrut.
+
+### Redirect URL Mismatch Error in ClickUp
+
+Possible solutions:
+
+- Confirm the redirect URL entered in ClickUp matches your Scrut region exactly.
+- Check for trailing slashes or typos in the URL.
+
+### ClickUp Task Not Appearing After Creation
+
+Possible solutions:
+
+- Confirm that the correct workspace, space, folder, and list were selected in the task creation dialog.
+- Refresh your ClickUp workspace and check the selected list.
+- Check the Audit Log tab on the ClickUp integration page in Scrut for errors.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: How long does it take for a task created in Scrut to appear in ClickUp?" default-open="false">
+
+Task creation is real-time. The task appears in ClickUp immediately after you click Create in Scrut.
+
+</Expandable>
+
+<Expandable title="2: Can I assign the task to a team member from Scrut?" default-open="false">
+
+No. Assignees and other task details can be managed directly in ClickUp after the task is created.
+
+</Expandable>
+
+<Expandable title="3: What happens if I regenerate the Client Secret in ClickUp?" default-open="false">
+
+The existing integration will stop working. Re-enter the new Client ID and Secret on the ClickUp integration page in Scrut and click Submit to reconnect.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

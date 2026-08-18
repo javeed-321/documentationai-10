@@ -1,0 +1,81 @@
+---
+title: "Create GitHub Issues"
+description: "Learn how to create a new GitHub issue from Scrut or unlink an existing issue."
+---
+
+Once your [GitHub integration is connected](/docs/integrating-github), you can:
+
+- Create new GitHub issues directly from Scrut
+- Link existing GitHub issues to Scrut
+
+Issues you create or link appear in the corresponding artifact details page along with their status, assignees, and labels, so you can track remediation without switching to GitHub.
+
+## Before You Begin
+
+- Ensure the Scrut - GitHub integration is active with [read and write access for Issues](/docs/integrating-github#permissions-and-access-requirements)
+- If you connected GitHub before the Issues scope update, see [Updating Your GitHub Connection to reconnect](/docs/integrating-github#updating-your-github-connection-existing-customers).
+
+## Create a New GitHub Issue
+
+1. Navigate to the module where you want to create an issue. You can create/link issues from the following compliance task modules in Scrut:
+  - Policies
+  - Evidence Tasks
+  - Tests
+  - Cloud
+  - Risk Management
+  - Audit → Audit Center → Requests
+  - Audit → Audit Center → Findings
+  - Audit → Audit Center → Corrective Actions
+  - Vulnerabilities → Findings
+2. Open the item you want to track and click the **GitHub Issues** tab.
+3. Click **Create → Create GitHub Issue**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429843802-ig0b4aytslh-create-github-issues__01-click-create-create-github-issue.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create → Create GitHub Issue" caption=" " />
+4. In the Create Issue modal, fill in the following fields:
+  - **Repo:** Select the repository where the issue should be created. The dropdown shows repositories accessible to your connected GitHub account.
+  - **Title:** Enter a title for the issue. This field is prefilled based on the item name. Edit it if needed.
+  - **Description:** Optional. Enter additional context or steps. This field is prefilled with the link to the corresponding artifact in Scrut.
+  - **Assignees:** Optional. Select one or more GitHub users to assign the issue to.
+  - **Labels:** Optional. Select one or more labels from the repository's label list.
+5. Click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429845440-errkngvmzrj-create-github-issues__02-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create" caption=" " />
+6. The issue is created in GitHub and linked to this item in Scrut. You can click on the issue to open it directly in GitHub.
+
+## Link an Existing GitHub Issue
+
+If an issue already exists in GitHub, you can link it to an item in Scrut instead of creating a new one.
+
+1. Navigate to the module and open the item you want to track.
+2. Click the **GitHub Issues** tab.
+3. Click **Create → Link Existing Issues**.
+4. Enter the links of one or more GitHub issues, separated by commas.
+5. Click **Link**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429847308-gnx4n544qo-create-github-issues__03-click-link.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Link" caption=" " />
+
+Scrut fetches the issue details from GitHub and links them to the artifact. The issue title, assignees, labels, and status appear in the tab.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429849163-1ya256ek2sg-create-github-issues__04-scrut-fetches-the-issue-details-from-github.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut fetches the issue details from GitHub and links them to the artifact" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  The issue must exist in GitHub and the repository must be accessible to your connected GitHub account. If either condition is not met, an error will appear.
+</Callout>
+
+## What Happens Next?
+
+Scrut automatically syncs any changes made to an issue in GitHub. For example, if you update the status, title, assignee, or labels in GitHub, the changes reflect in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429850887-5fn8gc07rcv-create-github-issues__05-scrut-automatically-syncs-any-changes-made.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut automatically syncs any changes made to an issue in GitHub" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429852711-i3861u9yv6c-create-github-issues__06-scrut-automatically-syncs-any-changes-made.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut automatically syncs any changes made to an issue in GitHub" caption=" " />
+
+## Unlink a GitHub Issue
+
+To unlink an issue from an artifact, navigate to the GitHub Issues tab in the artifact and click the Unlink icon.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429854518-rhq7lcgxzqi-create-github-issues__07-to-unlink-an-issue-from-an-artifact-navigate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To unlink an issue from an artifact, navigate to the GitHub Issues tab in the artifact and click the Unlink" caption=" " />
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

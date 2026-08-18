@@ -1,0 +1,137 @@
+---
+title: "Integrate Vercel"
+description: "Learn how to connect your organization's Vercel account with Scrut."
+---
+
+Connect your Vercel account to Scrut to automate compliance evidence collection across your cloud infrastructure and keep your security posture continuously monitored.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your Vercel configurations against applicable compliance frameworks.
+- **User Access Data:** Fetches user details, roles, and permissions from Vercel for Access Reviews.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+
+## Prerequisites
+
+- An active Vercel account with permission to create and manage personal access tokens.
+
+## Permissions and Access Requirements
+
+### For Vercel
+
+You need permission to create personal access tokens in Vercel. When creating the token, set the scope to Full Account to allow Scrut to collect data across all your projects. If you want Scrut to collect data from a specific project only, set the scope to that project instead.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integration module enabled.
+
+## Data Collected
+
+Scrut requires read-only access to the following data in your Vercel account:
+
+- Teams: Top-level account or team data
+- Users: User details and roles within the account
+- Projects: All projects within the connected scope
+- Domains: Domains associated with Vercel projects
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page in Scrut.
+
+## Integration Setup
+
+### Step 1: Generate an API Token in Vercel
+
+1. Log in to your [Vercel dashboard](https://vercel.com/login?next=%2Fdashboard), click your profile picture in the upper-right corner, and select **Settings**.
+2. Select **Tokens** from the sidebar.
+3. Enter a descriptive name for the token, such as Scrut Integration.
+4. Set the **Scope** to Full Account. If you want Scrut to collect data from a specific project only, select that project from the Scope dropdown instead.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431403555-wpmf7s3q4us-integrating-vercel__01-set-the-scope-to-full-account.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Set the Scope to Full Account" caption=" " />
+5. Set an expiration date for the token.
+6. Click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431405205-w8bk28r3i9q-integrating-vercel__02-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create" caption=" " />
+7. Copy the token value and store it securely. You will need it in the next step.
+
+**Note:** The token is displayed only once. Copy it before closing this screen. Vercel cannot retrieve it again.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431407052-84d9lr7v1yh-integrating-vercel__03-note-the-token-is-displayed-only-once-copy.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: The token is displayed only once. Copy it before closing this screen. Vercel cannot retrieve it again" caption=" " />
+
+Note: Refer to Vercel help documentation to learn more about [Vercel access tokens](https://vercel.com/kb/guide/how-do-i-use-a-vercel-api-access-token).
+
+### Step 2: Connect Vercel in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab.
+3. Scroll to the **Categories** section and select **Cloud Providers**.
+4. Find the Vercel tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431408789-d1sa766gw4f-integrating-vercel__04-find-the-vercel-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Find the Vercel tile and click Integrate" caption=" " />
+5. Paste the API token you copied in Step 1 into the API Token field.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431410518-2rokeg6d5fp-integrating-vercel__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Confirm that the success toast appears and that the status indicator shows Connected.
+
+## What Happens Next?
+
+### Initial data sync
+
+Scrut begins the initial data sync automatically after the integration is connected. You can monitor sync activity and review any errors by going to Integrations, opening the Vercel tile, and selecting the Audit Log tab.
+
+### Review synced data
+
+After the sync completes, verify that data has landed correctly in Scrut.
+
+- Navigate to Tests to review automated test results for Vercel.
+- Navigate to Compliance → Evidence Tasks to set up a Scrut Monitor to automate evidence collection from Vercel.
+- Navigate to People → Access Reviews to review user access data fetched from Vercel.
+
+## Common Errors and Troubleshooting
+
+### Invalid or Expired API Token
+
+Cause: The token entered during setup has expired or was copied incorrectly.
+
+Possible solutions: Return to Vercel Settings → Tokens and generate a new token. In Scrut, navigate to Integrations → Connected Integrations → Vercel and update the API Token field with the new token. Confirm there are no leading or trailing spaces when pasting the token.
+
+### Data not appearing in Scrut
+
+Possible solutions: Check the Audit Log tab on the Vercel integration page for any sync errors. Confirm that the token scope covers the projects you expect Scrut to collect data from. Trigger a manual sync from the integration settings page and wait a few minutes before checking again.
+
+### Automated Tests Not Running
+
+Possible solutions: Verify that the integration status on the Vercel integration page shows Connected. If the issue persists, contact [support@scrut.io](mailto:support@scrut.io) with your Audit Log details.
+
+### Specific project data missing
+
+Cause: The token scope may have been set to a single project, excluding others.
+
+Possible solutions: If you need data from multiple projects, generate a new token with Full Account scope and update the credentials in Scrut. If the scope is intentionally limited to one project, this behavior is expected.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can I limit the integration to a specific Vercel project?" default-open="false">
+
+Yes. When generating the API token in Vercel, set the Scope to the specific project you want Scrut to access instead of Full Account. Only data from that project will be collected.
+
+</Expandable>
+
+<Expandable title="2: What data does Scrut collect from Vercel?" default-open="false">
+
+Scrut collects Teams, Users, Projects, and Domains from your connected Vercel account. This data powers automated compliance tests, user access reviews, and evidence collection through Scrut Monitor.
+
+</Expandable>
+
+<Expandable title="3: Does the integration support bidirectional sync?" default-open="false">
+
+No. The Vercel integration is read-only. Scrut pulls data from Vercel but does not write or push any data back to your Vercel account.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

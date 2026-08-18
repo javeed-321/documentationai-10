@@ -1,0 +1,105 @@
+---
+title: "Configure Scope for AWS Integration"
+description: "Configure your AWS integration to define resource scope."
+---
+
+The [**Scrut - AWS integration**](/docs/integrating-aws) has been enhanced to provide you with improved control over the AWS resources you want to sync for compliance monitoring. Now, you can easily filter resources by:
+
+- Type (EC2 instances, S3 buckets, RDS databases, etc.)
+- Region
+- Tags
+
+This gives you granular control in selecting the specific AWS resources that you want Scrut to monitor.
+
+## How This Benefits You
+
+Previously, the AWS integration monitored all accessible resources within a connected AWS account. With this enhancement, you can now:
+
+- **Configure precise scope:** You can precisely control which AWS resources to sync with Scrut based on the following criteria:
+  - **Resource Types**: Choose from EC2 instances, S3 buckets, RDS databases, Lambda, etc.
+  - **AWS Regions**: Choose from different AWS regions, including global resources like IAM
+  - **Tags:** Select specific tags based on your selected resource types and regions
+
+This setup ensures Scrut only scans the resource types and regions you specify, along with the selected tags.
+- **Improve compliance accuracy:** For example, if your AWS account includes development, testing, and production resources, but only production resources are relevant for your SOC 2 audit, you can configure the integration scope to monitor only production resources.
+- **Streamline Scrut data:** Reduce noise and unnecessary data in the Cloud Tests module by excluding out-of-scope resources.
+
+<Callout kind="danger">
+  Important Reminder!
+
+  Your current AWS integration will continue to function as intended. However, to fully leverage the benefits of this enhancement, it’s crucial that you **complete the steps below** to configure the resource scope.
+</Callout>
+
+## AWS Integration Scope Configuration Guide
+
+Follow these steps to configure the resource scope for your existing AWS integration:
+
+### Prerequisites
+
+- You must be a Scrut Admin (or a Contributor with access to the Integration module)
+- You must have completed the Scrut - AWS integration (If you haven’t yet integrated AWS with Scrut, [follow the steps here](/docs/integrating-aws))
+- Your [AWS role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) must have the necessary permissions to create and manage roles and policies, including `tag:GetResources`
+
+### Step 1: Navigate to AWS Integration in Scrut
+
+1. Sign in to your Scrut account, click **Integrations** on the left navigation panel.
+2. Click **Connected Integrations** and search for **AWS**.
+3. Click the **Configure** button on the AWS integration tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429829467-qjk531i3vkm-aws-integration-enhancement__01-click-the-configure-button-on-the-aws.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Configure button on the AWS integration tile" caption=" " />
+
+### Step 2: Configure Resource Scope
+
+1. On the AWS integration page, click the **Configure** icon in your connected AWS integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429831331-0eto2wr88qsu-aws-integration-enhancement__02-on-the-aws-integration-page-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the AWS integration page, click the Configure icon in your connected AWS integration" caption=" " />
+2. Select the **AWS services** you want Scrut to monitor (ACM, EC2, IAM, S3, VPC, etc.). You can select any number of services as required.
+3. Select the **AWS regions** where you want Scrut to monitor resources.
+4. Based on your selections, Scrut will fetch relevant tags, allowing you to select the ones needed to filter resources. To get the latest tags, click the **Refresh Tags** button (available once every 24 hours).
+5. If you want to include resources without tags, check the **Include Untagged Resources** checkbox.
+6. Click **Save** to apply your scope configuration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432256136-74g0ay856gb-click-save-to-apply-your-scope-configuration-267ffee9.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save to apply your scope configuration" caption=" " />
+7. Watch for the success notification.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429833195-sdynq4hkkar-aws-integration-enhancement__04-watch-for-the-success-notification.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the success notification" caption=" " />
+
+Scrut will automatically trigger a resource discovery job to apply your new scope.
+
+<Callout kind="alert">
+  Heads Up!
+
+  It might take sometime for Scrut to fetch the newly added resources. Check the Audit Logs to track status.
+</Callout>
+
+## Viewing Filtered Data in Scrut
+
+1. Go to the **Cloud** module and click the **AWS** filter.
+2. Select the specific **AWS Account ID** and use the **Services** filter to view resource-specific data.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429834846-fhoii95ngr6-aws-integration-enhancement__05-select-the-specific-aws-account-id-and-use.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the specific AWS Account ID and use the Services filter to view resource-specific data" caption=" " />
+3. This scope filter is available across the following modules:
+  - Cloud → Dashboard
+  - Cloud → Tests
+  - Cloud → Resources
+
+---
+
+### FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens when AWS resources enter/exit the scope of the Scrut integration?" default-open="false">
+
+When you add a resource, Scrut will start monitoring it at the next sync. Similarly, when you move a resource out of scope for the integration, Scrut will stop monitoring it at the next sync. Risks linked to this resource receive an “Asset out-of-scope” badge.
+
+</Expandable>
+
+<Expandable title="2: How do I scan all my AWS resources?" default-open="false">
+
+To scan all your AWS resources, click the configure button on the integration page and unselect all resources, regions, and tags. Scrut will then scan your entire AWS infrastructure.
+
+</Expandable>
+
+</ExpandableGroup>
+

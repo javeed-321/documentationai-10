@@ -1,0 +1,72 @@
+---
+title: "Integrate BreezyHR"
+description: "Learn how to connect your BreezyHR account with Scrut."
+---
+
+The **Scrut - BreezyHR** integration fetches user access data, permissions, and role assignments from your BreezyHR account and sends them to the [Access Review](https://help.scrut.io/docs/what-is-access-review) module in Scrut. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="tip">
+  Heads Up!
+
+  The data synced from BreezyHR flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following credentials:
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- Email and Password for your BreezyHR account
+- BreezyHR account with API access
+
+<Callout kind="alert">
+  Note:
+
+  Scrut requires your BreezyHR account credentials to securely authenticate and connect to the BreezyHR API on your behalf.
+</Callout>
+
+## How To Connect BreezyHR With Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Human Resource Information Systems** in the **Categories** section.
+3. Scroll to the **BreezyHR** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430217041-v0m53tcc02c-integrating-breezyhr__01-scroll-to-the-breezyhr-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the BreezyHR tile and click Integrate" caption=" " />
+4. Enter your BreezyHR credentials (Email and Password) and click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430218736-idp8v17p3lg-integrating-breezyhr__02-enter-your-breezyhr-credentials-email-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter your BreezyHR credentials (Email and Password) and click Submit" caption=" " />
+5. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from BreezyHR. This process typically takes a few hours to complete. Check the **Audit Log** on the BreezyHR integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs a sync **every 24 hours** to fetch incremental data, such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+## Data Fetched from BreezyHR
+
+Scrut fetches the following access-related data points from BreezyHR:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing BreezyHR Data in Scrut
+
+To view the data fetched from your BreezyHR account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your BreezyHR account.
+
+You can also create an Access Review (or edit an existing one) and include the BreezyHR application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for BreezyHR:
+
+1. Go to **People → Access** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select BreezyHR in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click BreezyHR to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting BreezyHR with Scrut, get in touch with the Scrut support team at support@scrut.io.

@@ -1,0 +1,76 @@
+---
+title: "Set a Policy Review Cycle"
+description: "Learn how to set up a policy review workflow in Scrut."
+---
+
+<Callout kind="info">
+  Who can use this feature
+
+  - Supported on **Foundation, Growth,** and **Scale** plans
+</Callout>
+
+Scrut allows you to establish systematic and timely reviews of your organization's policies, ensuring they remain up-to-date and aligned with evolving industry standards.
+
+## Understanding the Policy Review workflow
+
+1. **Admin Sets the Policy Review Cycle:** After the policy is published, the admin creates a specific review cycle. This cycle defines when and how often the policy should be examined for accuracy and compliance.
+2. **On the Day of Policy Review**: When the scheduled review date arrives, the status of the policy changes from "Published" to "Needs Review." An email notification is then sent to the designated assignee, reminding them to take action.
+3. **Assignee Reuploads the Policy**: The assignee, responsible for the review, uploads the updated policy. This initiates the [policy approval workflow](/docs/understanding-policy-approval-workflow).
+
+<Callout kind="danger">
+  Important:
+
+  A policy must be published before setting up a review cycle.
+</Callout>
+
+You can set the review cycle in two ways:
+
+- [Individually for each policy](/docs/settings-a-policy-review-cycle#setting-the-review-cycle-for-a-single-policy)
+- [Through bulk assignments](/docs/settings-a-policy-review-cycle#setting-bulk-policy-review-cycle)
+
+## Set the Review Cycle for a Single Policy
+
+1. Sign in to Scrut, and go to **Compliance → Policies** using the left navigation menu.
+2. Go to the **All Policies** tab.
+3. Click the policy for which you want to set up a review cycle.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432272213-v6h6fiaq9t-go-to-the-all-policies-tab-and-select-the-aea0c51a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the policy for which you want to set up a review cycle" caption=" " />
+4. From the **Recurrence** dropdown menu, select the recurrence.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432150363-iv0kjq25acl-settings-a-policy-review-cycle__02-from-the-recurrence-dropdown-menu-select-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the Recurrence dropdown menu, select the recurrence" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  Policy Review Date = Date of publication of the policy + selected recurrence interval.
+</Callout>
+
+## Review Date Calculation
+
+The Policy Review Date is calculated based on the recurrence period, not the policy upload date.
+
+- At the start of each new recurrence period (Monthly, Quarterly, Bi-Annually, or Annually), the policy automatically transitions to **Needs Review** status.
+
+**Example:**
+
+If a policy has a quarterly recurrence and was published on January 20, the subsequent review dates would be:
+
+- April 1
+- July 1
+- October 1
+
+## Set the Review Cycle for Multiple Policies
+
+1. Sign in to Scrut, and go to **Compliance → Policies** using the left navigation menu.
+2. Go to the **All Policies** tab.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432152908-rjzxvvargjh-settings-a-policy-review-cycle__03-go-to-the-all-policies-tab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the All Policies tab" caption=" " />
+3. Select the policies for which you want to set up a review cycle and click **Edit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432154863-uk4sf1souqc-settings-a-policy-review-cycle__04-select-the-policies-for-which-you-want-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the policies for which you want to set up a review cycle and click Edit" caption=" " />
+4. From the **Recurrence** dropdown menu, select the recurrence.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432156816-447z9ksbj8y-settings-a-policy-review-cycle__05-from-the-recurrence-dropdown-menu-select-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the Recurrence dropdown menu, select the recurrence" caption=" " />
+5. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432158549-3eny2pgx6f5-settings-a-policy-review-cycle__06-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />

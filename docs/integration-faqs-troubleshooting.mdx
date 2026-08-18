@@ -1,0 +1,435 @@
+---
+title: "Additional FAQs: Integrations"
+description: "Find answers to all your common Scrut integration queries."
+---
+
+Find answers to common integration questions and issues.
+
+---
+
+### General Integration FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What access level do I need to complete an integration?" default-open="false">
+
+You need admin access to the specific tool to grant read-only permissions to Scrut for the integration.
+
+</Expandable>
+
+<Expandable title="2: What data does Scrut fetch from an integration?" default-open="false">
+
+It depends on the tool you’re integrating with Scrut. For example, if you’re integrating an HRIS, Scrut fetches employee data. You can review the individual integration guides to know more about the data fetched for each integration.
+
+</Expandable>
+
+<Expandable title="3: How secure is Scrut’s integration?" default-open="false">
+
+Scrut uses standards like SAML and OAuth 2.0 for secure authentication and authorization.
+
+- Your username and password are never shared with or stored by Scrut
+- Authentication is handled directly by the tool’s secure servers
+- Scrut only receives secure access tokens with limited, specific permissions
+- All data transmission is encrypted and follows industry security standards
+
+</Expandable>
+
+</ExpandableGroup>
+
+### Cloud Providers FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can the integration automatically fetch the required evidence from my connected cloud infrastructure?" default-open="false">
+
+Yes. Scrut automatically collects cloud-required evidence, such as IAM configurations, audit logs, resource settings, and activity reports, enabling continuous compliance monitoring and reducing manual evidence collection.
+
+</Expandable>
+
+<Expandable title="2: How often are the scans run?" default-open="false">
+
+Scans run automatically every 24 hours. You can also initiate on-demand rescans as needed for supported integrations.
+
+</Expandable>
+
+<Expandable title="3: What level of cloud access does Scrut require?" default-open="false">
+
+Scrut adheres to a least-privilege model, requesting only the minimum necessary permissions. Scrut requires read-only access to metadata, providing information about available configurations.
+
+</Expandable>
+
+<Expandable title="4: I have multiple subscriptions to the same cloud provider; how should I integrate them?" default-open="false">
+
+For multiple subscriptions to the same cloud provider, you can integrate them separately.
+
+- For **AWS**, you can add multiple AWS accounts by clicking Configure, and then Add New in the Scrut interface.
+- For **GCP**, you can also add multiple accounts by clicking Configure and then Add New.
+- For **Azure**, you can configure the scope of the integration to specify which of your accounts you want included in the integration.
+
+Refer to the [integration guides](/docs/integrations-overview#1-cloud-providers) for step-by-step instructions.
+
+</Expandable>
+
+<Expandable title="5: Do you access our database, and can you view our customer data?" default-open="false">
+
+No, we never require access to your database or customer data.
+
+</Expandable>
+
+<Expandable title="6: What security measures are in place for cloud provider integrations?" default-open="false">
+
+Scrut uses secure, encrypted connections (HTTPS, OAuth 2.0) for all cloud integrations. It follows least-privilege principles, requesting only the minimum permissions needed for compliance checks, and never stores sensitive credentials.
+
+</Expandable>
+
+<Expandable title="7: How does Scrut handle multi-cloud environments?" default-open="false">
+
+Scrut supports multi-cloud environments by integrating with major providers (AWS, Azure, GCP), offering a unified view of your security and compliance posture. It continuously monitors configurations, access, and activity across all connected clouds for consistent policy enforcement and automated compliance checks.
+
+</Expandable>
+
+<Expandable title="8: What happens if one of my cloud accounts becomes inactive?" default-open="false">
+
+Admins receive an email notification about the integration failure, and cloud tests related to the failed integration appear grayed out in the portal.
+
+</Expandable>
+
+<Expandable title="9: How does Scrut handle cloud resources across different regions?" default-open="false">
+
+Scrut automatically detects and monitors resources across all regions within connected cloud accounts, ensuring consistent security policies and compliance checks globally, regardless of where the resources are hosted.
+
+</Expandable>
+
+<Expandable title="10: What happens after the cloud integration is done?" default-open="false">
+
+Scrut fetches the data into the Tests and Compliance → Cloud modules.
+
+</Expandable>
+
+</ExpandableGroup>
+
+### Version Control FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: How does the version control integration help with compliance audits?" default-open="false">
+
+Scrut helps automate evidence collection for compliance audits by monitoring repository permissions, tracking changes to protected branches, validating security settings like MFA, and ensuring review workflows are followed, reducing manual audit efforts. Integrating your version control tools helps automate these tasks.
+
+</Expandable>
+
+<Expandable title="2: What access does Scrut require for version control integration?" default-open="false">
+
+Scrut requires read-only access to repository metadata, including permissions, branch protection settings, commit history, pull requests, and configuration details. It does not access actual code content.
+
+</Expandable>
+
+<Expandable title="3: How often does Scrut sync with my version control system?" default-open="false">
+
+Code review results are uploaded bi-monthly. Other tests run once every 24 hours.
+
+</Expandable>
+
+<Expandable title="4: How does Scrut use information from my version control system?" default-open="false">
+
+Scrut uses repository metadata to verify security best practices, enforce compliance requirements (e.g., MFA, protected branches, PR reviews), and automatically collect audit-relevant evidence.
+
+</Expandable>
+
+<Expandable title="5: Can I limit access to specific repositories or branches?" default-open="false">
+
+Yes, access can be scoped to specific repositories during the integration process, and only selected repositories will be monitored.
+
+</Expandable>
+
+<Expandable title="6: Can I include multiple repositories in the scope?" default-open="false">
+
+Yes, multiple repositories can be included in the scope.
+
+</Expandable>
+
+<Expandable title="7: What security measures are in place to protect my code?" default-open="false">
+
+Scrut only accesses metadata and does not read source code. All data is encrypted in transit and at rest, and access is governed by strict internal security controls.
+
+</Expandable>
+
+<Expandable title="8: Do I need to create a separate service account for Scrut's version control integration?" default-open="false">
+
+No, a separate service account is not mandatory.
+
+</Expandable>
+
+<Expandable title="9: Can I revoke Scrut's access if needed?" default-open="false">
+
+You can revoke access at any time by disconnecting the integration.
+
+</Expandable>
+
+<Expandable title="10: Will Scrut track all my code or only that related to evidence collection?" default-open="false">
+
+Scrut does not track or access your code—it only collects metadata relevant to security and compliance verification.
+
+</Expandable>
+
+<Expandable title="11: What metadata does Scrut collect from my repositories?" default-open="false">
+
+Scrut collects metadata such as branch protection settings, user roles, repository visibility, MFA status, pull request reviews, and commit history to protected branches.
+
+</Expandable>
+
+<Expandable title="12: Will this integration affect my development workflow?" default-open="false">
+
+No, Scrut runs passively and does not interfere with your development workflows, code deployment, or CI/CD processes.
+
+</Expandable>
+
+<Expandable title="13: Can I integrate multiple version control platforms simultaneously?" default-open="false">
+
+Yes, you can integrate multiple version control platforms simultaneously.
+
+</Expandable>
+
+<Expandable title="14: Does Scrut analyze code quality or just track changes?" default-open="false">
+
+No. Scrut does not analyze code quality; it focuses solely on compliance-related tracking and security configuration monitoring.
+
+</Expandable>
+
+<Expandable title="15: How does Scrut handle version control for monorepos?" default-open="false">
+
+Scrut monitors monorepos the same way as regular repos, focusing on repository-level settings and metadata rather than individual code modules.
+
+</Expandable>
+
+<Expandable title="16: Which environment (staging or production) should I integrate with the Scrut platform?" default-open="false">
+
+Scrut should be integrated with production environments, as these are most relevant for compliance audits and data protection.
+
+</Expandable>
+
+<Expandable title="17: Why doesn't Scrut automatically detect my default branch name?" default-open="false">
+
+Auto-detecting the default branch requires code read access to your repositories. Scrut integrations are designed to access only the metadata needed for compliance. The `scrut_branch_name` custom property gives Scrut the branch information it needs while keeping your codebase completely private.
+
+</Expandable>
+
+</ExpandableGroup>
+
+### HRIS FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: If my HRMS and IdP are both integrated, from where does the Scrut platform pick the employee population?" default-open="false">
+
+When both your HRIS and IdP are integrated, Scrut prioritizes the employee data in your **HRIS**. Here's a concise breakdown:
+
+- **HRIS is the primary source of truth:** If an employee exists in both HRIS and IdP, the employee data is taken exclusively from HRIS.
+- **IdP as a fallback:** Scrut uses IdP as the source of truth only if an employee exists solely in IdP and not in HRIS.
+- **HRIS dictates status:** Removal from HRIS triggers offboarding in Scrut, even if the employee still exists in IdP. Similarly, if an employee previously only in IdP is later added to HRIS, the HRIS data overrides any prior offboarding state.
+- **Conflict resolution:** In case of simultaneous syncs, HRIS data takes precedence over IDP data.
+
+In essence, HRIS is the primary source of truth, with IdP serving as a secondary source only when employees don't exist in the HRIS system.
+
+</Expandable>
+
+<Expandable title="2: How does the HRIS integration help with compliance audits?" default-open="false">
+
+HRIS integration helps automate access reviews and identity verification by syncing real-time employee data such as employment status and role assignments. This ensures that only active employees have access to critical systems and generates audit-ready reports that provide verifiable evidence for compliance checks.
+
+</Expandable>
+
+<Expandable title="3: What access does Scrut require for HRIS integration?" default-open="false">
+
+Scrut typically requires read access to user profiles (name, email, role, department) and employment status (active/inactive).
+
+</Expandable>
+
+<Expandable title="4: How often does Scrut sync with my HRIS?" default-open="false">
+
+Once every 24 hours.
+
+</Expandable>
+
+<Expandable title="5: What employee data does Scrut collect through the HRIS integration?" default-open="false">
+
+Full name and email, job title and department, employment status (active/inactive), and role and reporting structure (where available).
+
+</Expandable>
+
+<Expandable title="6: How can I exclude specific employees or service accounts from my audit scope?" default-open="false">
+
+Once integrated, all employees will sync to Scrut. You can mark service accounts as 'non-personnel' in Scrut to exclude them from the audit scope.
+
+</Expandable>
+
+<Expandable title="7: How are employees offboarded if only the HRIS is connected?" default-open="false">
+
+When an employee's exit date is set in the HRIS, Scrut will pull that information. Once the exit date is reached, Scrut will initiate the offboarding process.
+
+</Expandable>
+
+<Expandable title="8: Can I use both IDP and HRIS together?" default-open="false">
+
+Yes. When using both IDP and HRIS, Scrut considers HRIS the source of truth in the event of any conflicts.
+
+</Expandable>
+
+<Expandable title="9: How does Scrut handle sensitive employee information?" default-open="false">
+
+Scrut encrypts all data both in transit and at rest, follows least-privilege access controls, and complies with major security frameworks (like ISO 27001, SOC 2). Sensitive employee data is not stored or shared unnecessarily.
+
+</Expandable>
+
+<Expandable title="10: How does Scrut handle employee role changes in the HRIS?" default-open="false">
+
+Role changes detected via the HRIS sync are automatically logged and updated in the next sync.
+
+</Expandable>
+
+<Expandable title="11: Can Scrut detect and track employee transfers between departments?" default-open="false">
+
+Yes. Departmental changes are captured during sync and updated in the employee profile.
+
+</Expandable>
+
+<Expandable title="12: What security measures are in place for HRIS integrations?" default-open="false">
+
+Scrut uses secure API connections (OAuth or token-based), data encryption, access logging, and role-based internal access controls. All integrations are regularly audited for security compliance.
+
+</Expandable>
+
+<Expandable title="13: How does Scrut use HRIS data for compliance reporting?" default-open="false">
+
+HRIS data powers automated user access reviews, offboarding validations, and employment audits.
+
+</Expandable>
+
+<Expandable title="14: Do I need admin access to my HRIS to set up the integration?" default-open="false">
+
+Yes, you typically need admin or API-level access to authorize the integration, configure permissions, and initiate data syncing with Scrut.
+
+</Expandable>
+
+<Expandable title="15: How are contractors or temporary workers handled in the HRIS integration?" default-open="false">
+
+You can move contractors to a separate group using the group functionality.
+
+</Expandable>
+
+<Expandable title="16: Does Scrut automatically offboard employees when they are deleted or deactivated in my HRIS/IDP?" default-open="false">
+
+Scrut does not automatically delete or mark employees as Offboarded when they are deactivated in the HRIS/IDP. Instead, when an employee is deleted or marked as inactive in your HRIS/IDP, Scrut captures this on the next sync and moves the employee automatically to the **Offboarding Needed** status, using their deactivation or exit date as the recorded exit date in Scrut.
+
+</Expandable>
+
+</ExpandableGroup>
+
+### Identity Providers FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Why should I connect my identity provider?" default-open="false">
+
+IdP integration enables SSO login for employees and imports employee data to Scrut.
+
+</Expandable>
+
+<Expandable title="2: What level of IDP access does Scrut require?" default-open="false">
+
+Scrut needs read permissions to access user information related to user groups, audit reports, and delegated administrator reports.
+
+</Expandable>
+
+<Expandable title="3: What user information does Scrut collect from my IdP?" default-open="false">
+
+Scrut collects user account details, group memberships, login activity, and security alerts to monitor access and ensure compliance. It requires permissions for admin audit logs, activity reports, and security alerts to perform automated checks.
+
+</Expandable>
+
+<Expandable title="4: What if I have multiple subdomains?" default-open="false">
+
+Currently, Scrut only supports primary email domains for mapping; multiple subdomains are not supported.
+
+</Expandable>
+
+<Expandable title="5: How often does Scrut pull data from my IdP?" default-open="false">
+
+Data is automatically updated every 24 hours. You can also manually trigger synchronization, as needed.
+
+</Expandable>
+
+<Expandable title="6: How can I exclude specific employees or service accounts from my audit scope?" default-open="false">
+
+All employees sync to Scrut after integration. To exclude service accounts from the audit scope, mark them as 'non-personnel' within Scrut.
+
+</Expandable>
+
+<Expandable title="7: How are employees offboarded if only the IdP is connected?" default-open="false">
+
+When an employee is deleted or suspended in your IdP, Scrut captures this on the next sync and moves the employee automatically to the **Offboarding Needed** status, using their deactivation or exit date as the recorded exit date in Scrut.
+
+</Expandable>
+
+<Expandable title="8: What if I don't have an identity provider?" default-open="false">
+
+You can integrate with an HRMS tool or manually import employee data.
+
+</Expandable>
+
+<Expandable title="9: I don't have the permissions to integrate an IdP. What should I do?" default-open="false">
+
+Add a user with IdP admin access to your Scrut account to complete the integration. You can remove this user from your Scrut account afterward.
+
+</Expandable>
+
+<Expandable title="10: How secure is the connection between Scrut and my identity provider?" default-open="false">
+
+The connection uses industry-standard encryption protocols (HTTPS, OAuth 2.0) for secure data transmission. Scrut follows strict access controls and doesn't store credentials, maintaining a secure and compliant integration.
+
+</Expandable>
+
+<Expandable title="11: What happens if the IdP integration fails?" default-open="false">
+
+Admins will receive an email notification about the failure.
+
+</Expandable>
+
+<Expandable title="12: Can I switch identity providers after initial setup?" default-open="false">
+
+Yes, you can switch providers, but the originally connected IdP remains the source of truth for employee records. The new IdP will sync data regularly but won't override the primary source.
+
+</Expandable>
+
+<Expandable title="13: Can I connect more than one IdP?" default-open="false">
+
+Yes, you can connect multiple IdPs if needed.
+
+</Expandable>
+
+</ExpandableGroup>
+
+### MDM (Mobile Device Management) FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Why is Mobile Device Management (MDM) important for compliance?" default-open="false">
+
+Mobile Device Management (MDM) solutions are essential for ensuring compliance with data protection regulations. They provide visibility into device application usage and data access patterns, helping organizations maintain regulatory compliance.
+
+</Expandable>
+
+<Expandable title="2: Is it mandatory to have an MDM tool for the audit?" default-open="false">
+
+It is not mandatory, but an MDM tool helps in centrally monitoring endpoint security.
+
+</Expandable>
+
+<Expandable title="3: Can I connect multiple MDM tools in a single Scrut workspace?" default-open="false">
+
+Yes, you can connect multiple MDM tools in a single Scrut workspace. Employee Checklists support multi-select, so you can assign an employee more than one MDM tool to install. Once assigned, their device data appears separately for each tool under People → Employees → Technicals, and their specific action items appear under Employee Tasks based on exactly what they've been assigned.
+
+</Expandable>
+
+</ExpandableGroup>
+

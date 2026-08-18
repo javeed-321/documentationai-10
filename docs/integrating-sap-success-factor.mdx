@@ -1,0 +1,69 @@
+---
+title: "Integrate SAP Success Factors"
+description: "Learn how to connect your SAP SuccessFactors account with Scrut."
+---
+
+SAP SuccessFactors is a human resources management system (HRMS) that covers a wide range of HR functions. Through integrating SAP with scrut platform, we can fetch the employee details in the scrut platform, like Employee Name, email, department, reporting manager, joining date, and exit date.
+
+## Integrating SAP SuccessFactors
+
+### Step 1: Integration in Scrut
+
+1. From the left navigation panel, select Integrations.
+2. Click on **Available**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432252556-duak5dzr19s-click-on-available-08e3709b.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click on Available" caption=" " />
+
+3. Scroll to the *Human Resource Information Systems* section and find *SAP SuccessFactors*.
+4. Click **Integrate**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431146834-br5asual4xu-integrating-sap-success-factor__02-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. Click **Connect**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431148488-5amzqmgs7pq-integrating-sap-success-factor__03-click-connect.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect" caption=" " />
+
+SAP SuccessFactors window opens. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431150315-exddih35zh6-integrating-sap-success-factor__04-sap-successfactors-window-opens.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="SAP SuccessFactors window opens" caption=" " />
+
+### Step 2: Find your SAP SuccessFactors API Server URL
+
+1. To find your API Server URL, go to this [link](https://help.sap.com/docs/SAP_SUCCESSFACTORS_PLATFORM/28bc3c8e3f214ab487ec51b1b8709adc/af2b8d5437494b12be88fe374eba75b6.html).
+2. In the listed API Server URLs, search for the environment that matches your subdomain. For example, if your domain is https://salesdemo4.successfactors.com, search for salesdemo4. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431151960-5q5tmsiuuis-integrating-sap-success-factor__05-in-the-listed-api-server-urls-search-for-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the listed API Server URLs, search for the environment that matches your subdomain" caption=" " />
+3. Copy the entire URL.
+
+In this example, it would be: apisalesdemo4.successfactors.com
+
+4. Enter your SAP SuccessFactors API Server URL into scrut's UI Auth component. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431154005-5ni1ch6kz8r-integrating-sap-success-factor__06-enter-your-sap-successfactors-api-server-url.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter your SAP SuccessFactors API Server URL into scrut's UI Auth component" caption=" " />
+
+### Step 3: Find your SAP SuccessFactors Username and Company ID
+
+1. To find your SAP SuccessFactors username, go to the upper right-hand side and click on your profile image to view your username.
+
+**Note**: The username is not your email address.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431155787-48m9idurtru-integrating-sap-success-factor__07-note-the-username-is-not-your-email-address.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: The username is not your email address" caption=" " />
+
+2. To find your SAP SuccessFactors Company ID, in the same dropdown menu, click "Show version information." Locate Company ID in the modal that pops up:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431157603-91otk8a6ctm-integrating-sap-success-factor__08-to-find-your-sap-successfactors-company-id.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To find your SAP SuccessFactors Company ID, in the same dropdown menu, click 'Show version information.'" caption=" " />
+
+3. Once you obtain your username (not email) and company ID from the previous step, enter them in Scrut's UI component. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431159209-s8pp2rxx56-integrating-sap-success-factor__09-once-you-obtain-your-username-not-email-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once you obtain your username (not email) and company ID from the previous step, enter them in Scrut's UI" caption=" " />
+
+### Step 4: Find your SAP SuccessFactors API Key and Certificate details**
+
+1. In your Admin Center, go to Tools, and search for *Manage OAuth2 Client Applications* (If your page looks different, search for Manage OAuth2 Client Applications in the search tool on your homepage). <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431160931-keze5yvyjpk-integrating-sap-success-factor__10-in-your-admin-center-go-to-tools-and-search.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In your Admin Center, go to Tools, and search for Manage OAuth2 Client Applications (If your page looks" caption=" " />
+2. Click **Register Client Application**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431162914-0k01i8k8r7hf-integrating-sap-success-factor__11-click-register-client-application.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Register Client Application" caption=" " />
+3. Fill out Application Name & Application URL (what actually goes in these fields is not important). <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431164791-lfj7kwyx8p-integrating-sap-success-factor__12-fill-out-application-name-application-url.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Fill out Application Name & Application URL (what actually goes in these fields is not important)" caption=" " />
+4. Click *Generate X.509 Certificate*. Fill out Common Name (name doesn't matter) and click **Generate**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431166372-o1vrx8itk2p-integrating-sap-success-factor__13-click-generate-x-509-certificate-fill-out.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Generate X.509 Certificate. Fill out Common Name (name doesn't matter) and click Generate" caption=" " />
+5. Once the certificate populates, *download and save it*. You will have downloaded a file called *Certificate.pem*. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431168075-esg4d4j17hl-integrating-sap-success-factor__14-once-the-certificate-populates-download-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once the certificate populates, download and save it. You will have downloaded a file called Certificate.pem" caption=" " />
+6. Click Register (it will have replaced the Generate button).
+7. Back on your Manage OAuth2 Client Applications, go to the application you just created and click **Edit**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431169772-ynmscaifah-integrating-sap-success-factor__15-back-on-your-manage-oauth2-client.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Back on your Manage OAuth2 Client Applications, go to the application you just created and click Edit" caption=" " />
+8. You will now see an API key listed - this is your Client ID. *Copy and Save this Key*. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431171409-gnlk16g34n-integrating-sap-success-factor__16-you-will-now-see-an-api-key-listed-this-is.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="You will now see an API key listed - this is your Client ID. Copy and Save this Key" caption=" " />
+9. Open up the "Certificate.pem" file that you downloaded previously in a text editor.
+10. Copy only the string between —BEGIN ENCRYPTED PRIVATE KEY——- and —-END ENCRYPTED PRIVATE KEY——-.
+
+**Note**: Do not copy ——BEGIN ENCRYPTED PRIVATE KEY——and —-END ENCRYPTED PRIVATE KEY——.
+
+This is your SuccessFactors Private Key. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431173356-7nx52abr6u6-integrating-sap-success-factor__17-this-is-your-successfactors-private-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="This is your SuccessFactors Private Key" caption=" " />
+
+11. Enter your API Key and certificate’s private key into scrut's UI Auth component and hit **Submit**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431175029-sarhnvqmq2q-integrating-sap-success-factor__18-enter-your-api-key-and-certificates-private.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter your API Key and certificate’s private key into scrut's UI Auth component and hit Submit" caption=" " />
+
+**Info**:
+
+- Employee data will start syncing immediately. Incremental data will be synced every 24 hours.
+- Data can also be manually synced by clicking the three dots and choosing the **Sync Now** option.

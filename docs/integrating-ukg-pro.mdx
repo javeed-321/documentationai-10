@@ -1,0 +1,92 @@
+---
+title: "Integrate UKG Pro"
+description: "Learn how to connect your UKG Pro account with Scrut."
+---
+
+The **Scrut-UKG Pro integration** fetches employee data from your [UKG Pro account](https://www.ukg.com/) and sends it to Scrut. Upon completing the integration, Scrut will display the fetched data in the [People → Employees](https://help.scrut.io/docs/employees-1) module.
+
+## Prerequisites
+
+Before you begin the integration, make sure to have the following permissions for your UKG Pro account:
+
+- **Account Information**: Login credentials
+- **Access Level**: System administrator access to your company’s UKG Pro account
+- **Permissions**: Scrut requires the following read permissions for the integration:
+  - Read: user_profile
+  - Read: employment_info
+  - Read: manager_info (wherever applicable)
+  - Read: leave_data
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your UKG Pro account with your admin credentials before beginning the integration to avoid doing so later.
+</Callout>
+
+## How To Connect UKG Pro With Scrut
+
+### Step 1: Fetch the Required Details from UKG Pro
+
+As part of the integration, you’ll need to copy-paste the following parameters from UKG Pro in Scrut.
+
+#### 1: Customer API Key
+
+To get the API key, log in to your UKG Pro Account and search Service Account Administration in the search bar. Copy the Customer API Key and save it in a safe location. You’ll need to enter it in Scrut in the [next step](/docs/integrating-ukg-pro#step-2-connect-your-ukg-pro-account-in-scrut).
+
+#### 2: Web Service Account Username and Password
+
+Refer to the UKG Pro documentation to learn [how to create a Web Service Account](https://developer.ukg.com/hcm/docs/web-service-account). Copy the username and password, and save them in a safe location. You’ll need to enter these details in Scrut in the next step.
+
+#### 3: Web Service Domain
+
+From your account, search for Web Services. Look at any of the endpoint URLs. For example, if your URL is https://acme.ultipro.com/services/data, then your subdomain is 'acme'.
+
+### Step 2: Connect Your UKG Pro Account in Scrut
+
+1. [Log in to Scrut](https://app.scrut.io/login) and click **Integrations** on the left panel.
+2. Click the **Integrations Library** tab at the top, and in the **Categories** section, click **Human Resources Information Systems**.
+3. Locate the **UKG Pro** card, or use the search bar at the top of the page to find it, and click the **Integrate** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431398127-cmdv3r4npip-integrating-ukg-pro__01-locate-the-ukg-pro-card-or-use-the-search.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the UKG Pro card, or use the search bar at the top of the page to find it, and click the Integrate" caption=" " />
+4. On the UKG Pro integration page, click the **Connect** button at the top right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431399969-buchnw209ol-integrating-ukg-pro__02-on-the-ukg-pro-integration-page-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the UKG Pro integration page, click the Connect button at the top right" caption=" " />
+5. Enter the details you fetched in Step 1: Customer API key, web service account username and password, and web service domain.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431401642-zmxfa438pzd-integrating-ukg-pro__03-enter-the-details-you-fetched-in-step-1.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter the details you fetched in Step 1: Customer API key, web service account username and password, and web" caption=" " />
+6. Click **Submit**.
+
+That’s it. Once your UKG Pro account is successfully integrated with Scrut, you will see a connected flag on the page.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employee data from your UKG Pro account.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the UKG Pro integrations page.
+
+## Data Fetched From UKG Pro
+
+Scrut fetches the following employee details from UKG Pro:
+
+- **Contact Information**
+  - Employee Name (First and Last Name)
+  - Email Address
+- **Role Information**
+  - Employment Start Date
+  - Date of Exit (if applicable)
+  - Department (if available)
+  - Reporting Manager Name and Email (if available)
+- **Leave Data**
+  - Start and End Dates of Employee Leaves
+  - Status of Employee Leaves
+
+## Viewing UKG Pro Data in Scrut
+
+To view UKG Pro data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your UKG Pro account with Scrut, contact our team at support@scrut.io for assistance.

@@ -1,98 +1,33 @@
-## Welcome to the SessionM Help Center&#x20;
+---
+title: Help Center
+description: >-
+  Answers to the questions we get asked most, grouped by what you are trying to
+  do.
+---
 
-Get step-by-step instructions for implementing SessionM loyalty functionality.
+{/* The id below is load-bearing. Every rule in styles/scrut-help-center.css is
+    wrapped in :root:has(#dai-help-center), so if this element is removed the
+    entire stylesheet silently stops applying to this page. */}
 
+<div id="dai-help-center" class="dai-help-center">
+  <section class="hc-hero">
+    <h1 class="hc-hero__title">How can we help?</h1>
 
+    <p class="hc-hero__subtitle">Search the Scrut Help Center for onboarding guides, framework setup, policy management, and integration how-tos, all in one place.</p>
 
-<div style="width: 400px; margin: 50px auto; padding: 25px; border: 1px solid #ddd; border-radius: 10px; font-family: Arial;">
-    
-    <h2 style="text-align: center; color: #333;">
-        User Registration
-    </h2>
+    <div class="hc-hero__actions">
+      <div class="hc-search" data-hc-search role="button" tabindex="0" aria-label="Search for articles">
+        <svg class="hc-search__icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+        <span class="hc-search__placeholder">Search for articles</span>
+        <span class="hc-search__kbd">CTRL + K</span>
+      </div>
 
-    <input id="name" type="text" placeholder="Enter your name" style="width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box;"></input>
-
-    <input id="email" type="email" placeholder="Enter your email" style="width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box;"></input>
-
-    <button
-        onclick="
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-
-            if (name === '' || email === '') {
-                alert('Please fill in all fields');
-            } else {
-                alert('Registration successful!');
-                document.getElementById('message').innerText = 'Welcome, ' + name + '!';
-            }
-        "
-        style="width: 100%; padding: 12px; margin-top: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;"
-    >
-        Register
-    </button>
-
-    <p id="message" style="text-align: center; color: green;"></p>
-
+      <div class="hc-askai" data-hc-askai role="button" tabindex="0" aria-label="Ask AI about the documentation">
+        <svg class="hc-askai__icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" /><path d="M20 3v4" /><path d="M22 5h-4" /></svg>
+        <span>Ask AI</span>
+      </div>
+    </div>
+  </section>
 </div>
 
-## Procedural Guides
-
-<Columns cols="3">
-  <Card title="Account Management" href="/account-management/overview" icon="user-cog" horizontal="false">
-    Configure account-level settings for your SessionM platform account.
-  </Card>
-
-  <Card title="Admin and Rights" href="/admin-and-rights/overview" icon="shield-check" horizontal="false">
-    Configure access rights, platform settings, messaging providers and event streams.
-  </Card>
-
-  <Card title="Audiences" href="/audiences/overview" icon="users" horizontal="false">
-    Using the SessionM Audiences module, you can segment member data based on specified attributes into targeted subsets, or audiences.
-  </Card>
-
-  <Card title="Campaigns" href="/campaigns/overview" icon="megaphone" horizontal="false">
-    Build campaigns that target audiences, react to customer behaviors, deliver messages and issue outcomes.
-  </Card>
-
-  <Card title="Catalogs" href="/catalog/overview" icon="package" horizontal="false">
-    Ingest, map and manage the product catalogs that power offers, campaigns and reporting.
-  </Card>
-
-  <Card title="Composer" href="/composer/overview" icon="wand-sparkles" horizontal="false">
-    Composer is the platform's advanced segmentation module that enables marketers and business users to create targeted customer audiences.
-  </Card>
-
-  <Card title="Customers" href="/customers/overview" icon="user" horizontal="false">
-    Manage individual customer profiles and view their activity, offers, campaigns and data.
-  </Card>
-
-  <Card title="Loyalty Programs" href="/loyalty/overview" icon="award" horizontal="false">
-    Build tiered loyalty programs and manage the rules behind them.
-  </Card>
-
-  <Card title="Offers" href="/offers/overview" icon="tag" horizontal="false">
-    Create the offers that reward customers — discounts, coupons, packages and more — then manage and monitor them.
-  </Card>
-
-  <Card title="Points" href="/points/overview" icon="coins" horizontal="false">
-    Define the point economy behind your loyalty program — point accounts, point sources and their restrictions.
-  </Card>
-
-  <Card title="Promo Codes" href="/promo-codes/overview" icon="ticket" horizontal="false">
-    Generate promo codes with outcomes tied to them, then track their details and usage.
-  </Card>
-
-  <Card title="Reward Stores" href="/reward-stores/overview" icon="store" horizontal="false">
-    Create reward stores where customers redeem points for rewards, and review the stores defined for your brand.
-  </Card>
-
-  <Card title="Rules Management" href="/rules/overview" icon="git-branch" horizontal="false">
-    Define the loyalty rules that govern how customers earn points and rewards.
-  </Card>
-</Columns>
-
-<footer className="sessionm-footer"><div className="sessionm-footer__inner"><div className="sessionm-footer__cols"><div className="sessionm-footer__col"><p><p className="sessionm-footer__heading">Company</p></p><div className="sessionm-footer__links"><p><a href="https://www.sessionm.com/" target="_blank">SessionM</a>
-<a href="https://www.capillarytech.com/careers/" target="_blank">Careers</a>
-<a href="https://www.capillarytech.com/contact-us/" target="_blank">Contact Us</a></p></div></div><div className="sessionm-footer__col"><p><p className="sessionm-footer__heading">Resources</p></p><div className="sessionm-footer__links"><p><a href="/developer/sessionm-developer-center">Developer Docs</a>
-<a href="/release-notes/overview">Release Notes</a></p></div></div></div><p><p className="sessionm-footer__legal">©2026 SessionM | All rights reserved. Specifications for features or functionality herein may be dependent on a customer's environment; third-party software used and/or needed to be used; and may require professional services, integration services or other services.</p></p></div></footer>
-
+<CollectionList node="tabs:Help Center" cols="3" />

@@ -1,0 +1,90 @@
+---
+title: "Integrate HiBob"
+description: "Learn how to integrate your organization's HiBob account with Scrut."
+---
+
+The **Scrut**-**HiBob integration** fetches employee data from your HiBob account and syncs it with Scrut. In this guide, we’ll walk you through the step-by-step process of connecting your HiBob account with Scrut.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Account Requirements
+
+- You must be a Scrut Admin (or Contributor with access to the Integration module)
+- Permission to [create an API service user](https://apidocs.hibob.com/docs/api-service-users) for your organization’s HiBob account
+
+### Permissions
+
+Scrut requires the following **read-only permissions** to fetch the requisite data from HiBob:
+
+- **employee_profile**: Get profile data of an employee, like first and last names, date of birth, work email, termination date, hire date, etc.
+- **employee_orgStructure**: Get hierarchical data related to an employee, like the employee’s manager, department, and role.
+- **employee_leave_requests**: Get the leave requests for an employee.
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your organization’s HiBob account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate HiBob With Scrut
+
+### Step 1: Fetch Service User ID and Token from HiBob
+
+1. Sign in to your organization’s HiBob account and go to the **Service Users configuration page** to create a new user. and **copy the ID and token**.
+2. To access Employee data via the API, you need to **grant basic view access to each category** mentioned in the [permissions section](/docs/integrating-hibob#permissions) above:
+  - **View all employees’ [Category name] sections**
+3. Once you grant the required permissions, save the changes.
+4. **Copy the service user ID and token** in a safe location. You’ll need to enter them in Scrut in the next step.
+
+<Callout kind="info">
+  Pro Tip!
+
+  For step-by-step instructions on [creating the service user and assigning the required permissions](https://apidocs.hibob.com/docs/api-service-users), refer to HiBob’s help guide. For more information on the API, [see here](https://apidocs.hibob.com/docs/getting-started).
+</Callout>
+
+### Step 2: Navigate to Integrations in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and select **Human Resource Information Systems** from the Categories section.
+3. Scroll to the **HiBob** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432293513-5jw5xtkr5vu-scroll-to-the-hibob-tile-and-click-integrate-4fa99e0d.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the HiBob tile and click Integrate" caption=" " />
+4. Click the **Connect** button at the top right of the HiBob integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430644567-or5awwdu4pc-integrating-hibob__02-click-the-connect-button-at-the-top-right-of.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Connect button at the top right of the HiBob integration page" caption=" " />
+5. Enter the HiBob Service User ID and Token that you fetched in the previous step.
+6. Optionally, choose the HiBob environment you want to connect with Scrut.
+7. Click **Submit**.
+
+On successful integration, you’ll see the success toast message and the connected flag.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will begin syncing employee data from your HiBob account. Refer to the Audit Log to check sync status.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the HiBob integrations page.
+
+## Data Fetched from HiBob
+
+Scrut fetches the following data for all your employees from HiBob:
+
+- Employee name
+- Email address
+- Joining date
+- Exit date (if applicable)
+- Department and Role (if available)
+- Email of reporting manager (if available)
+- Leave data (start date, end date, and status)
+
+## Viewing HiBob Data in Scrut
+
+To view HiBob data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your HiBob account with Scrut, please contact our support team at support@scrut.io for assistance.

@@ -1,0 +1,1292 @@
+/* ==========================================================================
+   scrut-home.css — the home page (home.mdx)
+
+   Serves the landing page: navy header, hero with search + Ask AI, the module
+   card band, the article lists, and the footer. The <Card> components inside
+   that band are restyled separately in scrut-home-cards.css. The Help Center
+   tab page (help-center.mdx) is a different page with its own stylesheet,
+   scrut-help-center.css — do not confuse the two.
+
+   Values ported from the live help.scrut.io custom CSS ("v2 redesign",
+   design source: Figma "Scrut - Internal Version" → Help Center Homepage),
+   re-expressed against this page's own hc-* markup instead of Document360's
+   builder elements.
+
+   Every rule is scoped to .hc-home, the wrapper home.mdx puts around its
+   content, so nothing here leaks into the 200+ documentation pages.
+   Declarations carry !important because the platform's prose styles
+   (.mdx-container a, .mdx-container h2, …) would otherwise restyle the
+   markup — links pick up an underline, headings pick up prose margins.
+
+   The platform override block at the bottom strips the docs shell (navbar,
+   sidebar, table of contents, auto-injected title) from this route only.
+   ========================================================================== */
+
+/* ── 1. DESIGN TOKENS ─────────────────────────────────────────── */
+
+/* Defined on :root, not on .hc-home.
+
+   Two rules in this file style elements that are NOT inside .hc-home — the
+   agent chat panel (`:root:has(.hc-home) .dai-agent-chat`, which the platform
+   mounts through a portal) and `.dai-layout:has(.hc-home)`. `:has()` matches
+   the page, not an ancestor, so tokens scoped to .hc-home are invisible to
+   both and any var() there would fall back to nothing. Root scope also lets
+   scrut-home-cards.css consume the same palette instead of redeclaring it.
+
+   Custom properties paint nothing on their own, so this cannot leak into the
+   200+ documentation pages — only the .hc-home-scoped rules below consume it. */
+:root {
+  --scr-navy: #031432;
+  --scr-purple: #695acc;
+  --scr-cyan: #33d5ef;
+  --scr-white: #ffffff;
+
+  /* White at alpha. The header, hero and search chrome all sit on navy, so
+     every light tone there is white at a percentage — not a separate hex. */
+  --scr-white-08: rgba(255, 255, 255, 0.08); /* search field fill */
+  --scr-white-10: rgba(255, 255, 255, 0.1); /* header hairline */
+  --scr-white-12: rgba(255, 255, 255, 0.12); /* search field fill, hover */
+  --scr-white-20: rgba(255, 255, 255, 0.2); /* search field border */
+  --scr-white-35: rgba(255, 255, 255, 0.35); /* search field border, hover */
+  --scr-white-50: rgba(255, 255, 255, 0.5); /* CTRL+K chip border and label */
+  --scr-white-80: rgba(255, 255, 255, 0.8); /* nav links and Login */
+
+  /* Navy at alpha — shadows. Same colour as --scr-navy; rgb() form because a
+     hex token cannot be given an alpha channel at the point of use. */
+  --scr-navy-25: rgba(3, 20, 50, 0.25);
+  --scr-navy-45: rgba(3, 20, 50, 0.45);
+
+  /* Footer and muted greys */
+  --scr-footer-link: #2b3a4d; /* footer column links, legal links */
+  --scr-copyright: #4a5a6d; /* copyright line */
+  --scr-totop-bg: #6b7787; /* back-to-top button */
+  --scr-search-ink: #70707a; /* search icon + placeholder, per the source */
+  --scr-rule: #dfe5ec; /* footer top hairline */
+
+  /* Agent chat panel edges. The light value differs from --scr-rule by one
+     step in the blue channel; both are kept verbatim from the original rather
+     than unified, so nothing shifts visually. */
+  --scr-panel-edge: #dfe5ee;
+  --scr-panel-edge-dark: #0f2f5e;
+
+  /* documentation.json's colors.dark.brand — the blue the platform already
+     themes the site with, so the hero button matches rather than adding a
+     fourth blue alongside scrut.io's #43a6f7 and #0d4083. */
+  --scr-blue: #0065b3;
+  --scr-blue-hover: #0077d1;
+
+  /* scrut.io's primary CTA ("Book a Demo"), lifted verbatim from the live
+     site: aqua-green to aqua-blue at 147deg, navy label, 5.5rem pill. Using
+     the real brand button rather than approximating it keeps the help centre's
+     main action identical to the one on the marketing site. */
+  --scr-cta-green: #00fdb3;
+  --scr-cta-blue: #43a6f7;
+  --scr-cta-gradient: linear-gradient(147deg, #00fdb3, #43a6f7);
+  --scr-cta-ink: #031432;
+
+  /* Ask AI's rendered width and the gap beside it. The hero heading is offset
+     by half this sum so it centres on the search field rather than on the
+     band, since the search + Ask AI pair centres as a block and the field's
+     own midpoint therefore sits left of the page's.
+     Measured, so it has to be updated if the button's label or padding change
+     — the heading would drift otherwise. */
+  --hc-askai-width: 120px;
+  --hc-tools-gap: 12px;
+
+  /* 1240px — same content cap as www.scrut.io. The header bar runs wider. */
+  --scr-container: 77.5rem;
+  --scr-header-container: 80rem;
+
+  /* Module-card colour families — 4-cycle, sampled from Figma */
+  --scr-card-blue-bg: #e3f4ff;
+  --scr-card-blue-ink: #0d4083;
+  --scr-card-yellow-bg: #fcf6e0;
+  --scr-card-yellow-ink: #b28300;
+  --scr-card-lavender-bg: #fbf5ff;
+  --scr-card-lavender-ink: #695acc;
+  --scr-card-mint-bg: #edfaf9;
+  --scr-card-mint-ink: #23938b;
+
+  --scr-ink: #0d1b2a;
+  --scr-body: #3d4b5c;
+}
+
+/* ── 2. BASE ──────────────────────────────────────────────────── */
+
+.hc-home,
+.hc-home *,
+.hc-home *::before,
+.hc-home *::after {
+  box-sizing: border-box !important;
+}
+
+.hc-home {
+  margin: 0 !important;
+  font-family: "Inter", sans-serif !important;
+  color: var(--scr-body) !important;
+  background: var(--scr-white) !important;
+  line-height: 1.5 !important;
+  text-wrap: pretty;
+  /* The live site antialiases at the root; without it identical weights
+     render noticeably heavier than help.scrut.io. */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Client request on the live site: the homepage felt too large at 100% on
+   desktop, so it renders at 85%. `zoom` reflows like native browser zoom and
+   media queries still read the TRUE viewport width, so breakpoints are
+   unaffected. Applied >=992px only. */
+/* @media (min-width: 992px) {
+  .hc-home {
+    zoom: 0.85;
+  }
+} */
+
+.hc-home h1,
+.hc-home h2,
+.hc-home h3,
+.hc-home h4 {
+  font-family: "Rethink Sans", sans-serif !important;
+  letter-spacing: normal !important;
+}
+
+.hc-home img,
+.hc-home svg {
+  display: block !important;
+  max-width: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+.hc-home a {
+  color: var(--scr-purple) !important;
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  font-weight: inherit !important;
+}
+.hc-home a:hover {
+  opacity: 1 !important;
+}
+
+.hc-home h1 a,
+.hc-home h2 a,
+.hc-home h3 a {
+  color: inherit !important;
+  border-bottom: 0 !important;
+  font-weight: inherit !important;
+}
+
+.hc-home ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hc-home li {
+  margin: 0 !important;
+  color: inherit !important;
+}
+
+.hc-home p {
+  margin: 0 !important;
+}
+
+/* Client-First containment: fluid with 5% gutters until the design cap. */
+/* Content column. Narrower than the source's authored min(90%, 77.5rem):
+   measured side-by-side, help.scrut.io leaves ~17% of the viewport as
+   margin each side and the 90%/1240px pair left only ~15.6% here, so both
+   branches are pulled in ~5% to match the rendered result. */
+.hc-home .hc-shell {
+  width: min(78%, 1180px) !important;
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 !important;
+}
+
+/* ── 3. HEADER / NAV ──────────────────────────────────────────── */
+
+/* z-index has to stay BELOW the platform's dialogs, which sit at z-50. The
+   search modal opens at top-10 (40px) — directly behind this ~72px header — so
+   a higher value here punches the navy bar through the modal's backdrop and
+   clips the search field. 40 still clears the page content (z-0/z-1) while
+   letting Ask AI and search paint over the header as they should. */
+.hc-home .hc-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 40 !important;
+  background: var(--scr-navy) !important;
+  border-bottom: 1px solid var(--scr-white-10) !important;
+}
+
+/* Nav container — Client-First: 5% gutters, 80rem cap, 10px vertical.
+   position:relative anchors the absolutely centred links. */
+.hc-home .hc-header .hc-shell {
+  width: min(90%, 80rem) !important;
+  max-width: 80rem !important;
+}
+
+/* Three explicit columns rather than flex + an absolutely positioned nav.
+   The nav used to be abspos with top:50%, which centres against the padding
+   box, while the logo and actions were flex items centring against the content
+   box. With 22px/12px padding those two reference points sit 5px apart, so the
+   centre links rendered slightly higher than everything else. A single grid
+   gives all three the same baseline.
+
+   Columns are assigned explicitly below so that hiding the nav on narrow
+   viewports leaves the logo and actions where they are instead of letting the
+   actions collapse into the middle column. */
+.hc-home .hc-header__inner {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  /* Matched to scrut.io navbar — centre-aligned, tight container padding.
+     The nav links carry their own vertical padding (via line-height + gap)
+     so the bar height comes from those, not from the container. */
+  align-items: center !important;
+  gap: 32px !important;
+  height: auto !important;
+  padding-top: 0.75rem !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.hc-home .hc-brand {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  gap: 12px !important;
+  color: var(--scr-white) !important;
+}
+
+/* Header logo — this asset is already the light-on-dark version
+   (documentation.json's logo-dark), so no invert filter. */
+.hc-home .hc-brand__logo {
+  width: 8.5rem !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  filter: none !important;
+  flex-shrink: 0 !important;
+}
+
+/* Centred desktop links, shown >=1280. */
+.hc-home .hc-nav {
+  grid-column: 2 !important;
+  justify-self: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: static !important;
+  transform: none !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+/* inline-flex + line-height:1 collapses the line box onto the glyphs. As a
+   plain inline anchor at line-height 1.43 the box runs ~20px around ~14px of
+   text, and that half-leading reads as dead space under the label — the logo
+   and the CTA pill have none, so the row looked misaligned. */
+/* Explicit zeros: the platform's prose styles put margins on bare <a>, which
+   would nudge these off the shared midline. */
+.hc-home .hc-nav__link {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  /* Matched to scrut.io's .navbar_link-wrapper padding (0.9375rem each side)
+     and .navbar_link-dropdown-toggle vertical padding (1.5rem). */
+  padding: 1.5rem 0.9375rem !important;
+  color: var(--scr-white-80) !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: color 0.2s !important;
+}
+.hc-home .hc-nav__link:hover {
+  color: var(--scr-white) !important;
+}
+
+/* The centred links used to drop out below 1280, which left a wide gap between
+   the logo and Login on laptop widths. The logo is narrower now and the actions
+   no longer wrap, so the row fits comfortably down to ~900px. */
+@media (max-width: 899.98px) {
+  .hc-home .hc-nav {
+    display: none !important;
+  }
+
+  /* Hiding the nav is not enough on its own — it left the bar overflowing the
+     viewport, which is what broke the mobile layout: the page gained a
+     horizontal scrollbar, and because the navy header and hero paint at 100%
+     of the VIEWPORT rather than of the scrollable width, they stopped short of
+     the right edge and exposed a white strip.
+
+     Two causes, both fixed here:
+
+     1. The middle track is empty once .hc-nav is hidden, but `gap: 32px` still
+        applies on BOTH sides of it — 64px of dead space. Collapsing to two
+        tracks removes it.
+     2. `1fr` means `minmax(auto, 1fr)`, so neither outer track could shrink
+        below its own min-content. With the logo at flex-shrink:0 and
+        .hc-actions at white-space:nowrap, the bar's floor was ~398px against a
+        337px shell at a 375px viewport. `minmax(0, …)` lets them shrink. */
+  .hc-home .hc-header__inner {
+    /* Logo track is `auto`, NOT `minmax(0, auto)`. The mark is a fixed 7rem
+       image with flex-shrink:0, so a floor of 0 let the track collapse under
+       it — the image then overflowed its own track and painted on top of
+       Login. `auto` holds the track at the logo's width; only the actions
+       track absorbs the squeeze. */
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* Must move with the track count — .hc-actions is `grid-column: 3` by
+     default, which would create an implicit third column and re-introduce the
+     overflow this block exists to remove. */
+  .hc-home .hc-actions {
+    grid-column: 2 !important;
+    gap: 1rem !important;
+  }
+
+  .hc-home .hc-brand__logo {
+    width: 7rem !important;
+  }
+}
+
+/* flex-wrap:nowrap keeps Login and the referral button on one row — without it
+   they stack once the logo, centred nav and actions no longer fit the bar.
+   flex-shrink:0 stops the pair being squeezed before the nav gives way. */
+.hc-home .hc-actions {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  /* 24px read as a gap rather than a pairing — Login belongs with the button
+     it sits beside, not floating between it and the centre links. */
+  gap: 1.875rem !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* Login link — plain white text, hover fades to scrut.io's nav aqua-green. */
+.hc-home .hc-actions__login {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--scr-white-80) !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  transition: color 0.2s !important;
+}
+.hc-home .hc-actions__login:hover {
+  color: var(--scr-cta-green) !important;
+}
+
+/* CTA pill — translucent white, white-fill on hover. */
+.hc-home .hc-btn {
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  color: var(--scr-white) !important;
+  background: var(--scr-white-20) !important;
+  background-image: none !important;
+  border: none !important;
+  border-radius: 5.5rem !important;
+  /* Sized down from 0.625/1.25rem at 1rem text. Next to Login at 0.875rem the
+     pill read as a different scale from the rest of the bar; matching the type
+     size and tightening the padding settles it into the row. */
+  /* line-height 1, matching the nav links and Login. At 1.43 the label carried
+     ~6px of half-leading that the other items did not, so centring the boxes
+     still left the text off their line. Padding absorbs the height difference
+     so the pill keeps its shape. */
+  /* Vertical padding kept tight so the filled pill hugs its label. Measured at
+     3x on the deployed page, the text was already aligned to within 0.33px of
+     Login and the centre links — but at 0.625rem the pill stood 28.67px tall
+     against 14px of bare text beside it, and a solid block of colour reads as
+     heavier and lower than unbacked text at the same position. Shrinking the
+     shape toward the text line removes the illusion.
+
+     Vertical padding is symmetric: the earlier 0.5px optical nudge pushed the
+     pill off the shared midline. */
+  padding: 0.6875rem 1.25rem !important;
+  height: auto !important;
+  margin: 0 !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  white-space: nowrap !important;
+  transition:
+    background-color 0.2s,
+    color 0.2s !important;
+}
+.hc-home .hc-btn:hover {
+  background: var(--scr-white) !important;
+  color: var(--scr-navy) !important;
+}
+
+/* The <=767px step-down this block used to apply is now the base size, so it
+   only survives to keep the horizontal padding tighter on phones. */
+@media screen and (max-width: 767px) {
+  .hc-home .hc-btn {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .hc-home .hc-btn {
+    padding-left: 0.8rem !important;
+    padding-right: 0.8rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  /* Smallest phones (320px viewport → 288px shell). */
+  .hc-home .hc-brand__logo {
+    width: 6rem !important;
+  }
+
+  /* ── One action only, below 480px ────────────────────────────────────────
+     Logo + Login + referral button cannot share a line here: at a 272px
+     viewport they need ~268px inside a 245px shell. The two ways to absorb
+     that both read as broken — letting .hc-actions wrap drops Login onto its
+     own line, and shrinking the tracks lets the fixed-width logo overlap it.
+
+     So the bar collapses to a single action, which is the usual pattern at
+     this width. Login is the one kept: readers here are existing customers,
+     while "Submit a Referral" is a partner-program CTA and the least useful
+     item in the bar for someone reading documentation. It stays in the DOM
+     and in the footer, so nothing is lost to crawlers.
+
+     Login then takes the pill treatment, so the bar still has a visible
+     action rather than one bare word floating at the right edge. Values are
+     .hc-btn's, with the padding trimmed for the narrower measure. */
+  .hc-home .hc-btn {
+    display: none !important;
+  }
+
+  .hc-home .hc-actions {
+    gap: 0 !important;
+  }
+
+  .hc-home .hc-actions__login {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0.5rem 1rem !important;
+    background: var(--scr-white-20) !important;
+    border-radius: 5.5rem !important;
+    color: var(--scr-white) !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    transition: background-color 0.2s !important;
+  }
+  .hc-home .hc-actions__login:hover {
+    background: var(--scr-white-35) !important;
+    color: var(--scr-white) !important;
+  }
+}
+
+/* ── 4. HERO ──────────────────────────────────────────────────── */
+
+.hc-home .hc-hero {
+  position: relative !important;
+  background: var(--scr-navy) !important;
+  background-image: none !important;
+  overflow: hidden !important;
+  /* Closes the hairline that appeared under the header after scrolling.
+     The header is position:sticky, so the browser promotes it to its own
+     compositor layer. At fractional scroll offsets its bottom edge and this
+     section's top edge round to different device pixels, opening a 1px gap —
+     and what sits behind both is .dai-layout, which this page forces to
+     --scr-white. So the gap read as a bright white line. It was absent at
+     scroll-top because there is no compositing offset until you scroll.
+     Pulling the hero up one pixel removes the seam. The header carries
+     z-index 40 against this section's auto, so it still paints on top and its
+     rgba(255,255,255,.1) bottom border stays visible. */
+  margin-top: -1px !important;
+  /* Measured against help.scrut.io: 72 + 56 (h1) + 56 (gap) + 48 (search) + 68 */
+  /* Symmetric. It was 4.5/4.25rem, and combined with the h1's own line-height
+     leading that seated the heading-plus-search block about 11px above the
+     band's true centre. */
+  padding: 4.5rem 0 4.5rem !important;
+  text-align: center !important;
+  /* Dot-pattern side clusters — the Figma pattern export (500x236 RGBA),
+     hosted on the team's Webflow CDN. Same asset both sides, per Figma. */
+  --scr-hero-dots: url("https://cdn.prod.website-files.com/6798a9f2afba026ef37a64ed/6a5506bbf87b0ed856da2caa_Hero%20right.png");
+}
+
+.hc-home .hc-hero::before,
+.hc-home .hc-hero::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 500px !important;
+  height: 236px !important;
+  top: 40% !important;
+  background-image: var(--scr-hero-dots) !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+/* Anchored to the CONTENT CENTER, not the section edges — so on large
+   viewports the clusters hug the heading/search column like the Figma
+   (1440 canvas: cluster at -170px = 890px left of center). */
+.hc-home .hc-hero::before {
+  left: calc(50% - 890px) !important;
+}
+
+.hc-home .hc-hero::after {
+  right: calc(50% - 889px) !important;
+}
+
+/* scrut.io hides hero decorations <=991 — same here */
+@media (max-width: 991px) {
+  .hc-home .hc-hero::before,
+  .hc-home .hc-hero::after {
+    display: none !important;
+  }
+}
+
+.hc-home .hc-hero > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Figma hero H1: Inter SemiBold 48/56, -2% tracking (NOT Rethink Sans) */
+.hc-home .hc-hero__title {
+  font-family: "Inter", sans-serif !important;
+  font-size: 2.5rem !important;
+  line-height: 1.15 !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--scr-white) !important;
+  /* The right margin is the offset trick: as a centred flex item the heading's
+     *margin box* is what gets centred, so a right margin of W moves the text
+     itself left by W/2.
+     Halved: the full counterweight put the heading on the search field's exact
+     midpoint, which read as too far left against the band. Half splits the
+     difference — the heading sits between the field's centre and the page's. */
+  margin: 0 0 2.5rem 0 !important;
+}
+
+/* Centre the hero column explicitly. The search pill relied on `margin: 0 auto`
+   inside a block parent, which only centres while nothing upstream sets a
+   width or text-align of its own. Making the wrapper a centred flex column
+   pins the heading and the pill to the same axis regardless. */
+.hc-home .hc-hero__inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* The search field and Ask AI centre as one block, so the empty navy either
+   side of them is equal.
+ *
+ * There are only two possible arrangements here and they cannot both hold:
+ *   - centre the search field itself, and Ask AI hangs off its right, leaving
+ *     more space on the left of the block than on the right;
+ *   - centre the pair, which is what this does — equal margins, at the cost of
+ *     the field's own midpoint sitting slightly left of the heading's.
+ * Equal margins is the one that reads as centred, because the eye measures the
+ * block against the edges of the band, not against the heading above it. */
+.hc-home .hc-hero__tools {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+}
+
+/* Explicit width rather than a flex-basis: the field shrinks on narrow
+   viewports but never collapses to its text. */
+.hc-home .hc-hero__tools > .hc-search {
+  width: 33.25rem !important;
+  max-width: 100% !important;
+  flex: 0 1 33.25rem !important;
+}
+
+.hc-home .hc-hero__tools > .hc-askai {
+  flex: 0 0 auto !important;
+}
+
+/* Below the point where the field plus button stop fitting side by side, stack
+   them and centre both — keeping Ask AI inline would squeeze the search field. */
+@media (max-width: 767px) {
+  .hc-home .hc-hero__tools {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  /* `flex: 0 1 33.25rem` sizes the MAIN axis. In the row layout above that is
+     the width, but this block turns the container into a column — so the basis
+     becomes the HEIGHT and, because flex-basis outranks the `height: 48px` on
+     .hc-search, the field rendered as a 532px-tall box. Reset the basis to auto
+     so the declared height applies again, and let the field span the column. */
+  .hc-home .hc-hero__tools > .hc-search {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 33.25rem !important;
+    height: 48px !important;
+  }
+  .hc-home .hc-hero__tools > .hc-askai {
+    flex: 0 0 auto !important;
+    margin-left: 0 !important;
+  }
+  /* Stacked here, so the search field centres on the band by itself and the
+     heading's counterweight has to come off or it would sit left of nothing. */
+  .hc-home .hc-hero__title {
+    margin-right: 0 !important;
+  }
+}
+
+/* Ask AI — filled with the site's own brand blue (documentation.json's
+   colors.dark.brand) rather than a translucent white. Against the navy hero a
+   white or transparent pill washes out, and the same treatment carried into
+   dark mode looked bleached. A solid brand fill holds in both themes. */
+.hc-home .hc-askai {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex: 0 0 auto !important;
+  height: 48px !important;
+  /* scrut.io's own padding is .6875rem 1.875rem; the vertical value is dropped
+     here because the fixed 48px height already matches the search field beside
+     it, and keeping both would fight. */
+  padding: 0 1.875rem !important;
+  background-color: transparent !important;
+  background-image: var(--scr-cta-gradient) !important;
+  border: 0 !important;
+  border-radius: 5.5rem !important;
+  color: var(--scr-cta-ink) !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  box-shadow: none !important;
+  overflow: hidden !important;
+  position: relative !important;
+  transition:
+    filter 0.2s,
+    transform 0.2s !important;
+}
+/* scrut.io animates a panel across the button on hover. That needs the extra
+   markup its Webflow component carries, so this lifts the gradient slightly
+   instead — same direction of travel, one declaration. */
+.hc-home .hc-askai:hover {
+  filter: brightness(1.06) !important;
+}
+/* White, not cyan. The ring sits on the navy band, and cyan is now inside the
+   button's own gradient — a cyan ring against an aqua button is invisible. */
+.hc-home .hc-askai:focus-visible {
+  outline: 2px solid var(--scr-white) !important;
+  outline-offset: 3px !important;
+}
+
+/* Navy, matching the label — the gradient is light enough that a white icon
+   disappears into it. */
+.hc-home .hc-askai__icon {
+  flex: 0 0 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  color: var(--scr-cta-ink) !important;
+}
+
+/* Search pill — Figma: 420px wide, 60px tall, translucent white. */
+.hc-home .hc-search {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  /* Measured off the live hero: 532 x 48, not the 420 x 60 the Figma note
+     in the original CSS describes (that hook never took on D360's markup). */
+  max-width: 33.25rem !important;
+  height: 48px !important;
+  /* Inside .hc-hero__tools this is a flex item: shrink-to-fit up to the design
+     width instead of claiming the full row, which would push Ask AI onto a
+     second line on every viewport. */
+  flex: 0 1 33.25rem !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding: 0 10px 0 18px !important;
+  background: var(--scr-white-08) !important;
+  border: 1px solid var(--scr-white-20) !important;
+  border-radius: 48px !important;
+  color: var(--scr-white) !important;
+  box-shadow: none !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  font-family: "Inter", sans-serif !important;
+  cursor: pointer !important;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s !important;
+}
+.hc-home .hc-search:hover {
+  background: var(--scr-white-12) !important;
+  border-color: var(--scr-white-35) !important;
+}
+
+/* The source renders the search text and icon in D360's muted dark grey,
+   not white — its own ::placeholder rule never took on the real markup. */
+/* The platform wraps the placeholder + kbd spans in a <p> tag.
+   Make that <p> flex with space-between so the kbd goes to the right. */
+.hc-home .hc-search > p {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.hc-home .hc-search__icon {
+  flex: none !important;
+  color: var(--scr-search-ink) !important;
+  opacity: 1 !important;
+}
+
+.hc-home .hc-search__placeholder {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  color: var(--scr-search-ink) !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+
+/* CTRL+K chip — Figma: 1px border + text at 50% white, pill radius. */
+.hc-home .hc-search__kbd {
+  flex: none !important;
+  background: transparent !important;
+  border: 1px solid var(--scr-white-20) !important;
+  border-radius: 19px !important;
+  color: var(--scr-white-50) !important;
+  font-family: "Inter", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+  letter-spacing: normal !important;
+  padding: 3px 10px !important;
+  white-space: nowrap !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 767px) {
+  .hc-home .hc-hero {
+    padding: 3.5rem 0 4.5rem !important;
+  }
+  .hc-home .hc-hero__title {
+    font-size: 2.25rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+}
+
+@media (max-width: 479px) {
+  .hc-home .hc-hero__title {
+    font-size: 1.75rem !important;
+  }
+}
+
+/* ── 6. ARTICLE LISTS BAND ────────────────────────────────────── */
+
+.hc-home .hc-lists {
+  display: block !important;
+  background: var(--scr-navy) !important;
+  font-family: "Inter", sans-serif !important;
+  padding: 0 !important;
+}
+
+.hc-home .hc-lists__grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 2.5rem 3rem !important;
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
+}
+
+/* Column heading — Rethink Sans 24/32, white (Figma Title 1) */
+.hc-home .hc-list__title {
+  font-family: "Rethink Sans", sans-serif !important;
+  font-size: 1.2rem !important;
+  line-height: 1.3334 !important;
+  font-weight: 500 !important;
+  letter-spacing: normal !important;
+  color: var(--scr-white) !important;
+  margin: 0 0 1.5rem !important;
+}
+
+.hc-home .hc-list__items {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+/* Links: white @ 70% opacity → hover cyan @ 100%, 250ms ease-in-out. */
+.hc-home .hc-list__link {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  font-weight: 400 !important;
+  color: var(--scr-white) !important;
+  opacity: 0.7 !important;
+  text-decoration: none !important;
+  white-space: normal !important;
+  transition:
+    color 250ms ease-in-out,
+    opacity 250ms ease-in-out !important;
+}
+.hc-home .hc-list__link:hover {
+  color: var(--scr-cyan) !important;
+  opacity: 1 !important;
+}
+.hc-home .hc-list__link svg {
+  flex: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 991px) {
+  .hc-home .hc-lists__grid {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hc-home .hc-lists__grid {
+    grid-template-columns: 1fr !important;
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+    gap: 2.5rem !important;
+  }
+}
+
+/* ── 7. SITE FOOTER ───────────────────────────────────────────── */
+
+.hc-home .hc-footer {
+  display: block !important;
+  background: var(--scr-white) !important;
+  padding: 56px 0 32px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  color: var(--scr-ink) !important;
+}
+
+.hc-home .hc-footer__top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 40px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 68px !important;
+}
+
+.hc-home .hc-footer__brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  color: var(--scr-ink) !important;
+}
+
+.hc-home .hc-footer__logo {
+  width: 170px !important;
+  height: 40px !important;
+}
+
+.hc-home .hc-badges {
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  flex-wrap: wrap !important;
+}
+
+.hc-home .hc-badge {
+  width: 62px !important;
+  height: 62px !important;
+  object-fit: contain !important;
+}
+
+.hc-home .hc-copyright {
+  margin: 26px 0 0 !important;
+  font-size: 15px !important;
+  color: var(--scr-copyright) !important;
+}
+
+/* Wordmark watermark closing the footer. The 8% opacity and the downward fade
+   both live inside the SVG (a <g opacity> plus one linear gradient per glyph,
+   navy to navy at 0.1), so nothing here sets colour — it only sizes the
+   artwork and takes it out of the interaction and accessibility trees.
+   Properties mirror the element's own computed style: block, full width,
+   auto height, no fill. (The computed dump also carried vertical-align:middle,
+   which is inert once the svg is display:block, so it is not repeated here.) */
+.hc-home .hc-watermark {
+  display: block !important;
+  width: 100% !important;
+  margin: 40px 0 0 !important;
+  padding: 0 !important;
+  line-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+.hc-home .hc-watermark svg {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  fill: none !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+}
+
+/* The wordmark is 1240 x 115, so it grows very tall relative to the footer on
+   narrow viewports — trim the gap above it rather than let it dominate. */
+@media (max-width: 767px) {
+  .hc-home .hc-watermark {
+    margin-top: 24px !important;
+  }
+}
+
+.hc-home .hc-footer__cols {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 40px !important;
+  padding-bottom: 56px !important;
+}
+
+.hc-home .hc-fcol__heading {
+  margin: 0 0 26px !important;
+  font-family: "Rethink Sans", sans-serif !important;
+  font-size: 1rem !important;
+  line-height: 1.3 !important;
+  font-weight: 600 !important;
+  color: var(--scr-ink) !important;
+}
+
+.hc-home .hc-fcol__heading--stacked {
+  margin-top: 48px !important;
+}
+
+.hc-home .hc-fcol__list {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 18px !important;
+}
+
+.hc-home .hc-fcol__link {
+  color: var(--scr-footer-link) !important;
+  font-size: 0.875rem !important;
+  font-weight: 400 !important;
+}
+.hc-home .hc-fcol__link:hover {
+  color: var(--scr-navy) !important;
+}
+
+.hc-home .hc-footer__bar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  flex-wrap: wrap !important;
+  padding-top: 30px !important;
+  border-top: 1px solid var(--scr-rule) !important;
+}
+
+.hc-home .hc-social {
+  display: flex !important;
+  align-items: center !important;
+  gap: 22px !important;
+}
+
+.hc-home .hc-social__link {
+  color: var(--scr-navy) !important;
+}
+.hc-home .hc-social__link:hover {
+  color: var(--scr-purple) !important;
+}
+
+.hc-home .hc-legal {
+  display: flex !important;
+  align-items: center !important;
+  gap: 26px !important;
+  flex-wrap: wrap !important;
+}
+
+.hc-home .hc-legal__link {
+  color: var(--scr-footer-link) !important;
+  font-size: 1rem !important;
+}
+.hc-home .hc-legal__link:hover {
+  color: var(--scr-navy) !important;
+}
+
+@media (max-width: 1180px) {
+  .hc-home .hc-footer__cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hc-home .hc-footer__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ── 8. BACK TO TOP ───────────────────────────────────────────── */
+
+/* Same rule as the header: below the platform's z-50 dialogs, so this does not
+   float over an open search or Ask AI panel. */
+.hc-home .hc-totop {
+  position: fixed !important;
+  right: 26px !important;
+  bottom: 96px !important;
+  z-index: 30 !important;
+  width: 46px !important;
+  height: 46px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: var(--scr-totop-bg) !important;
+  color: var(--scr-white) !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 16px var(--scr-navy-25) !important;
+}
+.hc-home .hc-totop:hover {
+  background: var(--scr-navy) !important;
+  color: var(--scr-white) !important;
+}
+
+/* ==========================================================================
+   Platform overrides — landing page only
+
+   Scoped with :has(.hc-home) so the documentation pages keep their navbar,
+   sidebar, table of contents and centred article column.
+   ========================================================================== */
+
+/* full bleed: the navy bands must reach both edges of the viewport */
+.dai-layout:has(.hc-home) {
+  max-width: none !important;
+  background: var(--scr-white) !important;
+}
+
+.dai-layout:has(.hc-home) .dai-content-column {
+  width: 100% !important;
+}
+
+.dai-page:has(.hc-home),
+.dai-page:has(.hc-home) .dai-page-main,
+.dai-article:has(.hc-home),
+.dai-article:has(.hc-home) .mdx-container {
+  max-width: none !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+.dai-article:has(.hc-home) > .mt-8 {
+  margin-top: 0 !important;
+}
+
+/* strip the docs shell from this route */
+.dai-layout:has(.hc-home) .dai-sticky-header,
+.dai-layout:has(.hc-home) .dai-sidebar-column,
+.dai-page:has(.hc-home) .dai-page-aside,
+.dai-article:has(.hc-home) > .dai-breadcrumbs,
+.dai-article:has(.hc-home) > .page-title,
+.dai-article:has(.hc-home) > .page-description,
+.dai-article:has(.hc-home) > .mt-16 {
+  display: none !important;
+}
+
+/* Hide the platform footer visually — stays in DOM for crawlers / SEO.
+   Uses visibility:hidden + height:0 instead of display:none so Google and
+   other crawlers can still read the footer links and content. */
+.dai-layout:has(.hc-home) footer:not(.hc-footer),
+.dai-layout:has(.hc-home) .dai-footer {
+  visibility: hidden !important;
+  overflow: hidden !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* ==========================================================================
+   Ask AI panel — landing page only
+
+   The panel is a portal: it mounts outside .hc-home, so `.hc-home .dai-agent-chat`
+   cannot reach it. `:has()` inverts the problem — the ROOT element matches on
+   whether the page contains .hc-home, and .hc-home only exists on the landing
+   page. So these rules apply on the landing page and nowhere else, wherever the
+   portal happens to attach.
+
+   :root rather than body, so it still holds if the portal ever mounts to
+   <html> instead of <body>.
+
+   Documentation pages are left entirely alone and keep the platform's own
+   panel colours.
+
+   Only design tokens are redefined. The panel's internals — messages,
+   citations, buttons — carry no stable class names, but they all derive from
+   these, so nothing needs targeting individually and new components added by a
+   platform update inherit correctly.
+   ========================================================================== */
+
+:root:has(.hc-home) .dai-agent-chat {
+  color-scheme: light;
+
+  --background: var(--scr-white);
+  --card: var(--scr-white);
+  --popover: var(--scr-white);
+  --muted: #f4f7fb;
+  --accent: #eef4fb;
+  --secondary: #f4f7fb;
+  --sidebar: #f8fafc;
+
+  --border: var(--scr-panel-edge);
+  --border-muted: #edf1f7;
+  --ring: #bcd4ea;
+
+  --heading: var(--scr-ink);
+  --body: var(--scr-body);
+  --foreground: var(--scr-body);
+  --sub-text: var(--scr-totop-bg);
+
+  /* Scrut's own blue, so the send button and links match the hero CTA. */
+  --brand: #0065b3;
+  --brand-text: var(--scr-white);
+  --link: #0065b3;
+
+  background: var(--scr-white) !important;
+  /* No edge. The panel element already ships Tailwind's `border-0`; a border
+     here overrides it (ours carries !important) and painted a light line down
+     the left of the panel. The box-shadow below is what separates it from the
+     page. */
+  border-left: none !important;
+  box-shadow: -12px 0 32px -24px var(--scr-navy-45) !important;
+}
+
+/* In dark mode a white panel would be just as jarring the other way, so it
+   takes Scrut navy instead of the stock near-black — same family as the hero. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]):has(.hc-home) .dai-agent-chat {
+    color-scheme: dark;
+
+    --background: var(--scr-navy);
+    --card: #06204a;
+    --popover: #06204a;
+    --muted: #0a2a5c;
+    --accent: #0a2a5c;
+    --secondary: #06204a;
+    --sidebar: #021028;
+
+    --border: var(--scr-panel-edge-dark);
+    --border-muted: #0a2247;
+    --ring: #1e4a86;
+
+    --heading: #f2f6fb;
+    --body: #c3d2e4;
+    --foreground: #c3d2e4;
+    --sub-text: #8ea3bd;
+
+    --brand: #0077d1;
+    --brand-text: var(--scr-white);
+    --link: #7fc0f5;
+
+    background: var(--scr-navy) !important;
+    border-left: none !important;
+  }
+}
+
+:root[data-theme="dark"]:has(.hc-home) .dai-agent-chat {
+  color-scheme: dark;
+
+  --background: var(--scr-navy);
+  --card: #06204a;
+  --popover: #06204a;
+  --muted: #0a2a5c;
+  --accent: #0a2a5c;
+  --secondary: #06204a;
+  --sidebar: #021028;
+
+  --border: var(--scr-panel-edge-dark);
+  --border-muted: #0a2247;
+  --ring: #1e4a86;
+
+  --heading: #f2f6fb;
+  --body: #c3d2e4;
+  --foreground: #c3d2e4;
+  --sub-text: #8ea3bd;
+
+  --brand: #0077d1;
+  --brand-text: var(--scr-white);
+  --link: #7fc0f5;
+
+  background: var(--scr-navy) !important;
+  border-left: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Ask AI panel — left edge.
+
+   The three blocks above target `.dai-agent-chat`, but the panel element
+   actually carries `bg-background border-0 border-navbar-border h-full w-full
+   lg:w-auto` — no `dai-agent-chat` among them. So those rules never reach it,
+   which is why the edge survived being set to `none` there and why the panel
+   stays navy in light mode instead of taking the white background they set.
+
+   The line itself is the platform's `border-navbar-border`, whose token is
+   light in light mode and dark in dark mode — hence "only in light mode".
+   `border-0` on the element sets the width, not the colour, so both are
+   neutralised here.
+
+   Deliberately broad: the attribute match also catches the navbar and the
+   sidebar strip, both of which are display:none on this page, so it costs
+   nothing here. Narrow it once the panel's real class list is known.
+   -------------------------------------------------------------------------- */
+:root:has(.hc-home) .dai-agent-chat,
+:root:has(.hc-home) [class*="border-navbar-border"] {
+  border-left-width: 0 !important;
+  border-left-color: transparent !important;
+}

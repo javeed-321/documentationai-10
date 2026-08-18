@@ -1,0 +1,45 @@
+---
+title: "Understand Task Management Integration Capabilities"
+description: "See which task management integrations support bidirectional sync and attachment imports for evidence tasks."
+---
+
+Integrating with a project management platform lets you create compliance-related tickets directly from Scrut in your connected tool. All integrations with the **Task Management** tag **support creating a ticket in Scrut and automatically syncing it to your connected tool**.
+
+Some integrations also support additional capabilities, such as:
+
+- **Bidirectional Status Sync:** Status changes made to linked tickets in your connected tool are automatically reflected in Scrut. This keeps compliance records in sync on both platforms, which is especially valuable when tracking remediation progress during audits.
+- **Ticket Automation:** This feature enables Scrut to automatically create a new ticket each time a linked artifact moves to a non-compliant status:
+  - Policy status changes to **Needs Review**
+  - Evidence Task status changes to **Needs Attention**
+  - Test status changes to **Fix Required**
+
+  This keeps your team's task queue up to date without any manual effort.
+- **Attachments for Evidence Tasks:** Files attached to a linked ticket in your connected tool are automatically imported into the corresponding evidence task in Scrut. For example, a screenshot or configuration export attached to a Jira ticket will sync automatically to the linked evidence task in Scrut.
+
+**Note:** Applies only to tickets linked to an evidence task in Scrut. Attachments from unlinked tickets are not imported.
+
+## Integration Capabilities at a Glance
+
+Use the table below to see which integrations support bidirectional sync and attachment imports for evidence tasks.
+
+| Integration | Bidirectional Status Sync | Ticket Automation | Attachments for Evidence Tasks |
+| --- | --- | --- | --- |
+| [**Jira**](/docs/integrating-jira) | **Yes** | **Yes** | **Yes** |
+| [**Monday.com**](/docs/integrating-mondaycom) | **Yes** | **Yes** | **Yes** |
+| [**ClickUp**](/docs/integrating-click-up) | No | No | No |
+| [**Shortcut**](/docs/integrating-shortcut) | No | No | No |
+| [**Linear**](/docs/integrating-linear) | No | No | No |
+| [**Asana**](/docs/integrating-asana) | **Yes** | No | No |
+| [**Azure DevOps (Project Management)**](/docs/integrating-azure-devops-1) | No | No | No |
+| [**ServiceNow**](/docs/integrating-servicenow) | No | No | No |
+| [**Basecamp**](/docs/integrating-basecamp) | No | No | No |
+| [**Trello**](/docs/integrating-trello) | **Yes** | No | No |
+| [**OpenProject**](/docs/integrating-openproject) | No | No | No |
+| [**GitHub**](/docs/integrating-github) | **Yes** | No | No |
+| [**Zendesk**](/docs/integrating-zendesk) | **Yes** | No | No |
+| [**Freshservice**](/docs/integrating-freshservice) | **Yes** | **Yes** | **Yes** |
+| [**ServiceDesk Plus**](/docs/integrating-servicedesk-plus) | **Yes** | No | No |
+
+**Note:** GitHub, Zendesk, Freshservice, and ServiceDesk Plus are listed here for their task management capabilities. They are present in the [Version Control](/docs/integrations-overview#3-version-control) and [Ticket Management](/docs/integrations-overview#15-ticket-management) categories on the platform, respectively.
+
+Reach out to support@scrut.io or contact your CSM for further assistance.

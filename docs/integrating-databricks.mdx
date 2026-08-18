@@ -1,0 +1,175 @@
+---
+title: "Integrate Databricks"
+description: "Learn how to integrate your Databricks account with Scrut."
+---
+
+Connect your Databricks account to Scrut to fetch user access data for Access Reviews and run automated compliance checks against your applicable frameworks.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details, roles, and permissions from Databricks for Access Reviews.
+- **Automated Tests:** Runs automated checks that continuously evaluate Databricks for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- An active Databricks workspace with administrator access.
+- For the API Key method: ability to generate a Personal Access Token from your workspace.
+- For the OAuth method: access to the Databricks account console at accounts.cloud.databricks.com to create an app connection.
+
+## Permissions and Access Requirements
+
+### For Databricks
+
+- Read access to user records in Databricks (view name, email, and user role).
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor with access to the Integrations module).
+
+## Data Collected
+
+- User Name
+- User Email
+- User Role
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+<Callout kind="alert">
+  Note:
+
+  Databricks supports two authentication methods. Complete only the fields for the method you choose, and leave the rest blank in Scrut.
+</Callout>
+
+### Step 1: Generate Credentials in Databricks
+
+Use any one of the following methods:
+
+#### Method 1: API Key Authentication (Personal Access Token)
+
+1. Sign in to your Databricks workspace, click your username in the top menu, and select **Settings**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430335660-e8ug8dch3wv-integrating-databricks__01-sign-in-to-your-databricks-workspace-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to your Databricks workspace, click your username in the top menu, and select Settings" caption=" " />
+2. Click **Developer**, then click **Manage** next to **Access Tokens**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430337302-h7e4paua5sa-integrating-databricks__02-click-developer-then-click-manage-next-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Developer, then click Manage next to Access Tokens" caption=" " />
+3. Click **Generate new token**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430338999-hhapqmucehn-integrating-databricks__03-click-generate-new-token.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Generate new token" caption=" " />
+4. (Optional) Enter a comment, e.g., Scrut Integration.
+5. Enter a numerical value for token lifetime, e.g., 120 days.
+6. If your workspace prompts you to select an access scope for the token, choose **Other APIs**, not BI Tools. BI Tools only covers connections to BI clients like Tableau or Power BI and won't give Scrut the access it needs.
+7. Click **Generate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430340811-czq6k6ye0h7-integrating-databricks__04-click-generate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Generate" caption=" " />
+8. Copy the displayed token and save it securely.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430342634-b0146bsmuh-integrating-databricks__05-copy-the-displayed-token-and-save-it-securely.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the displayed token and save it securely" caption=" " />
+9. Go to Workspaces, click your workspace, and copy the Workspace URL. This is your Base URL. (e.g., `https://&lt;workspace-id&gt;.cloud.databricks.com`). You’ll need to enter this in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430344335-h2ketaocmri-integrating-databricks__06-go-to-workspaces-click-your-workspace-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to Workspaces, click your workspace, and copy the Workspace URL" caption=" " />
+
+#### Method 2: OAuth 2.0 Authentication
+
+1. Log in to your Databricks account console at [accounts.cloud.databricks.com](http://accounts.cloud.databricks.com).
+2. Click **Settings** in the left sidebar, then open the **App connections** tab.
+3. Click **Add connection**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430345856-ra8qd34vol8-integrating-databricks__07-click-add-connection.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add connection" caption=" " />
+4. Fill in the connection details:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430364226-7jwvv4rctvs-integrating-databricks__08-fill-in-the-connection-details.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Fill in the connection details" caption=" " />
+  - **Application Name** (a descriptive name, e.g., Scrut-databricks-app)
+  - **Redirect URLs:** copy this callback URL (`https://api.gocobalt.io/api/v1/databricks/callback)` and paste it in Databricks.
+
+Note: This field is only needed for the OAuth method; skip it entirely if you're using the API Key method.
+  - **Access scopes:** select All APIs, not SQL. SQL only covers Databricks SQL warehouse access, and Scrut needs broader API access to run its checks.
+  - **Client secret:** leave Generate a client secret unchecked. Databricks OAuth uses PKCE and doesn't issue a client secret for this connection type, so leave that field blank in Scrut. This is unrelated to whether you choose the API Key or OAuth method; Databricks shows it as an optional field on every OAuth app.
+5. Click **Add**. Copy the **Client ID** shown in the popup.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430367181-qcema5hjv2d-integrating-databricks__09-click-add-copy-the-client-id-shown-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add. Copy the Client ID shown in the popup" caption=" " />
+6. Go to Workspaces, click your workspace, and copy the Workspace URL. This is your Base URL. (e.g., `https://&lt;workspace-id&gt;.cloud.databricks.com`). You’ll need to enter this in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430344335-h2ketaocmri-integrating-databricks__06-go-to-workspaces-click-your-workspace-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to Workspaces, click your workspace, and copy the Workspace URL" caption=" " />
+
+### Step 2: Add the Credentials to Scrut
+
+1. Sign in to Scrut and click **Integrations**.
+2. Go to the **Integrations Library** tab and select **Database** from the Categories section.
+3. Scroll to the Databricks tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430368968-8tvdltek7mo-integrating-databricks__11-scroll-to-the-databricks-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Databricks tile and click Integrate" caption=" " />
+4. On the Databricks integration page, fill in the fields for your chosen method and leave the others blank:
+  - API Key method: paste the API token from Method 1 into API Key, and enter Base URL
+  - OAuth method: paste the Client ID from Method 2 into Client ID, enter Base URL, leave Client Secret blank.
+5. Click **Submit**.
+
+Once authorization is done, you'll see the "Connected Successfully" message and the Connected status indicator.
+
+## What Happens Next?
+
+### Initial data sync
+
+The initial sync begins automatically once the integration is connected. To monitor sync status, check the Audit Log on the Databricks integration page in Scrut.
+
+### Review synced data
+
+- Navigate to **People → Access → Overview** to view the user details fetched from Databricks. You can also create or edit an Access Review and include Databricks in scope. See the guide on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+- Navigate to **Tests → Automated Tests** to view the compliance checks Scrut runs for Databricks.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure on submit
+
+Possible solutions: verify that the credentials you entered match your chosen method exactly; for the API Key method, confirm the Personal Access Token hasn't expired or been revoked; for the OAuth method, confirm the Client ID is correct and that the Client Secret was left blank.
+
+### Base URL rejected or connection unreachable
+
+Cause: the Databricks account console URL (accounts.cloud.databricks.com) was entered instead of the workspace URL.
+
+Possible solutions: go to Workspaces in the account console and copy the correct Workspace URL; confirm there's no trailing path beyond the domain.
+
+### Data not appearing in Scrut
+
+Possible solutions: check the Audit Log for error entries; confirm the integration status shows Connected; contact [support@scrut.io](mailto:support@scrut.io) if the issue persists.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="Which authentication method should I use, API Key or OAuth?" default-open="false">
+
+Use the API Key method for a quick setup with a single Personal Access Token. Use OAuth if your organization prefers centrally managed app connections without a long-lived token tied to one user.
+
+</Expandable>
+
+<Expandable title="Do I need to enter a Client Secret for the OAuth method?" default-open="false">
+
+No. Databricks OAuth uses PKCE, which doesn't require or generate a client secret. Leave that field blank in Scrut.
+
+</Expandable>
+
+<Expandable title="What happens if my Personal Access Token expires or is revoked?" default-open="false">
+
+The integration will show an authentication error. Generate a new token in Databricks and update it on the Databricks integration settings page in Scrut.
+
+</Expandable>
+
+<Expandable title="Can I switch from one authentication method to another later?" default-open="false">
+
+Yes. Fill in the fields for the new method on the integration settings page, leave the other method's fields blank, and click Submit.
+
+</Expandable>
+
+<Expandable title="What access does Scrut need in my Databricks account?" default-open="false">
+
+Read-only access to user records - name, email, and role - for either the token or the app connection you create.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

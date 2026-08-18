@@ -1,0 +1,123 @@
+---
+title: "Integrate Kolide"
+description: "Learn how to connect your Kolide account with Scrut."
+---
+
+The **Scrut-Kolide Integration** fetches your employees’ device/endpoint data from your [Kolide](https://www.kolide.com/) account and sends it to Scrut. In this article, we walk you through the process of connecting Kolide with Scrut.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your Kolide account:
+
+- **Account Information:** Login credentials for your Kolide account
+- **Access:** You must be a Kolide admin with “Full Access” to create and manage API keys
+- **Permissions:** Scrut needs the following permissions:
+  - Read devices: To read devices in your Kolide account
+  - Read checks: For automated tests
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your Kolide account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With Kolide
+
+### Step 1: Generate an API Key in Kolide
+
+Follow these steps to create an API key:
+
+1. Sign in to Kolide and click your user avatar in the upper-right corner.
+2. In the dropdown menu, click **Settings**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430761405-zrqxp7udpie-integrating-kolide__01-in-the-dropdown-menu-click-settings.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the dropdown menu, click Settings" caption=" " />
+3. In the menu on the left, click **Developers**.
+4. In the sub-menu that appears, click **API Keys**.
+5. On the next screen, click **Create New Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430763075-fbmthf50m5-integrating-kolide__02-on-the-next-screen-click-create-new-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the next screen, click Create New Key" caption=" " />
+6. In the modal that appears:
+  - Enter a name for the key, such as Scrut Automation
+  - Enter the name of the Kolide administrator who will be responsible for this API key’s usage
+7. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430764901-b4705czkowt-integrating-kolide__03-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+8. Once saved, the API key is available in the table. Click the copy button and save it to a safe location. You’ll need to enter it in Scrut in [Step 2](/docs/integrating-kolide#step-2-connect-your-kolide-account-in-scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430766796-uavv62t9hp-integrating-kolide__04-once-saved-the-api-key-is-available-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once saved, the API key is available in the table" caption=" " />
+
+### Step 2: Connect Your Kolide Account in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and choose **Mobile Device Management Tools** in the **Categories** section.
+3. Scroll to the Kolide tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430768574-0xz26nbd08k-integrating-kolide__05-scroll-to-the-kolide-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Kolide tile and click Integrate" caption=" " />
+4. On the Kolide integration page, paste the API key from [Step 1](/docs/integrating-kolide#step-1-generate-an-api-key-in-kolide).
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430770619-jqi5fqpgexk-integrating-kolide__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430772287-8dl1rukqpe-integrating-kolide__07-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employees’ device data from Kolide.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync**: If you prefer, you can initiate a manual sync by clicking the **Sync Now** button on the Kolide integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430773937-e5z9tf1adr-integrating-kolide__08-manual-sync-if-you-prefer-you-can-initiate-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: If you prefer, you can initiate a manual sync by clicking the Sync Now button on the Kolide" caption=" " />
+
+## What Happens Next?
+
+On successfully completing the integration, Scrut fetches data from Kolide and syncs it to the following modules:
+
+### 1: People → Employees
+
+Scrut will fetch the complete inventory of devices from Kolide and map them to employees using email as the unique identifier. Device details captured for audit purposes include:
+
+- Device Name
+- OS
+- Serial Number
+- Device Type
+
+### 2: Asset Management
+
+All device data that Scrut fetches from Kolide will be displayed in the Asset Management module. This creates a centralized asset directory, readily available for audit and compliance use cases.
+
+1. Click **Asset Management** on the left navigation panel.
+2. Go to the **Mobile Devices** section. This tab lists all the devices available in your Kolide account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430775847-346d890ctnc-integrating-kolide__09-go-to-the-mobile-devices-section-this-tab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the Mobile Devices section. This tab lists all the devices available in your Kolide account" caption=" " />
+
+### 3: Access Reviews
+
+Scrut will retrieve the list of all users with privileged access to Kolide. Admins can initiate and manage access reviews for Kolide directly within Scrut. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Kolide:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select **Kolide** in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430777522-f37tk120yee-integrating-kolide__10-review-the-details-and-click-save-review.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the details and click Save Review" caption=" " />
+
+### 4: Automated Tests for Evidence Collection
+
+Kolide’s native “Checks” will be automatically pulled into the Automated Tests module.
+
+- **Direct Control Mapping**: Kolide checks can be mapped to framework controls within Scrut, serving as live audit evidence.
+- **No Manual Export/Upload**: Customers no longer need to export check results from Kolide and upload them to Scrut.
+- **Custom Check Support**: Any custom checks created in Kolide are also fetched and shown in Scrut automatically.
+- **Real-Time Sync**: If a check is paused or deleted, or if a device is marked out of scope, those updates are immediately reflected in Scrut.
+
+This ensures full synchronization between Kolide and Scrut, making evidence management effortless. To view Kolide checks data in Scrut:
+
+1. Click **Tests** on the left navigation panel.
+2. Click the **Application** filter and select **Kolide**.
+3. This lists all automated tests Scrut runs on your connected Kolide account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430779329-7f6bry99kl-integrating-kolide__11-this-lists-all-automated-tests-scrut-runs-on.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="This lists all automated tests Scrut runs on your connected Kolide account" caption=" " />

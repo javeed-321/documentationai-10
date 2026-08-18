@@ -1,0 +1,91 @@
+---
+title: "Integrate PandaDoc"
+description: "Learn how to connect your organization's PandaDoc account with Scrut."
+---
+
+The **Scrut - PandaDoc** integration fetches user access data, permissions, and role assignments from your PandaDoc account and sends them to Scrut’s Access Review module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from PandaDoc flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You must have permissions to generate an API key in PandaDoc
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in PandaDoc
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your PandaDoc account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect PandaDoc With Scrut
+
+### Step 1: Fetch API Key from PandaDoc
+
+1. Log in to your PandaDoc account, navigate to API and Integrations and click API.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431076287-ovnshf04t3k-integrating-pandadoc__01-log-in-to-your-pandadoc-account-navigate-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your PandaDoc account, navigate to API and Integrations and click API" caption=" " />
+2. Click Enable to enable API keys for your account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431078000-3l76izrj0om-integrating-pandadoc__02-click-enable-to-enable-api-keys-for-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Enable to enable API keys for your account" caption=" " />
+3. Generate the API key. To generate the API key for the Production environment, contact the PandaDoc sales team.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431079799-039wpxcdqxna-integrating-pandadoc__03-generate-the-api-key-to-generate-the-api-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Generate the API key. To generate the API key for the Production environment, contact the PandaDoc sales team" caption=" " />
+4. Once you have generated the API key, copy and save it in a safe location. You’ll need to enter it in Scrut in the [next step](/docs/integrating-pandadoc#step-2-go-to-integrations-in-scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431081625-kjugk98e0l-integrating-pandadoc__04-once-you-have-generated-the-api-key-copy-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once you have generated the API key, copy and save it in a safe location" caption=" " />
+
+**Note:** Refer to this guide from PandaDoc for [more information on the API key and what it does](https://developers.pandadoc.com/reference/api-key-authentication-process).
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Policy Management** in the **Categories** section.
+3. Scroll to the **PandaDoc** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431084696-jiqwuf7mu4l-integrating-pandadoc__05-scroll-to-the-pandadoc-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the PandaDoc tile and click Integrate" caption=" " />
+4. On the integration page, paste the API key obtained in [Step 1](/docs/integrating-pandadoc#step-1-fetch-api-key-from-pandadoc).
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431086522-cem0obhf9d5-integrating-pandadoc__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431088280-94731r9w99h-integrating-pandadoc__07-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from PandaDoc. This process typically takes a few hours to complete. Check the Audit Log on the PandaDoc integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs the sync once **every 24 hours** to fetch incremental data such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431090187-l1zxhx1o5q-integrating-pandadoc__08-manual-sync-you-can-also-click-the-sync-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: You can also click the Sync Now button to trigger an immediate data refresh" caption=" " />
+
+## Data Fetched from PandaDoc
+
+Scrut fetches the following access-related data points from PandaDoc:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing PandaDoc Data in Scrut
+
+To view the data fetched from your PandaDoc account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your PandaDoc account. You can also create an Access Review (or edit an existing one) and include the PandaDoc application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+---
+
+If you face any difficulties connecting PandaDoc with Scrut, get in touch with the Scrut support team at support@scrut.io.

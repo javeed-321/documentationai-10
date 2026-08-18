@@ -1,0 +1,97 @@
+---
+title: "Integrate Qualys"
+description: "Learn how to connect your Qualys account with Scrut."
+---
+
+# Integrating Qualys
+
+In this article, we explain how to integrate your Qualys account with Scrut.
+
+## How To Integrate Qualys With Scrut
+
+### Step 1: Create a Service Account in Qualys
+
+To integrate with Qualys, you will need to create a service account. You need to set up a dedicated email for this account.
+
+1. Access the Qualys Vulnerability Management, Detection, and Response (VMDR) tool. You can find your app URL on [this page](https://qualysguard.qualys.com/portal-help/en/admin/index.htm#t=user%2Fadd_new_user_from_vm.htm).
+2. Navigate to the **Users → Manager User Accounts**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431109610-azcrtvyp7s-integrating-qualys__01-navigate-to-the-users-manager-user-accounts.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to the Users → Manager User Accounts" caption=" " />
+3. Click **New → User**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431111404-hanec6stm7-integrating-qualys__02-click-new-user.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click New → User" caption=" " />
+4. Fill out the user information form with the following details:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431113269-y0kxk4z0h2a-integrating-qualys__03-fill-out-the-user-information-form-with-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Fill out the user information form with the following details" caption=" " />
+  - First Name: Scrut
+  - Last Name: Integration
+  - Title: - (hyphen)
+  - Phone: - (hyphen)
+  - Address 1: - (hyphen)
+  - Country: United States of America
+  - Email Address: [Enter dedicated service account email address]
+  - State: California
+5. In the **Locale** Section:
+  - Language: English
+  - Date Format: ISO Format (yyyy-mm-dd)
+  - Time Zone: Select your time zone
+6. In the **User Role** Section:
+  - User Role: Reader
+  - Allow Access to: Check both "API" and "GUI" options.
+  - Business Unit: Select the target business unit for monitoring.
+7. In the **Notifications** Section:
+  - Disable all notifications (set to "None", "Off", or "No notification").
+8. Save the new user.
+9. Check the provided email address for an email from Qualys. Follow the instructions to set a password, and enter it in Scrut in the next step.
+
+### Step 2: Navigate to Integrations in Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Go to the **Integrations Library** tab, and click **Vulnerability Scanners** in the **Categories** section.
+3. Search for and find the **Qualys** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431115090-t3dlu4ggng-integrating-qualys__04-search-for-and-find-the-qualys-tile-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for and find the Qualys tile and click Integrate" caption=" " />
+4. Enter the following details:
+  - **Username**: Enter your Qualys username.
+  - **Password**: Enter the password that is generated in your Qualys service account.
+  - **Region**: Select the region of your Qualys account.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431116831-3ulp87lrbaj-integrating-qualys__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Watch out for the “Connected” status flag.
+
+---
+
+### FAQs & Troubleshooting
+
+<ExpandableGroup>
+
+<Expandable title="I don’t see any hosts while configuring the Qualys scope in Scrut." default-open="false">
+
+This usually happens when the Qualys service account you created for the Scrut integration does not have access to any Asset groups. Without this access, Scrut cannot fetch host data from your Qualys account.
+
+#### How To Fix
+
+Follow these steps to assign the relevant Asset Groups to the service account:
+
+1. Log in to Qualys with a Manager account (only Manager roles can modify user access).
+2. Navigate to **Users → Setup → Users**.
+3. Locate and edit the service account you’re using for Scrut integration.
+4. Go to the **Assets Groups** tab.
+5. Select the **Asset Groups** that contain the hosts that you want Scrut to access.
+6. Click **Save**.
+
+If your organization uses multiple business units (BUs), ensure that the service account is assigned to the same BU that owns those asset groups.
+
+Alternatively, if you want the service account to see all assets, you can:
+
+- Go to the Permissions tab in the user settings.
+- Enable “Allow access to all asset groups.”
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.
+

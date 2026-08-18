@@ -1,0 +1,286 @@
+---
+title: "Integrate Snowflake"
+description: "Learn how to connect your organization's Snowflake account with Scrut."
+---
+
+Connect your Snowflake account to Scrut to sync user access data and run automated compliance checks against your applicable frameworks.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details, roles, and permissions from Snowflake for Access Reviews.
+- **Automated Tests:** Runs automated checks that continuously evaluate Snowflake for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+Before starting the integration, make sure the following are in place:
+
+- ACCOUNTADMIN or relevant role to fetch the required credentials from Snowflake
+
+## Permissions and Access Requirements
+
+### For Snowflake
+
+- Read access to user accounts, roles, and permissions in Snowflake
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integrations module enabled
+
+## Limitations
+
+- Snowflake has announced the deprecation of single-factor password authentication. Username and Password (Method 2) may already be restricted or unavailable depending on your organization's security policy.
+- Snowflake discourages embedding passwords in JDBC connection strings for production use.
+
+## Data Collected
+
+- User Name: Snowflake user display name
+- User Email: Snowflake user email address
+- User Role: Snowflake role assigned to user
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page using the Sync Now button.
+
+## Integration Setup
+
+Scrut supports four authentication methods. Choose the one that fits your environment and complete only the steps for that method.
+
+<Callout kind="alert">
+  Heads Up!
+
+  Fill in only the fields that correspond to the method you choose. Leave all other fields blank.
+</Callout>
+
+### Before You Begin: Fetch Your Account Identifier
+
+Most authentication methods require your Account Identifier. To find it:
+
+1. Log in to Snowflake and look at your browser URL. Everything before `.snowflakecomputing.com` is your Account Identifier.
+
+   Example: `https://&lt;account-identifier&gt;.snowflakecomputing.com`
+2. Alternatively, run the following SQL in any Snowflake worksheet: `SELECT CURRENT_ORGANIZATION_NAME() || '-' || CURRENT_ACCOUNT_NAME();`
+
+Note: The preferred format is `orgname-accountname` (for example, `mycompany-prod123`). The legacy `account_locator.region.cloud` format is still accepted, but is not recommended by Snowflake.
+
+### Quick Reference: Fields Required Per Method
+
+| Field | JDBC String | Username + Password | Key Pair | OAuth |
+| --- | --- | --- | --- | --- |
+| JDBC Connection String | **Required** |  |  |  |
+| Username |  | **Required** | **Required** |  |
+| Password |  | **Required** |  |  |
+| Private Key |  |  | **Required** |  |
+| Account Identifier |  | **Required** | **Required** |  |
+| Database |  | Optional | Optional |  |
+| Warehouse |  | Optional | Optional |  |
+| Role |  | Optional | Optional |  |
+| Schema |  | Optional | Optional |  |
+| Client ID |  |  |  | **Required** |
+| Client Secret |  |  |  | **Required** |
+| Token URL |  |  |  | **Required** |
+| Scope |  |  |  | Optional |
+
+## Step 1: Prepare Your Snowflake Credentials
+
+### Method 1: JDBC Connection String
+
+Best for teams that already have a pre-built Snowflake JDBC connection string, or want to embed all connection parameters in a single field.
+
+Fields required: JDBC Connection String only.
+
+1. Build your connection string using the following format: `jdbc:snowflake://&lt;account-identifier&gt;.snowflakecomputing.com/?user=&lt;username&gt;&amp;password=&lt;password&gt;&amp;db=&lt;database&gt;&amp;warehouse=&lt;warehouse&gt;&amp;role=&lt;role&gt;&amp;schema=&lt;schema&gt;`
+2. Replace each placeholder with your actual values. The `db`, `warehouse`, `role`, and `schema` parameters are optional.
+
+<Callout kind="alert">
+  **Important:**
+
+  When using this method, leave all other fields in Scrut empty. The connection string contains everything Snowflake needs. Snowflake advises against using this method in production environments because embedded passwords can be inadvertently exposed. For production, use Key Pair (Method 3) or OAuth (Method 4).
+</Callout>
+
+### Method 2: Username and Password
+
+Best for quick setup in development or testing environments.
+
+Fields required: Username, Password, Account Identifier. Database, Warehouse, Role, and Schema are optional.
+
+1. Locate your Snowflake username by clicking your profile name in the bottom left of Snowflake's UI. Admins can also find it under **Admin → Users & Roles → Users**.
+2. Use the password associated with your Snowflake user account.
+3. Find your Account Identifier using the steps in the [Before You Begin section](/v1/docs/integrating-snowflake#before-you-begin-finding-your-account-identifier) above.
+4. To find optional context values, run the following in a Snowflake worksheet:
+  - Database: `SHOW DATABASES;`
+  - Warehouse: `SHOW WAREHOUSES;`
+  - Role: `SHOW ROLES;`
+  - Schema: `SHOW SCHEMAS IN DATABASE &lt;database_name&gt;;`
+
+<Callout kind="alert">
+  Heads Up!
+
+  Snowflake has announced the deprecation of single-factor password authentication. If you encounter authentication failures with this method, switch to Key Pair (Method 3) or OAuth (Method 4).
+</Callout>
+
+### Method 3: Key Pair Authentication
+
+Best for service accounts, automated integrations, and environments where password-based authentication has been disabled. This is Snowflake's recommended method for programmatic access.
+
+Fields required: Username, Private Key, Account Identifier. Database, Warehouse, Role, and Schema are optional.
+
+A Snowflake administrator must complete the following one-time setup before entering credentials in Scrut.
+
+Generate the key pair:
+
+1. Open a terminal and run the following command to generate an encrypted private key: `openssl genrsa 2048 | openssl pkcs8 -topk8 -v2 aes256 -inform PEM -out rsa_key.p8`
+2. When prompted, enter an Encryption Password and re-enter it for verification. Save this passphrase securely. You will need to enter it in Scrut as the Passphrase field.
+3. This generates a file called `rsa_key.p8` in the current directory. Open it and copy the full contents, including the `-----BEGIN ENCRYPTED PRIVATE KEY-----` and `-----END ENCRYPTED PRIVATE KEY-----` lines. This is your Private Key.
+4. Run the following command to derive the public key: `openssl rsa -in rsa_key.p8 -pubout -out rsa_key.pub`
+5. Open `rsa_key.pub` and copy its contents. You will need this in the next step.
+
+Assign the public key to your Snowflake user:
+
+6. In Snowflake, click your profile in the bottom left and confirm your current role is ACCOUNTADMIN. Switch to it if not.
+7. Go to **Projects → Worksheets** and click the **+** icon to create a new worksheet.
+8. Run the following command, replacing the placeholders with your username and the public key contents: `ALTER USER &lt;Username&gt; SET RSA_PUBLIC_KEY="&lt;Public_key&gt;"`
+
+   When pasting the public key value, exclude the `-----BEGIN PUBLIC KEY-----` and `-----END PUBLIC KEY-----` header and footer lines. Paste only the key body.
+9. Confirm that the statement executed successfully.
+
+<Callout kind="alert">
+  Important:
+
+  The public key must be assigned to the Snowflake user before you attempt to connect in Scrut. The connection will fail if this step has not been completed.
+</Callout>
+
+### Method 4: OAuth (Client Credentials)
+
+Best for enterprise setups using an Identity Provider such as Okta, Microsoft Entra ID, or Snowflake's own OAuth server for machine-to-machine authentication.
+
+Fields required: Client ID, Client Secret, Token URL. Scope is optional but recommended.
+
+**Prerequisite:** A Snowflake administrator must create a Security Integration before this method can be used.
+
+1. Log in to Snowflake with the ACCOUNTADMIN role and run the following SQL:
+
+```plaintext
+CREATE SECURITY INTEGRATION <integration_name>
+  TYPE = OAUTH
+  ENABLED = TRUE
+  OAUTH_CLIENT = CUSTOM
+  OAUTH_CLIENT_TYPE = 'CONFIDENTIAL'
+  OAUTH_REDIRECT_URI = 'https://api.gocobalt.io/api/v1/snowflake/callback'
+  OAUTH_ISSUE_REFRESH_TOKENS = TRUE
+  OAUTH_REFRESH_TOKEN_VALIDITY = 86400;
+```
+
+2. After creation, retrieve your Client ID and Client Secret by running: `SELECT SYSTEM$SHOW_OAUTH_CLIENT_SECRETS('&lt;integration_name&gt;');`
+
+   The result returns `OAUTH_CLIENT_ID` and `OAUTH_CLIENT_SECRET`. Store both securely.
+3. Your Token URL follows this format: `https://&lt;account-identifier&gt;.snowflakecomputing.com/oauth/token`
+4. For the Scope field, use one of the following values:
+  - `session:role:ROLENAME` to activate a specific role (for example, `session:role:ANALYST`)
+  - `session:role-any` to use the user's default role
+
+**Note:** The roles ACCOUNTADMIN, SECURITYADMIN, ORGADMIN, and GLOBALORGADMIN are blocked by default for OAuth. If one of these roles is required, a Snowflake administrator must run: `ALTER ACCOUNT SET OAUTH_ADD_PRIVILEGED_ROLES_TO_BLOCKED_LIST = FALSE;`
+
+## Step 2: Connect Snowflake in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab and select **Database** from the Categories section.
+3. Scroll to the **Snowflake** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431262755-qkz1e55ooc-integrating-snowflake__01-scroll-to-the-snowflake-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Snowflake tile and click Integrate" caption=" " />
+4. On the Snowflake integration page, fill in the fields that correspond to your chosen authentication method. Leave all other fields blank.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431264493-2q59vto2ebf-integrating-snowflake__02-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once the connection is successful, you will see the "Integration Successful" message and the **Connected** status indicator on the integration page.
+
+<Callout kind="alert">
+  Important:
+
+  If you are using Key Pair authentication and enter a private key that exceeds the character limit, you will see a character limit warning. You can ignore this warning and click Submit to proceed.
+</Callout>
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is connected, Scrut begins syncing user data from Snowflake automatically. The initial sync may take a few hours to complete. To monitor progress, go to the **Audit Log** tab on the Snowflake integration page in Scrut.
+
+### Review synced data
+
+Once the sync is complete, review the data at the following locations:
+
+- Navigate to **People → Access Reviews → Applications** to view Snowflake user details, including names, emails, and roles.
+- Navigate to **Automated Test**s to view compliance tests that Scrut runs against your Snowflake data.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure on submit
+
+Possible solutions:
+
+- Verify that the credentials you entered match your chosen authentication method exactly.
+- For Key Pair: confirm the public key has been assigned to the Snowflake user using the ALTER USER command before submitting in Scrut.
+- For Username and Password: check whether your Snowflake account has disabled single-factor authentication. If so, switch to Key Pair or OAuth.
+- For OAuth: confirm the Security Integration was created successfully and that the Client ID, Client Secret, and Token URL are accurate.
+
+### Data not appearing in Access Reviews
+
+Possible solutions:
+
+- Check the **Audit Log** on the Snowflake integration page to confirm the sync completed without errors.
+- Trigger a manual sync using the **Sync Now** button and wait for it to complete.
+- Confirm the Snowflake user account used for the integration has read access to user accounts, roles, and permissions.
+
+### JDBC connection fails
+
+Possible solutions:
+
+- Confirm the Account Identifier in your connection string is correct and uses the preferred `orgname-accountname` format.
+- Check that all required parameters in the string (user, password) are present and correctly formatted.
+- Avoid using this method in production. Switch to Key Pair or OAuth for more secure authentication.
+
+### OAuth token request fails
+
+Possible solutions:
+
+- Confirm the Token URL matches the format `https://&lt;account-identifier&gt;.snowflakecomputing.com/oauth/token`.
+- Verify that the Security Integration in Snowflake is enabled and that the redirect URI matches exactly.
+- If the required role is a privileged one (ACCOUNTADMIN, SECURITYADMIN, etc.), ensure a Snowflake admin has unblocked it.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Which authentication method should I use?" default-open="false">
+
+Snowflake recommends Key Pair Authentication or OAuth for new integrations. Username and Password is being deprecated and may not be available depending on your organization's security configuration. If you are unsure, check with your Snowflake administrator before proceeding.
+
+</Expandable>
+
+<Expandable title="2: Can I change the authentication method after the integration is set up?" default-open="false">
+
+Yes. Go to the **Snowflake** integration page in Scrut, update the relevant credential fields to match your new method, clear any fields that do not apply, and click **Submit** to reconnect.
+
+</Expandable>
+
+<Expandable title="3: What happens if I rotate or change my Snowflake credentials?" default-open="false">
+
+The integration will stop syncing until you update the credentials in Scrut. Go to the Snowflake integration page, enter the new credentials, and click **Submit** to restore the connection.
+
+</Expandable>
+
+<Expandable title="4: How often does Scrut sync data from Snowflake?" default-open="false">
+
+Scrut syncs data from Snowflake once every 24 hours. You can also trigger an immediate sync by clicking **Sync Now** on the integration page.
+
+</Expandable>
+
+<Expandable title="5: What happens if a user is deleted in Snowflake?" default-open="false">
+
+The deleted user will not show up in Scrut in the next sync.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to support@scrut.io or contact your CSM for further assistance.

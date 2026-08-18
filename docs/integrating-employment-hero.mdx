@@ -1,0 +1,97 @@
+---
+title: "Integrate Employment Hero"
+description: "Learn how to connect your Employment Hero account with Scrut."
+---
+
+The **Scrut** **-** **Employment Hero integration** syncs employee data from your Employment Hero account to Scrut so that you can access employee details in the [**People → Employees module**](https://help.scrut.io/docs/employees) in Scrut. This article provides a step-by-step guide for integrating your Employment Hero account with Scrut.
+
+## Prerequisites
+
+Before you begin the integration, make sure to have the following permissions for your Employment Hero account:
+
+- **Account Information:** Login credentials
+- **Access Level:** Admin access to Employment Hero to generate the client ID and secret
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Employment Hero account before beginning the integration to avoid doing so later.
+</Callout>
+
+## How to Connect Employment Hero With Scrut
+
+### Step 1: Generate Client ID and Secret in Employment Hero
+
+1. Go to the Employment Hero developer portal. To access the developer portal, sign in to your Employment Hero account and click Developer Portal under your profile name in the top right corner.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430420341-c72goigzdc-integrating-employment-hero__01-go-to-the-employment-hero-developer-portal.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the Employment Hero developer portal" caption=" " />
+2. Click on **Add Application** and enter a name for the application, such as Scrut Automation.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430422037-m4sdq0i99wo-integrating-employment-hero__02-click-on-add-application-and-enter-a-name.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click on Add Application and enter a name for the application, such as Scrut Automation" caption=" " />
+3. Enter this **redirect URL**: [https://app.getknit.dev/oauth/authorize](https://app.getknit.dev/oauth/authorize)
+4. Select the following **scopes**:
+  - organisations:list
+  - organisations:show
+  - employees:list
+  - timesheet_entries:list
+  - employees:list
+  - employment_histories:list
+  - employees:show
+  - teams:list
+5. Copy the **Client ID and Client Secret** shown on screen. You’ll need to enter it in Scrut in the [next step](/docs/integrating-employment-hero#step-2-connect-your-employment-hero-account-in-scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430423588-zf8n3bl087c-integrating-employment-hero__03-copy-the-client-id-and-client-secret-shown.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Client ID and Client Secret shown on screen. You’ll need to enter it in Scrut in the next step" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  If you have trouble generating the Client ID and Client Secret, please check this [help guide from Employment Hero](https://developer.employmenthero.com/api-references/#obtain-credentials).
+</Callout>
+
+### Step 2: Connect Your Employment Hero Account in Scrut
+
+1. [Log in to Scrut](https://app.scrut.io/login) and click **Integrations** on the left panel.
+2. Click the **Integrations Library** tab at the top, and in the **Categories** section, click **Human Resources Information Systems**.
+3. Locate the **Employment Hero** card, or use the search bar at the top of the page to find it, and click the **Integrate** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430425194-nii0pdxuema-integrating-employment-hero__04-locate-the-employment-hero-card-or-use-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Employment Hero card, or use the search bar at the top of the page to find it, and click the" caption=" " />
+4. Click the **Connect** button on the top right of the Employment Hero integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430426783-09usa0p37snn-integrating-employment-hero__05-click-the-connect-button-on-the-top-right-of.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Connect button on the top right of the Employment Hero integration page" caption=" " />
+5. In the pop-up window, enter the **Employment Hero Client ID** and **Client Secret** you copied in [Step 1](/docs/integrating-employment-hero#step-1-generate-client-id-and-secret-in-employment-hero).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430428491-lfjhfkprchr-integrating-employment-hero__06-in-the-pop-up-window-enter-the-employment.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the pop-up window, enter the Employment Hero Client ID and Client Secret you copied in Step 1" caption=" " />
+6. Click **Submit** to complete the integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430430103-w8nfur31jxp-integrating-employment-hero__07-click-submit-to-complete-the-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit to complete the integration" caption=" " />
+
+Watch for the success notification that indicates the integration is complete.
+
+## **Synchronization Details**
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employee data from your Employment Hero account.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the Employment Hero integrations page.
+
+## **Data Fetched From Employment Hero**
+
+Scrut fetches the following employee details from Employment Hero:
+
+- Employee name (first and last name)
+- Email address
+- Employment start date
+- Date of exit (if applicable)
+- Department and role (if available)
+- Email of reporting manager (if available)
+- Leave data (start date, end date, and status)
+
+## **Viewing Employment Hero Data in Scrut**
+
+To view Employment Hero data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your Employment Hero account with Scrut, please contact our support team at scrut@support.io for assistance.

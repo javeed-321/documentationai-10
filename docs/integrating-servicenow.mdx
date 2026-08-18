@@ -1,0 +1,88 @@
+---
+title: "Integrate ServiceNow"
+description: "Learn how to connect Scrut with ServiceNow."
+---
+
+The Scrut - ServiceNow integration fetches compliance data from your [ServiceNow developer account](https://developer.servicenow.com/dev.do#!/) and imports it into Scrut. Upon completing the integration, Scrut will display the fetched data in the following modules:
+
+- Evidence Tasks
+- Test
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your ServiceNow account:
+
+- **Access Level**: You require Admin access to your ServiceNow account.
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your ServiceNow account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With ServiceNow
+
+### Step 1: Copy Client ID and Client Secret from ServiceNow
+
+1. Log in to your ServiceNow Development dashboard and navigate to **All → System OAuth → Application Registry**.
+2. Click on the **New** button to create a new OAuth endpoint.
+3. Select **Create an OAuth API endpoint for external clients**.
+4. Configure your new OAuth endpoint as needed, and set the Redirect URL based on your Scrut instance region.
+  - **India**: https://app.scrut.io/settings/integration/servicenow
+  - **US**: https://app.us.scrut.io/settings/integration/servicenow
+  - **EU**: https://app.eu.scrut.io/settings/integration/servicenow
+  - **Australia**: https://app.au.scrut.io/settings/integration/servicenow
+5. This will generate the OAuth Endpoint with the Client ID and Client Secret you need.
+
+<Callout kind="info">
+  Pro Tip!
+
+  For step-by-step instructions, refer to [ServiceNow’s documentation](https://www.servicenow.com/docs/bundle/yokohama-platform-security/page/administer/security/task/t_CreateEndpointforExternalClients.html).
+</Callout>
+6. Copy and save the **Client ID** and **Client Secret**, as you will need them in the next step.
+
+<Callout kind="danger">
+  Note:
+
+  The Client Secret will not be redisplayed. So, ensure that you store it in a safe location for easy access later.
+</Callout>
+
+### Step 2: Connect Your ServiceNow Account in Scrut
+
+1. [Sign in to your Scrut account](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432297094-rk4vqrq4ip-sign-in-to-your-scrut-account-and-click-5cb4189e.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to your Scrut account and click Integrations on the left navigation panel" caption=" " />
+2. Navigate to the **Integrations Library** tab and choose **Project Management Platforms** in the **Categories** section.
+3. Scroll to the **ServiceNow** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431238779-hz65zis4yom-integrating-servicenow__02-scroll-to-the-servicenow-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the ServiceNow tile and click Integrate" caption=" " />
+4. On the ServiceNow integration page, enter your ServiceNow **Instance Name**.
+
+<Callout kind="alert">
+  Heads Up!
+
+  ServiceNow instances follow this naming convention: https://&lt;INSTANCE_NAME>.service-now.com, where &lt;INSTANCE_NAME> is your ServiceNow Instance Name.
+</Callout>
+5. Paste the **Client ID** and **Client Secret** from Step 1.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431240762-o26p8n61xnh-integrating-servicenow__03-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Click **Authorize** to grant the required permissions.
+8. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+## Data Fetched from ServiceNow
+
+Scrut fetches the following data points from ServiceNow:
+
+- **List of Users**: Username, Name, Email, Title, Department, Active, MFA Enabled, Created
+- **List of Groups**: Name, Description, Active, Manager, Parent, Updated
+- **List of Incidents**: number, opened_at, short_description, caller_id.value, priority, state, category, assignment_group.value, assigned_to.value, sys_updated_on, sys_updated_by
+- **List of Tasks/Issues**: active, assigned_to, sys_created_on, short_description, escalation number, priority, state
+
+<Callout kind="alert">
+  Note:
+
+  Refer to ServiceNow’s documentation for more information on the [task table fields](https://www.servicenow.com/docs/bundle/washingtondc-application-development/page/administer/task-table/reference/r_ImportantTaskTableFields.html).
+</Callout>
+
+If you encounter any difficulties connecting ServiceNow with Scrut, please get in touch with the Scrut support team at support@scrut.io.

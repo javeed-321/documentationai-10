@@ -1,0 +1,139 @@
+---
+title: "Integrate HubSpot"
+description: "Learn how to connect your organization's HubSpot account with Scrut."
+---
+
+Connect your HubSpot account with Scrut to sync user access data into the Access Review module and run automated compliance checks against your HubSpot configurations. This article explains how to integrate your HubSpot account with Scrut.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details, roles, and permissions from HubSpot for Access Reviews.
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+
+## Prerequisites
+
+- An active HubSpot account with admin access
+
+## Permissions and Access Requirements
+
+### For HubSpot
+
+Scrut requests, **read-only access** to the following data in your HubSpot account:
+
+- Manage and view your CRM data:
+  - View details about users assigned to a CRM record
+  - Read User CRM object data
+- Basic HubSpot account information:
+  - View properties about the installing account, including primary domain and user emails
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor with access to the Integrations module)
+
+## Data Collected
+
+- User Name: HubSpot user name
+- User Email: HubSpot user email
+- User Role: HubSpot role assignment
+
+## Sync Frequency
+
+Data is synced automatically once every 12 hours. You can also trigger a manual sync from the HubSpot integration page in Scrut.
+
+## Integration Setup
+
+### Step 1: Authorize Access in HubSpot
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Navigate to the **Integrations Library** tab and select **Customer Relationship Management** under **Categories**.
+3. Scroll to the **HubSpot** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430661731-ieynxwsqwif-integrating-hubspot__01-scroll-to-the-hubspot-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the HubSpot tile and click Integrate" caption=" " />
+4. Click **Connect** at the top right of the HubSpot integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430663684-eszmqr5n91c-integrating-hubspot__02-click-connect-at-the-top-right-of-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect at the top right of the HubSpot integration page" caption=" " />
+5. Scrut redirects you to the HubSpot authorization page. Sign in to your HubSpot account if prompted.
+6. Select the HubSpot account you want to connect with Scrut and click **Choose Account**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430665228-hbbr8waiglg-integrating-hubspot__03-select-the-hubspot-account-you-want-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the HubSpot account you want to connect with Scrut and click Choose Account" caption=" " />
+7. Review the permissions and click **Connect app** to complete authorization.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430666992-jhv9oip863i-integrating-hubspot__04-review-the-permissions-and-click-connect-app.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the permissions and click Connect app to complete authorization" caption=" " />
+
+### Step 2: Confirm the Connection in Scrut
+
+8. After authorization, you'll see the "Integration successful" banner and a **Connected** status indicator on the HubSpot integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430668732-pruqm6sqcd-integrating-hubspot__05-after-authorization-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="After authorization, you'll see the 'Integration successful' banner and a Connected status indicator on the" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+The initial sync starts automatically after the integration is connected and typically takes a few hours to complete. Monitor sync progress in the **Audit Log** on the HubSpot integration page in Scrut.
+
+### Review synced data
+
+- Navigate to **People → Access Reviews** to create an access review and validate access data pulled from HubSpot.
+- Navigate to **Tests** to view automated test coverage driven by HubSpot data. Apply the Source filter with HubSpot selected to view tests only for HubSpot.
+
+## Common Errors and Troubleshooting
+
+### Authorization failure
+
+Possible solutions:
+
+- Confirm that you have admin access to the HubSpot account you're connecting to.
+- Clear your browser cache and retry the connection flow.
+- Make sure you're selecting the correct HubSpot account on the account selection screen.
+
+### Data not appearing in Access Review
+
+Possible solutions:
+
+- Check the **Audit Log** on the HubSpot integration page to confirm the initial sync has completed.
+- If the sync is complete but data is missing, click **Sync Now** to force a refresh.
+- Verify that the connected HubSpot account has active users with assigned roles.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430670487-ybw2p04xu3j-integrating-hubspot__06-verify-that-the-connected-hubspot-account.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Verify that the connected HubSpot account has active users with assigned roles" caption=" " />
+
+### Integration shows "Not Connected" after setup
+
+Possible solutions:
+
+- Disconnect and reconnect the integration.
+- Confirm the HubSpot account credentials used during setup are still active.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What data does Scrut collect from HubSpot?" default-open="false">
+
+Scrut collects user name, user email, and user role. This data flows into the Access Review module under People → Access → Overview.
+
+</Expandable>
+
+<Expandable title="2: What happens when a user is removed from HubSpot?" default-open="false">
+
+Removed users are reflected in Scrut after the next sync cycle. They will no longer appear as active users in the Access Review module.
+
+</Expandable>
+
+<Expandable title="3: Can I include HubSpot in an existing access review?" default-open="false">
+
+Yes. Edit an existing access review and add HubSpot under Applications in Scope, then save the review.
+
+</Expandable>
+
+<Expandable title="4: How do I disconnect the HubSpot integration?" default-open="false">
+
+Go to the HubSpot integration page in Scrut and click Disconnect. This removes the connection and stops future syncs.
+
+</Expandable>
+
+</ExpandableGroup>
+
+---
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

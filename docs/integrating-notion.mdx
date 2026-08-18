@@ -1,0 +1,125 @@
+---
+title: "Integrate Notion"
+description: "Learn how to connect your Notion account with Scrut."
+---
+
+Connect Notion with Scrut to streamline access reviews. Once integrated, Scrut automatically fetches your Notion workspace users so you can review and validate their access rights from within Scrut.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details, roles, and permissions from Notion for Access Reviews.
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+
+## Prerequisites
+
+- An active Notion workspace with administrator access.
+
+## Permissions and Access Requirements
+
+### For Notion
+
+- Read content (permission to view pages you select)
+- Read user information, including email addresses (required for user sync)
+
+### For Scrut
+
+- Admin access to Scrut, or a Contributor role with permission to the Integration module.
+
+## Limitations
+
+- Notion's API does not currently support fetching user roles. As a result, the Role column will appear empty in the user list during access reviews.
+
+## Data Collected
+
+- Account Name: Notion workspace user display name
+- Email: User email address
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Connect Notion to Scrut
+
+1. From the left navigation panel, select **Integrations**.
+2. Click the **Integration Library** tab.
+3. Scroll to the **Miscellaneous** section and locate **Notion**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430992968-iopt7oag3k-integrating-notion__01-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. Click **Connect**. You will be redirected to Notion to authorize the connection.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430994875-s33kjk63cb-integrating-notion__02-click-connect-you-will-be-redirected-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect. You will be redirected to Notion to authorize the connection" caption=" " />
+6. On the Notion authorization screen, review the permissions requested by Scrut Automation.
+
+   **Note:** Scrut requests two permissions during the OAuth flow: permission to view pages you select (optional) and permission to view workspace users and their email addresses (required for access reviews).
+7. Click **Select pages** and choose the pages you want to grant Scrut access to.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430996615-vxfk2zf9mr-integrating-notion__03-click-select-pages-and-choose-the-pages-you.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Select pages and choose the pages you want to grant Scrut access to" caption=" " />
+8. For access reviews, page access is optional. So, you can skip page selection.
+9. Click **Allow access** to complete authorization.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430998478-fxxkeey5m36-integrating-notion__04-click-allow-access-to-complete-authorization.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Allow access to complete authorization" caption=" " />
+10. Watch out for the connected toast message and indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431000303-3pyf43i55ks-integrating-notion__05-watch-out-for-the-connected-toast-message.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the connected toast message and indicator" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is complete, Scrut automatically begins fetching user data from your Notion workspace. The initial sync may take a few moments. You can monitor the sync status under Audit Log on the Notion integration settings page.
+
+### Review synced data
+
+- Navigate to **People → Access Reviews**. Create a new access review for Notion. Refer to the [Access Review guide for detailed steps](https://help.scrut.io/docs/quick-start-guide-access-review).
+- Navigate to **Tests → Automated Tests** to view compliance tests for Notion.
+
+## Common Errors and Troubleshooting
+
+### Connection fails during authentication
+
+- Confirm you are logged in to the correct Notion account before starting the OAuth flow.
+- Ensure you have administrator access to the Notion workspace you are connecting.
+- Try the connection again in a new browser window or incognito session.
+
+### User list not fetching
+
+- Check that the integration status shows as Connected on the Notion settings page in Scrut.
+- Trigger a manual sync from the integration settings page and wait a few minutes.
+- Confirm that users in your Notion workspace have email addresses associated with their accounts. Users without email addresses will not appear in the synced list.
+
+### Role column appears empty
+
+Cause: Notion's API does not expose user roles.
+
+Possible solutions: This is expected behavior. The Role column will always be blank for Notion access reviews. Review access based on the Account Name and Maintain Access columns instead.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Does Scrut pull data from all pages in my Notion workspace?" default-open="false">
+
+Not by default. During the OAuth flow, you select which pages Scrut can access. For access reviews, Scrut uses the workspace user list, not page content. Page access is optional and recommended only for future feature expansion.
+
+</Expandable>
+
+<Expandable title="2: Why is the Role column blank for all Notion users?" default-open="false">
+
+Notion's API does not currently support fetching user roles. This is a platform limitation and not something that can be resolved in Scrut. The Role field will remain empty for all Notion access reviews.
+
+</Expandable>
+
+<Expandable title="3: What happens if a user is removed from Notion after the sync?" default-open="false">
+
+Scrut reflects the current state of your Notion workspace on every sync. If a user is removed from Notion, they will no longer appear in subsequent synced user lists.
+
+</Expandable>
+
+</ExpandableGroup>
+
+---
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

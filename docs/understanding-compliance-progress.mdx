@@ -1,0 +1,166 @@
+---
+title: "Understand the Compliance Dashboard"
+description: "Understand the different charts and metrics in Scrut's dashboard."
+---
+
+<Callout kind="info">
+  Who can use this feature
+
+  - Supported on **Foundation, Growth,** and **Scale** plans
+</Callout>
+
+The compliance dashboard in Scrut provides an overview of your organization’s compliance status. It helps you monitor your compliance progress, analyze compliance trends over time, track upcoming audits, identify tasks that require your attention, and view key metrics at a glance. This guide will walk you through each dashboard component and explain how to use it effectively.
+
+## Accessing the Dashboard
+
+To access the compliance dashboard:
+
+1. [Log in to Scrut](https://app.scrut.io/) using your credentials.
+2. Click **Dashboard** on the left navigation panel.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429682856-mws1l4r9cs-understanding-compliance-progress__01-click-dashboard-on-the-left-navigation-panel.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Dashboard on the left navigation panel" caption=" " />
+
+## Compliance Progress
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429684671-x9hkrhqn2l-understanding-compliance-progress__02-compliance-progress.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Compliance Progress" caption=" " />
+
+This chart shows your overall compliance status as a percentage. The Compliance Progress card also includes the compliance percentage of each component:
+
+- **Policies (%)**: Percentage of published policies
+- **Evidence Tasks (%)**: Percentage of evidence uploaded
+- **Automated Tests (%)**: Percentage of automated tests that are compliant
+
+### Understanding Compliance Calculations
+
+#### Compliance
+
+The compliance progress indicates the overall compliance status of your organization. The higher the percentage, the more compliant your organization is.
+
+<Callout kind="alert">
+  Compliance Percentage = (No. of compliance controls / Total no. of controls) * 100
+
+  **Note:** Controls marked as “Not in Scope” or “Not Applicable” are excluded from this calculation. Additionally, policies linked to “Not Applicable” controls are also omitted from this calculation.
+</Callout>
+
+#### Policies
+
+This metric shows the percentage of published policies. The higher the number, the more comprehensive your policy documentation will be.
+
+<Callout kind="alert">
+  Policies Percentage = (No. of policies published / Total no. of policies) * 100
+
+  **Note:** Policies marked as “Not Relevant” are excluded from this calculation. Additionally, evidence tasks attached to “Not Applicable” controls are also omitted from this calculation.
+</Callout>
+
+#### Evidence Tasks
+
+This metric indicates the percentage of uploaded evidence tasks. The higher the number, the more proactive your organization has been in providing relevant evidence for implementing necessary controls and measures.
+
+<Callout kind="alert">
+  Evidence Tasks Percentage = (No. of evidence tasks uploaded / Total no. of evidence tasks) * 100
+
+  **Note:** Evidence marked as “Not Relevant” are excluded from this calculation. Additionally, tests associated with “Not Applicable” controls are also omitted from this calculation.
+</Callout>
+
+#### Automated Tests
+
+This metric indicates the percentage of automated test findings that are compliant with relevant standards. The higher the number, the more secure and compliant your cloud infrastructure and other applications are.
+
+<Callout kind="alert">
+  Automated Tests Percentage = (No. of compliant automated tests / Total no. of automated tests) * 100
+
+  **Note:** Tests marked as “Ignored” are excluded from this calculation.
+</Callout>
+
+## Compliance Trend
+
+Click the **View Compliance Trend** button in the Compliance Progress chart to view your historical compliance data.
+
+|  |  |
+| --- | --- |
+| <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429686333-zqj6arhf1sq-understanding-compliance-progress__03-view-compliance-trend-button-in-the.png?fm=auto&auto=compress%2Cformat" width="400" height="300" alt="View Compliance Trend button in the Compliance Progress chart" /> | <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429687968-w1lb0ygmmej-understanding-compliance-progress__04-compliance-trend-chart-showing-historical.png?fm=auto&auto=compress%2Cformat" width="400" height="300" alt="Compliance trend chart showing historical compliance percentages over time" /> |
+
+- Click and drag the plot area to zoom in.
+- Click **Reset Zoom** to zoom out.
+- Hover over any point to view the compliance percentages for a specific day.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429689516-s1guxtb7wjq-understanding-compliance-progress__05-hover-over-any-point-to-view-the-compliance.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Hover over any point to view the compliance percentages for a specific day" caption=" " />
+
+## Jobs That Need Your Attention
+
+This section highlights tasks that require immediate action:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429691338-mposjjk3pg9-understanding-compliance-progress__06-this-section-highlights-tasks-that-require.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="This section highlights tasks that require immediate action" caption=" " />
+
+It includes:
+
+- **Policies:** It lists policies in statuses such as Not Uploaded, Draft, Approved, or Needs Review.
+- **Evidence Tasks:** It lists evidence items with statuses such as Not Uploaded, Draft, or Needs Attention.
+- **Automated Tests:** Tests with status Needs Attention.
+
+Each category shows the total number of tasks that you need to resolve. Below this summary, you can see the individual item name, department/team, and assignees. Clicking the **Resolve** button next to an item takes you directly to the artifact’s page. Click the **View All** button to see the complete list of items under each section.
+
+## Vulnerabilities Overview
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429693273-w6zofjkjecg-understanding-compliance-progress__07-vulnerabilities-overview.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Vulnerabilities Overview" caption=" " />
+
+This chart provides a quick assessment of your security posture through a donut chart that illustrates the distribution of vulnerabilities. It highlights vulnerabilities across different risk categories and includes those with the following statuses: **open, acknowledged**, and **risk**. This chart helps your security team prioritize remediation efforts by focusing on critical and high vulnerabilities while maintaining awareness of the overall vulnerability burden.
+
+Clicking on any part of the donut chart takes you to the [**Vulnerability module**](https://help.scrut.io/docs/step-by-step-guide-vulnerabilities-module) with relevant filters applied. For instance, selecting the high-risk portion of the chart allows for a quick and efficient review of vulnerabilities categorized as High severity.
+
+## Cloud Security Overview
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429695040-9h2orhbn456-understanding-compliance-progress__08-cloud-security-overview.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Cloud Security Overview" caption=" " />
+
+This chart helps users quickly assess the security status of their AWS, Azure, and GCP infrastructure. It shows an intuitive stacked bar visualization that makes it easy to identify the number of tests passed successfully or failed. You can toggle between the three cloud providers using the tabs at the top to drill down into specific cloud environments. The chart is clickable, and clicking on any section takes you to the [cloud module](https://help.scrut.io/docs/cloud-quick-start-guide) with relevant filters applied.
+
+## Frameworks
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429696651-1ye3trkoaa2-understanding-compliance-progress__09-frameworks.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Frameworks" caption=" " />
+
+The Frameworks section shows your compliance status across different frameworks. For each framework, you can see:
+
+- Framework name
+- Visual indicator of compliance level
+- Compliance percentage
+
+Click **View All** to access detailed information about all frameworks. Click on a specific framework to go directly to the corresponding framework page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429698187-6m1btkv5z6r-understanding-compliance-progress__10-click-view-all-to-access-detailed.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click View All to access detailed information about all frameworks" caption=" " />
+
+## Upcoming Audits
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429699878-8al22hac2kk-understanding-compliance-progress__11-upcoming-audits.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Upcoming Audits" caption=" " />
+
+This section displays upcoming audits, helping you prepare and allocate resources accordingly. It includes:
+
+- Audit date
+- Audit name
+- Audit type (Internal / External)
+
+Click **View Audit Calendar** to see the expanded calendar view of all scheduled audits. Click on any audit to go directly to the corresponding page in the Audit Center.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429701542-cfft3f8yx5u-understanding-compliance-progress__12-click-view-audit-calendar-to-see-the.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click View Audit Calendar to see the expanded calendar view of all scheduled audits" caption=" " />
+
+## Filtering by Entities
+
+You can filter dashboard data by specific entities within your organization.
+
+1. Click on the entity filter dropdown (It includes **All Entities** by default).
+2. Select the specific entities you want to include in your view.
+3. The dashboard will update to show data only for the selected entities.
+4. Click the Reset icon to remove applied filters.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429701542-cfft3f8yx5u-understanding-compliance-progress__12-click-view-audit-calendar-to-see-the.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Reset icon to remove applied filters" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  The dashboard data varies depending on your Scrut role. Admins can see all data, while contributors can only see policies, evidence, and tests assigned to them.
+</Callout>
+
+## Additional Tips
+
+- Click the information icon (?) next to section headers to learn more about each chart.
+- The **View All** option in each chart provides more comprehensive information.
+- Click on metrics or numbers throughout the dashboard to go directly to the relevant page of the underlying data.

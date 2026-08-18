@@ -1,0 +1,154 @@
+---
+title: "Integrate Zoho"
+description: "Learn how to connect your Zoho account with Scrut to sync employee information."
+---
+
+The **Zoho (People)** integration syncs employee data from Zoho into Scrut, giving your compliance team an up-to-date view of your workforce directly within the platform. Learn how to connect your Zoho account with Scrut to sync employee information.
+
+## What This Integration Does in Scrut
+
+- **Employee Directory:** Syncs employee and group data into Scrut's People module. These users can then access the Employee Portal for training, policy acceptance, and device-related activities.
+
+## Prerequisites
+
+Before setting up the integration, make sure you have the following in place:
+
+- An active Zoho People account with Owner-level access
+- Employee profiles set up in Zoho People
+
+## Permissions and Access Requirements
+
+### For Zoho People
+
+- Owner role in Zoho People (required to authorize the integration)
+- OAuth scope: ZOHOPEOPLE.forms.READ
+
+Refer to Zoho’s documentation to [learn more about OAuth scopes](https://www.zoho.com/people/api/scopes.html).
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integration module enabled
+
+## Data Collected
+
+- Employee Name
+- Email Address
+- Joining Date
+- Exit Date (if applicable)
+- Department (Synced only if available in Zoho People)
+- Role (Synced only if available in Zoho People)
+- Reporting Manager Email (Synced only if available in Zoho People)
+- Leave Start Date
+- Leave End Date
+- Leave Status
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Connect Zoho People in Scrut
+
+1. From the left navigation panel, select **Integrations**.
+2. Navigate to the **Integrations Library** tab.
+3. Scroll to the **Human Resource Information Systems** section and find **Zoho**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431453730-94aalqlzvr-integrating-zoho-people__01-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. Click **Connect**. You will be redirected to the Zoho login page.
+6. Sign in with your Zoho email address or mobile number.
+7. On the permissions screen, click **Accept** to authorize Scrut Automation to access data in your Zoho account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431455572-dp04uhxq4qu-integrating-zoho-people__02-on-the-permissions-screen-click-accept-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the permissions screen, click Accept to authorize Scrut Automation to access data in your Zoho account" caption=" " />
+
+### Step 2: Confirm the Connection
+
+8. After authorization, Zoho redirects you back to the Integrations page in Scrut.
+9. Zoho now appears with a Connected status.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431457946-c0q37ti4ofb-integrating-zoho-people__03-zoho-now-appears-with-a-connected-status.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Zoho now appears with a Connected status" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  The user completing the integration must have an Owner role in Zoho People. Integrations completed by users without Owner access will not authorize successfully.
+</Callout>
+
+## What Happens Next?
+
+### Initial data sync
+
+Employee data begins syncing immediately after the integration is connected. To monitor sync activity, go to the Zoho People integration settings page and open the Audit Log tab.
+
+### Review synced data
+
+Once the initial sync completes, verify that data has landed correctly in Scrut:
+
+- Navigate to **People → Employees** to view synced employee records, including name, email, joining date, department, role, and reporting manager.
+- Leave data is associated with each employee's record and updates with each sync cycle.
+
+## Common Errors and Troubleshooting
+
+### Integration fails to connect
+
+Possible solutions:
+
+- Confirm that the Zoho account used during setup has Owner-level access in Zoho People. Integration attempts by non-Owner accounts will not complete successfully.
+- Try disconnecting and reconnecting the integration using an account with the correct role.
+
+### Employee data not appearing in Scrut
+
+Possible solutions:
+
+- Allow a few minutes after the initial connection before checking the People module. The first sync may take some time depending on the number of employee records.
+- Trigger a manual sync by clicking the three-dot menu on the Zoho People integration card and selecting Sync Now.
+- Check the Audit Log for any sync errors that may indicate a data retrieval issue.
+
+### Certain Fields show as blank
+
+Cause: Certain fields are conditional and will only sync if they are populated in Zoho People.
+
+Possible solutions:
+
+- Confirm that Department, Role, Reporting Manager Email, and Exit Date are filled in for the relevant employees in Zoho People.
+- Trigger a manual sync after updating the records in Zoho.
+
+### Employee records not updating after changes in Zoho
+
+Possible solutions:
+
+- Incremental updates sync every 24 hours. If you need updated records sooner, trigger a manual sync from the integration settings page.
+- Confirm the changes were saved correctly in Zoho People before syncing.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What role do I need in Zoho People to set up the integration?" default-open="false">
+
+You must have an Owner role in Zoho People to authorize the integration. Users with lower permission levels cannot complete the OAuth authorization flow.
+
+</Expandable>
+
+<Expandable title="2: How do I disconnect the Zoho People integration?" default-open="false">
+
+Navigate to **Integrations → Connected Integrations**, and open the **Zoho** integration card. Use the three-dot menu to find the disconnect option. Disconnecting stops future syncs but does not remove data already synced to Scrut.
+
+</Expandable>
+
+<Expandable title="3: How often does Scrut sync data from Zoho People?" default-open="false">
+
+Data syncs automatically every 24 hours. You can also trigger a manual sync at any time from the Zoho People integration settings page by clicking the three-dot menu and selecting Sync Now.
+
+</Expandable>
+
+<Expandable title="4: What happens when an employee exits and their exit date is updated in Zoho People?" default-open="false">
+
+The Exit Date is synced to Scrut during the next sync cycle. Scrut reflects the updated status in the People → Employees module.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

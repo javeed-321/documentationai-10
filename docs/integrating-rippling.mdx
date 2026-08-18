@@ -1,0 +1,238 @@
+---
+title: "Integrate Rippling"
+description: "Learn how to connect your organization's Rippling account with Scrut."
+---
+
+Connect your Rippling account with Scrut to automatically sync employee data and device information, keeping your compliance workflows up to date without manual effort.
+
+## What This Integration Does in Scrut
+
+- **Employee Directory:** Syncs employee and group data into Scrut's People module. These users can then access the Employee Portal for training, policy acceptance, and device-related activities.
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered assets and supports the collection of asset-related compliance evidence.
+- **User Endpoint Devices:** Fetches employee device details, including security posture and installed software. These devices are mapped to employees and visible in their profile under People → Employees → Technical.
+
+## Prerequisites
+
+- An active Rippling account with Super Admin access.
+- Employees in Rippling must have work email addresses to ensure accurate data mapping.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log into your Rippling account before starting the setup in Scrut to avoid being redirected mid-flow.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For Rippling
+
+Scrut requests read-only access to the following OAuth scopes during the authorization step:
+
+Employee data:
+
+- employee:read
+- employee:name:read
+- employee:preferredFirstName:read
+- employee:preferredLastName:read
+- employee:department:read
+- employee:endDate:read
+- employee:workEmail:read
+- employee:userId:read
+- employee:manager:read
+- employee:roleState:read
+
+Company data:
+
+- company:read
+- company:legalName:read
+- company:departments:read
+- company:employmentTypes:read
+- company:customFields:read
+
+Group data:
+
+- groups:read
+- group_members:read
+
+Device data (required for MDM scope):
+
+- reports:hardware:read
+
+Authentication:
+
+- openid
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor with access to the Integration module).
+- To collect device data, you must configure the MDM scope after completing the initial HRIS connection. See [Step 2](/v1/docs/integrating-rippling#step-2-configure-the-mdm-scope-device-data) in the Integration Setup section below.
+
+## Data Collected
+
+### Employee Details
+
+- First and Last Name
+- Work Email
+- Department
+- Role
+- Reporting Manager Email
+- Joining Date
+- Exit Date (if applicable)
+- Group memberships
+- Leave Data (Include start date, end date, and leave status)
+
+### Asset Management and User Endpoint Devices
+
+- Device Name
+- OS Version
+- Serial Number
+- Antivirus Installed (Displayed as Yes or No)
+- Hard Drive Encrypted (Displayed as Yes or No)
+- Screen Lock Enabled (Displayed as Yes or No)
+
+Devices are mapped to employees using work email as the unique identifier.
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync by clicking Sync Now on the Rippling integration page.
+
+## Integration Setup
+
+The Rippling–Scrut integration setup involves two steps:
+
+1. Connect Rippling to Scrut as an HRIS by completing the OAuth authorization flow.
+2. Optionally, configure the MDM scope to also sync device data.
+
+### Step 1: Connect Rippling as an HRIS
+
+1. Sign in to your Scrut account and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab and select **Human Resource Information Systems** under **Categories**.
+3. Locate the **Rippling** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431118695-69dj16gauwi-integrating-rippling__01-locate-the-rippling-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Rippling tile and click Integrate" caption=" " />
+4. On the Rippling integration page, click **Connect** in the top right corner.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431120312-kn1gga9naur-integrating-rippling__02-on-the-rippling-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Rippling integration page, click Connect in the top right corner" caption=" " />
+5. You are redirected to the Rippling login page. Enter your credentials and click **Continue**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431121995-dx3xuwgh08-integrating-rippling__03-you-are-redirected-to-the-rippling-login.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="You are redirected to the Rippling login page. Enter your credentials and click Continue" caption=" " />
+6. Rippling prompts you to install the Scrut Automation app in your Rippling account. Select I'm the Scrut Automation admin, I'll install it and click Continue.
+
+**Note:** You must be a Scrut Admin to complete this step. If you are not the admin, select Invite someone else to install it to delegate the task.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431123788-8qspic6d1hd-integrating-rippling__04-note-you-must-be-a-scrut-admin-to-complete.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: You must be a Scrut Admin to complete this step" caption=" " />
+
+7. Review the permissions Scrut requires and click **Authorize** to grant access.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431125517-vk9j9abz94-integrating-rippling__05-review-the-permissions-scrut-requires-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the permissions Scrut requires and click Authorize to grant access" caption=" " />
+8. Under **App Access Rules**, select which employees should automatically receive access to Scrut Automation when they join Rippling. Click Continue.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431127372-2ka0g10yc0p-integrating-rippling__06-under-app-access-rules-select-which.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under App Access Rules, select which employees should automatically receive access to Scrut Automation when" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  Rippling recommends "Everyone except 1099 contractors should get an account" as the default access rule. Adjust this to match your organization's access policy.
+</Callout>
+
+9. On the **Provision Time** page, select when newly eligible employees should be provisioned. Click Continue.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431129168-ep58zkzjpan-integrating-rippling__07-on-the-provision-time-page-select-when-newly.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Provision Time page, select when newly eligible employees should be provisioned. Click Continue" caption=" " />
+10. On the Redirect page, click **Continue** to finalize the connection.
+
+Watch for the success toast and the Connected status tag on the Rippling integration page. The integration is now active.
+
+### Step 2: Configure the MDM Scope (Device Data)
+
+Complete this step only if you also want to sync employee endpoint and device data from Rippling.
+
+1. In Scrut, go to **Integrations → Connected Integrations → Human Resource Information Systems**.
+2. Click **Configure** on the Rippling tile.
+3. Click **Configure Scope** on the Rippling integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431130965-ejo7afrp57-integrating-rippling__08-click-configure-scope-on-the-rippling.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Configure Scope on the Rippling integration page" caption=" " />
+4. In the **Configure Scope** panel, select **Mobile Device Management (MDM)**.
+5. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431132829-huwqnawyq7-integrating-rippling__09-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+Scrut begins syncing device data from Rippling immediately after you save.
+
+## What Happens Next?
+
+### Initial data sync
+
+Scrut starts syncing data from Rippling as soon as the connection is established. The initial sync may take a few minutes to complete. Track the sync status in the Audit Log on the Rippling integration page.
+
+### Review synced data
+
+Once the sync completes, verify that the data has landed in the respective modules in Scrut:
+
+- Navigate to People → Employees → All Employees to view synced employee records.
+- Click on any employee profile to review their name, email, joining date, reporting manager, department, and leave data.
+- Navigate to People → Employees → Technicals to view device records mapped to each employee.
+- Navigate to Tests → Automated Tests to view automated configuration checks that Scrut runs for Rippling.
+- Navigate to Compliance → Evidence Tasks to add a Scrut Monitor to automate evidence collection from Rippling.
+- Navigate to Asset Management to view assets from your Rippling account reflected in Scrut.
+
+## Common Errors and Troubleshooting
+
+### Connection fails during authorization
+
+Possible solutions:
+
+- Confirm that you are logged in as a Super Admin in Rippling before starting the flow.
+- Confirm that you are a Scrut Admin. Contributors can initiate but not complete the installation.
+- Try clearing your browser cache and restarting the OAuth flow.
+
+### Employee data not appearing in Scrut
+
+Possible solutions:
+
+- Check the Audit Log on the Rippling integration page to confirm the sync completed without errors.
+- Confirm that the affected employees have a work email address set in Rippling. Employees without a work email are excluded from the sync.
+- Trigger a manual sync by clicking Sync Now on the integration page and check the Audit Log again.
+
+### Device data not appearing after enabling MDM
+
+Possible solutions:
+
+- Confirm that the MDM scope is saved correctly. Go to Integrations → Connected Integrations, click Configure on the Rippling tile, then click Configure Scope and verify that Mobile Device Management is checked.
+- Allow time for the initial device sync to complete. Check the Audit Log for progress.
+- Confirm that devices are enrolled and active in your Rippling account.
+
+### Data mismatch between Rippling and Scrut
+
+Possible solutions:
+
+- Trigger a manual sync and allow it to complete before comparing records.
+- Confirm that the relevant employee fields are populated in Rippling. Fields left blank in Rippling will not be populated in Scrut.
+- If the issue persists, connect with support@scrut.io.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens when an employee is offboarded in Rippling?" default-open="false">
+
+When an employee's end date is set in Rippling, Scrut reflects this during the next sync. The employee's exit date is updated in their Scrut profile, and their status changes to Offboarding Needed.
+
+</Expandable>
+
+<Expandable title="2: What happens if I change my Rippling credentials or reinstall the app?" default-open="false">
+
+If the Rippling app is removed or credentials change, the integration will stop syncing. Disconnect and reconnect the integration from the Rippling tile in Scrut's Integrations Library to restore the connection.
+
+</Expandable>
+
+<Expandable title="3: Can I sync only employee data without enabling device sync?" default-open="false">
+
+Yes. Device sync is optional and requires a separate configuration step. Completing Step 1 (HRIS connection) alone syncs only employee data. You can enable device sync at any time by completing Step 2.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

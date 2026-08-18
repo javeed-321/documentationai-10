@@ -1,0 +1,108 @@
+---
+title: "Scrut Authentication System Migration"
+description: "Scrut uses Auth0 as its authentication system to provide users with enhanced security and a seamless experience."
+---
+
+Scrut is upgrading our internal authentication system from [AWS Cognito](https://aws.amazon.com/pm/cognito/) to [Auth0](https://auth0.com/). This migration demonstrates our ongoing commitment to implementing industry-leading security measures that protect your data while delivering an exceptional user experience. Scrut ensures a smooth transition to the new authentication system with no downtime. We'll carry out the migration behind the scenes, ensuring minimal interruptions.
+
+## How Does the Migration Benefit You?
+
+- **Enhanced Security:** Auth0's robust security framework includes [advanced threat detection and anomaly identification](https://auth0.com/learn/anomaly-detection), significantly improving protection against unauthorized access attempts and brute force attacks.
+- **Comprehensive Data Protection:** Auth0's end-to-end encryption protocols ensure your credentials and sensitive information remain protected at every stage of the authentication process.
+- **Compliance:** Auth0 complies with [multiple frameworks and certifications](https://auth0.com/docs/secure/data-privacy-and-compliance), such as FAPI, GDPR, HIPAA & HITECH, CSA STAR, ISO 27001/27018, PCI DSS, PSD2, and SOC2, maintaining industry security standards when handling sensitive data.
+- **Improved User Isolation** - [Auth0 Organizations](https://auth0.com/docs/get-started/architecture-scenarios/multiple-organization-architecture) enable better separation between different customer environments, protecting sensitive data across organizational boundaries.
+- **Streamlined Login Experience:** With Auth0, you'll experience a more intuitive login process that eliminates unnecessary friction, making secure access more convenient.
+- **Customized Login Options:** With this migration, you'll only see the enterprise SSO options your organization has integrated with Scrut on the login page. This is a significant improvement over the previous version, where users were presented with a static list of all possible providers. Refer to this guide for step-by-step instructions on [customizing the SSO login options](https://help.scrut.io/docs/configuring-sso-login-methods) for your users.
+
+## What’s Changing?
+
+### First Login After Migration
+
+It’s important to note that the first time you and your employees log into Scrut after the migration, the platform will prompt you to re-authenticate the application. You’ll see a standard consent screen, where you must click **Accept** to continue. This step is done to register your email address in Scrut’s Auth0 system. **We do not fetch, read, or store confidential or sensitive information from your systems.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432227723-f6upncd1pfi-scrut-authentication-system-migration__01-its-important-to-note-that-the-first-time.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="It’s important to note that the first time you and your employees log into Scrut after the migration, the" caption=" " />
+
+### No Enterprise SSO
+
+<Callout kind="tip">
+  No Action Required
+
+  If your organization doesn’t use enterprise SSO with Scrut, you do NOT have to take any further actions.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432229411-wh37hvynfn9-scrut-authentication-system-migration__02-if-your-organization-doesnt-use-enterprise.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="If your organization doesn’t use enterprise SSO with Scrut, you do NOT have to take any further actions" caption=" " />
+
+Sample login screen when Enterprise SSO is not integrated with Scrut
+
+If you don't have any enterprise-level SSO (Single Sign-On) integrated with Scrut, the [login](https://app.scrut.io/) [page](https://app.scrut.io/) will show these default authentication methods:
+
+- **Via Google**: Log in using your Google Workspace email.
+- **Via Microsoft:** Log in with your Microsoft account.
+- **Get Verification Code:** Receive a One-Time Password (OTP) in your email inbox and copy-paste it for access.
+
+The login process using the default authentication mechanisms will work as usual post-migration without any changes on your end.
+
+### When Using Enterprise SSO
+
+<Callout kind="alert">
+  Heads Up!
+
+  Currently, this migration is not applicable for Okta SSO.
+</Callout>
+
+<Callout kind="danger">
+  ⚠️ Action Required for SSO Configuration Update ⚠️
+
+  If your organization uses enterprise SSO with Scrut, you MUST complete the steps below for continued access after this migration.
+</Callout>
+
+To ensure that your SSO options work seamlessly after the migration, follow the instructions in this section.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432231196-j80iqlrwbq-scrut-authentication-system-migration__03-to-ensure-that-your-sso-options-work.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To ensure that your SSO options work seamlessly after the migration, follow the instructions in this section" caption=" " />
+
+Sample login screen with the JumpCloud SSO integrated with Scrut
+
+If you have enterprise SSO options integrated with Scrut, the login screen will dynamically display those SSO options you’ve connected with Scrut. For example, if you’ve integrated OneLogin and JumpCloud with Scrut, the login page will include these authentication mechanisms along with the default options mentioned above.
+
+However, for the enterprise SSO options to work, you must complete these steps:
+
+#### Step 1: Navigate To Your SSO Console
+
+1. Log in to your SSO application console with admin access and navigate to the **Applications** section.
+2. Under the OIDC application, search for the app created for Scrut integration.
+
+#### Step 2: Add the Redirect URL
+
+Add the following redirection URL to your OIDC system.
+
+#### **https://scrut.eu.auth0.com/login/callback**
+
+**Note:** The page where you input the redirect URL will vary depending on your SSO application.
+
+<Callout kind="alert">
+  Important:
+
+  There are no changes to existing URLs. Add the Redirect URL mentioned above in addition to the URLs you’ve already included.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432277900-ng5q4llu9zh-important-this-redirect-uri-is-required-for-dc5c21b5.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="OneLogin Redirect URL" caption=" " />
+
+OneLogin Redirect URL
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432279601-4bhk1ki9pkr-important-you-must-also-add-the-following-9cc46298.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="JumpCloud Redirect URL" caption=" " />
+
+JumpCloud Redirect URL
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432300649-67stihdm92t-this-is-critical-to-ensure-the-integration-bb99603d.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="PingOne Redirect URL" caption=" " />
+
+PingOne Redirect URL
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to this guide to [customize the SSO options](https://help.scrut.io/docs/configuring-sso-login-methods) shown on the login screen.
+</Callout>
+
+## Contact Support
+
+The Scrut team aims to make this transition seamless with minimal disruptions. If you have any further questions or concerns about this migration, please get in touch with your CSM or the Scrut support team (support@scrut.io).

@@ -1,0 +1,100 @@
+---
+title: "Integrate Tableau"
+description: "Learn how to connect your organization's Tableau account with Scrut."
+---
+
+The **Scrut - Tableau** integration fetches user access data, permissions, and role assignments from your Tableau account and syncs them with the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Tableau flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- Permission to create a [Personal Access Token (PAT)](https://help.tableau.com/current/server/en-us/security_personal_access_tokens.htm) in Tableau
+- Personal Access Tokens enabled for your organization’s Tableau account ([See here for how](https://help.salesforce.com/s/articleView?id=001470600&amp;type=1))
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Tableau
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Tableau account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Tableau With Scrut
+
+### Step 1: Fetch Access Token from Tableau
+
+1. Log in to your Tableau account, click on your profile in the top right corner, and then click **My Account Settings**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431347564-0cnaziow5yza-integrating-tableau__01-log-in-to-your-tableau-account-click-on-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your Tableau account, click on your profile in the top right corner, and then click My Account" caption=" " />
+2. Scroll to the **Personal Access Token** section, enter a name for the token (such as Scrut) and click **Create Token**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431349384-1vjphl65or3-integrating-tableau__02-scroll-to-the-personal-access-token-section.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Personal Access Token section, enter a name for the token (such as Scrut) and click Create Token" caption=" " />
+3. **Copy the Token Secret** and **Name**, as you’ll need to enter them in Scrut in the [next step](/docs/integrating-tableau#step-2-go-to-integrations-in-scrut).
+
+**Important**: The secret will not be displayed after closing this screen. So, make sure to copy and save it before closing this window.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431351125-zo8u09ldwap-integrating-tableau__03-important-the-secret-will-not-be-displayed.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: The secret will not be displayed after closing this screen" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to Tableau’s help documentation for [more information on Personal Access Tokens](https://help.tableau.com/current/server/en-us/security_personal_access_tokens.htm).
+</Callout>
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Capacity & Usage Monitoring** in the **Categories** section.
+3. Scroll to the **Tableau** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431352866-x6tb46tvps-integrating-tableau__04-scroll-to-the-tableau-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Tableau tile and click Integrate" caption=" " />
+4. On the integration page, paste the Token Secret and Name obtained in [Step 1](/docs/integrating-tableau#step-1-fetch-access-token-from-tableau).
+5. Enter the base URL of your Tableau account.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431354727-yomzjtzks7p-integrating-tableau__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431356617-g8o9ptx2eie-integrating-tableau__06-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Tableau. This process typically takes a few hours to complete. Check the Audit Log on the Tableau integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs the sync once **every 24 hours** to fetch incremental data such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431358294-e2o7e6d7era-integrating-tableau__07-manual-sync-you-can-also-click-the-sync-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: You can also click the Sync Now button to trigger an immediate data refresh" caption=" " />
+
+## Data Fetched from Tableau
+
+To view the data fetched from your Tableau account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your Tableau account. Click on it for more information.
+
+You can also create an Access Review (or edit an existing one) and include the Tableau application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Tableau:
+
+1. Go to **People → Access** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select Tableau in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Tableau to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting Tableau with Scrut, get in touch with the Scrut support team at support@scrut.io.

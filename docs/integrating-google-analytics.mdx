@@ -1,0 +1,74 @@
+---
+title: "Integrate Google Analytics"
+description: "Learn how to connect your Google Analytics account with Scrut."
+---
+
+The **Scrut-Google Analytics** integration fetches user access data, permissions, and role assignments from your Google Analytics account and sends them to the Access Review module in Scrut. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Google Analytics flows into the Access Review module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your Google Analytics account:
+
+- **Account Information:** Login credentials (Google Account)
+- **Access Level:** Admin access to Google Analytics properties
+- **Permissions:** The following permissions are required to fetch access review data:
+  - **Account Settings:** View and manage organization properties
+  - **User Account Information:** View the name, email, and roles of users
+  - **OAuth Scope:** analytics.readonly
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Google Analytics account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Google Analytics With Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430573427-08gb7nnl2us6-integrating-google-analytics__01-sign-in-to-your-scrut-account-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to your Scrut account and click Integrations on the left navigation panel" caption=" " />
+2. Go to the **Integrations Library** tab, and in the **Categories** section, click **Miscellaneous**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430575020-e6ye2p4s0so-integrating-google-analytics__02-go-to-the-integrations-library-tab-and-in.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the Integrations Library tab, and in the Categories section, click Miscellaneous" caption=" " />
+3. Locate the Google Analytics tile, and click **Integrate**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430576780-9va6crdexh7-integrating-google-analytics__03-locate-the-google-analytics-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Google Analytics tile, and click Integrate" caption=" " />
+4. On the Google Analytics integration page, click the **Connect** button at the top right. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430578545-tetvb8d4ffi-integrating-google-analytics__04-on-the-google-analytics-integration-page.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Google Analytics integration page, click the Connect button at the top right" caption=" " />
+5. Scrut will prompt you to log in to your Google account (if you haven’t already). <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430580406-dyhui43rwii-integrating-google-analytics__05-scrut-will-prompt-you-to-log-in-to-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut will prompt you to log in to your Google account (if you haven’t already)" caption=" " />
+6. If you manage multiple Google Analytics accounts, use the dropdown to select the one you want to connect with Scrut.
+7. Click **Continue** to grant the necessary permissions. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430582059-jrqsmjczmja-integrating-google-analytics__06-click-continue-to-grant-the-necessary.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Continue to grant the necessary permissions" caption=" " />
+
+Watch for the Connected Successfully notification message and the Connected status indicator. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430583870-oqrpwwesuvl-integrating-google-analytics__07-watch-for-the-connected-successfully.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the Connected Successfully notification message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync user data from Google Analytics.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** Click the **Sync Now** button at the top right of the Google Analytics integration page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430585495-9huprsuj1sq-integrating-google-analytics__08-manual-sync-click-the-sync-now-button-at-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: Click the Sync Now button at the top right of the Google Analytics integration page in Scrut" caption=" " />
+
+## Data Fetched from Google Analytics
+
+Scrut fetches the following access-related data points from Google Analytics:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Google Analytics Data in Scrut
+
+To view the data fetched from your Google Analytics account, you’ll need to create an Access Review (or edit an existing one) and include the Google Analytics application in scope. Refer to this guide for [step-by-step instructions on creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Google Analytics:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search and select Google Analytics in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430587326-nyzowwah4c-integrating-google-analytics__09-review-the-details-and-click-save-review.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the details and click Save Review" caption=" " />
+6. From the Access Review page, click Google Analytics to view user details in Scrut. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430589066-c0i0y1ypv9-integrating-google-analytics__10-from-the-access-review-page-click-google.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the Access Review page, click Google Analytics to view user details in Scrut" caption=" " />
+
+---
+
+If you face any difficulties connecting Google Analytics with Scrut, please contact the Scrut support team at support@scrut.io.

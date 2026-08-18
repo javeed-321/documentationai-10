@@ -1,0 +1,161 @@
+---
+title: "Integrate SharePoint"
+description: "Learn how to connect your SharePoint sites with Scrut for policy management."
+---
+
+Connect SharePoint with Scrut to import your policy documents and keep them in sync automatically. Any updates made to policies in SharePoint are reflected in Scrut within 24 hours.
+
+## What This Integration Does in Scrut
+
+- **Policy Management:** Fetches policy documents into the Policies module in Scrut. These policies can then be assigned to employees for review and acceptance.
+
+## Prerequisites
+
+Before starting the integration, make sure you have the following:
+
+- An active Microsoft SharePoint account with administrator access
+- Policies stored in a folder within the root drive of your SharePoint site (the default root drive is Documents)
+
+## Permissions and Access Requirements
+
+### For SharePoint
+
+Scrut requires an administrator-level role in your Microsoft tenant to grant tenant-wide, read-only permissions. This can be a Global Administrator, Application Administrator, or Cloud Application Administrator role.
+
+The following read-only OAuth scopes are requested during setup:
+
+- `openid`
+- `Sites.Read.All`
+- `offline_access`
+
+For details on what each scope covers, refer to [Microsoft's permissions documentation](https://learn.microsoft.com/en-us/graph/permissions-reference).
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integration module enabled
+
+## Data Collected
+
+- Policy document - Synced from the selected folder within the SharePoint site's root drive
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the SharePoint integration page in Scrut.
+
+## Integration Setup
+
+### Step 1: Connect SharePoint to Scrut
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log in to your SharePoint account before starting this step to avoid being redirected mid-setup.
+</Callout>
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Click the **Integrations Library** tab.
+3. Select **Policy Management** from the **Categories** section.
+4. Locate the **SharePoint** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431242497-isuw8vi6y4-integrating-sharepoint__01-locate-the-sharepoint-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the SharePoint tile and click Integrate" caption=" " />
+5. On the SharePoint integration page, click **Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431244218-6377tdr8gnu-integrating-sharepoint__02-on-the-sharepoint-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the SharePoint integration page, click Connect" caption=" " />
+6. If you are not already logged in, Scrut redirects you to the Microsoft login page. Enter your credentials and authenticate.
+7. Review the permissions requested and click **Accept**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431245848-i9ntyk6lgm-integrating-sharepoint__03-review-the-permissions-requested-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the permissions requested and click Accept" caption=" " />
+8. Confirm the "Connected Successfully" notification appears and that the status shows **Connected**.
+
+### Step 2: Link Policies from SharePoint
+
+1. In Scrut, navigate to **Compliance → Policies** using the left panel.
+2. Click the policy you want to link to a SharePoint file.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432273954-7hzl3vl7nzj-go-to-the-all-policies-tab-and-select-your-9046bb29.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the policy you want to link to a SharePoint file" caption=" " />
+3. Click **Link Policy**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432281227-ix3lmr63y6-in-the-start-your-policy-section-on-the-468064ab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Link Policy" caption=" " />
+4. In the **Integration** dropdown, select **SharePoint**.
+5. Select your SharePoint site from the dropdown.
+6. Navigate through the folder hierarchy within the root drive to locate the folder containing the policy file.
+7. Select the file and click **Submit**.
+
+The policy is now linked. Scrut tags it as "Synced from SharePoint, \{datetime\}" and keeps it synced going forward.
+
+## What Happens Next?
+
+### Initial data sync
+
+After connecting, Scrut begins gathering data from SharePoint. You can monitor sync activity in the **Audit Log** tab on the SharePoint integration page.
+
+### Review synced data
+
+- Navigate to **Compliance → Policies** to view linked policies and their sync tags.
+- Open any linked policy to see the sync datetime tag and version history.
+
+**Note:** When a policy is updated in SharePoint, Scrut sets its status to Draft and notifies users that a new version is available. Users can then choose to sync the latest version.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure
+
+Possible solutions:
+
+- Confirm that the account used to connect has Global Administrator, Application Administrator, or Cloud Application Administrator privileges in Microsoft.
+- Disconnect and reconnect the integration using the correct admin account.
+- Ensure you are logging into the correct Microsoft tenant.
+
+### Policy file not visible during linking
+
+Possible solutions:
+
+- Confirm that the policy file is stored inside a folder within the root drive of the SharePoint site. Files placed directly at the root level are not displayed.
+- Verify the account has Sites.Read.All permissions granted for the tenant.
+
+### Policy not syncing after update
+
+Possible solutions:
+
+- Check that the file was saved and is accessible in SharePoint.
+- Use the **Sync Now** button on the SharePoint integration page to trigger a manual sync.
+- Review the Audit Log for any sync errors.
+
+### Integration shows “Not Connected”
+
+Possible solutions:
+
+- Click **Connect** again and complete the authentication flow.
+- If the issue persists, disconnect the integration and reconnect.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can I connect more than one SharePoint site?" default-open="false">
+
+Yes. There is no limit on the number of SharePoint sites you can integrate with Scrut.
+
+</Expandable>
+
+<Expandable title="2: What happens when a policy is updated in SharePoint?" default-open="false">
+
+Scrut detects the change during the next sync cycle and updates the policy status to Draft. A new datetime sync tag is added, and users receive a notification with the option to accept the latest version.
+
+</Expandable>
+
+<Expandable title="3: Can I trigger a sync manually?" default-open="false">
+
+Yes. Go to **Integrations → Connected Integrations**, open the SharePoint integration, and click **Sync Now**.
+
+</Expandable>
+
+<Expandable title="4: Do I need to re-authenticate if my Microsoft credentials change?" default-open="false">
+
+Yes. If your admin credentials or tenant configuration change, disconnect the integration and reconnect using the updated credentials.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to support@scrut.io or contact your CSM for further assistance.

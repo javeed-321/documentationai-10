@@ -1,1313 +1,1488 @@
 {
-  "name": "SessionM",
-  "initialRoute": "help-center",
+  "name": "Scrut",
+  "initialRoute": "home",
+  "logo-light": "https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786353824464-a91fe0tdccq-light_theme_scrut_logo.webp?fm=auto&auto=compress%2Cformat",
+  "logo-dark": "https://cdn.document360.io/logo/8e8877e6-4593-427e-8cd8-588b3226c39a/32b7648617eb44a89f44f21cda9fb596-logo%20scrut.svg",
   "colors": {
     "light": {
-      "brand": "#CF4500",
-      "heading": "#181821",
-      "text": "#363747"
+      "brand": "#695ACC",
+      "heading": "#1A1A1A",
+      "text": "#374151"
     },
     "dark": {
-      "brand": "#FF884D",
-      "heading": "#F2F2F5",
-      "text": "#BFC0CF"
+      "brand": "#0065B3",
+      "heading": "#F2F2F2",
+      "text": "#C1C1C1"
     }
   },
+  "customCss": [
+    {
+      "src": "styles/scrut-home.css"
+    },
+    {
+      "src": "styles/scrut-help-center.css"
+    },
+    {
+      "src": "styles/scrut-home-cards.css"
+    }
+  ],
+  "scripts": [
+    {
+      "src": "scripts/help-center.js"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/testing",
+      "destination": "/docs/understanding-framework-dashboard"
+    },
+    {
+      "source": "/integrating-azure-active-directory",
+      "destination": "/docs/integrating-okta"
+    },
+    {
+      "source": "/generating-framework-compliance-report",
+      "destination": "/docs/downloading-framework-compliance-report"
+    },
+    {
+      "source": "/mongodb",
+      "destination": "/docs/integrating-mongodb"
+    },
+    {
+      "source": "/docs/clone-integrating-gcp",
+      "destination": "/docs/gcpserviceaccountrebinding"
+    },
+    {
+      "source": "/docs/serviceaccountrebinding",
+      "destination": "/docs/gcpserviceaccountrebinding"
+    },
+    {
+      "source": "/docs/estimate-policy-effort",
+      "destination": "/docs/set-policy-effort-estimate"
+    },
+    {
+      "source": "/docs/policy-versioning",
+      "destination": "/docs/policy-autosave"
+    },
+    {
+      "source": "/docs/what-is-a-policy",
+      "destination": "/docs/policy-statuses"
+    },
+    {
+      "source": "/docs/setup-wizard-is-now-task-center",
+      "destination": "/docs/task-center-replaces-setup-wizard"
+    },
+    {
+      "source": "/docs/integrating-tenable-1",
+      "destination": "/docs/integrating-tenable"
+    }
+  ],
   "navigation": {
     "tabs": [
       {
-        "tab": "Help Center",
-        "icon": "book",
-        "path": "help-center",
-        "show-sidebar": false,
-        "show-toc": false,
+        "tab": "Home",
+        "icon": "home",
+        "public": true,
+        "path": "home",
         "pages": [
           {
-            "group": "Account Management",
-            "icon": "user-cog",
-            "path": "account-management/overview",
-            "pages": [
-              {
-                "title": "Set up platform time zone",
-                "path": "account-management/set-up-platform-time-zone"
-              }
-            ]
-          },
-          {
-            "group": "Audiences",
-            "icon": "users",
-            "path": "audiences/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "group": "Create audience",
-                    "path": "audiences/create/create-audience/overview",
-                    "pages": [
-                      {
-                        "title": "Create and name your audience",
-                        "path": "audiences/create/create-audience/create-and-name-your-audience"
-                      },
-                      {
-                        "title": "Select your pre-defined attribute cards",
-                        "path": "audiences/create/create-audience/select-your-pre-defined-attribute-cards"
-                      },
-                      {
-                        "title": "Define the logic for your attribute cards",
-                        "path": "audiences/create/create-audience/define-the-logic-for-your-attribute-cards"
-                      },
-                      {
-                        "title": "Save and activate your audience",
-                        "path": "audiences/create/create-audience/save-and-activate-your-audience"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Create static snapshot",
-                    "path": "audiences/create/create-static-snapshot"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Activate, pause or edit export",
-                    "path": "audiences/manage/activate-pause-or-edit-export"
-                  },
-                  {
-                    "title": "Add export destination",
-                    "path": "audiences/manage/add-export-destination"
-                  },
-                  {
-                    "title": "Create audience export template",
-                    "path": "audiences/manage/create-audience-export-template"
-                  },
-                  {
-                    "title": "Custom data attributes",
-                    "path": "audiences/manage/custom-data-attributes"
-                  },
-                  {
-                    "title": "Delete audience",
-                    "path": "audiences/manage/delete-audience"
-                  },
-                  {
-                    "title": "Duplicate audience",
-                    "path": "audiences/manage/duplicate-audience"
-                  },
-                  {
-                    "title": "Add encryption mechanism",
-                    "path": "audiences/manage/add-encryption-mechanism"
-                  },
-                  {
-                    "title": "Export audience or snapshot",
-                    "path": "audiences/manage/export-audience-or-snapshot"
-                  },
-                  {
-                    "title": "Issue bulk offer to audience",
-                    "path": "audiences/manage/issue-bulk-offer-to-audience"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View audience information",
-                    "path": "audiences/view/view-audience-information"
-                  },
-                  {
-                    "title": "View audience size",
-                    "path": "audiences/view/view-audience-size"
-                  },
-                  {
-                    "title": "View bulk offers issued to audience",
-                    "path": "audiences/view/view-bulk-offers-issued-to-audience"
-                  },
-                  {
-                    "title": "View export job configurations",
-                    "path": "audiences/view/view-export-job-configurations"
-                  },
-                  {
-                    "title": "View export job history",
-                    "path": "audiences/view/view-export-job-history"
-                  },
-                  {
-                    "title": "View static snapshots",
-                    "path": "audiences/view/view-static-snapshots"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Admin & Rights",
-            "icon": "shield-check",
-            "path": "admin-and-rights/overview",
-            "pages": [
-              {
-                "group": "About",
-                "icon": "info",
-                "pages": [
-                  {
-                    "title": "About Admin & Rights module",
-                    "path": "admin-and-rights/about/about-admin-and-rights-module"
-                  },
-                  {
-                    "title": "About accounts, groups, and roles",
-                    "path": "admin-and-rights/about/about-accounts-groups-and-roles"
-                  },
-                  {
-                    "title": "About messaging providers and templates",
-                    "path": "admin-and-rights/about/about-messaging-providers-and-templates"
-                  },
-                  {
-                    "title": "About Customers 2 settings",
-                    "path": "admin-and-rights/about/about-customers-2-settings"
-                  },
-                  {
-                    "title": "About customer search configuration",
-                    "path": "admin-and-rights/about/about-customer-search-configuration"
-                  },
-                  {
-                    "title": "Access rights workflow for accounts, groups, and roles",
-                    "path": "admin-and-rights/about/access-rights-workflow-for-accounts-groups-and-roles"
-                  }
-                ]
-              },
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Configure affiliations",
-                    "path": "admin-and-rights/create/configure-affiliations"
-                  },
-                  {
-                    "title": "Configure Customers 2 event streams for sub-tabs on Activity tab",
-                    "path": "admin-and-rights/create/configure-customers-2-event-streams-for-sub-tabs-on-activity-tab"
-                  },
-                  {
-                    "title": "Configure Customers 2 product recommendations or member profiles",
-                    "path": "admin-and-rights/create/configure-customers-2-product-recommendations-or-member-profiles"
-                  },
-                  {
-                    "title": "Configure Customers 2 quick actions for offers",
-                    "path": "admin-and-rights/create/configure-customers-2-quick-actions-for-offers"
-                  },
-                  {
-                    "title": "Configure Customers 2 profile summary",
-                    "path": "admin-and-rights/create/configure-customers-2-profile-summary"
-                  },
-                  {
-                    "title": "Configure Customers module",
-                    "path": "admin-and-rights/create/configure-customers-module"
-                  },
-                  {
-                    "title": "Configure messaging provider templates",
-                    "path": "admin-and-rights/create/configure-messaging-provider-templates"
-                  },
-                  {
-                    "title": "Configure messaging providers",
-                    "path": "admin-and-rights/create/configure-messaging-providers"
-                  },
-                  {
-                    "title": "Configure SSO and SAML settings",
-                    "path": "admin-and-rights/create/configure-sso-and-saml-settings"
-                  },
-                  {
-                    "title": "Configure event stream with Timeline Series Config tool",
-                    "path": "admin-and-rights/create/configure-event-stream-with-timeline-series-config-tool"
-                  },
-                  {
-                    "title": "Create custom user profile attributes",
-                    "path": "admin-and-rights/create/create-custom-user-profile-attributes"
-                  },
-                  {
-                    "title": "Add account",
-                    "path": "admin-and-rights/create/add-account"
-                  },
-                  {
-                    "title": "Create customer search attributes",
-                    "path": "admin-and-rights/create/create-customer-search-attributes"
-                  },
-                  {
-                    "title": "Create event category",
-                    "path": "admin-and-rights/create/create-event-category"
-                  },
-                  {
-                    "title": "Create event template",
-                    "path": "admin-and-rights/create/create-event-template"
-                  },
-                  {
-                    "title": "Create event type",
-                    "path": "admin-and-rights/create/create-event-type"
-                  },
-                  {
-                    "title": "Create group",
-                    "path": "admin-and-rights/create/create-group"
-                  },
-                  {
-                    "title": "Create rendering context",
-                    "path": "admin-and-rights/create/create-rendering-context"
-                  },
-                  {
-                    "title": "Create rendering template",
-                    "path": "admin-and-rights/create/create-rendering-template"
-                  },
-                  {
-                    "title": "Create role",
-                    "path": "admin-and-rights/create/create-role"
-                  },
-                  {
-                    "title": "Create stream type",
-                    "path": "admin-and-rights/create/create-stream-type"
-                  },
-                  {
-                    "title": "Create stream view",
-                    "path": "admin-and-rights/create/create-stream-view"
-                  },
-                  {
-                    "title": "Create stream",
-                    "path": "admin-and-rights/create/create-stream"
-                  },
-                  {
-                    "title": "Create organization profile",
-                    "path": "admin-and-rights/create/create-organization-profile"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Edit a Timeline Series Config object",
-                    "path": "admin-and-rights/manage/edit-a-timeline-series-config-object"
-                  },
-                  {
-                    "title": "Perform basic operations for customer search settings",
-                    "path": "admin-and-rights/manage/perform-basic-operations-for-customer-search-settings"
-                  },
-                  {
-                    "title": "Perform basic operations for accounts, groups, and roles",
-                    "path": "admin-and-rights/manage/perform-basic-operations-for-accounts-groups-and-roles"
-                  },
-                  {
-                    "title": "Perform basic operations with Customers 2 settings",
-                    "path": "admin-and-rights/manage/perform-basic-operations-with-customers-2-settings"
-                  },
-                  {
-                    "title": "Edit messaging providers and templates",
-                    "path": "admin-and-rights/manage/edit-messaging-providers-and-templates"
-                  },
-                  {
-                    "title": "Manage SM Sync",
-                    "path": "admin-and-rights/manage/manage-sm-sync"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Campaigns",
-            "icon": "megaphone",
-            "path": "campaigns/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Create campaign",
-                    "path": "campaigns/create/create-campaign"
-                  },
-                  {
-                    "title": "Set campaign runtime",
-                    "path": "campaigns/create/set-campaign-runtime"
-                  },
-                  {
-                    "title": "Specify advanced settings",
-                    "path": "campaigns/create/specify-advanced-settings"
-                  },
-                  {
-                    "title": "Define behaviors",
-                    "path": "campaigns/create/define-behaviors"
-                  },
-                  {
-                    "title": "Define outcomes",
-                    "path": "campaigns/create/define-outcomes"
-                  },
-                  {
-                    "group": "Add message",
-                    "path": "campaigns/create/add-message/overview",
-                    "pages": [
-                      {
-                        "title": "Select message type",
-                        "path": "campaigns/create/add-message/select-message-type"
-                      },
-                      {
-                        "title": "Set up message delivery",
-                        "path": "campaigns/create/add-message/set-up-message-delivery"
-                      },
-                      {
-                        "title": "Add creative content",
-                        "path": "campaigns/create/add-message/add-creative-content"
-                      },
-                      {
-                        "title": "Select target for message",
-                        "path": "campaigns/create/add-message/select-target-for-message"
-                      },
-                      {
-                        "title": "Document message",
-                        "path": "campaigns/create/add-message/document-message"
-                      },
-                      {
-                        "title": "Approve and launch message",
-                        "path": "campaigns/create/add-message/approve-and-launch-message"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Target campaign",
-                    "path": "campaigns/create/target-campaign"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Delete behavior or message",
-                    "path": "campaigns/manage/delete-behavior-or-message"
-                  },
-                  {
-                    "title": "Delete campaign",
-                    "path": "campaigns/manage/delete-campaign"
-                  },
-                  {
-                    "title": "End campaign",
-                    "path": "campaigns/manage/end-campaign"
-                  },
-                  {
-                    "title": "Launch campaign",
-                    "path": "campaigns/manage/launch-campaign"
-                  },
-                  {
-                    "title": "Pause or resume campaign",
-                    "path": "campaigns/manage/pause-or-resume-campaign"
-                  },
-                  {
-                    "title": "Relaunch campaign",
-                    "path": "campaigns/manage/relaunch-campaign"
-                  },
-                  {
-                    "title": "Review campaign",
-                    "path": "campaigns/manage/review-campaign"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View information for all campaigns",
-                    "path": "campaigns/view/view-information-for-all-campaigns"
-                  },
-                  {
-                    "title": "View bulk offers",
-                    "path": "campaigns/view/view-bulk-offers"
-                  },
-                  {
-                    "title": "View behavior or message details",
-                    "path": "campaigns/view/view-behavior-or-message-details"
-                  },
-                  {
-                    "title": "View information for specific campaign",
-                    "path": "campaigns/view/view-information-for-specific-campaign"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Catalog",
-            "icon": "package",
-            "path": "catalog/overview",
-            "pages": [
-              {
-                "group": "About",
-                "icon": "info",
-                "pages": [
-                  {
-                    "title": "About SessionM catalogs",
-                    "path": "catalog/about/about-sessionm-catalogs"
-                  },
-                  {
-                    "title": "About SessionM catalog mapping",
-                    "path": "catalog/about/about-sessionm-catalog-mapping"
-                  },
-                  {
-                    "title": "About the benefits of a unified catalog",
-                    "path": "catalog/about/about-the-benefits-of-a-unified-catalog"
-                  },
-                  {
-                    "title": "Methods of catalog ingest",
-                    "path": "catalog/about/methods-of-catalog-ingest"
-                  },
-                  {
-                    "title": "Pre-ingest: Assess catalog data",
-                    "path": "catalog/about/pre-ingest-assess-catalog-data"
-                  },
-                  {
-                    "title": "Tour catalog management interface",
-                    "path": "catalog/about/tour-catalog-management-interface"
-                  }
-                ]
-              },
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Upload disparate catalog",
-                    "path": "catalog/create/upload-disparate-catalog"
-                  },
-                  {
-                    "title": "Upload unified catalog",
-                    "path": "catalog/create/upload-unified-catalog"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Add categories or items",
-                    "path": "catalog/manage/add-categories-or-items"
-                  },
-                  {
-                    "title": "Break mapping relationship",
-                    "path": "catalog/manage/break-mapping-relationship"
-                  },
-                  {
-                    "title": "Edit categories or items",
-                    "path": "catalog/manage/edit-categories-or-items"
-                  },
-                  {
-                    "title": "Move categories or items",
-                    "path": "catalog/manage/move-categories-or-items"
-                  },
-                  {
-                    "title": "Remove categories or items",
-                    "path": "catalog/manage/remove-categories-or-items"
-                  },
-                  {
-                    "title": "Search and view catalogs",
-                    "path": "catalog/manage/search-and-view-catalogs"
-                  },
-                  {
-                    "title": "Create master catalog",
-                    "path": "catalog/manage/create-master-catalog"
-                  },
-                  {
-                    "title": "Map store catalog to master catalog",
-                    "path": "catalog/manage/map-store-catalog-to-master-catalog"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Composer",
-            "icon": "wand-sparkles",
-            "path": "composer/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "group": "Audience",
-                    "icon": "users",
-                    "pages": [
-                      {
-                        "group": "Create new Composer audience",
-                        "path": "composer/create/audience/create-new-composer-audience/overview",
-                        "pages": [
-                          {
-                            "title": "Create and name audience",
-                            "path": "composer/create/audience/create-new-composer-audience/create-and-name-audience"
-                          },
-                          {
-                            "title": "Add attribute cards",
-                            "path": "composer/create/audience/create-new-composer-audience/add-attribute-cards"
-                          },
-                          {
-                            "title": "Group the cards and define their Boolean logic",
-                            "path": "composer/create/audience/create-new-composer-audience/group-the-cards-and-define-their-boolean-logic"
-                          },
-                          {
-                            "title": "Save and activate audience in Composer module",
-                            "path": "composer/create/audience/create-new-composer-audience/save-and-activate-audience-in-composer-module"
-                          },
-                          {
-                            "title": "Activate Composer audience in Audiences module",
-                            "path": "composer/create/audience/create-new-composer-audience/activate-composer-audience-in-audiences-module"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "group": "Query",
-                    "icon": "search",
-                    "pages": [
-                      {
-                        "group": "Create custom SQL query",
-                        "path": "composer/create/query/create-custom-sql-query/overview",
-                        "pages": [
-                          {
-                            "title": "Create and name custom SQL query",
-                            "path": "composer/create/query/create-custom-sql-query/create-and-name-custom-sql-query"
-                          },
-                          {
-                            "title": "Build and run custom SQL query",
-                            "path": "composer/create/query/create-custom-sql-query/build-and-run-custom-sql-query"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Convert Composer audience definition to SQL editor",
-                    "path": "composer/manage/convert-composer-audience-definition-to-sql-editor"
-                  },
-                  {
-                    "title": "Delete Composer audience",
-                    "path": "composer/manage/delete-composer-audience"
-                  },
-                  {
-                    "title": "Duplicate Composer audience",
-                    "path": "composer/manage/duplicate-composer-audience"
-                  },
-                  {
-                    "title": "Export Composer audience",
-                    "path": "composer/manage/export-composer-audience"
-                  },
-                  {
-                    "title": "Export Composer query",
-                    "path": "composer/manage/export-composer-query"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View Composer audience information",
-                    "path": "composer/view/view-composer-audience-information"
-                  },
-                  {
-                    "title": "View Composer query information",
-                    "path": "composer/view/view-composer-query-information"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Customers",
-            "icon": "user",
-            "path": "customers/overview",
-            "pages": [
-              {
-                "group": "About",
-                "icon": "info",
-                "pages": [
-                  {
-                    "title": "About the SessionM customer profile",
-                    "path": "customers/about/about-the-sessionm-customer-profile"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Add customer profile",
-                    "path": "customers/manage/add-customer-profile"
-                  },
-                  {
-                    "title": "Add note to customer profile",
-                    "path": "customers/manage/add-note-to-customer-profile"
-                  },
-                  {
-                    "title": "Adjust points",
-                    "path": "customers/manage/adjust-points"
-                  },
-                  {
-                    "title": "Adjust tier levels",
-                    "path": "customers/manage/adjust-tier-levels"
-                  },
-                  {
-                    "title": "Export customer data",
-                    "path": "customers/manage/export-customer-data"
-                  },
-                  {
-                    "title": "Forget customer record",
-                    "path": "customers/manage/forget-customer-record"
-                  },
-                  {
-                    "title": "Manage stored value cards",
-                    "path": "customers/manage/manage-stored-value-cards"
-                  },
-                  {
-                    "title": "Cease marketing",
-                    "path": "customers/manage/cease-marketing"
-                  },
-                  {
-                    "title": "Sync accounts",
-                    "path": "customers/manage/sync-accounts"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "Search customer profiles",
-                    "path": "customers/view/search-customer-profiles"
-                  },
-                  {
-                    "title": "View customer profile",
-                    "path": "customers/view/view-customer-profile"
-                  },
-                  {
-                    "title": "View customer data",
-                    "path": "customers/view/view-customer-data"
-                  },
-                  {
-                    "title": "View customer activity",
-                    "path": "customers/view/view-customer-activity"
-                  },
-                  {
-                    "title": "View campaigns for customer",
-                    "path": "customers/view/view-campaigns-for-customer"
-                  },
-                  {
-                    "title": "View offers issued to customer",
-                    "path": "customers/view/view-offers-issued-to-customer"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Loyalty",
-            "icon": "award",
-            "path": "loyalty/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Build loyalty program",
-                    "path": "loyalty/create/build-loyalty-program"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Remove rules from tiered loyalty programs",
-                    "path": "loyalty/manage/remove-rules-from-tiered-loyalty-programs"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Offers",
-            "icon": "tag",
-            "path": "offers/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "group": "Create offer",
-                    "path": "offers/create/create-offer/overview",
-                    "pages": [
-                      {
-                        "title": "Set up Booking offer",
-                        "path": "offers/create/create-offer/set-up-booking-offer"
-                      },
-                      {
-                        "title": "Set up Buy X, Get Y offer",
-                        "path": "offers/create/create-offer/set-up-buy-x-get-y-offer"
-                      },
-                      {
-                        "title": "Set up Fixed Amount Discount",
-                        "path": "offers/create/create-offer/set-up-fixed-amount-discount"
-                      },
-                      {
-                        "title": "Set up Fulfillment offer",
-                        "path": "offers/create/create-offer/set-up-fulfillment-offer"
-                      },
-                      {
-                        "title": "Set up Package offer",
-                        "path": "offers/create/create-offer/set-up-package-offer"
-                      },
-                      {
-                        "title": "Set up Percent Discount offer",
-                        "path": "offers/create/create-offer/set-up-percent-discount-offer"
-                      },
-                      {
-                        "title": "Set up Price Coupon offer",
-                        "path": "offers/create/create-offer/set-up-price-coupon-offer"
-                      },
-                      {
-                        "title": "Set up Selection offer",
-                        "path": "offers/create/create-offer/set-up-selection-offer"
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Deactivate offer",
-                    "path": "offers/manage/deactivate-offer"
-                  },
-                  {
-                    "title": "Delete offer",
-                    "path": "offers/manage/delete-offer"
-                  },
-                  {
-                    "title": "Edit offer",
-                    "path": "offers/manage/edit-offer"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View offer information",
-                    "path": "offers/view/view-offer-information"
-                  }
-                ]
-              },
-              {
-                "group": "About",
-                "icon": "info",
-                "pages": [
-                  {
-                    "title": "What types of offers does SessionM support?",
-                    "path": "offers/about/what-types-of-offers-does-sessionm-support"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Points",
-            "icon": "coins",
-            "path": "points/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Create point account",
-                    "path": "points/create/create-point-account"
-                  },
-                  {
-                    "title": "Create point source",
-                    "path": "points/create/create-point-source"
-                  }
-                ]
-              },
-              {
-                "group": "Manage",
-                "icon": "settings",
-                "pages": [
-                  {
-                    "title": "Activate or deactivate point account",
-                    "path": "points/manage/activate-or-deactivate-point-account"
-                  },
-                  {
-                    "title": "Activate, pause or archive point source",
-                    "path": "points/manage/activate-pause-or-archive-point-source"
-                  },
-                  {
-                    "title": "Modify point source restrictions",
-                    "path": "points/manage/modify-point-source-restrictions"
-                  },
-                  {
-                    "title": "Edit point account",
-                    "path": "points/manage/edit-point-account"
-                  },
-                  {
-                    "title": "Edit point source",
-                    "path": "points/manage/edit-point-source"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View point accounts",
-                    "path": "points/view/view-point-accounts"
-                  },
-                  {
-                    "title": "View point audit logs",
-                    "path": "points/view/view-point-audit-logs"
-                  },
-                  {
-                    "title": "View point sources",
-                    "path": "points/view/view-point-sources"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Promo Codes",
-            "icon": "ticket",
-            "path": "promo-codes/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Create promo code",
-                    "path": "promo-codes/create/create-promo-code"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View promo code details",
-                    "path": "promo-codes/view/view-promo-code-details"
-                  },
-                  {
-                    "title": "View promo codes list",
-                    "path": "promo-codes/view/view-promo-codes-list"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Reward Stores",
-            "icon": "store",
-            "path": "reward-stores/overview",
-            "pages": [
-              {
-                "group": "Create",
-                "icon": "plus",
-                "pages": [
-                  {
-                    "title": "Create reward store",
-                    "path": "reward-stores/create/create-reward-store"
-                  }
-                ]
-              },
-              {
-                "group": "View",
-                "icon": "eye",
-                "pages": [
-                  {
-                    "title": "View reward stores",
-                    "path": "reward-stores/view/view-reward-stores"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Rules",
-            "icon": "git-branch",
-            "path": "rules/overview",
-            "pages": [
-              {
-                "title": "Create rule",
-                "path": "rules/create-rule"
-              },
-              {
-                "title": "Delete rule",
-                "path": "rules/delete-rule"
-              },
-              {
-                "title": "Duplicate rule",
-                "path": "rules/duplicate-rule"
-              },
-              {
-                "title": "View and search rules",
-                "path": "rules/view-and-search-rules"
-              }
-            ]
+            "title": "Home",
+            "path": "home"
           }
-        ],
-        "show-page-navigation": true,
-        "ask-feedback": false,
-        "public": false
+        ]
       },
       {
-        "tab": "Developer",
-        "icon": "code",
-        "path": "developer/sessionm-developer-center",
-        "show-sidebar": false,
-        "show-toc": false,
-        "pages": [
+        "tab": "Documentation",
+        "icon": "book",
+        "groups": [
           {
-            "group": "APIs",
-            "icon": "code",
+            "group": "Getting Started",
             "pages": [
               {
-                "group": "SessionM API Services Overview",
-                "path": "developer/sessionm-api-services-overview",
+                "group": "Onboarding & Setup",
+                "icon": "user-plus",
                 "pages": [
                   {
-                    "title": "Introduction",
-                    "path": "developer/sessionm-api-services-overview"
+                    "title": "Log In to Scrut",
+                    "icon": "log-in",
+                    "path": "docs/how-to-log-into-scrut"
                   },
                   {
-                    "title": "Technical Summary",
-                    "path": "developer/sessionm-api-services-overview/technical-summary"
+                    "title": "Complete Onboarding Tasks",
+                    "icon": "clipboard-check",
+                    "path": "docs/onboarding-tasks"
                   },
                   {
-                    "title": "API Domains",
-                    "path": "developer/sessionm-api-services-overview/api-domains"
+                    "title": "Notification Center: Walkthrough",
+                    "icon": "bell",
+                    "path": "docs/notification-center"
+                  },
+                  {
+                    "title": "Quick Start Guide: Setup Wizard",
+                    "icon": "wand-2",
+                    "path": "docs/setup-wizard"
                   }
                 ]
               },
               {
-                "title": "Before You Begin",
-                "path": "developer/before-you-begin"
-              },
-              {
-                "group": "Customers",
-                "path": "developer/customers",
+                "group": "Task Center",
+                "icon": "list-checks",
                 "pages": [
                   {
-                    "title": "Customer Profile APIs",
-                    "path": "developer/customers/customer-profile-apis"
+                    "title": "Task Center: Walkthrough",
+                    "icon": "list-checks",
+                    "path": "docs/task-center-walkthrough",
+                    "public": false
                   },
                   {
-                    "title": "Customer Accounts Merge API",
-                    "path": "developer/customers/customer-accounts-merge-api"
+                    "title": "Track & Complete Audit Prep Tasks",
+                    "icon": "clipboard-list",
+                    "path": "docs/task-center-audit-prep"
                   },
                   {
-                    "title": "Customer Account Notes API",
-                    "path": "developer/customers/customer-account-notes-api"
+                    "title": "Track & Complete Your Tasks in Scrut",
+                    "icon": "check-square",
+                    "path": "docs/my-tasks-task-center"
                   },
                   {
-                    "title": "Tags API",
-                    "path": "developer/customers/tags-api"
-                  },
-                  {
-                    "title": "Events API",
-                    "path": "developer/customers/events-api"
-                  },
-                  {
-                    "title": "Timeline APIs",
-                    "path": "developer/customers/timeline-apis"
-                  },
-                  {
-                    "title": "Data Privacy API",
-                    "path": "developer/customers/data-privacy-api"
-                  },
-                  {
-                    "title": "Device Tokens API",
-                    "path": "developer/customers/device-tokens-api"
+                    "title": "Track & Complete Continuous Compliance Tasks",
+                    "icon": "refresh-cw",
+                    "path": "docs/continuous-compliance-task-center"
                   }
                 ]
               },
               {
-                "group": "Campaigns",
-                "path": "developer/campaigns",
+                "group": "Dashboards",
+                "icon": "layout-dashboard",
                 "pages": [
                   {
-                    "title": "Campaigns API",
-                    "path": "developer/campaigns/campaigns-api"
-                  },
-                  {
-                    "title": "Inbox API",
-                    "path": "developer/campaigns/inbox-api"
-                  },
-                  {
-                    "title": "Promo Code APIs",
-                    "path": "developer/campaigns/promo-code-apis"
+                    "title": "Understand the Compliance Dashboard",
+                    "icon": "bar-chart-3",
+                    "path": "docs/understanding-compliance-progress"
                   }
                 ]
               },
               {
-                "group": "POS",
-                "path": "developer/pos",
+                "group": "Getting Around Scrut",
+                "icon": "compass",
                 "pages": [
                   {
-                    "title": "Overview",
-                    "path": "developer/pos"
+                    "title": "Customize Table Data",
+                    "icon": "table",
+                    "path": "docs/customizing-rows"
                   },
                   {
-                    "title": "General DTO Definitions",
-                    "path": "developer/pos/general-dto-definitions"
-                  },
-                  {
-                    "title": "Send Transaction",
-                    "path": "developer/pos/send-transaction"
-                  },
-                  {
-                    "title": "User Lookup",
-                    "path": "developer/pos/user-lookup"
-                  },
-                  {
-                    "group": "Discounting",
-                    "path": "developer/pos/discounting",
-                    "pages": [
-                      {
-                        "title": "Immediate Redeem API",
-                        "path": "developer/pos/discounting/immediate-redeem-api"
-                      },
-                      {
-                        "title": "Lock Offer API",
-                        "path": "developer/pos/discounting/lock-offer-api"
-                      },
-                      {
-                        "title": "Unlock Offer API",
-                        "path": "developer/pos/discounting/unlock-offer-api"
-                      },
-                      {
-                        "title": "Reinstate Offer API",
-                        "path": "developer/pos/discounting/reinstate-offer-api"
-                      }
-                    ]
+                    "title": "Search Within Scrut",
+                    "icon": "search",
+                    "path": "docs/how-to-search-within-scrut"
                   }
                 ]
               },
               {
-                "title": "Offers",
-                "path": "offers"
-              },
-              {
-                "title": "Loyalty",
-                "path": "loyalty"
-              },
-              {
-                "title": "Catalog",
-                "path": "catalog"
-              },
-              {
-                "title": "Transactions",
-                "path": "transactions"
-              },
-              {
-                "group": "Advanced",
-                "path": "developer/advanced",
+                "group": "Account, Access & Support",
+                "icon": "life-buoy",
                 "pages": [
                   {
-                    "title": "Divisions API",
-                    "path": "developer/advanced/divisions-api"
+                    "title": "Contact Scrut Support",
+                    "icon": "headphones",
+                    "path": "docs/how-to-contact-scrut-support"
                   },
                   {
-                    "title": "Model API",
-                    "path": "developer/advanced/model-api"
+                    "title": "Can I Access Scrut on Mobile or Tablet?",
+                    "icon": "smartphone",
+                    "path": "docs/supported-devices-and-browsers"
                   },
                   {
-                    "title": "Lockout API",
-                    "path": "developer/advanced/lockout-api"
-                  },
-                  {
-                    "title": "Limiter API",
-                    "path": "developer/advanced/limiter-api"
-                  },
-                  {
-                    "title": "Encrypting Requests",
-                    "path": "developer/advanced/encrypting-requests"
-                  }
-                ]
-              },
-              {
-                "group": "Deprecated",
-                "path": "developer/deprecated",
-                "pages": [
-                  {
-                    "title": "Orders API",
-                    "path": "developer/deprecated/orders-api"
-                  },
-                  {
-                    "title": "Points API",
-                    "path": "developer/deprecated/points-api"
-                  },
-                  {
-                    "title": "Tiers API",
-                    "path": "developer/deprecated/tiers-api"
-                  },
-                  {
-                    "title": "Core Loyalty APIs",
-                    "path": "developer/deprecated/core-loyalty-apis"
-                  },
-                  {
-                    "title": "Places API",
-                    "path": "developer/deprecated/places-api"
-                  },
-                  {
-                    "title": "Access Tokens API",
-                    "path": "developer/deprecated/access-tokens-api"
-                  },
-                  {
-                    "title": "Identity Services API",
-                    "path": "developer/deprecated/identity-services-api"
-                  },
-                  {
-                    "title": "SMS Validation API",
-                    "path": "developer/deprecated/sms-validation-api"
-                  },
-                  {
-                    "title": "Customer Affiliation API",
-                    "path": "developer/deprecated/customer-affiliation-api"
-                  },
-                  {
-                    "title": "Image Validation API",
-                    "path": "developer/deprecated/image-validation-api"
-                  },
-                  {
-                    "title": "Campaign Creation API",
-                    "path": "developer/deprecated/campaign-creation-api"
-                  },
-                  {
-                    "title": "Campaigns Management API",
-                    "path": "developer/deprecated/campaigns-management-api"
+                    "title": "Understand Scrut's Data Security Measures",
+                    "icon": "lock",
+                    "path": "docs/data-security-measures"
                   }
                 ]
               }
-            ]
+            ],
+            "path": "docs/getting-started-overview"
+          },
+          {
+            "group": "Frameworks & Controls",
+            "pages": [
+              {
+                "group": "Frameworks",
+                "icon": "layers",
+                "pages": [
+                  {
+                    "title": "Frameworks: Walkthrough",
+                    "icon": "book-open",
+                    "path": "docs/understanding-framework-dashboard"
+                  },
+                  {
+                    "title": "Quick Start Guide: Frameworks",
+                    "icon": "zap",
+                    "path": "docs/quick-start-guide-frameworks"
+                  },
+                  {
+                    "title": "Which Frameworks Does Scrut Support?",
+                    "icon": "list",
+                    "path": "docs/framework-overview"
+                  },
+                  {
+                    "title": "Add a New Framework",
+                    "icon": "plus-circle",
+                    "path": "docs/framework"
+                  },
+                  {
+                    "title": "Create a Custom Framework",
+                    "icon": "wrench",
+                    "path": "docs/creating-your-own-framework"
+                  },
+                  {
+                    "title": "Edit Custom Framework Name",
+                    "icon": "pencil",
+                    "path": "docs/editing-custom-framework-name"
+                  },
+                  {
+                    "title": "Add a Framework Requirement",
+                    "icon": "plus",
+                    "path": "docs/adding-framework-requirements"
+                  },
+                  {
+                    "title": "Edit or Delete a Framework Requirement",
+                    "icon": "edit",
+                    "path": "docs/editing-and-deleting-framework-requirement"
+                  },
+                  {
+                    "title": "Export Framework Requirements",
+                    "icon": "download",
+                    "path": "docs/exporting-inout-scope-framework-requirements"
+                  },
+                  {
+                    "title": "Download SoA for ISO Frameworks",
+                    "icon": "file-down",
+                    "path": "docs/download-soa-for-iso-frameworks"
+                  },
+                  {
+                    "title": "Download Framework Compliance Report",
+                    "icon": "file-bar-chart",
+                    "path": "docs/downloading-framework-compliance-report"
+                  },
+                  {
+                    "title": "Mark a Framework Requirement as Out of Scope",
+                    "icon": "eye-off",
+                    "path": "docs/marking-framework-requirements-as-out-of-scope"
+                  },
+                  {
+                    "title": "Link and Unlink Controls to a Framework Requirement",
+                    "icon": "link",
+                    "path": "docs/linking-framework-requirement-to-a-control"
+                  },
+                  {
+                    "title": "Link and Unlink Framework Requirements to a Control",
+                    "icon": "unlink",
+                    "path": "docs/linking-controls-and-framework-requirements"
+                  }
+                ]
+              },
+              {
+                "group": "Controls",
+                "icon": "sliders-horizontal",
+                "pages": [
+                  {
+                    "title": "Controls: Walkthrough",
+                    "icon": "book-open",
+                    "path": "docs/understanding-controls"
+                  },
+                  {
+                    "title": "Create a Custom Control",
+                    "icon": "plus-circle",
+                    "path": "docs/creating-custom-controls"
+                  },
+                  {
+                    "title": "View Risks Linked to a Control",
+                    "icon": "alert-triangle",
+                    "path": "docs/viewing-risks-linked-to-a-control"
+                  },
+                  {
+                    "title": "Edit, Delete or Mark a Control Out of Scope",
+                    "icon": "edit",
+                    "path": "docs/editing-and-deleting-control"
+                  },
+                  {
+                    "title": "Export Controls",
+                    "icon": "download",
+                    "path": "docs/exporting-controls"
+                  },
+                  {
+                    "title": "Link and Unlink Artifacts to a Control",
+                    "icon": "link",
+                    "path": "docs/linking-controls-and-artifacts"
+                  }
+                ]
+              }
+            ],
+            "path": "docs/frameworks-and-controls-overview"
+          },
+          {
+            "group": "Policies",
+            "pages": [
+              {
+                "title": "Policies: Walkthrough",
+                "icon": "book-open",
+                "path": "docs/policy-module-walkthrough"
+              },
+              {
+                "group": "Create & Import Policies",
+                "icon": "file-plus",
+                "pages": [
+                  {
+                    "title": "Create, Upload, or Link Policy Content",
+                    "icon": "upload",
+                    "path": "docs/uploading-policy"
+                  },
+                  {
+                    "title": "Import a Policy from Google Drive",
+                    "icon": "hard-drive-download",
+                    "path": "docs/import-a-policy-from-google-drive"
+                  },
+                  {
+                    "title": "Create a Custom Policy",
+                    "icon": "file-plus-2",
+                    "path": "docs/creating-policy"
+                  },
+                  {
+                    "title": "Edit Policy Name & Details",
+                    "icon": "pencil",
+                    "path": "docs/editing-policy"
+                  }
+                ]
+              },
+              {
+                "group": "Edit Policy Content",
+                "icon": "pencil",
+                "pages": [
+                  {
+                    "title": "Edit Policy Content in Scrut's Editor",
+                    "icon": "pencil",
+                    "path": "docs/how-to-use-policy-editor"
+                  },
+                  {
+                    "title": "Auto Save a Policy",
+                    "icon": "save",
+                    "path": "docs/policy-autosave"
+                  },
+                  {
+                    "title": "Add Policy Header and Footer",
+                    "icon": "layout",
+                    "path": "docs/policy-header-and-footer"
+                  },
+                  {
+                    "title": "Understand Policy Variables",
+                    "icon": "variable",
+                    "path": "docs/policy-variables"
+                  }
+                ]
+              },
+              {
+                "group": "Policy Approval & Review",
+                "icon": "check-circle",
+                "pages": [
+                  {
+                    "title": "Set a Policy Review Cycle",
+                    "icon": "calendar",
+                    "path": "docs/settings-a-policy-review-cycle"
+                  },
+                  {
+                    "title": "Add Policy Assignees",
+                    "icon": "user-plus",
+                    "path": "docs/marking-a-policy-not-relevant-2"
+                  },
+                  {
+                    "title": "Add Policy Approvers",
+                    "icon": "user-check",
+                    "path": "docs/add-policy-approvers"
+                  },
+                  {
+                    "title": "Understand Policy Approval Workflow",
+                    "icon": "git-merge",
+                    "path": "docs/understanding-policy-approval-workflow"
+                  }
+                ]
+              },
+              {
+                "group": "Manage & Organize Policies",
+                "icon": "folder-tree",
+                "pages": [
+                  {
+                    "title": "Perform Bulk Actions on Policies",
+                    "icon": "layers",
+                    "path": "docs/bulk-action-feature"
+                  },
+                  {
+                    "title": "Clone a Policy",
+                    "icon": "copy",
+                    "path": "docs/clone-a-policy"
+                  },
+                  {
+                    "title": "Delete a Policy",
+                    "icon": "trash-2",
+                    "path": "docs/delete-a-policy"
+                  },
+                  {
+                    "title": "Link and Unlink Controls to a Policy",
+                    "icon": "link",
+                    "path": "docs/linking-policy-to-a-control"
+                  },
+                  {
+                    "title": "View the Policy Effort Estimate",
+                    "icon": "clock",
+                    "path": "docs/set-policy-effort-estimate"
+                  },
+                  {
+                    "title": "Turn On Policy IDs",
+                    "icon": "hash",
+                    "path": "docs/policy-id"
+                  },
+                  {
+                    "title": "Manage Policy Versions",
+                    "icon": "git-branch",
+                    "path": "docs/editing-a-policy-version"
+                  },
+                  {
+                    "title": "Mark a Policy as Not Relevant",
+                    "icon": "x-circle",
+                    "path": "docs/marking-a-policy-not-relevant"
+                  },
+                  {
+                    "title": "Mark a Policy as Relevant",
+                    "icon": "check-circle",
+                    "path": "docs/marking-a-policy-not-relevant-1"
+                  }
+                ]
+              },
+              {
+                "group": "Policy Status",
+                "icon": "activity",
+                "pages": [
+                  {
+                    "title": "Policy Statuses",
+                    "icon": "info",
+                    "path": "docs/policy-statuses"
+                  }
+                ]
+              },
+              {
+                "group": "Policy Exports & Attachments",
+                "icon": "download",
+                "pages": [
+                  {
+                    "title": "Export Policies & Attachments",
+                    "icon": "download",
+                    "path": "docs/exporting-policies"
+                  },
+                  {
+                    "title": "Delete Policy Attachment",
+                    "icon": "paperclip",
+                    "path": "docs/removing-policy-content"
+                  }
+                ]
+              },
+              {
+                "group": "AI in Policies",
+                "icon": "sparkles",
+                "pages": [
+                  {
+                    "title": "Map Controls to Policies Using Scrut Teammates",
+                    "icon": "sparkles",
+                    "path": "docs/ai-suggested-policy-control-mapping"
+                  },
+                  {
+                    "title": "Review AI-Detected Policy Gaps",
+                    "icon": "scan",
+                    "path": "docs/ai-detected-policy-gaps"
+                  }
+                ]
+              },
+              {
+                "group": "Additional FAQs: Policies",
+                "icon": "help-circle",
+                "pages": [
+                  {
+                    "title": "Impact of Policy Variables on Existing Policies",
+                    "icon": "alert-circle",
+                    "path": "docs/impact-of-policy-variables-on-existing-policies"
+                  },
+                  {
+                    "title": "Access Policy Settings",
+                    "icon": "settings",
+                    "path": "docs/how-to-access-policy-settings"
+                  }
+                ]
+              }
+            ],
+            "path": "docs/policies-overview"
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              {
+                "title": "Which Integrations Does Scrut Support?",
+                "icon": "list",
+                "path": "docs/integrations-overview"
+              },
+              {
+                "title": "Troubleshoot Integration Issues",
+                "icon": "wrench",
+                "path": "docs/integration-troubleshooting"
+              },
+              {
+                "title": "Additional FAQs: Integrations",
+                "icon": "circle-help",
+                "path": "docs/integration-faqs-troubleshooting"
+              },
+              {
+                "group": "Background Check",
+                "icon": "user-search",
+                "pages": [
+                  {
+                    "title": "Integrate Certn",
+                    "icon": "user-check",
+                    "path": "docs/integrating-certn"
+                  },
+                  {
+                    "title": "Integrate Checkr",
+                    "icon": "badge-check",
+                    "path": "docs/checkr-integration-sync-employee-bgv-data-to-scrut"
+                  },
+                  {
+                    "title": "Integrating Zinc Work",
+                    "icon": "search",
+                    "path": "docs/integrating-zinc-work"
+                  },
+                  {
+                    "title": "Integrate SpringVerify",
+                    "icon": "shield-check",
+                    "path": "docs/integrating-springverify"
+                  }
+                ]
+              },
+              {
+                "group": "Campaigns & Trainings",
+                "icon": "graduation-cap",
+                "pages": [
+                  {
+                    "title": "Integrate KnowBe4",
+                    "icon": "graduation-cap",
+                    "path": "docs/integrating-knowbe4"
+                  },
+                  {
+                    "title": "Integrate ThreatCop",
+                    "icon": "shield-alert",
+                    "path": "docs/integrating-threatcop"
+                  },
+                  {
+                    "title": "Integrate EC Council",
+                    "icon": "award",
+                    "path": "docs/integrating-ec-council"
+                  },
+                  {
+                    "title": "Integrate Phished",
+                    "icon": "fish",
+                    "path": "docs/integrating-phished"
+                  }
+                ]
+              },
+              {
+                "group": "Capacity & Usage Monitoring",
+                "icon": "gauge",
+                "pages": [
+                  {
+                    "title": "Integrate Datadog",
+                    "icon": "bar-chart-2",
+                    "path": "docs/integrating-datadog"
+                  },
+                  {
+                    "title": "Integrate New Relic",
+                    "icon": "activity",
+                    "path": "docs/integrating-new-relic"
+                  },
+                  {
+                    "title": "Integrate Sumo Logic",
+                    "icon": "line-chart",
+                    "path": "docs/integrating-sumo-logic"
+                  },
+                  {
+                    "title": "Integrate Tableau",
+                    "icon": "pie-chart",
+                    "path": "docs/integrating-tableau"
+                  },
+                  {
+                    "title": "Integrate Google Analytics",
+                    "icon": "trending-up",
+                    "path": "docs/integrating-google-analytics"
+                  }
+                ]
+              },
+              {
+                "group": "Cloud Providers",
+                "icon": "cloud",
+                "pages": [
+                  {
+                    "title": "Integrate AWS",
+                    "icon": "cloud",
+                    "path": "docs/integrating-aws"
+                  },
+                  {
+                    "title": "Integrate Microsoft Azure",
+                    "icon": "cloud-cog",
+                    "path": "docs/integrating-azure"
+                  },
+                  {
+                    "title": "Integrate GCP",
+                    "icon": "cloud-lightning",
+                    "path": "docs/integrating-gcp-using-service-account-impersonation"
+                  },
+                  {
+                    "title": "Integrating GCP (Multi-Project) [BETA]",
+                    "icon": "cloud-upload",
+                    "path": "docs/integrating-gcp-new"
+                  },
+                  {
+                    "title": "Integrate DigitalOcean",
+                    "icon": "droplet",
+                    "path": "docs/integrating-digitalocean"
+                  },
+                  {
+                    "title": "Integrate Heroku",
+                    "icon": "hexagon",
+                    "path": "docs/integrating-heroku"
+                  },
+                  {
+                    "title": "Integrate Vercel",
+                    "icon": "triangle",
+                    "path": "docs/integrating-vercel"
+                  },
+                  {
+                    "title": "Configure Scope for AWS Integration",
+                    "icon": "sliders",
+                    "path": "docs/aws-integration-enhancement"
+                  },
+                  {
+                    "title": "Configure Scope for Azure Integration",
+                    "icon": "sliders-horizontal",
+                    "path": "docs/azure-integration-enhancement"
+                  },
+                  {
+                    "title": "Rebind GCP - Service Account",
+                    "icon": "refresh-cw",
+                    "path": "docs/gcpserviceaccountrebinding"
+                  }
+                ]
+              },
+              {
+                "group": "Communication Tools",
+                "icon": "message-square",
+                "pages": [
+                  {
+                    "title": "Integrate Dialpad",
+                    "icon": "phone",
+                    "path": "docs/integrating-dialpad"
+                  },
+                  {
+                    "title": "Integrate Fireflies",
+                    "icon": "mic",
+                    "path": "docs/integrating-fireflies"
+                  },
+                  {
+                    "title": "Integrate SendGrid",
+                    "icon": "send",
+                    "path": "docs/integrating-sendgrid"
+                  },
+                  {
+                    "title": "Integrate Slack",
+                    "icon": "hash",
+                    "path": "docs/integrating-slack"
+                  }
+                ]
+              },
+              {
+                "group": "Customer Relationship Management",
+                "icon": "handshake",
+                "pages": [
+                  {
+                    "title": "Integrate Active Campaign",
+                    "icon": "mail",
+                    "path": "docs/integrating-active-campaign"
+                  },
+                  {
+                    "title": "Integrate Close CRM",
+                    "icon": "phone-call",
+                    "path": "docs/integrating-close-crm"
+                  },
+                  {
+                    "title": "Integrate Copper",
+                    "icon": "briefcase",
+                    "path": "docs/integrating-copper"
+                  },
+                  {
+                    "title": "Integrate Freshdesk",
+                    "icon": "headphones",
+                    "path": "docs/integrating-freshdesk"
+                  },
+                  {
+                    "title": "Integrate HubSpot",
+                    "icon": "target",
+                    "path": "docs/integrating-hubspot"
+                  },
+                  {
+                    "title": "Integrate Insightly",
+                    "icon": "eye",
+                    "path": "docs/integrating-insightly"
+                  },
+                  {
+                    "title": "Integrate Less Annoying CRM",
+                    "icon": "smile",
+                    "path": "docs/integrating-less-annoying-crm"
+                  },
+                  {
+                    "title": "Integrate NetSuite",
+                    "icon": "package",
+                    "path": "docs/integrating-netsuite"
+                  },
+                  {
+                    "title": "Integrate Oracle Cloud HCM",
+                    "icon": "building",
+                    "path": "docs/integrating-oracle-cloud-hcm"
+                  },
+                  {
+                    "title": "Integrate Oracle Sales & Fusion Service",
+                    "icon": "shopping-cart",
+                    "path": "docs/integrating-oracle-sales-fusion-service"
+                  },
+                  {
+                    "title": "Integrate Salesforce",
+                    "icon": "zap",
+                    "path": "docs/salesforce-integration"
+                  }
+                ]
+              },
+              {
+                "group": "Database",
+                "icon": "database",
+                "pages": [
+                  {
+                    "title": "Integrate Databricks",
+                    "icon": "blocks",
+                    "path": "docs/integrating-databricks"
+                  },
+                  {
+                    "title": "Integrate Fivetran",
+                    "icon": "cable",
+                    "path": "docs/integrating-fivetran"
+                  },
+                  {
+                    "title": "Integrate MongoDB",
+                    "icon": "leaf",
+                    "path": "docs/integrating-mongodb"
+                  },
+                  {
+                    "title": "Integrate Snowflake",
+                    "icon": "snowflake",
+                    "path": "docs/integrating-snowflake"
+                  }
+                ]
+              },
+              {
+                "group": "Human Resource Information Systems",
+                "icon": "users",
+                "pages": [
+                  {
+                    "title": "Integrate ADP",
+                    "icon": "calculator",
+                    "path": "docs/integrating-adp"
+                  },
+                  {
+                    "title": "Integrate AlexisHR",
+                    "icon": "user",
+                    "path": "docs/integrating-alexishr"
+                  },
+                  {
+                    "title": "Integrate Bamboo HR",
+                    "icon": "sprout",
+                    "path": "docs/integrating-bamboo-hr"
+                  },
+                  {
+                    "title": "Integrate Breathe HR",
+                    "icon": "wind",
+                    "path": "docs/integrating-breathehr"
+                  },
+                  {
+                    "title": "Integrate BreezyHR",
+                    "icon": "cloud-sun",
+                    "path": "docs/integrating-breezyhr"
+                  },
+                  {
+                    "title": "Integrate Charlie HR",
+                    "icon": "smile",
+                    "path": "docs/integrating-charlie-hr"
+                  },
+                  {
+                    "title": "Integrate CyberArk",
+                    "icon": "lock",
+                    "path": "docs/cyberark-integration"
+                  },
+                  {
+                    "title": "Integrate Darwinbox",
+                    "icon": "box",
+                    "path": "docs/integrating-darwinbox"
+                  },
+                  {
+                    "title": "Integrate Deel",
+                    "icon": "globe",
+                    "path": "docs/integrating-deel"
+                  },
+                  {
+                    "title": "Integrate Employment Hero",
+                    "icon": "trophy",
+                    "path": "docs/integrating-employment-hero"
+                  },
+                  {
+                    "title": "Integrate Freshteam",
+                    "icon": "users",
+                    "path": "docs/integrating-freshteam"
+                  },
+                  {
+                    "title": "Integrate greytHR",
+                    "icon": "circle-user",
+                    "path": "docs/integrating-greythr"
+                  },
+                  {
+                    "title": "Integrate HiBob",
+                    "icon": "heart",
+                    "path": "docs/integrating-hibob"
+                  },
+                  {
+                    "title": "Integrate HR Works",
+                    "icon": "hard-hat",
+                    "path": "docs/integrating-hr-works"
+                  },
+                  {
+                    "title": "Integrate Jibble",
+                    "icon": "clock",
+                    "path": "docs/integrating-jibble"
+                  },
+                  {
+                    "title": "Integrate Keka",
+                    "icon": "star",
+                    "path": "docs/integrating-keka-hr"
+                  },
+                  {
+                    "title": "Integrate Paycom",
+                    "icon": "credit-card",
+                    "path": "docs/integrating-paycom"
+                  },
+                  {
+                    "title": "Integrate Paylocity",
+                    "icon": "wallet",
+                    "path": "docs/integrating-paylocity"
+                  },
+                  {
+                    "title": "Integrate Personio",
+                    "icon": "contact",
+                    "path": "docs/personio-integration"
+                  },
+                  {
+                    "title": "Integrate Rippling",
+                    "icon": "waves",
+                    "path": "docs/integrating-rippling"
+                  },
+                  {
+                    "title": "Integrate Sage HR",
+                    "icon": "feather",
+                    "path": "docs/integrating-sage-hr"
+                  },
+                  {
+                    "title": "Integrate SAP Success Factors",
+                    "icon": "gem",
+                    "path": "docs/integrating-sap-success-factor"
+                  },
+                  {
+                    "title": "Integrate UKG Pro",
+                    "icon": "crown",
+                    "path": "docs/integrating-ukg-pro"
+                  },
+                  {
+                    "title": "Integrate Workday",
+                    "icon": "sun",
+                    "path": "docs/integrating-workday"
+                  },
+                  {
+                    "title": "Integrate Zenefits",
+                    "icon": "heart-handshake",
+                    "path": "docs/integrating-zenefits"
+                  },
+                  {
+                    "title": "Integrate Zoho",
+                    "icon": "user-circle",
+                    "path": "docs/integrating-zoho-people"
+                  }
+                ]
+              },
+              {
+                "group": "Identity Providers",
+                "icon": "key-round",
+                "pages": [
+                  {
+                    "title": "Integrate Google Workspace",
+                    "icon": "chrome",
+                    "path": "docs/integrating-google-workspace"
+                  },
+                  {
+                    "title": "Integrate Microsoft Entra (Azure AD)",
+                    "icon": "key-round",
+                    "path": "docs/integrating-azure-active-directory-1"
+                  },
+                  {
+                    "title": "Integrate Okta (IDP)",
+                    "icon": "fingerprint",
+                    "path": "docs/integrating-okta-idp"
+                  },
+                  {
+                    "title": "Integrate Okta (SSO)",
+                    "icon": "shield",
+                    "path": "docs/integrating-okta"
+                  },
+                  {
+                    "title": "Integrate OneLogin",
+                    "icon": "log-in",
+                    "path": "docs/integrating-onelogin"
+                  },
+                  {
+                    "title": "Integrate JumpCloud SSO",
+                    "icon": "arrow-right-circle",
+                    "path": "docs/jumpcloud-sso"
+                  },
+                  {
+                    "title": "Integrate Auth0",
+                    "icon": "lock-keyhole",
+                    "path": "docs/integrating-autho-1"
+                  },
+                  {
+                    "title": "Integrate PingOne (Beta)",
+                    "icon": "radar",
+                    "path": "docs/integrating-pingidentity"
+                  }
+                ]
+              },
+              {
+                "group": "Miscellaneous",
+                "icon": "shapes",
+                "pages": [
+                  {
+                    "title": "Integrate 15Five",
+                    "icon": "star",
+                    "path": "docs/integrating-15five"
+                  },
+                  {
+                    "title": "Integrate Aircall",
+                    "icon": "phone-outgoing",
+                    "path": "docs/integrating-aircall"
+                  },
+                  {
+                    "title": "Integrate Amplitude",
+                    "icon": "signal",
+                    "path": "docs/integrating-amplitude"
+                  },
+                  {
+                    "title": "Integrate Anthropic Claude",
+                    "icon": "bot",
+                    "path": "docs/integrating-anthropic-claude"
+                  },
+                  {
+                    "title": "Integrate Apollo.io",
+                    "icon": "rocket",
+                    "path": "docs/integrating-apollo-io"
+                  },
+                  {
+                    "title": "Integrate AppDirect",
+                    "icon": "store",
+                    "path": "docs/integrating-appdirect"
+                  },
+                  {
+                    "title": "Integrating Cal.com",
+                    "icon": "calendar",
+                    "path": "docs/integrating-cal-com"
+                  },
+                  {
+                    "title": "Integrating Calendly",
+                    "icon": "calendar-check",
+                    "path": "docs/integrating-calendly"
+                  },
+                  {
+                    "title": "Integrate Collibra",
+                    "icon": "library",
+                    "path": "docs/integrating-collibra"
+                  },
+                  {
+                    "title": "Integrate Gainsight PX",
+                    "icon": "gauge",
+                    "path": "docs/integrating-gainsight-px"
+                  },
+                  {
+                    "title": "Integrate Gong",
+                    "icon": "volume-2",
+                    "path": "docs/integrating-gong"
+                  },
+                  {
+                    "title": "Integrate Harvest",
+                    "icon": "timer",
+                    "path": "docs/integrating-harvest"
+                  },
+                  {
+                    "title": "Integrate Hunter",
+                    "icon": "crosshair",
+                    "path": "docs/integrating-hunter"
+                  },
+                  {
+                    "title": "Integrate Notion",
+                    "icon": "notebook",
+                    "path": "docs/integrating-notion"
+                  },
+                  {
+                    "title": "Integrate OpenAI",
+                    "icon": "sparkles",
+                    "path": "docs/integrating-openai"
+                  },
+                  {
+                    "title": "Integrate Stripe",
+                    "icon": "banknote",
+                    "path": "docs/integrating-stripe"
+                  },
+                  {
+                    "title": "Integrate Xero",
+                    "icon": "receipt",
+                    "path": "docs/integrating-xero"
+                  }
+                ]
+              },
+              {
+                "group": "Mobile Device Management Tools",
+                "icon": "smartphone",
+                "pages": [
+                  {
+                    "title": "Integrate Jamf Pro",
+                    "icon": "apple",
+                    "path": "docs/integrating-jamf-pro"
+                  },
+                  {
+                    "title": "Integrate JumpCloud",
+                    "icon": "server",
+                    "path": "docs/integrating-jumpcloud"
+                  },
+                  {
+                    "title": "Integrate Kandji (Iru)",
+                    "icon": "monitor",
+                    "path": "docs/integrating-kandji"
+                  },
+                  {
+                    "title": "Integrate MS Intune",
+                    "icon": "laptop",
+                    "path": "docs/microsoft-intune"
+                  },
+                  {
+                    "title": "Integrate Endpoint Central",
+                    "icon": "cpu",
+                    "path": "docs/integrating-endpoint-central"
+                  },
+                  {
+                    "title": "Integrating Fleet",
+                    "icon": "ship",
+                    "path": "docs/integrating-fleet"
+                  },
+                  {
+                    "title": "Integrate KiteCyber",
+                    "icon": "wifi",
+                    "path": "docs/integrating-kitecyber"
+                  },
+                  {
+                    "title": "Integrate NinjaOne",
+                    "icon": "terminal",
+                    "path": "docs/integrating-ninjaone"
+                  },
+                  {
+                    "title": "Integrate Sophos",
+                    "icon": "shield-check",
+                    "path": "docs/integrating-sophos"
+                  },
+                  {
+                    "title": "Integrate Kolide",
+                    "icon": "scan",
+                    "path": "docs/integrating-kolide"
+                  },
+                  {
+                    "title": "Integrate Hexnode",
+                    "icon": "tablet-smartphone",
+                    "path": "docs/integrating-hexnode"
+                  }
+                ]
+              },
+              {
+                "group": "Policy Management",
+                "icon": "clipboard-list",
+                "pages": [
+                  {
+                    "title": "Integrate Confluence",
+                    "icon": "file-text",
+                    "path": "docs/integrating-confluence"
+                  },
+                  {
+                    "title": "Integrate SharePoint",
+                    "icon": "folder",
+                    "path": "docs/integrating-sharepoint"
+                  },
+                  {
+                    "title": "Integrate PandaDoc",
+                    "icon": "file-signature",
+                    "path": "docs/integrating-pandadoc"
+                  }
+                ]
+              },
+              {
+                "group": "Project Management Platforms",
+                "icon": "kanban",
+                "pages": [
+                  {
+                    "title": "Understand Task Management Integration Capabilities",
+                    "icon": "info",
+                    "path": "docs/task-management-integration-capabilities"
+                  },
+                  {
+                    "title": "Integrate Jira",
+                    "icon": "ticket",
+                    "path": "docs/integrating-jira"
+                  },
+                  {
+                    "title": "Manage Jira Tickets",
+                    "icon": "plus-square",
+                    "path": "docs/creating-jira-ticket"
+                  },
+                  {
+                    "title": "Integrate Monday.com",
+                    "icon": "calendar-days",
+                    "path": "docs/integrating-mondaycom"
+                  },
+                  {
+                    "title": "Integrate ClickUp",
+                    "icon": "check-circle",
+                    "path": "docs/integrating-click-up"
+                  },
+                  {
+                    "title": "Integrate Shortcut",
+                    "icon": "scissors",
+                    "path": "docs/integrating-shortcut"
+                  },
+                  {
+                    "title": "Create Shortcut Story",
+                    "icon": "square-plus",
+                    "path": "docs/creating-a-shortcut-story"
+                  },
+                  {
+                    "title": "Integrate Linear",
+                    "icon": "minus",
+                    "path": "docs/integrating-linear"
+                  },
+                  {
+                    "title": "Create Linear Issue",
+                    "icon": "circle-plus",
+                    "path": "docs/creating-linear-issue"
+                  },
+                  {
+                    "title": "Integrate Asana",
+                    "icon": "sunrise",
+                    "path": "docs/integrating-asana"
+                  },
+                  {
+                    "title": "Create Asana Tasks",
+                    "icon": "file-plus",
+                    "path": "docs/creating-asana-ticket"
+                  },
+                  {
+                    "title": "Integrate Azure DevOps (Create Tickets)",
+                    "icon": "git-pull-request",
+                    "path": "docs/integrating-azure-devops-1"
+                  },
+                  {
+                    "title": "Integrate ServiceNow",
+                    "icon": "headset",
+                    "path": "docs/integrating-servicenow"
+                  },
+                  {
+                    "title": "Integrate Basecamp",
+                    "icon": "tent",
+                    "path": "docs/integrating-basecamp"
+                  },
+                  {
+                    "title": "Integrate Trello",
+                    "icon": "layout-grid",
+                    "path": "docs/integrating-trello"
+                  },
+                  {
+                    "title": "Integrate Miro",
+                    "icon": "pen-tool",
+                    "path": "docs/integrating-miro"
+                  },
+                  {
+                    "title": "Integrate Figma",
+                    "icon": "figma",
+                    "path": "docs/integrating-figma"
+                  },
+                  {
+                    "title": "Integrate Hive",
+                    "icon": "hexagon",
+                    "path": "docs/integrating-hive"
+                  },
+                  {
+                    "title": "Integrate Canny",
+                    "icon": "megaphone",
+                    "path": "docs/integrating-canny"
+                  },
+                  {
+                    "title": "Integrate OpenProject",
+                    "icon": "folder-kanban",
+                    "path": "docs/integrating-openproject"
+                  }
+                ]
+              },
+              {
+                "group": "Threat Intelligence",
+                "icon": "shield-alert",
+                "pages": [
+                  {
+                    "title": "Integrate SentinelOne",
+                    "icon": "shield-alert",
+                    "path": "docs/integrating-sentinelone"
+                  }
+                ]
+              },
+              {
+                "group": "Ticket Management",
+                "icon": "ticket",
+                "pages": [
+                  {
+                    "title": "Integrate Freshservice",
+                    "icon": "life-buoy",
+                    "path": "docs/integrating-freshservice"
+                  },
+                  {
+                    "title": "Integrate ServiceDesk Plus",
+                    "icon": "help-circle",
+                    "path": "docs/integrating-servicedesk-plus"
+                  },
+                  {
+                    "title": "Integrate Zendesk",
+                    "icon": "message-square",
+                    "path": "docs/integrating-zendesk"
+                  }
+                ]
+              },
+              {
+                "group": "Version Control",
+                "icon": "git-branch",
+                "pages": [
+                  {
+                    "title": "Integrate Azure DevOps",
+                    "icon": "git-merge",
+                    "path": "docs/integrating-azure-devops"
+                  },
+                  {
+                    "title": "Integrate Bitbucket",
+                    "icon": "git-fork",
+                    "path": "docs/integrating-bitbucket"
+                  },
+                  {
+                    "title": "Integrate GitHub",
+                    "icon": "github",
+                    "path": "docs/integrating-github"
+                  },
+                  {
+                    "title": "Create GitHub Issues",
+                    "icon": "plus-square",
+                    "path": "docs/create-github-issues"
+                  },
+                  {
+                    "title": "Integrate GitLab",
+                    "icon": "git-branch",
+                    "path": "docs/adding-gitlab"
+                  }
+                ]
+              },
+              {
+                "group": "Vulnerability Scanners",
+                "icon": "bug",
+                "pages": [
+                  {
+                    "title": "Integrating Aikido",
+                    "icon": "swords",
+                    "path": "docs/integrating-aikido"
+                  },
+                  {
+                    "title": "Integrate Microsoft Defender Endpoint",
+                    "icon": "shield",
+                    "path": "docs/integrating-microsoft-defender-endpoint"
+                  },
+                  {
+                    "title": "Integrating Qualys",
+                    "icon": "scan-line",
+                    "path": "docs/integrating-qualys"
+                  },
+                  {
+                    "title": "Integrate Sentry",
+                    "icon": "alarm-clock",
+                    "path": "docs/integrating-sentry"
+                  },
+                  {
+                    "title": "Integrate Snyk",
+                    "icon": "bug",
+                    "path": "docs/integrating-snyk"
+                  },
+                  {
+                    "title": "Integrate SonarCloud",
+                    "icon": "radio",
+                    "path": "docs/integrating-sonarcloud"
+                  },
+                  {
+                    "title": "Integrate Tenable",
+                    "icon": "radar",
+                    "path": "docs/integrating-tenable"
+                  }
+                ]
+              },
+              {
+                "group": "Web Security & CDN",
+                "icon": "globe",
+                "pages": [
+                  {
+                    "title": "Integrate Cloudflare",
+                    "icon": "globe-lock",
+                    "path": "docs/integrating-cloudflare"
+                  }
+                ]
+              }
+            ],
+            "path": "docs/overview-integrations"
+          },
+          {
+            "group": "Others",
+            "pages": [
+              {
+                "title": "Continuous Compliance",
+                "icon": "refresh-cw",
+                "path": "docs/evidence-tasks-walkthrough",
+                "public": false
+              },
+              {
+                "title": "Risk Management",
+                "icon": "alert-triangle",
+                "path": "docs/how-to-use-the-risk-dashboard"
+              },
+              {
+                "title": "Asset Management",
+                "icon": "box",
+                "path": "docs/asset-management-walkthrough"
+              },
+              {
+                "title": "People Compliance",
+                "icon": "users",
+                "path": "docs/employees-module"
+              },
+              {
+                "title": "Vendor Management",
+                "icon": "building-2",
+                "path": "docs/understanding-vendor-management"
+              },
+              {
+                "title": "Trust Management",
+                "icon": "shield",
+                "path": "docs/trust-vault-user-navigation"
+              },
+              {
+                "title": "Audit Readiness",
+                "icon": "clipboard-check",
+                "path": "docs/understanding-audit-center"
+              },
+              {
+                "title": "Scrut Teammates",
+                "icon": "sparkles",
+                "path": "docs/what-is-scrut-teammates"
+              },
+              {
+                "title": "Reports",
+                "icon": "file-bar-chart",
+                "path": "docs/reports-walkthrough"
+              }
+            ],
+            "path": "docs/others-overview"
           }
         ],
-        "show-page-navigation": false,
-        "ask-feedback": false,
+        "public": true
+      },
+      {
+        "tab": "API Docs",
+        "icon": "code",
+        "groups": [
+          {
+            "group": "Endpoints",
+            "openapi": "api-reference/openapi.yaml",
+            "pages": []
+          }
+        ],
         "public": true
       },
       {
         "tab": "Release Notes",
         "icon": "megaphone",
-        "path": "release-notes/overview",
-        "show-sidebar": false,
-        "show-toc": false,
-        "pages": [
+        "groups": [
           {
-            "group": "2024 Release Notes",
-            "icon": "calendar",
+            "group": "Release Notes",
             "pages": [
               {
-                "title": "July 2024 Release Notes",
-                "path": "release-notes/2024/july-2024"
+                "title": "Release Notes",
+                "icon": "megaphone",
+                "path": "docs/release-notes",
+                "show-sidebar": false
               },
               {
-                "title": "April 2024 Release Notes",
-                "path": "release-notes/2024/april-2024"
+                "title": "July 2026",
+                "icon": "calendar",
+                "path": "docs/july-2026",
+                "show-sidebar": false
               },
               {
-                "title": "February 2024 Release Notes",
-                "path": "release-notes/2024/february-2024"
+                "title": "May 2026",
+                "icon": "calendar-days",
+                "path": "docs/may-2026",
+                "show-sidebar": false
               },
               {
-                "title": "January 2024 Release Notes",
-                "path": "release-notes/2024/january-2024"
-              }
-            ]
-          },
-          {
-            "group": "2023 Release Notes",
-            "icon": "calendar",
-            "pages": [
-              {
-                "title": "October 2023 Release Notes",
-                "path": "release-notes/2023/october-2023"
+                "title": "March 2026",
+                "icon": "calendar-check",
+                "path": "docs/march-2026",
+                "show-sidebar": false
               },
               {
-                "title": "August 2023 Release Notes",
-                "path": "release-notes/2023/august-2023"
+                "title": "February 2026",
+                "icon": "calendar-clock",
+                "path": "docs/february-2026",
+                "show-sidebar": false
               },
               {
-                "title": "June 2023 Release Notes",
-                "path": "release-notes/2023/june-2023"
+                "title": "January 2026",
+                "icon": "calendar-range",
+                "path": "docs/january-2026",
+                "show-sidebar": false
               },
               {
-                "title": "April 2023 Release Notes",
-                "path": "release-notes/2023/april-2023"
-              },
-              {
-                "title": "February 2023 Release Notes",
-                "path": "release-notes/2023/february-2023"
-              },
-              {
-                "title": "January 2023 Release Notes",
-                "path": "release-notes/2023/january-2023"
-              }
-            ]
-          },
-          {
-            "group": "2022 Release Notes",
-            "icon": "calendar",
-            "pages": [
-              {
-                "title": "October 2022 Release Notes",
-                "path": "release-notes/2022/october-2022"
-              },
-              {
-                "title": "August 2022 Release Notes",
-                "path": "release-notes/2022/august-2022"
-              },
-              {
-                "title": "June 2022 Release Notes",
-                "path": "release-notes/2022/june-2022"
-              },
-              {
-                "title": "April 2022 Release Notes",
-                "path": "release-notes/2022/april-2022"
-              },
-              {
-                "title": "February 2022 Release Notes",
-                "path": "release-notes/2022/february-2022"
-              },
-              {
-                "title": "January 2022 Release Notes",
-                "path": "release-notes/2022/january-2022"
+                "title": "December 2025",
+                "icon": "calendar-minus",
+                "path": "docs/dec-18-2025",
+                "show-sidebar": false
               }
             ]
           }
@@ -1315,22 +1490,124 @@
         "public": true
       },
       {
-        "tab": "Learning Hub",
-        "icon": "graduation-cap",
-        "href": "https://academy.capillarytech.com/sessionm/pages/112/home",
-        "public": true
+        "tab": "Help Center",
+        "icon": "life-buoy",
+        "public": true,
+        "groups": [
+          {
+            "group": "Getting Started",
+            "icon": "rocket",
+            "pages": [
+              {
+                "title": "How do I log in to Scrut?",
+                "path": "help-center/getting-started/how-do-i-log-in",
+                "show-sidebar": false
+              },
+              {
+                "title": "How do I find my way around Scrut?",
+                "path": "help-center/getting-started/how-do-i-find-my-way-around",
+                "show-sidebar": false
+              },
+              {
+                "title": "What is the onboarding checklist?",
+                "path": "help-center/getting-started/what-is-onboarding-checklist",
+                "show-sidebar": false
+              }
+            ],
+            "path": "help-center/getting-started/overview",
+            "show-sidebar": false
+          },
+          {
+            "group": "Frameworks & Controls",
+            "icon": "shield-check",
+            "pages": [
+              {
+                "title": "What is a framework, control, and requirement?",
+                "path": "help-center/frameworks-controls/what-is-a-framework",
+                "show-sidebar": false
+              },
+              {
+                "title": "How do I add a framework?",
+                "path": "help-center/frameworks-controls/how-do-i-add-a-framework",
+                "show-sidebar": false
+              },
+              {
+                "title": "Why is a control showing as failing?",
+                "path": "help-center/frameworks-controls/why-is-a-control-failing",
+                "show-sidebar": false
+              }
+            ],
+            "path": "help-center/frameworks-controls/overview",
+            "show-sidebar": false
+          },
+          {
+            "group": "Policies",
+            "icon": "file-text",
+            "pages": [
+              {
+                "title": "How do I create or import a policy?",
+                "path": "help-center/policies/how-do-i-create-a-policy",
+                "show-sidebar": false
+              },
+              {
+                "title": "Who needs to approve a policy?",
+                "path": "help-center/policies/who-needs-to-approve-a-policy",
+                "show-sidebar": false
+              },
+              {
+                "title": "How often should policies be reviewed?",
+                "path": "help-center/policies/how-often-should-policies-be-reviewed",
+                "show-sidebar": false
+              }
+            ],
+            "path": "help-center/policies/overview",
+            "show-sidebar": false
+          },
+          {
+            "group": "Integrations",
+            "icon": "plug",
+            "pages": [
+              {
+                "title": "What can I connect to Scrut?",
+                "path": "help-center/integrations/what-can-i-connect",
+                "show-sidebar": false
+              },
+              {
+                "title": "My integration stopped working. What should I check?",
+                "path": "help-center/integrations/my-integration-stopped-working",
+                "show-sidebar": false
+              }
+            ],
+            "path": "help-center/integrations/overview",
+            "show-sidebar": false
+          },
+          {
+            "group": "Account & Support",
+            "icon": "life-buoy",
+            "pages": [
+              {
+                "title": "How do I invite teammates?",
+                "path": "help-center/account-support/how-do-i-invite-teammates",
+                "show-sidebar": false
+              },
+              {
+                "title": "How is my data protected?",
+                "path": "help-center/account-support/how-is-my-data-protected",
+                "show-sidebar": false
+              },
+              {
+                "title": "How do I contact support?",
+                "path": "help-center/account-support/how-do-i-contact-support",
+                "show-sidebar": false
+              }
+            ],
+            "path": "help-center/account-support/overview",
+            "show-sidebar": false
+          }
+        ],
+        "path": "help-center"
       }
     ]
   },
-  "logo-dark": "https://blob-cdn.documentation.ai/org-a44f305a-09d8-4c5e-881d-266f10a97ab9/doc-e899af75-9c11-42e7-b892-adcdfe8015a5/1785744702779-y01qxmbd5q7-sessionm-white2x--1-.png?fm=auto&auto=compress%2Cformat",
-  "logo-light": "https://blob-cdn.documentation.ai/org-a44f305a-09d8-4c5e-881d-266f10a97ab9/doc-e899af75-9c11-42e7-b892-adcdfe8015a5/1785474333275-v7y1ypfxmf-sessionm-logo-light.png?fm=auto&auto=compress%2Cformat",
-  "favicon": "https://blob-cdn.documentation.ai/org-a44f305a-09d8-4c5e-881d-266f10a97ab9/doc-e899af75-9c11-42e7-b892-adcdfe8015a5/1785744744551-81ulw2nxsot-sessionm-favicon-270.png?fm=auto&auto=compress%2Cformat",
-  "customCss": [
-    {
-      "src": "styles/home.css"
-    },
-    {
-      "src": "styles/footer.css"
-    }
-  ]
+  "favicon": "https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786353134353-t8e4aazj8w-scrut_favicon.png?fm=auto&auto=compress%2Cformat"
 }

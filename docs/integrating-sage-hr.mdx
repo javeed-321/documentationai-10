@@ -1,0 +1,90 @@
+---
+title: "Integrate Sage HR"
+description: "Learn how to connect your Sage HR account with Scrut."
+---
+
+The **Scrut** **-** **Sage HR integration** seamlessly syncs employee data from your [Sage HR](https://www.sage.com/en-gb/sage-business-cloud/hr/) account to Scrut so that you can easily access crucial employee details in the [**People → Employees module**](https://help.scrut.io/docs/employees) in Scrut. This article provides a step-by-step guide for integrating your Sage HR account with Scrut.
+
+## Prerequisites
+
+Before you begin the integration, make sure to have the following permissions for your Sage HR account:
+
+- **Account Information**: Login credentials
+- **Access Level**: Admin access to Sage HR
+- **API enabled** for your organization’s Sage HR account
+  - To enable the Sage HR API key, navigate to **Profile → Settings → Integrations → API → Enable API Access** in your Sage HR account.
+- **Permissions**: Scrut requires read access to the following data:
+  - Read: user_profile
+  - Read: employment_info
+  - Read: manager_info (wherever applicable)
+  - Read: leave_dataAccess to your organization’s Sage HR account
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Sage HR account before beginning the integration to avoid doing so later.
+</Callout>
+
+## How to Connect Sage HR With Scrut
+
+### Step 1: Navigate to Integrations in Scrut
+
+1. [Log in to Scrut](https://app.scrut.io/login) and click **Integrations** on the left panel.
+2. Click the **Integrations Library** tab at the top, and in the **Categories** section, click **Human Resources Information Systems**.
+3. Locate the **Sage HR** card, or use the search bar at the top of the page to find it, and click the **Integrate** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431134654-iwlpdqkbmad-integrating-sage-hr__01-locate-the-sage-hr-card-or-use-the-search.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Sage HR card, or use the search bar at the top of the page to find it, and click the Integrate" caption=" " />
+
+### Step 2: Connect Your Sage HR Account
+
+1. Click the **Connect** button on the top right of the Sage HR integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431136291-9o7sjmb6npv-integrating-sage-hr__02-click-the-connect-button-on-the-top-right-of.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Connect button on the top right of the Sage HR integration page" caption=" " />
+2. In the pop-up window, enter the following details.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431137964-rh74jg2yr5-integrating-sage-hr__03-in-the-pop-up-window-enter-the-following.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the pop-up window, enter the following details" caption=" " />
+3. Enter the **subdomain** for your Sage HR account.
+  - For example, if you sign in at “**scrutautomation.sage.hr**”, **scrutautomation** is your subdomain.
+4. Enter your **Sage API key**.
+  - To find the API key, log in to your Sage HR account and go to **Settings → Integrations → API** to generate the key.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431139769-5ep6ivd21zi-integrating-sage-hr__04-to-find-the-api-key-log-in-to-your-sage-hr.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To find the API key, log in to your Sage HR account and go to Settings → Integrations → API to generate the" caption=" " />
+5. Click **Submit** to complete the integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431141425-ilwgzoszonc-integrating-sage-hr__05-click-submit-to-complete-the-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit to complete the integration" caption=" " />
+
+Watch for the success notification that indicates the integration is complete.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431143081-3ji0349iyxr-integrating-sage-hr__06-watch-for-the-success-notification-that.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the success notification that indicates the integration is complete" caption=" " />
+
+The employee details fetched from your Sage HR account will now be visible in the [People → Employees](https://help.scrut.io/docs/employees) module in Scrut.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employee data from your Sage HR account.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the Sage HR integrations page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431144929-30nuqozksfg-integrating-sage-hr__07-manual-sync-you-can-also-initiate-a-manual.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: You can also initiate a manual sync by clicking the Sync Now button on the Sage HR integrations" caption=" " />
+
+## Data Fetched From Sage HR
+
+Scrut fetches the following employee details from Sage HR:
+
+- Employee Name (First and Last Name)
+- Email Address
+- Employment Start Date
+- Date of Exit (if applicable)
+- Reporting Manager Email
+- Start and End Dates of Employee Leaves
+
+## Viewing Sage HR Data in Scrut
+
+To view Sage HR data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your Sage HR account with Scrut, please contact our support team at scrut@support.io for assistance.

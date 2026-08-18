@@ -1,0 +1,143 @@
+---
+title: "Integrate DigitalOcean"
+description: "Learn how to connect your DigitalOcean infrastructure to Scrut."
+---
+
+Connect your DigitalOcean account to Scrut to automatically collect cloud infrastructure evidence and keep your compliance data up to date. Once connected, Scrut pulls resources like Droplets, Firewalls, and Kubernetes Clusters into your compliance and asset workflows. Learn how to connect your DigitalOcean infrastructure to Scrut.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your DigitalOcean configurations against applicable compliance frameworks.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered DigitalOcean resources and supports the collection of asset-related compliance evidence.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+
+## Prerequisites
+
+An active DigitalOcean account with admin-level access.
+
+## Permissions and Access Requirements
+
+### For DigitalOcean
+
+Scrut requests the following OAuth scopes during authentication. These are read-only and do not grant Scrut any write access to your DigitalOcean account.
+
+- account:read
+- block_storage:read
+- database:read
+- droplet:read
+- firewall:read
+- kubernetes:read
+- load_balancer:read
+- monitoring:read
+- ssh_key:read
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integrations module enabled.
+
+## Data Collected
+
+- Droplets: Includes Droplet name, region, size, and status
+- Load Balancers: Includes configuration and associated Droplets
+- Kubernetes Clusters: Includes cluster name, version, and node pool details
+- Block Storage Volumes: Includes volume name, size, and attachment status
+- Database Clusters: Includes engine type, version, and cluster status
+- Alert Policies: Includes policy name, type, and target resources
+- Firewalls: Includes inbound and outbound rules and associated Droplets
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page in Scrut.
+
+## Integration Setup
+
+### Step 1: Connect DigitalOcean to Scrut
+
+1. From the left navigation panel, click **Integrations**.
+2. Navigate to the **Integrations Library** tab.
+3. Scroll to the **Cloud Providers** section and locate **DigitalOcean**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430404657-4z6bbwkj5qs-integrating-digitalocean__01-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. On the DigitalOcean integration page, click **Connect**.
+
+**Important:** You need admin-level access. The integration will fail if the authenticating account lacks the required permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430406488-hy9oe4n9xdc-integrating-digitalocean__02-important-you-need-admin-level-access.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: You need admin-level access" caption=" " />
+6. You are redirected to DigitalOcean's authentication page. Log in with your admin account credentials and authorize the requested scopes.
+7. Select the Digital Ocean team that Scrut can access.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430408142-y2l4vg3bjkk-integrating-digitalocean__03-select-the-digital-ocean-team-that-scrut-can.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the Digital Ocean team that Scrut can access" caption=" " />
+8. On successful authentication, you are redirected back to Scrut. The integration status updates to Connected.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430410073-n4ozekt3sre-integrating-digitalocean__04-on-successful-authentication-you-are.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On successful authentication, you are redirected back to Scrut. The integration status updates to Connected" caption=" " />
+
+### Step 2: Configure Resource Scope
+
+1. Click **Configure Scope** on the Digital Ocean integration page.
+2. In the **Apps in Scope** panel, toggle on each resource type you want Scrut to sync.
+3. Click **Save** to confirm your selections.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430411829-i8a02gkyjud-integrating-digitalocean__05-click-save-to-confirm-your-selections.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save to confirm your selections" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+The first sync starts automatically after you save your scope configuration. You can monitor sync activity and review connection history in the Audit Log section of the DigitalOcean integration settings page.
+
+### Review synced data
+
+Once the sync completes, verify that data has landed correctly in the following modules:
+
+- Navigate to **Tests** to view automated test results and flagged misconfigurations.
+- Navigate to **Evidence Tasks** to set up Scrut Monitors to automate evidence collection from Digital Ocean.
+- Navigate to **Asset Management** to view discovered Digital Ocean assets.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure
+
+Cause: The DigitalOcean account used during setup does not have admin-level access, or the OAuth authorization was not fully completed.
+
+Possible solutions: Verify that the account you authenticated with has admin access in DigitalOcean. Disconnect the integration and reconnect using a DigitalOcean admin account.
+
+### Data not appearing in Scrut
+
+Possible solutions: Check that the relevant resource types are toggled on in Configure Scope. Trigger a manual sync from the integration settings page and wait a few minutes. Review the Audit Log on the DigitalOcean integration page for any sync errors.
+
+### Resources missing from Asset Management
+
+Possible solutions: Confirm the resources exist in your DigitalOcean account and are in an active state. Check that the corresponding data type is enabled in your scope configuration.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What DigitalOcean resources does Scrut collect?" default-open="false">
+
+Scrut collects Droplets, Load Balancers, Kubernetes Clusters, Block Storage Volumes, Database Clusters, Alert Policies, and Firewalls. All data is read-only.
+
+</Expandable>
+
+<Expandable title="2: Can I control which resources Scrut monitors?" default-open="false">
+
+Yes. Use the Configure Scope option on the DigitalOcean integration page to toggle resource types on or off. Changes take effect on the next sync.
+
+</Expandable>
+
+<Expandable title="3: What happens if I change my DigitalOcean credentials or revoke access?" default-open="false">
+
+If Scrut's access is revoked in DigitalOcean, the integration will stop syncing and may show a connection error. Disconnect and reconnect the integration using updated credentials to restore it.
+
+</Expandable>
+
+<Expandable title="4: Will Scrut make any changes to my DigitalOcean resources?" default-open="false">
+
+No. Scrut only requests read-only OAuth scopes and does not modify any resources in your DigitalOcean account.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

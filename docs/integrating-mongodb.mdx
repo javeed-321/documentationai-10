@@ -1,0 +1,211 @@
+---
+title: "Integrate MongoDB"
+description: "Learn how to connect your MongoDB Atlas organization with Scrut."
+---
+
+In this article, we explain how to connect your MongoDB Atlas organization with Scrut.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your MongoDB configurations against applicable compliance frameworks.
+- **User Access Data:** Fetches user details, roles, and permissions from MongoDB for Access Reviews.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+
+## Prerequisites
+
+- An active MongoDB Atlas account with organization-level administrator access.
+- The IP Access List restriction for the Atlas Administration API must be disabled in your MongoDB Atlas organization settings, or Scrut's outbound IP addresses must be added to the access list. See here for how to do it.
+
+## Permissions and Access Requirements
+
+### For MongoDB
+
+- Organization-level administrator access to your MongoDB Atlas account
+- An Atlas API key with Organization Read Only permissions (created in Step 1 below).
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integrations module enabled.
+
+## Data Collected
+
+| Scrut Field | Source Data | Notes |
+| --- | --- | --- |
+| Projects | MongoDB Atlas Projects | All projects in the organization |
+| Users | Organization Users | User details, roles, and permissions |
+| Clusters | Atlas Clusters | Cluster configurations and metadata. |
+| Cluster Snapshots | Atlas Cluster Snapshots | Snapshot records for compliance evidence |
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also trigger a manual sync from the integration settings page in Scrut.
+
+## Integration Setup
+
+### Step 1: Fetch Your Organization ID
+
+1. Log in to your MongoDB Atlas account.
+2. Navigate to **Organization Settings → General Settings** and copy your **Organization ID**.
+3. Save it in a safe location, as you’ll need to enter it in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430860853-hu4h3f72hjm-integrating-mongodb__01-save-it-in-a-safe-location-as-youll-need-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Save it in a safe location, as you’ll need to enter it in Scrut" caption=" " />
+
+### Step 2: Generate an API Key in MongoDB Atlas
+
+1. Log in to your MongoDB Atlas account.
+2. Navigate to **Applications → API Keys** and click **Create API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430862575-fviton6866t-integrating-mongodb__02-navigate-to-applications-api-keys-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to Applications → API Keys and click Create API Key" caption=" " />
+3. Enter a description for the key.
+4. Select **Organization Read Only** as the permission level.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430864347-gsoc60aozlv-integrating-mongodb__03-select-organization-read-only-as-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Organization Read Only as the permission level" caption=" " />
+5. Click **Next**. Copy the Public Key and Private Key and store them in a secure location.
+
+   **Important:** The private key is only shown once. If you lose it, you will need to generate a new API key.
+6. Click **Done**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430866070-ulfl63gxpr8-integrating-mongodb__04-click-done.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Done" caption=" " />
+
+Note: To learn more about MongoDB API keys, refer to the [MongoDB help documentation](https://www.mongodb.com/docs/atlas/api/atlas-admin-api/).
+
+### Step 3: Disable the IP Access List Restriction
+
+By default, MongoDB restricts API access only to approved IP addresses. You must disable this restriction (or whitelist Scrut's outbound IPs) for the integration to connect.
+
+1. Navigate to **Organization Settings**.
+2. Locate the **Require IP Access List for the Atlas Administration API** toggle.
+3. Ensure the toggle is turned off.
+
+**Note:** If your security policy requires IP whitelisting instead of disabling the toggle, contact Scrut Support to obtain the outbound IP addresses to add to your API key's access list.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430867695-2u927ke162t-integrating-mongodb__05-note-if-your-security-policy-requires-ip.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: If your security policy requires IP whitelisting instead of disabling the toggle, contact Scrut Support" caption=" " />
+
+### Step 4: Connect MongoDB in Scrut
+
+1. Log in to Scrut and click **Integrations** in the left navigation panel.
+2. Click the **Integrations Library** tab.
+3. Select **Database** from the **Categories** list.
+4. Locate the **MongoDB** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430869409-oyp8ycqvzlo-integrating-mongodb__06-locate-the-mongodb-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the MongoDB tile and click Integrate" caption=" " />
+5. On the MongoDB integration page, enter the following credentials:
+  - **Organization ID**: Your MongoDB Atlas organization ID, which you copied in Step 1.
+  - **Public Key**: The public key from the API key you created in Step 2.
+  - **Private Key**: The private key from the API key you created in Step 2.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430870978-kkoeihmcc6-integrating-mongodb__07-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+### Step 5: Configure Projects
+
+1. Click **Configure Projects** on the MongoDB integration page in Scrut.
+2. Select your MongoDB projects for which you want to sync data into Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430872738-syhy8hr15t-integrating-mongodb__08-select-your-mongodb-projects-for-which-you.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select your MongoDB projects for which you want to sync data into Scrut" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+Once the integration is connected, Scrut begins the initial data sync automatically. You can monitor the sync status by navigating to Integrations, opening the MongoDB integration, and checking the Audit Log tab.
+
+### Review synced data
+
+After the sync completes, verify the data in the following locations:
+
+- Navigate to **Evidence Tasks** to [configure a Scrut Monitor](https://help.scrut.io/docs/how-to-set-up-scrut-monitor) to automate evidence collection from MongoDB.
+- Navigate to **Tests** to see automated test results mapped to your compliance frameworks.
+- Navigate to **People → Access Reviews** to create an access review to sync user access data.
+
+## Common Errors and Troubleshooting
+
+### User role changed
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430874369-yvijybp3hum-integrating-mongodb__09-user-role-changed.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="User role changed" caption=" " />
+
+This error occurs due to access restrictions on your MongoDB API key. MongoDB's security controls may be blocking connection attempts from Scrut's servers, preventing the platform from validating and establishing the integration.
+
+Recent security enhancements in both MongoDB and Scrut have introduced stricter access controls to protect your data. As a result, Scrut's outbound IP addresses need explicit permission to access your MongoDB API key for the integration to function properly.
+
+**Why IP Whitelisting is Required**
+
+IP whitelisting ensures that only trusted sources can access your MongoDB instance through the API key. This is a security best practice that prevents unauthorized access while allowing legitimate integrations like Scrut to function properly. By restricting access to specific IP addresses, you maintain control over who can connect to your database while enabling seamless integration with approved platforms.
+
+**Resolution steps**
+
+**Step 1: Verify API Key Configuration**
+
+Before proceeding, ensure that:
+
+- Your MongoDB API key is active and has the necessary permissions
+- The API key has not expired or been revoked
+- The user account associated with the API key has appropriate access roles
+
+**Step 2: Contact Scrut Support for IP Whitelisting**
+
+- Contact Scrut support and mention that you're experiencing a MongoDB integration error
+- The support team will provide you with the specific IP addresses that need to be whitelisted
+- Add these IP addresses to your MongoDB API key's access list
+
+**Step 3: Whitelist IP Addresses in MongoDB**
+
+Once you receive the IP addresses from Scrut support:
+
+- Log in to your MongoDB Atlas account
+- Select the API key you're using for the Scrut integration
+- Go to the **Access List** tab
+- Click **Add Access List Entry**
+- Enter each IP address provided by Scrut support
+- Add a description (e.g., "Scrut Integration")
+- Click **Save**
+
+**Step 4: Reauthenticate the Integration**
+
+After whitelisting the IP addresses:
+
+- Return to the Scrut integration setup screen
+- Restart the integration process
+- Complete the validation step
+- Verify that the connection is successful
+
+### Invalid credentials
+
+Possible solutions:
+
+- Double-check that the Organization ID, Public Key, and Private Key were entered correctly with no extra spaces.
+- If the API key was regenerated after initial setup, re-enter the new credentials on the integration settings page and resubmit.
+
+### Data not appearing in Scrut
+
+Possible solutions:
+
+- Confirm the integration status shows Connected on the MongoDB integration page.
+- Check the Audit Log tab for sync errors or warnings.
+- Trigger a manual sync from the integration settings page and wait a few minutes before rechecking.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What permissions does the MongoDB API key need?" default-open="false">
+
+The API key requires the Organization Read Only permission. This gives Scrut read access to your organization's projects, users, clusters, and snapshots without any write permissions.
+
+</Expandable>
+
+<Expandable title="2: What happens if I regenerate my MongoDB API key?" default-open="false">
+
+If your API key is regenerated or revoked, the integration will stop syncing data. Navigate to Integrations, open the MongoDB integration, update the credentials with the new public and private keys, and resubmit.
+
+</Expandable>
+
+<Expandable title="3: Does this integration support MongoDB deployments outside of Atlas?" default-open="false">
+
+This integration is designed for MongoDB Atlas. Self-hosted or on-premises MongoDB deployments are not supported.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

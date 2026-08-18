@@ -1,0 +1,113 @@
+---
+title: "Integrate Checkr"
+description: "Learn how to connect your Checkr account with Scrut to sync employee background verification status."
+---
+
+Integrating your Checkr account with Scrut enables automated collection and monitoring of employee background verification data to support compliance and risk management requirements.
+
+## What this Integration Does in Scrut
+
+This integration:
+
+- Automatically syncs background check status for employees from Checkr into the **Tasks → Ongoing → Background Checks** section in the **People → Employees** module in Scrut
+- Centralizes background check data for audit and compliance reporting
+- Enables real-time monitoring of the background verification processes of employees
+- Provides evidence for compliance frameworks requiring employee background checks
+
+## Prerequisites
+
+### Permissions and Access Requirements
+
+**For Checkr:**
+
+- Active Checkr account with administrator access
+- Ability to access the Checkr dashboard
+- Permission to view and generate API keys
+
+**For Scrut:**
+
+- Admin role (or Contributor with access to the Integrations module) in Scrut
+
+## How To Integrate Checkr with Scrut
+
+### Step 1: Fetch API Key from Checkr
+
+1. Log in to your Checkr account and navigate to the **Account** page on the dashboard.
+2. Select the **Developer settings** tab and click **Create Key**.
+3. Enter the required details and generate the API key.
+4. Copy the key as you’ll need to enter it in Scrut in the next step.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to [Checkr’s documentation for more information on the API key](https://help.checkr.com/helpcenter/s/article/14966447719703-Manage-API-keys-and-webhooks).
+</Callout>
+
+### Step 2: Connect Your Checkr Account in Scrut
+
+1. Log in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Click the **Integrations Library** tab at the top, and in the **Categories** section, click **Background Check**.
+3. Locate the **Checkr** card, or use the search bar at the top of the page to find it, and click the **Integrate** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429840140-7botu3rsb8i-checkr-integration-sync-employee-bgv-data-to-scrut__01-locate-the-checkr-card-or-use-the-search-bar.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Checkr card, or use the search bar at the top of the page to find it, and click the Integrate" caption=" " />
+4. Enter the API Key you copied from Checkr and click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429841856-6qq2b11nexf-checkr-integration-sync-employee-bgv-data-to-scrut__02-enter-the-api-key-you-copied-from-checkr-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter the API Key you copied from Checkr and click Submit" caption=" " />
+
+## What Happens Next?
+
+- The integration will begin syncing background verification data for employees from your Checkr account.
+- The background check status will populate on employee detail pages in the **Tasks → Ongoing → Background Checks** section in the **People → Employees** module in Scrut.
+- Check Checkr integration **Audit Logs** to view data sync status and confirm successful integration.
+
+## FAQs & Troubleshooting
+
+<ExpandableGroup>
+
+<Expandable title="1: Invalid API Key Error" default-open="false">
+
+- Verify the API key was copied correctly without extra spaces
+- Ensure the API key is active and not expired in Checkr
+- Confirm you have administrator permissions in Checkr to create and copy the API key
+
+</Expandable>
+
+<Expandable title="2: Data Not Syncing" default-open="false">
+
+- Check your internet connection
+- Verify the Checkr integration status shows as "Connected"
+- Review Audit Logs for any sync errors or warnings
+- Re-authenticate the integration by updating the API key
+
+</Expandable>
+
+<Expandable title="3: Background Check Status Not Appearing in Scrut" default-open="false">
+
+- Ensure employees exist in both Checkr and Scrut systems
+- Verify that employee emails match between platforms
+- Allow up to 24 hours for initial data sync to complete
+- Contact Scrut support if the data doesn't appear after 24 hours
+
+<Callout kind="danger">
+  Important
+
+  Scrut uses the employee's official email ID to retrieve background check results from Checkr. If the background verification was initiated with the employee’s personal email ID, then the results cannot be fetched from Checkr.
+</Callout>
+
+</Expandable>
+
+<Expandable title="4: What happens if I regenerate my Checkr API key?" default-open="false">
+
+You'll need to update the integration in Scrut with the new API key. Navigate to Integrations → Checkr and enter the new key.
+
+</Expandable>
+
+<Expandable title="5: How often does Scrut sync data from Checkr?" default-open="false">
+
+Once every 24 hours.
+
+</Expandable>
+
+</ExpandableGroup>
+
+For further questions or assistance, connect with Scrut Support (support@scrut.io).

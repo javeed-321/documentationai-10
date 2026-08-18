@@ -1,0 +1,69 @@
+---
+title: "December 2025"
+metaDescription: "Scrut's December 2025 release adds the 21 CFR Part 11 framework for life sciences, mid-review vendor attachment uploads, Hexnode MDM sync, and template-free CSV or Excel asset imports."
+---
+
+## In this release
+
+Scrut’s December release adds 21 CFR Part 11 for life sciences teams, removes friction from vendor and asset workflows, and pulls more device and ticketing data into Scrut.
+
+- 21 CFR Part 11 joins the Frameworks module, with validation status tracking and readiness reporting.
+- Vendors can reupload or replace attachments mid-review, so one wrong file no longer restarts the questionnaire.
+- Hexnode MDM inventory syncs into Scrut.
+- Asset imports now accept your CSV or Excel file as-is.
+- Notifications consolidate into one center,
+- OpenProject tickets and Jira attachments now reach evidence and remediation work.
+
+## Key Features & Enhancements
+
+### Support for 21 CFR Part 11 Framework
+
+Life sciences teams preparing for FDA scrutiny often discover that electronic records and electronic signatures requirements live in slide decks, SOPs, and shared drives rather than in one operable control set.
+
+Scrut now supports 21 CFR Part 11 inside the Frameworks module so teams can map Part 11 requirements to policies, risks, and technical documentation in their workspace. The frameworks module also supports evidence and policy suggestions, control owner assignment, validation status tracking, a centralized evidence repository, and readiness reporting for internal and external stakeholders for 21 CFR Part 11.
+
+<Callout kind="info">
+  Learn more: [Supported frameworks](/docs/framework-overview#21-cfr-part-11)
+</Callout>
+
+### Vendors can reupload attachments without restarting the questionnaire
+
+Vendor assessments regularly hit the same friction point after submission: a reviewer finds an attachment outdated, incomplete, or wrong for the question. Restarting the questionnaire, rejecting the response, or moving the fix to email slows every review and splits the evidence trail.
+
+Vendor assessments on Scrut now allow vendors to reupload or replace attachments after submitting a questionnaire while the question is still under review and the questionnaire is not marked complete. Reviewers can request additional or updated documentation in the platform; vendors update the files against the relevant question, and reviewers see the new attachments without a full resubmit. The questionnaire stays in review until clarifications are addressed, then completes as usual.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432184006-49ttel3157k-dec-18-2025__01-vendor-assessments-on-scrut-now-allow.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Vendor assessments on Scrut now allow vendors to reupload or replace attachments after submitting a" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Vendor risk assessment workflow](https://help.scrut.io/docs/steps-to-complete-vendor-risk-assessment)
+</Callout>
+
+### Sync Hexnode MDM device inventory
+
+Endpoint controls fail audits when Mobile Device Manager (MDM) inventory lives only in the MDM console while evidence tasks still expect manual exports. Compliance owners then chase screenshots of device posture instead of a living inventory tied to their GRC tool. Scrut now integrates with Hexnode so teams can pull MDM data into Scrut for stronger device asset visibility.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432266888-7r0blulmpi-endpoint-controls-fail-audits-when-mobile-ede7fa60.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Endpoint controls fail audits when Mobile Device Manager (MDM) inventory lives only in the MDM console while" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Integrate Hexnode](/docs/integrating-hexnode)
+</Callout>
+
+### Import assets flexibly without fixed templates
+
+Teams export from cloud providers, configuration databases, or internal spreadsheets, then spend hours renaming fields and reshaping CSV or Excel files before importing into their GRC asset register.
+
+The Asset Management module in Scrut now accepts CSV or Excel files without a predefined template. Upload the file as-is, then use the import wizard under **Asset Management → Add Asset → Import via CSV/XLSX** to map columns to Scrut fields.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432187221-ptz7ppxynz-dec-18-2025__03-the-asset-management-module-in-scrut-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The Asset Management module in Scrut now accepts CSV or Excel files without a predefined template" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Bulk import assets](https://help.scrut.io/docs/adding-assets#bulk-import-assets)
+</Callout>
+
+## Other Updates
+
+- The [Family Educational Rights and Privacy Act (FERPA) framework](/docs/framework-overview#ferpa-family-educational-rights-and-privacy-act) mapping was refreshed to align with recent U.S. Department of Education (DOE) Student Privacy Policy Office (SPPO) guidance.
+- Users now receive notifications from multiple modules in a single [Notification Center](/docs/notification-center), replacing scattered alerts and emails.
+- [Teammates Chat](https://help.scrut.io/docs/ask-anything-to-scrut-teammates) now surfaces clickable, context-aware follow-up questions under responses so users can continue the conversation without retyping.
+- Create and view [OpenProject tickets](/docs/integrating-openproject) directly from Scrut for remediation and compliance work tracking.
+- Scrut can now [sync Jira attachments](/docs/creating-jira-ticket#sync-jira-attachments-to-evidence-tasks) to linked evidence tasks. This includes attachments embedded in descriptions and comments, including inline images.

@@ -1,0 +1,144 @@
+---
+title: "Integrate Zinc Work"
+description: "Learn how to connect your Zinc Work account with Scrut."
+---
+
+Connect ZincWork with Scrut to track background verification checks for your employees, with results automatically reflected in each employee's profile based on their BGV status in ZincWork.
+
+## What This Integration Does in Scrut
+
+- **Background Verification:** Syncs background verification data to Scrut if enabled in employee checklists. The verification results are displayed within each employee's profile in **People → Employees → Tasks**.
+
+**Note:** Background check results are fetched from Zinc Work only for employees marked as BGV Required in the employee checklist configuration in Scrut.
+- **Automated Tests:** Runs automated checks that continuously evaluate ZincWork for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- An active ZincWork account with administrator access.
+- A ZincWork API key. Refer to [Step 1](/v1/docs/integrating-zinc-work#step-1-retrieve-your-api-key-from-zincwork) below to retrieve it.
+
+## Permissions and Access Requirements
+
+### For ZincWork
+
+- Admin access on your ZincWork account.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permissions to the Integration module.
+
+## Data Collected
+
+| Scrut Field | Zinc Work Source Field | Notes |
+| --- | --- | --- |
+| BGV Status | `results[].result` | Mapped as: `clear` = Pass `consider` = Fail no result = Pending |
+| Report URL | `reportUrl` | Links to the full background check report in ZincWork |
+| Package Name | `metadata.package.name` | Name of the background check package used |
+| Employee Name | `candidate.firstName` + `candidate.lastName` | Full name of the employee |
+| Employee Email | `candidate.email` | Used to match the result to the employee record in Scrut |
+| BGV Check Timestamp | `checks[].report.completedAt` | Timestamp of when the BGV was completed |
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Retrieve Your API Key from ZincWork
+
+1. Log in to your ZincWork account (`https://app.zincwork.com).`
+2. Click your account name or profile icon in the top-right corner and select **Settings**.
+3. Go to the **API Keys** section.
+4. Copy your API key and store it securely. You will need it in the next step.
+
+**Note:** You need to enter both the API key and Base URL in Scrut to complete the integration setup.
+
+The Base URL is `https://api.zinc.io` for all standard production accounts. If you are using a staging account, use `https://stagingapi.zinc.io`.
+
+### Step 2: Configure the Integration in Scrut
+
+1. In Scrut, navigate to **Integrations → Integration Library → Background Check**.
+2. Click **Integrate** on the Zinc Work tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431450155-v2khzzam3fc-integrating-zinc-work__01-click-integrate-on-the-zinc-work-tile.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate on the Zinc Work tile" caption=" " />
+3. Enter your **API key** in the API Key field.
+4. Enter your **Base URL** in the Base URL field.
+5. Click **Submit** to complete the setup.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431451888-6gp0wovemil-integrating-zinc-work__02-click-submit-to-complete-the-setup.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit to complete the setup" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is connected, the initial data sync begins automatically. You can monitor sync status and review connection activity in the Audit Logs section of the integration settings page.
+
+### Review synced data
+
+- Navigate to **People → Employees → Tasks → Ongoing** to view background verification results for individual employees.
+- Navigate to Automated Tests to view compliance check results for ZincWork.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure
+
+Possible solutions:
+
+- Confirm that the API key you entered is correct and has not been revoked in ZincWork.
+- Verify that the Base URL matches your account environment. Use `https://api.zinc.io` for production and `https://stagingapi.zinc.io` for staging accounts.
+- Regenerate the API key in ZincWork and re-enter it in Scrut if the issue persists.
+
+### Background check results not appearing
+
+Possible solutions:
+
+- Confirm that the employee is marked as BGV Required in their checklist configuration in Scrut. Results are only fetched for eligible employees.
+- Confirm the candidate email used in ZincWork matches the email address on the employee's Scrut profile.
+- Wait for the next scheduled sync or trigger a manual sync from the integration settings page.
+- Verify that the background check has been completed and a result is available in ZincWork.
+
+### Integration disconnected or sync stopped
+
+Possible solutions:
+
+- Check whether the API key has been rotated or deactivated in ZincWork. If so, retrieve the new key and update it in Scrut.
+- Reconnect the integration by re-entering your credentials in Integrations → Integration Library → Background Verification.
+
+### BGV Status Showing as Pending
+
+Possible solutions:
+
+- Confirm that the background check has been completed in ZincWork. If ZincWork returns no result for an employee, Scrut displays the status as Pending.
+- If the check is complete in ZincWork but Pending persists in Scrut, trigger a manual sync or wait for the next scheduled sync.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What BGV statuses does Scrut display for ZincWork checks?" default-open="false">
+
+Scrut displays three statuses: Pass, Fail, and Pending. A ZincWork result of `clear` maps to Pass, `consider` maps to Fail, and no result returned maps to Pending.
+
+</Expandable>
+
+<Expandable title="2: How does Scrut match background check results for employees?" default-open="false">
+
+Scrut uses the candidate's or user's email address to look up records in ZincWork. Make sure email addresses in Scrut employee profiles match those used in ZincWork.
+
+</Expandable>
+
+<Expandable title="3: How does Scrut determine which employees to run background checks for?" default-open="false">
+
+Scrut fetches background verification results only for employees marked as BGV Required in their checklist configuration. Employees without this flag are not included.
+
+</Expandable>
+
+<Expandable title="4: What happens if I regenerate my ZincWork API key?" default-open="false">
+
+The integration will stop syncing until the new key is updated in Scrut. Go to the ZincWork integration settings in Scrut and replace the existing key with the new one.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to support@scrut.io or contact your CSM for further assistance.

@@ -1,0 +1,98 @@
+---
+title: "Integrate Figma"
+description: "Learn how to connect your Figma account with Scrut."
+---
+
+The **Scrut-Figma** integration fetches user access data, permissions, and role assignments from your [Figma account](https://www.figma.com/) and sends them to Scrut's **Access Review** module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your Figma account:
+
+- **Account Requirements:** You need an Organization or Enterprise plan in Figma to fetch the Tenant ID and API key.
+- **Access Level**: Organization Admin access to Figma
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Figma account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Figma With Scrut
+
+### Step 1: Fetch the API Key from Figma
+
+1. Log in to your Figma account and select **Admin** in the sidebar.
+2. Open **Settings**, navigate to the **Login and provisioning** section, and click **SCIM provisioning**.
+3. Click **Generate API token**.
+4. Copy the API token value. You'll need to enter it in Scrut in **Step 3**.
+
+### Step 2: Copy Your Figma Tenant ID
+
+1. Log in to your Figma account and select **Admin** in the sidebar.
+2. Open **Settings**, navigate to the **Login and provisioning** section, and click **SAML SSO**.
+3. Copy the Tenant ID. You'll need to enter it in Scrut in **Step 3**.
+
+### Step 3: Connect Your Figma Account in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and choose **Project Management Platform** in the **Categories** section.
+3. Scroll to the **Figma** tile and click **Integrate**.
+4. On the integration setup page:
+  - Paste the API key obtained in **Step 1**.
+  - Paste the tenant ID obtained in **Step 2**.
+5. Click **Submit**.
+6. Once authorization is done, you'll see the "**Connected Successfully**" message and the **Connected** status indicator.
+
+## Synchronization Details
+
+- **Initial Sync**: On integration, Scrut will instantly fetch the scan results from your Figma account.
+- **Recurring Sync**: After the initial scan, Scrut runs the scan once every 24 hours to fetch incremental data.
+- **Manual Sync:** If required, you can click the **Sync Now** button on the Figma integration page to initiate a manual sync.
+
+## Data Fetched from Figma
+
+Scrut fetches the following access-related data points from Figma:
+
+- UserID
+- Email
+- First Name
+
+## Viewing Figma Data in Scrut
+
+To view the data fetched from your Figma account, you'll need to create an Access Review and include the Figma application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Figma:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select **Figma** in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Figma to view Figma user details in Scrut.
+
+## Troubleshooting
+
+### Only SSO-provisioned users appear after sync
+
+After a sync, you may notice that only a small number of users appear in Scrut's Access Review module, while manually added users, direct invitees, and guest users are missing.
+
+This is a limitation of Figma's SCIM API, which the integration uses to fetch user data. The SCIM API only returns users provisioned through an Identity Provider (IdP) via SSO. Users added manually, invited directly, or who are existing guests are not included in SCIM responses.
+
+<Callout kind="alert">
+  Heads Up!
+
+  This is a Figma platform limitation, not a Scrut configuration issue. Running a manual sync will not resolve it.
+</Callout>
+
+To get all your Figma users into Scrut, contact support@scrut.io with the following details:
+
+- Your Figma plan (Organization or Enterprise)
+- Your Figma Org ID, available in **Figma Admin → Settings**
+
+The Scrut support team will review your setup and work with you to ensure all users are fetched correctly.
+
+---
+
+Reach out to support@scrut.io or contact your CSM for further assistance.

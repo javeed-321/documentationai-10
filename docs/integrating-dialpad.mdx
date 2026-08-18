@@ -1,0 +1,91 @@
+---
+title: "Integrate Dialpad"
+description: "Learn how to connect your Dialpad account to Scrut to automatically retrieve user records for Access Reviews."
+---
+
+## What This Integration Does in Scrut
+
+- **User Access Data**: Fetches user details, roles, and permissions from Dialpad for Access Reviews.
+- **Automated Tests**: Runs automated checks that continuously evaluate Dialpad for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- Pro or Enterprise plan in Dialpad
+- You must be a Company Admin in Dialpad
+
+## Permissions and Access Requirements
+
+### For Dialpad
+
+You must be a Company Admin to generate an API key. The account used to generate the key must have the necessary admin permissions to list and retrieve user data across the organization.
+
+### For Scrut
+
+Admin access to Scrut, or Contributor access with permission to manage Integrations.
+
+## Limitations
+
+API key creation is available only on Dialpad Pro and Enterprise plans. If your account is on a lower tier, you will not be able to generate credentials for this integration. Dialpad API keys are tied to the admin account that generated them. If that admin account is deactivated or loses admin permissions, the integration will stop syncing.
+
+## Data Collected
+
+- Name: Full display name of the user
+- Email Address: Primary email on the Dialpad account
+- Role: Admin or standard user role.
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Generate an API Key in Dialpad
+
+1. Log in to your Dialpad account as a Company Admin.
+2. Click your profile or navigate to **Admin Settings**.
+3. Select **My Company**.
+4. Go to **Authentication** and select **API Keys**.
+5. Click **Add Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430399320-wlzwd1mv5ri-integrating-dialpad__01-click-add-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add Key" caption=" " />
+6. Enter a name for the key and set the expiration terms.
+7. Click **Save**.
+8. Copy the API key immediately.
+
+**Important:** Store the API key in a secure location before closing the screen. You will not be able to view it again after leaving this screen.
+
+### Step 2: Connect Dialpad in Scrut
+
+1. Log in to Scrut and go to **Integrations**.
+2. Navigate to the **Integrations Library** tab and search for **Dialpad** in **Communication Tools**.
+3. Click **Integrate** on the Dialpad tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430401001-zlj1eco4gyd-integrating-dialpad__02-click-integrate-on-the-dialpad-tile.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate on the Dialpad tile" caption=" " />
+4. Paste the **API key** you copied from Dialpad into the API Key field.
+5. Click **Submit**.
+6. Scrut will validate the credentials and activate the integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430402891-r88tf8igm6j-integrating-dialpad__03-scrut-will-validate-the-credentials-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut will validate the credentials and activate the integration" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is connected, Scrut begins the initial data sync automatically. You can monitor sync status and activity in the Audit Logs section within the Dialpad integration settings.
+
+### Review synced data
+
+- Navigate to People → Access Reviews → Applications to find Dialpad user records available for review.
+- Navigate to Tests → Automated Tests to review the compliance checks that Scrut runs for your Dialpad account.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure
+
+Possible solutions: Confirm the API key was copied correctly with no trailing spaces. Verify the Dialpad account that generated the key still has Company Admin permissions. If the key has expired, generate a new one in Dialpad and re-enter it in Scrut.
+
+### Integration stops syncing after working previously
+
+Possible solutions: Verify that the admin account tied to the API key is still active and retains Company Admin permissions in Dialpad. If the account was deactivated or the role was changed, generate a new API key from an active admin account and update the credentials in Scrut.
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

@@ -1,0 +1,374 @@
+---
+title: "Integrate Microsoft Azure"
+description: "Learn how to connect your Microsoft Azure account with Scrut."
+---
+
+Connecting your Microsoft Azure infrastructure to Scrut automates compliance evidence collection, eliminates manual configuration checks, and keeps your security posture continuously evaluated across your Azure environment. On successful integration, Scrut automatically scans your Azure infrastructure every 24 hours. You can integrate one or multiple Azure accounts, as needed.
+
+This guide walks you through the step-by-step process of connecting your Azure infrastructure with Scrut.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your Azure configurations against applicable compliance frameworks.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered Azure assets and supports the collection of asset-related compliance evidence.
+
+## Prerequisites
+
+- An active Azure account with administrator access.
+- You must be an Organization Administrator, Global Administrator, or [User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles) in Azure or have a custom role with equivalent permissions.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log in to your Microsoft Azure account before starting the integration setup. This keeps the setup steps uninterrupted.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For Azure
+
+Scrut requires the following **read-only Microsoft Graph API permissions** for this integration:
+
+- AuditLog.Read.All: Grants access to activity logs, including changes in user accounts, directory configurations, and login attempts.
+- Directory.Read.All: Grants access to view group memberships, organizational hierarchy, and directory data.
+- User.Read: Grants access to retrieve user profiles, including names, emails, and roles.
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor role with access to the Integration module).
+
+## Data Collected
+
+- Subscriptions
+- Resource Groups
+- Resources
+- Virtual Machines
+- Storage Accounts
+- SQL Servers
+- SQL Databases
+- Cosmos DB Accounts
+- Load Balancers
+- Key Vaults
+- Backup Jobs
+- Backup Policies
+- Alerts
+- Monitor Alerts
+- Monitor Alert Rules
+- Role Assignments
+- Network Security Groups
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours from your Azure infrastructure to Scrut.
+
+**Note:** Manual sync is not supported for this integration.
+
+## Integration Setup
+
+The Microsoft Azure integration setup involves the following steps:
+
+1. Register a Scrut application in Azure and note the Application (client) ID and Directory (tenant) ID.
+2. Add the required API permissions to the registered application.
+3. Create a client secret for the registered application.
+4. Create an IAM role and assign it to the registered application in Azure.
+5. Connect your Azure account in Scrut.
+6. Configure the subscription scope.
+
+### Step 1: Create Scrut App Registration in Azure
+
+1. Go to the [Azure Home Page](http://portal.azure.com/#home).
+2. Search for “Azure Active Directory” in the search field and select Microsoft Entra ID.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430112664-o1yrh8o1wfl-integrating-azure__01-search-for-azure-active-directory-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for “Azure Active Directory” in the search field and select Microsoft Entra ID" caption=" " />
+3. Expand the **Manage** menu in the left navigation panel and select **App registrations**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430114481-idgcz8i4b2o-integrating-azure__02-expand-the-manage-menu-in-the-left.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Expand the Manage menu in the left navigation panel and select App registrations" caption=" " />
+4. Click **+ New registration** from the top menu.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430116309-3jjkveqe7gv-integrating-azure__03-click-new-registration-from-the-top-menu.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click + New registration from the top menu" caption=" " />
+5. The **Register an Application** page opens. In the **Application Name** field, enter a name for the application, such as Scrut Evidence Collection or Scrut Application.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430117980-qzkf71ypsn-integrating-azure__04-the-register-an-application-page-opens.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The Register an Application page opens" caption=" " />
+6. Under Account Type, select **Accounts** **in this organizational directory only ([Default Directory] only - Single tenant).**
+7. Click **Register**.
+8. Copy the **Application (client) ID** and **Directory (tenant) ID**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430119769-f343ug99v4-integrating-azure__05-copy-the-application-client-id-and-directory.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Application (client) ID and Directory (tenant) ID" caption=" " />
+
+### Step 2: Add API Permissions to the Registered Application
+
+1. Expand the Manage menu and select **API permissions** from the left navigation panel.
+2. Click **Add a permission**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430121453-4kvn761yihf-integrating-azure__06-click-add-a-permission.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add a permission" caption=" " />
+3. Select **Microsoft Graph** from the flyout menu.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430123250-f3lttw786de-integrating-azure__07-select-microsoft-graph-from-the-flyout-menu.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Microsoft Graph from the flyout menu" caption=" " />
+4. Select **application permissions**.
+5. In the **Select permissions** search field, enter **AuditLog.Read.All**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430124998-akqpjianfoh-integrating-azure__08-in-the-select-permissions-search-field-enter.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Select permissions search field, enter AuditLog.Read.All" caption=" " />
+6. Select the **AuditLog.Read.All** checkbox.
+7. Search for **Directory.Read.All.**
+8. Select the **Directory.Read.All** checkbox**.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430126827-9t9k4c7136-integrating-azure__09-select-the-directory-read-all-checkbox.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the Directory.Read.All checkbox" caption=" " />
+
+1. Click **Add permissions**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430128591-jogu4amy3zc-integrating-azure__10-click-add-permissions.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add permissions" caption=" " />
+2. Click **Grant admin consent for [Default Directory].**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430130182-wywackk784e-integrating-azure__11-click-grant-admin-consent-for-default.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Grant admin consent for [Default Directory]" caption=" " />
+3. Click **Yes** to confirm.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430131885-qnmdh7e55cc-integrating-azure__12-click-yes-to-confirm.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Yes to confirm" caption=" " />
+
+### Step 3: Create a Client Secret for the Registered Application
+
+1. Select **Certificates & secrets** from the left-hand navigation.
+2. Click **+ New Client Secret**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430133614-9ua2via4p4-integrating-azure__13-click-new-client-secret.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click + New Client Secret" caption=" " />
+3. Add a description.
+4. Select a duration from the expires drop-down menu.
+5. Click **Add** to save the new Client Secret.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430135436-u8u90xfj86i-integrating-azure__14-click-add-to-save-the-new-client-secret.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add to save the new Client Secret" caption=" " />
+6. Copy the **Client Secret Value** (third column) for later use.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430137083-20frt25vupc-integrating-azure__15-copy-the-client-secret-value-third-column.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Client Secret Value (third column) for later use" caption=" " />
+
+<Callout kind="danger">
+  Important
+
+  - **You cannot retrieve this Value after you leave this page.** Copy and store it securely before proceeding.
+  - Do not enter the Secret ID in place of the client secret value when connecting Scrut. Only the client secret value is accepted.
+</Callout>
+
+<Callout kind="alert">
+  Note
+
+  To restrict access to the Scrut integration to a specific Resource Group in your Azure subscription, please follow the guidelines outlined in the section "Use Case: Create IAM Role on a Resource Group." We recommend not limiting access in this way and [configuring the scope directly in Scrut](/docs/integrating-azure#step-6-configure-scopes-nicknames). To do this please move on to [Step 4](/docs/integrating-azure#step-4-create-iam-role).
+</Callout>
+
+<ExpandableGroup>
+
+<Expandable title="Use Case: Create IAM Role on a Resource Group" default-open="false">
+
+1. In Azure, click on your preferred **Resource Group**, navigate to **Access Control (IAM)**, click **Add** and select **Add role assignment**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430138731-annkpozxbsw-integrating-azure__16-in-azure-click-on-your-preferred-resource.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In Azure, click on your preferred Resource Group, navigate to Access Control (IAM), click Add and select Add" caption=" " />
+2. Select **Reader** from the Role dropdown menu and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430140661-1yw4a88vcgc-integrating-azure__17-select-reader-from-the-role-dropdown-menu.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Reader from the Role dropdown menu and click Next" caption=" " />
+3. Select **User, group or service principal**.
+4. Click on **Select members** and search for the app you created earlier (Scrut Application).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430142351-xgwudzv5yk-integrating-azure__18-click-on-select-members-and-search-for-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click on Select members and search for the app you created earlier (Scrut Application)" caption=" " />
+5. Click **review + assign**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430143955-gatswcgfzb-integrating-azure__19-click-review-assign.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click review + assign" caption=" " />
+6. Watch out for the notification indicating successful role assignment.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430145676-x3jq0fmwb7p-integrating-azure__20-watch-out-for-the-notification-indicating.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the notification indicating successful role assignment" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  Proceed to [Step 5](/docs/integrating-azure#step-5-connect-azure-with-scrut).
+</Callout>
+
+</Expandable>
+
+</ExpandableGroup>
+
+### Step 4: Create IAM Role
+
+1. In Azure, click on your subscription, navigate to **Access Control (IAM)**, click **Add** and select **Add role assignment**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430147418-gji590itapt-integrating-azure__21-in-azure-click-on-your-subscription-navigate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In Azure, click on your subscription, navigate to Access Control (IAM), click Add and select Add role" caption=" " />
+2. Select **Reader** from the Role dropdown menu and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430149195-8nayrqlga8i-integrating-azure__22-select-reader-from-the-role-dropdown-menu.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Reader from the Role dropdown menu and click Next" caption=" " />
+3. Select **User, group or service principal**.
+4. Click **Select members** and search for the app you created earlier (Scrut Application).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430151120-ewgpe28qsrr-integrating-azure__23-click-select-members-and-search-for-the-app.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Select members and search for the app you created earlier (Scrut Application)" caption=" " />
+5. Click **Review + assign**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430152844-kf94p1g0us-integrating-azure__24-click-review-assign.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Review + assign" caption=" " />
+6. Watch out for the notification indicating successful role assignment.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430154483-n5qxzhw7419-integrating-azure__25-watch-out-for-the-notification-indicating.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the notification indicating successful role assignment" caption=" " />
+
+### Step 5: Connect Azure With Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click Integrations on the left navigation panel.
+2. Click the **Integrations Library** tab and navigate to **Cloud Providers** in the **Categories** section.
+3. Locate the **Microsoft Azure** integration tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430156191-88vbjzj0saq-integrating-azure__26-locate-the-microsoft-azure-integration-tile.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Microsoft Azure integration tile and click Integrate" caption=" " />
+4. Enter the **Client ID, Tenant ID** and **Client Secret,** which we fetched from Azure in the previous steps. Enter an **Account Nickname.**
+
+<Callout kind="danger">
+  Important:
+
+  Do NOT enter the secret ID in place of client secret value. Only enter the **client secret value.**
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430157987-znmo71wmqte-integrating-azure__27-do-not-enter-the-secret-id-in-place-of.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Do NOT enter the secret ID in place of client secret value. Only enter the client secret value" caption=" " />
+5. If you’re integrating with **Azure GovCloud**, make sure to enable the **GovCloud** toggle in this step. This enables connecting with government entities. This ensures that customers working in regulated environments can leverage Scrut's capabilities while staying compliant with government cloud requirements.
+6. Select the appropriate region for the Azure GovCloud from the dropdown.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430159757-4naa3t78ebe-integrating-azure__28-select-the-appropriate-region-for-the-azure.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the appropriate region for the Azure GovCloud from the dropdown" caption=" " />
+7. Click **Connect**.
+
+Watch out for the “Integration Successful” and “Credentials Validated Successfully” notifications.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430161351-vc0kgd21zs-integrating-azure__29-watch-out-for-the-integration-successful-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the “Integration Successful” and “Credentials Validated Successfully” notifications" caption=" " />
+
+### Step 6: Configure Scopes & Nicknames
+
+The final step in the integration process is to configure which Azure subscriptions Scrut should scan:
+
+- Select one or multiple subscriptions to include in the scan
+- Enter a suitable nickname for each, and click **Finish**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432268627-4ri4mi37g2r-enter-a-suitable-nickname-for-each-and-click-c3379dcc.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter a suitable nickname for each, and click Finish" caption=" " />
+
+Watch out for the success notification and the connected status flag.
+
+<Callout kind="alert">
+  Note:
+
+  Scrut does not scan unselected subscriptions, and tests for those subscriptions do not appear in the [Cloud module](https://help.scrut.io/docs/cloud).
+</Callout>
+
+## Integrating Multiple Azure Accounts
+
+To connect an additional Azure account:
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Connected Integrations** tab and search for '**Azure**'.
+3. Click **Configure** on the Azure integration tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432257892-20vyz8faptm-click-the-configure-button-on-the-azure-c5f03472.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Configure on the Azure integration tile" caption=" " />
+4. Click **Add**.
+5. Follow the same steps as those for your first Azure account, starting from [Step 5](/v1/docs/integrating-azure#step-5-connect-azure-with-scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430163270-0rynvb4xc86-integrating-azure__32-follow-the-same-steps-as-those-for-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Follow the same steps as those for your first Azure account, starting from Step 5" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+The initial sync begins automatically after setup. It may take up to 24 hours for Scrut to populate the first scan results. Check the Audit Logs tab on the Microsoft Azure integration page to track the sync status.
+
+**Note:** If results are not available after 24 hours, contact [support@scrut.io](mailto:support@scrut.io) for help.
+
+### Review synced data
+
+Once the sync completes, verify that data has landed correctly in the following modules:
+
+- Navigate to Cloud to view automated test results and flagged misconfigurations.
+- Navigate to Evidence Tasks to set up Scrut Monitors to automate evidence collection from Azure.
+- Navigate to Asset Management to view discovered Azure assets.
+
+## Common Errors & Troubleshooting
+
+### Integration shows as not connected after submitting
+
+Possible solutions: Verify that the Client ID, Tenant ID, and Client Secret were copied correctly from Azure. Leading or trailing spaces can cause validation failures. Confirm that admin consent was granted for all required API permissions before connecting. Ensure you entered the client secret Value, not the Secret ID.
+
+### Data not appearing after 24 hours
+
+Possible solutions: Check the Audit Logs tab on the Microsoft Azure integration page to confirm whether the scan completed successfully. Verify that at least one subscription was selected in the scope configuration. If the Audit Logs show errors, contact [support@scrut.io](mailto:support@scrut.io) with the error details.
+
+### Resources are missing in the Cloud module
+
+Possible solutions: Confirm that the subscription containing the resource is selected in your scope configuration. Confirm that the AuditLog.Read.All and Directory.Read.All permissions are granted, and the admin consent was applied.
+
+### Client secret has expired
+
+Possible solutions: Azure client secrets have a defined expiry period. If your integration stops working after the expiry date, generate a new client secret in Azure and update it in Scrut by clicking the edit icon on your connected Azure integration.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can I modify the scope of a connected Azure integration?" default-open="false">
+
+Yes. You can update the Azure subscriptions Scrut monitors at any time. Click the edit icon on your connected Azure integration, update the subscription selection or nicknames, and click Finish.
+
+1. Click the edit <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432288155-k9frmuyktv-pencil-icon-37db2f75.png?fm=auto&auto=compress%2Cformat" width="20" height="20" alt="Pencil icon" caption=" " />icon in your connected Azure integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432261518-uzlqh9miy2-click-the-edit-icon-in-your-connected-azure-08c9fab2.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the edit icon in your connected Azure integration" caption=" " />
+2. The **Client ID, Tenant ID**, and **Client Secret** will be auto-filled.
+
+   **Note:** You can also **edit the Client Secret**. Replace it with a new client secret when the current one expires, based on the expiration period configured during setup.
+3. Enter an **Account Nickname** and choose the **Entities** to which the integration applies.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432270472-mwo6dx0pvs-enter-an-account-nickname-and-choose-the-7e248d7c.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter an Account Nickname and choose the Entities to which the integration applies" caption=" " />
+4. Click **Save**.
+5. Watch out for the “Fetched Azure subscriptions successfully” notifications.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432307848-0l4zvm3z8p2e-watch-out-for-the-integration-successful-and-5081e6a1.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the “Fetched Azure subscriptions successfully” notifications" caption=" " />
+6. Select the Azure Subscription IDs that you want to connect with Scrut. You can also unselect previously selected subscriptions.
+
+<Callout kind="alert">
+  Note: Deselecting a subscription will:
+
+  - Remove all tests associated with that subscription in the [Cloud module](https://help.scrut.io/docs/cloud)
+  - Decrease overall compliant/non-compliant test counts
+  - Remove the subscription from the account selection dropdown in the Cloud module
+</Callout>
+7. Enter a suitable nickname for each, and click **Finish**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432268627-4ri4mi37g2r-enter-a-suitable-nickname-for-each-and-click-c3379dcc.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter a suitable nickname for each, and click Finish" caption=" " />
+
+Watch out for the connected status flag.
+
+</Expandable>
+
+<Expandable title="2: Can I integrate multiple Azure accounts with Scrut?" default-open="false">
+
+Yes. Scrut supports multiple Azure accounts. Each account requires its own app registration and client secret in Azure.
+
+</Expandable>
+
+<Expandable title="3: What happens if I deselect a subscription from my scope?" default-open="false">
+
+Deselecting a subscription removes all associated tests from the Cloud module, decreases overall compliant and non-compliant test counts, and removes the subscription from the account selection dropdown in the Cloud module.
+
+</Expandable>
+
+<Expandable title="4: What happens if I rotate my Azure client secret?" default-open="false">
+
+If the client secret expires or is rotated, your integration stops syncing. Generate a new client secret in Azure, then update the value in your Scrut integration settings before the expiry date to avoid a coverage gap.
+
+</Expandable>
+
+<Expandable title="5: Can I restrict the integration to a specific Resource Group instead of an entire subscription?" default-open="false">
+
+Yes. To limit access to a specific Resource Group, follow the [IAM role assignment steps (Step 4)](/v1/docs/integrating-azure#step-4-create-iam-role) at the Resource Group level instead of the subscription level. Note that Scrut recommends configuring scope at the subscription level in Scrut for broader coverage.
+
+</Expandable>
+
+<Expandable title="6: Where can I view the full list of automated tests and evidence collected for Azure?" default-open="false">
+
+Sign in to Scrut, click Integrations on the left navigation panel, and click the Microsoft Azure tile to expand it. The expanded view lists all Automated Tests and Automated Evidence collected via Scrut Monitor for your connected Azure account.
+
+</Expandable>
+
+<Expandable title="7: Does Scrut support Azure GovCloud?" default-open="false">
+
+Yes. To connect an Azure GovCloud account, turn on the GovCloud account toggle in the [Credentials step](/v1/docs/integrating-azure#step-5-connect-azure-with-scrut) and select your GovCloud region when setting up your Microsoft Azure integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430165344-neqdjl2coxs-integrating-azure__38-yes.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Yes" caption=" " />
+
+</Expandable>
+
+</ExpandableGroup>
+

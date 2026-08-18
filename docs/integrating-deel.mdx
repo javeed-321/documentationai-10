@@ -1,0 +1,115 @@
+---
+title: "Integrate Deel"
+description: "Learn how to connect your organization's Deel account with Scrut."
+---
+
+The **Scrut-Deel integration** fetches employee data from your Deel account and syncs it with Scrut. In this guide, we walk you through the process of integrating your Deel account with Scrut.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Account Requirements
+
+- You must be a Scrut Admin (or Contributor with access to the Integration module)
+- You need permissions to generate an [API access token in your Deel account](https://developer.deel.com/docs/api-tokens-1)
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Deel:
+
+- **Organizations:read**
+  - View basic information about your organizations, teams, legal entities, and agreements
+- **People:read**
+  - Read worker’s information such as profile, time off, etc.
+- **Time-off:read**
+  - Read time off related data like time off requests, balances, policies, and more
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your organization’s Deel account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Deel With Scrut
+
+### Step 1: Fetch Access Token from Deel
+
+<Callout kind="alert">
+  For step-by-step instructions on how to generate the access token, refer to the [Deel help documentation](https://developer.deel.com/docs/api-tokens-1).
+</Callout>
+
+1. Log in to your organization’s Deel account, and go to **More → Developer**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430380921-h4xpzl6qr5o-integrating-deel__01-log-in-to-your-organizations-deel-account.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your organization’s Deel account, and go to More → Developer" caption=" " />
+2. Go to the **Access Tokens** tab and click **Generate new token**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430382670-0v667rera4b-integrating-deel__02-go-to-the-access-tokens-tab-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Go to the Access Tokens tab and click Generate new token" caption=" " />
+3. On the first step of the Generate access token wizard, enter a **label for the token** (e.g., Scrut), select the **token type as Organization**, and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430384269-kz435k3o4h-integrating-deel__03-on-the-first-step-of-the-generate-access.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the first step of the Generate access token wizard, enter a label for the token (e.g., Scrut), select the" caption=" " />
+4. In the next step, select the following **token scopes** and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430385832-7izc14rrosq-integrating-deel__04-in-the-next-step-select-the-following-token.jpg?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the next step, select the following token scopes and click Next" caption=" " />
+  - **Organizations:read**
+  - **People:read**
+  - **Time-off:read**
+5. In the Permissions level, set organization-level.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430387454-m3cg879jp4-integrating-deel__05-in-the-permissions-level-set-organization.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Permissions level, set organization-level" caption=" " />
+6. In the next step, ensure the “Hide all personally identifiable information (PII) toggle is turned OFF, as Scrut requires this access to read employee name and email. Click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430389017-vvhhrqw2w6-integrating-deel__06-in-the-next-step-ensure-the-hide-all.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the next step, ensure the “Hide all personally identifiable information (PII) toggle is turned OFF, as" caption=" " />
+7. In the final step, click **Generate**.
+8. Copy the access token and save it in a safe location. You’ll need to enter it in Scrut in the [next step](/docs/integrating-deel#step-2-navigate-to-integrations-in-scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430390539-t2922ny102g-integrating-deel__07-copy-the-access-token-and-save-it-in-a-safe.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the access token and save it in a safe location. You’ll need to enter it in Scrut in the next step" caption=" " />
+
+### Step 2: Navigate to Integrations in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and select **Human Resource Information Systems** from the Categories section.
+3. Scroll to the **Deel** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430392120-dj750ehdn8w-integrating-deel__08-scroll-to-the-deel-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Deel tile and click Integrate" caption=" " />
+4. Click the **Connect** button at the top right of the Deel integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430393635-ro21nbbkw5-integrating-deel__09-click-the-connect-button-at-the-top-right-of.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Connect button at the top right of the Deel integration page" caption=" " />
+5. Enter the following details:
+  - **Deel Access Token:** Paste the Deel access token you generated in the [previous step](/docs/integrating-deel#step-1-fetch-access-token-from-deel).
+  - **Deel Environment (Optional):** Select your application environment. By default, it is set to production.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430395261-91ebme36ofb-integrating-deel__10-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Once your Deel account is successfully integrated, you will see a connected flag on the Deel integrations page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430397016-utssi0tm6jj-integrating-deel__11-once-your-deel-account-is-successfully.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once your Deel account is successfully integrated, you will see a connected flag on the Deel integrations" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employee data from your Deel account.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the Deel integrations page.
+
+## Data Fetched from Deel
+
+Scrut fetches the following data for all your employees from Deel:
+
+- Employee name (First and last name)
+- Email address
+- Joining date
+- Exit date (if applicable)
+- Department and Role (if available)
+- Email of reporting manager (if available)
+- Leave data (start date, end date, and status)
+
+## Viewing Deel Data in Scrut
+
+To view Deel data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your Deel account with Scrut, please contact our support team at support@scrut.io for assistance.

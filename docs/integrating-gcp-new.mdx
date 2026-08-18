@@ -1,0 +1,178 @@
+---
+title: "Integrate GCP (Multi-Project) [BETA]"
+description: "Learn how to connect your GCP account with Scrut."
+---
+
+<Callout kind="alert">
+  Important
+
+  This **feature is currently in beta** and may require additional validation or implementation steps. If you would like to use this method for GCP integration, please contact your CSM to enable this workflow for your Scrut account.
+</Callout>
+
+## When to use this method?
+
+**When connecting multiple GCP Projects (ideally, more than 10)**
+
+If you’re connecting multiple projects, the [legacy approach of connecting GCP with Scrut](/docs/integrating-gcp-using-service-account-impersonation) might be time-consuming. You have to repeat the same steps for each integration (one integration equals one GCP account) to connect multiple GCP Projects, which can be highly time-consuming and manual.
+
+To address this challenge, we’ve simplified the workflow. **This method allows you to connect multiple GCP projects simultaneously.** We’ve also limited the manual steps required, reducing the time and effort needed to set up the integration.
+
+## How to Integrate Your GCP Account With Scrut for Multi-Projects
+
+### Permissions
+
+Before you begin the integration, make sure you have the following permissions for your GCP platform:
+
+- **Project Details and Configurations:** Access to view project metadata, resource settings, and configurations across your Google Cloud environment to ensure compliance with best practices.
+- **Logs and Monitoring Data:** Permission to retrieve logs and performance data via Stackdriver to track resource usage, detect unusual activity, and maintain operational security.
+- **Service Account Tokens:** Access to service account tokens and associated metadata to ensure secure authentication and proper access control within cloud services.
+- Cloud Resource Manager API is enabled for the project. (To learn more, refer to [Cloud Resource Manager API | Google Cloud](https://docs.cloud.google.com/resource-manager/reference/rest).)
+- IAM Service Account Credentials API is enabled for the project. (To learn more, refer to [IAM Service Account Credentials API](https://cloud.google.com/iam/docs/reference/credentials/rest).)
+- The service account has the following permissions: Security Reviewer, Service Account Token Creator, and Viewer. (To know more, refer to [IAM Basic and Predefined Roles](https://cloud.google.com/iam/docs/understanding-roles).)
+
+<Callout kind="info">
+  Pro Tip:
+
+  See here for a detailed overview of the [permissions](/docs/integrating-gcp-using-service-account-impersonation#permissions) needed for this integration. To learn more about service account impersonation, refer to Google’s documentation on:
+
+  - [Service Accounts Overview](https://cloud.google.com/iam/docs/service-account-overview#impersonation)
+  - [Create Short-Lived Credentials for a Service Account](https://cloud.google.com/iam/docs/create-short-lived-credentials-direct)
+</Callout>
+
+### Step 1: Navigate to Integrations in Scrut
+
+1. [Log in to Scrut](https://app.scrut.io/login) and click **Integrations** on the left navigation panel.
+2. Click the **Integrations Library** tab at the top of the page.
+3. In the **Categories** section, click **Cloud Providers**.
+4. Click the **Integrate** button on the Google Cloud card.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430511570-jsucyry7xuk-integrating-gcp-new__01-gcp-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="GCP Integration" caption=" " />
+5. Click the **Connect** button on the GCP integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430513521-ip1ldp9i49n-integrating-gcp-new__02-gcp-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="GCP Integration" caption=" " />
+
+### Step 2: Execute Scrut’s Integration Script
+
+Scrut runs a script on your GCP organization to extract the required metadata for the integration. Follow the instructions on the screen to generate and execute the script.
+
+#### Prerequisites
+
+Install the [Google Cloud SDK](https://cloud.google.com/sdk) if you haven’t done so already.
+
+#### Step 2.1: Authenticate the CLI
+
+Run these commands sequentially.
+
+```plaintext
+gcloud auth login
+
+sudo apt-get install jq
+```
+
+#### Step 2.2: Download the Shell File
+
+Download this file: [**scrut-gcp-setup-script.sh**](https://s3.us-east-1.amazonaws.com/scrut.io/scrut_gcp_integration.sh)
+
+#### Step 2.3: Upload the File to Cloud Shell
+
+1. Open **Google Cloud Shell**.
+2. Click Open **Editor → More (<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432302475-crxjzp6lqos-three-dots-icon-51c8d982.png?fm=auto&auto=compress%2Cformat" width="20" height="20" alt="Three-dots icon" caption=" " />) → Upload**.
+3. Upload the file you downloaded in the previous step to the same directory.
+
+#### Step 2.4: Run the Script
+
+```plaintext
+chmod +x scrut_gcp_integration.sh
+
+./scrut_gcp_integration.sh
+```
+
+Scrut runs the script on your GCP organization to extract the required metadata for the integration. After you run the script, you’ll be prompted to:
+
+- Select the GCP organization and billing account you want to connect to Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430515337-rfmmsxj12os-integrating-gcp-new__04-select-the-gcp-organization-and-billing.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the GCP organization and billing account you want to connect to Scrut" caption=" " />
+- Select the projects to include in the integration. Enter the numbers corresponding to the projects you want to connect. Enter ALL to connect all your GCP projects to Scrut in a single step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430516901-xsioypn9cki-integrating-gcp-new__05-select-the-projects-to-include-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the projects to include in the integration" caption=" " />
+
+Once you provide the inputs, the script will create a service account and the necessary roles and permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430518734-3ve4zi4q5sj-integrating-gcp-new__06-once-you-provide-the-inputs-the-script-will.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once you provide the inputs, the script will create a service account and the necessary roles and permissions" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430520457-uvs8rj6ouq-integrating-gcp-new__07-once-you-provide-the-inputs-the-script-will.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once you provide the inputs, the script will create a service account and the necessary roles and permissions" caption=" " />
+
+Once it finishes executing, it will create a file named **scrut_config.json.gz.enc** in the same folder as the script. Download the generated encrypted (**scrut_config.json.gz.enc**) file. You’ll need to upload it in the next step of the integration process in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430522068-hg2u0zi6bbw-integrating-gcp-new__08-once-it-finishes-executing-it-will-create-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once it finishes executing, it will create a file named scrut_config.json.gz.enc in the same folder as the" caption=" " />
+
+<Callout kind="danger">
+  Note:
+
+  When connecting a huge number of GCP projects, the integration script may occasionally encounter issues during execution. If the script fails to complete, please contact our support team at [support@scrut.io](mailto:support@scrut.io) for assistance.
+</Callout>
+
+### Step 3: Upload the encrypted file to Scrut
+
+1. Navigate back to the Scrut platform and click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430523792-wbr0jefva5h-integrating-gcp-new__09-navigate-back-to-the-scrut-platform-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate back to the Scrut platform and click Next" caption=" " />
+2. Upload the downloaded file and click **Finish**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430525581-jcudlxhw9ko-integrating-gcp-new__10-upload-the-downloaded-file-and-click-finish.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Upload the downloaded file and click Finish" caption=" " />
+
+This completes your GCP integration with Scrut.
+
+## FAQs & Troubleshooting
+
+<ExpandableGroup>
+
+<Expandable title="1: How secure is this script?" default-open="false">
+
+To protect your configuration data, **Scrut uses a two-layer (hybrid) encryption approach**. This ensures the data remains secure even if it is shared or stored outside your environment.
+
+**Why a Hybrid Approach?**
+
+Some encryption methods are fast but not ideal for securely sharing secrets. Others are very secure but slow and limited in how much data they can handle. This script combines both approaches to get the best of each.
+
+**What Happens to Your Data**
+
+1. **Data Is Compressed First:** Before encryption, the configuration file is compressed. This reduces file size and ensures consistent encryption results.
+2. **Data Is Locked with AES-256 (Fast & Strong):** The compressed file is encrypted using AES-256-CBC. AES is a widely trusted industry standard used by banks and cloud providers. A random secret key and a random initialization value (IV) are generated for every run. This ensures that even if the same data is encrypted twice, the output will look completely different each time.
+3. **The AES Key Is Locked with RSA-2048 (Secure Sharing):** The AES key itself must be protected. The script encrypts the AES key using RSA-2048 with Scrut's public key. Only Scrut's private key can unlock it. This ensures no one else (including you) can decrypt the file once it's encrypted for Scrut.
+4. **Final Secure Package Is Created:** The script combines everything into one encrypted file. Encrypted AES key (RSA-protected) * Encrypted data (AES-protected). This single file is what you securely share with Scrut.
+
+**Security Benefits**
+
+- Uses industry-standard encryption (AES-256 + RSA-2048)
+- Keys are generated fresh for every run
+- No secrets are stored in plain text
+- Only Scrut can decrypt the final file
+- Safe to transmit over email or upload portals
+
+**What You Need to Share**
+
+At the end of the process, you'll get one encrypted file: `scrut_config.json.enc`This is the only file you need to provide to Scrut.
+
+</Expandable>
+
+<Expandable title="2: Can I connect multiple projects to Scrut?" default-open="false">
+
+Yes. Once you run the script, you’ll be prompted to choose the projects you want to connect to Scrut. Enter the corresponding project numbers. Alternatively, you can enter ALL to connect all your existing GCP projects to Scrut in one go.
+
+</Expandable>
+
+<Expandable title="3: How do I add a new GCP project to connect to Scrut?" default-open="false">
+
+To add a new GCP project to your existing **Scrut ↔ GCP** integration, you must repeat the steps mentioned above. In the step where you select the GCP projects, enter the number corresponding to the new project. Complete the remaining integration steps as instructed above.
+
+</Expandable>
+
+<Expandable title="4: What happens after I disconnect the integration?" default-open="false">
+
+Scrut deletes all the credentials and data stored on our end and disintegrates the integration from our platform. Currently, service accounts created during this process persist in the customer environment and must be manually deleted if no longer required.
+
+</Expandable>
+
+</ExpandableGroup>
+

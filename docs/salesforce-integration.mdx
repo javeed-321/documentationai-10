@@ -1,0 +1,127 @@
+---
+title: "Integrate Salesforce"
+description: "Learn how to connect your Salesforce account with Scrut to automatically approve Trust Vault access requests."
+---
+
+The **Scrut - Salesforce integration** enables you to automate approvals for access requests to your Trust Vault. With this integration, you can **automatically approve Trust Vault access requests from known contacts and prospects in your Salesforce account**. After completing the integration, you can [configure the rules](/docs/salesforce-integration#configuring-autoapproval-of-trust-vault-access-requests) to control who gets instant access and who needs to be approved before accessing the Trust Vault.
+
+In this guide, we will show you how to connect your Salesforce account to Scrut.
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging in to your Salesforce account before beginning the integration, to avoid doing so later.
+</Callout>
+
+## How To Connect Salesforce With Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and navigate to **Integrations** using the left side menu.
+2. Go to the **Integrations Library** tab and in **Categories**, select **Customer Relationship Management**.
+3. Click the **Integrate** button on the Salesforce card. You can also use the search bar to find the Google Salesforce integration quickly.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431786451-zv0by1nfg38-salesforce-integration__01-click-the-integrate-button-on-the-salesforce.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Integrate button on the Salesforce card" caption=" " />
+4. Click the **Connect** button on the Salesforce integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431788168-b7rtm7koqq8-salesforce-integration__02-click-the-connect-button-on-the-salesforce.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Connect button on the Salesforce integration page" caption=" " />
+5. Enter the subdomain of your Salesforce account.
+  - For example, if you sign in at "acme.salesforce.com," enter "**acme**."
+  - Or if you sign in at "acme.lightning.force.com", enter "**acme**."
+  - Do not enter the full "acme.salesforce.com."
+6. Optionally, select the Salesforce environment that you want to connect with Scrut.
+7. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431790218-067ct3aa38cs-salesforce-integration__03-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+8. You will be redirected to the Salesforce login page to authenticate.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431791869-k23uvhr9sw-salesforce-integration__04-you-will-be-redirected-to-the-salesforce.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="You will be redirected to the Salesforce login page to authenticate" caption=" " />
+9. Once authorized, the integration will connect successfully.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431793616-ub91kxw6tn-salesforce-integration__05-once-authorized-the-integration-will-connect.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorized, the integration will connect successfully" caption=" " />
+
+## Configuring Auto-Approval of Trust Vault Access Requests
+
+Once you’ve completed the Scrut - Salesforce integration, you can configure auto-approval of Trust Vault access requests. To do this:
+
+1. Click **Trust → Trust Vault** on the side navigation panel, then click the **Settings** icon located at the top right.
+2. Navigate to the **Auto Approve** tab.
+3. Select the Auto-Approve Request option and set it to **Auto-Approve If**.
+4. Configure the rules for Trust Vault using Salesforce. Select the NDA Options and Expiry Duration for each rule.
+5. Click **Save Changes**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431795176-h4zzpme32i-salesforce-integration__06-click-save-changes.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save Changes" caption=" " />
+
+### What Happens Next?
+
+Depending on the rules you’ve configured in the Auto Approve tab, whenever a customer/prospect requests access to your organization’s Trust Vault, the request will get auto-approved if the user’s:
+
+- Email matches a contact in your Salesforce account
+- Email domain matches a contact associated with an account in Salesforce
+- Email matches a prospect in your Salesforce account
+
+If there is a match, you don’t have to approve the access request. Scrut will automatically grant them access to all documents in your Trust Vault.
+
+Users who are auto-approved will have the Salesforce tag associated with them. You can check this in the **Trust Vault → Access → Approved** tab.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431796894-b5er4lx4c95-salesforce-integration__07-users-who-are-auto-approved-will-have-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Users who are auto-approved will have the Salesforce tag associated with them" caption=" " />
+
+## Troubleshooting
+
+<ExpandableGroup>
+
+<Expandable title="Error Message: Invalid Credentials (E000)" default-open="false">
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431798734-6angiutv1o7-salesforce-integration__08-troubleshooting.jpg?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Troubleshooting" caption=" " />
+
+This error indicates that the Salesforce account used for the integration either has incorrect credentials or lacks the necessary permissions to connect to Scrut.
+
+#### Root Causes
+
+This error typically occurs when:
+
+- The Salesforce account doesn't have administrator-level access
+- The "API Enabled" permission is not granted to the user account
+- The "Knit" Connected App is not installed or properly configured in your Salesforce instance
+- The credentials entered during setup are incorrect or have expired
+
+#### Resolution Steps
+
+#### Step 1: Verify Administrator Credentials
+
+Contact your Salesforce administrator to confirm that the account being used for the integration has full administrator privileges. The integration requires administrative access to properly set up and manage the connection between Salesforce and Scrut.
+
+#### Step 2: Enable API Access
+
+Verify if the "API Enabled" permission is granted. This permission allows Scrut to communicate with your Salesforce instance programmatically and access the necessary data.
+
+**To check and enable API access:**
+
+- Have your Salesforce administrator navigate to **Setup** → **Users** → select the integration user
+- Scroll to the **System Permissions** section in the user's profile or permission set
+- Ensure the **"API Enabled"** checkbox is selected
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431800294-jr64iwi7rs-salesforce-integration__09-ensure-the-api-enabled-checkbox-is-selected.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Ensure the 'API Enabled' checkbox is selected" caption=" " />
+
+#### Step 3: Install the “Knit” Connected App
+
+Scrut's Salesforce integration uses a Connected App called "Knit" to facilitate secure OAuth authentication and data exchange. If this app is missing or misconfigured, the integration will fail.
+
+**To verify or install the Knit Connected App:**
+
+- Ask your Salesforce administrator to go to **Connected Apps** → **Connect Apps using OAuth** and search for **"Knit"** in the list of connected apps.
+- If Knit is not present, make sure to install it
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431802198-1yxt1334vmri-salesforce-integration__10-if-knit-is-not-present-make-sure-to-install.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="If Knit is not present, make sure to install it" caption=" " />
+
+#### Step 4: Re-authenticate the Integration
+
+After confirming all permissions and configurations are correct:
+
+- Return to the Scrut integration setup screen
+- Click **"Try again"** to re-enter your credentials
+- Complete the OAuth authentication flow when prompted
+- Verify that the integration connection is successful
+
+</Expandable>
+
+</ExpandableGroup>
+

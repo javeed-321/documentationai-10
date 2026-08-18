@@ -1,0 +1,141 @@
+---
+title: "Integrate ServiceDesk Plus"
+description: "Learn how to connect your ServiceDesk Plus account with Scrut."
+---
+
+The **Scrut - ServiceDesk Plus** integration enables you to create tickets for compliance tasks and issues directly from Scrut in your ServiceDesk Plus account. This article offers a step-by-step guide to help you connect your ServiceDesk Plus account with Scrut.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your ServiceDesk Plus account:
+
+- **Account Information:** Login credentials for your ServiceDesk Plus account
+- **Permissions:** Scrut requires the following permissions:
+  - Create new requests
+  - Read all requests
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your ServiceDesk Plus account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With ServiceDesk Plus
+
+### Step 1: Copy the Service Domain URL and Portal Name from ServiceDesk Plus
+
+1. Log in to your ServiceDesk Plus account, and click the hamburger icon on the top-left and select **ESM Directory**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431207989-aym274r8nw9-integrating-servicedesk-plus__01-log-in-to-your-servicedesk-plus-account-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your ServiceDesk Plus account, and click the hamburger icon on the top-left and select ESM Directory" caption=" " />
+2. Click **Service Instances** on the left menu.
+3. Copy the **Service Domain URL** and **Portal Name**. In this example:
+  - **Service Domain URL:** [https://sdpondemand.manageengine.in](https://sdpondemand.manageengine.in)
+
+**Note:** Do not include the trailing slash when copying the domain URL.
+  - **Portal Name:** itdesk
+4. You’ll need to enter these details in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431209913-1w4wrqzju6u-integrating-servicedesk-plus__02-youll-need-to-enter-these-details-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="You’ll need to enter these details in the next step" caption=" " />
+
+### Step 2: Integrate Your ServiceDesk Plus Account in Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left side panel.
+2. Navigate to the **Integrations Library** tab, and in **the Categories section**, scroll to **Ticket Management**. Alternatively, you can search for ServiceDesk Plus using the search bar at the top of the page.
+3. Click the **Integrate** button in the ServiceDesk Plus tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431211569-wn0goj41ku-integrating-servicedesk-plus__03-click-the-integrate-button-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Integrate button in the ServiceDesk Plus tile" caption=" " />
+4. On the ServiceDesk Plus integration page, enter the **Service Domain URL** and **Portal Name** you copied in the previous step and click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431213703-l2m066gh2l-integrating-servicedesk-plus__04-on-the-servicedesk-plus-integration-page.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the ServiceDesk Plus integration page, enter the Service Domain URL and Portal Name you copied in the" caption=" " />
+5. If you haven’t logged in to ServiceDesk Plus, Scrut will prompt you to complete the login process.
+6. Next, click **Accept** to grant Scrut the requisite permissions for the integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431215410-lgvfb55ed-integrating-servicedesk-plus__05-next-click-accept-to-grant-scrut-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Next, click Accept to grant Scrut the requisite permissions for the integration" caption=" " />
+7. Watch out for the success notification and the Connected flag.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431217210-pyg4unmfsg-integrating-servicedesk-plus__06-watch-out-for-the-success-notification-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the success notification and the Connected flag" caption=" " />
+
+## Creating a ServiceDesk Plus Ticket in Scrut
+
+Once you have completed the integration, you can create ServiceDesk Plus tickets directly from Scrut. You can create and manage tickets across all modules, including:
+
+- Policies
+- Evidence Tasks
+- Tests
+- Cloud
+- Risk Management
+- Audit → Audit Center → Requests
+- Audit → Audit Center → Findings
+- Audit → Audit Center → Corrective Actions
+- Vulnerabilities → Findings
+
+To create a ticket:
+
+1. Navigate to your desired artifact page, click the three-dot icon on the top-right, and select **Create ServiceDesk Plus Ticket**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431219250-2i5h7t8ssod-integrating-servicedesk-plus__07-navigate-to-your-desired-artifact-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to your desired artifact page, click the three-dot icon on the top-right, and select Create" caption=" " />
+2. Scrut automatically fills in the ticket **Title** and **Description**. You can edit these details if required.
+3. Select the **Assignee** who will handle the ticket and set a **Due Date**.
+4. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431221263-q8hx7qd9cam-integrating-servicedesk-plus__08-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+5. Scrut will create the ticket in your ServiceDesk Plus account. Watch out for the success notification.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431223019-7o1zn2xroc8-integrating-servicedesk-plus__09-scrut-will-create-the-ticket-in-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut will create the ticket in your ServiceDesk Plus account. Watch out for the success notification" caption=" " />
+6. Scrut also adds the ticket link and creator’s details to the **Audit Logs**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431224636-go1j3f12w1-integrating-servicedesk-plus__10-scrut-also-adds-the-ticket-link-and-creators.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut also adds the ticket link and creator’s details to the Audit Logs" caption=" " />
+
+Sample audit log details for a ServiceDesk Plus ticket creation
+
+7. The **Tickets (ServiceDesk Plus)** tab provides details on all ServiceDesk Plus tickets you’ve created for this artifact. It includes information such as:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431226418-fafo7zmneom-integrating-servicedesk-plus__11-the-tickets-servicedesk-plus-tab-provides.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The Tickets (ServiceDesk Plus) tab provides details on all ServiceDesk Plus tickets you’ve created for this" caption=" " />
+
+- ServiceDesk Plus ID
+- Title
+- Status
+- Technician
+- Email IDs to Notify
+- Created Date
+- Due Date
+
+<Callout kind="info">
+  Pro Tip!
+
+  Clicking the ServiceDesk Plus ID of the ticket will take you directly to the corresponding ticket details page in ServiceDesk Plus.
+</Callout>
+
+## Linking Existing ServiceDesk Plus Tickets in Scrut
+
+Scrut allows you to link existing tickets in your ServiceDesk Plus dashboard to specific artifacts. To do this:
+
+1. [Log in to Scrut](https://app.scrut.io/) and navigate to your preferred artifact.
+2. Scroll to the **Tickets (ServiceDesk Plus)** tab.
+3. Click the **Create** button and select **Link Existing Tickets**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431228139-m5x5g6mj1q-integrating-servicedesk-plus__12-click-the-create-button-and-select-link.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Create button and select Link Existing Tickets" caption=" " />
+4. Copy and paste the ticket URL and click **Link**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431229834-8g0c50o8tti-integrating-servicedesk-plus__13-copy-and-paste-the-ticket-url-and-click-link.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy and paste the ticket URL and click Link" caption=" " />
+5. The ticket will be linked to the artifact.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431231765-zajbg8b5swn-integrating-servicedesk-plus__14-the-ticket-will-be-linked-to-the-artifact.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The ticket will be linked to the artifact" caption=" " />
+
+## Updating Tasks in ServiceDesk Plus
+
+The integration between Scrut and ServiceDesk Plus is bidirectional and syncs in real time. **When you change any synced fields in your ServiceDesk Plus tickets, those changes will automatically update in Scrut.** For example, if you mark a task as completed in ServiceDesk Plus, that completion status will immediately appear in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431233584-9drx8mjlyvr-integrating-servicedesk-plus__15-the-integration-between-scrut-and.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The integration between Scrut and ServiceDesk Plus is bidirectional and syncs in real time" caption=" " />
+
+## Limitations
+
+When creating a ServiceDesk Plus ticket from Scrut, you cannot assign a Technician. The Assignee you select in Scrut will be added to the Email to Notify field.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431235410-uhc8osa7wc-integrating-servicedesk-plus__16-when-creating-a-servicedesk-plus-ticket-from.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="When creating a ServiceDesk Plus ticket from Scrut, you cannot assign a Technician" caption=" " />
+
+However, if you edit the request in ServiceDesk Plus to add a Technician, the details will be reflected automatically in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431237150-cqjc09hxhzr-integrating-servicedesk-plus__17-however-if-you-edit-the-request-in.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="However, if you edit the request in ServiceDesk Plus to add a Technician, the details will be reflected" caption=" " />
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

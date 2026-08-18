@@ -1,0 +1,117 @@
+---
+title: "Integrate Sumo Logic"
+description: "Learn how to connect your organization's Sumo Logic account with Scrut."
+---
+
+The **Scrut - Sumo Logic** integration fetches user access data, permissions, and role assignments from your Sumo Logic account and syncs them with the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Sumo Logic flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You need the [Create Access Keys role capability](https://help.sumologic.com/docs/manage/users-roles/roles/role-capabilities/#security) in Sumo Logic to create an access key
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Sumo Logic
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Sumo Logic account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Sumo Logic With Scrut
+
+### Step 1: Fetch Access Key and ID from Sumo Logic
+
+1. In the main menu in Sumo Logic, select your **Username**, and then **Preferences → Personal Access Keys**.
+2. Click **+Add Access Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431330439-0n0sjnjnr8yg-integrating-sumo-logic__01-click-add-access-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click +Add Access Key" caption=" " />
+3. In the Add Access Key window, enter a name for the key, such as Scrut.
+4. In the **Scopes**, select **Custom**, expand **User Management**, and set **View** for **Users and Roles**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431332266-rq2vw6zy9if-integrating-sumo-logic__02-in-the-scopes-select-custom-expand-user.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Scopes, select Custom, expand User Management, and set View for Users and Roles" caption=" " />
+5. Click **Save** to generate the key.
+6. **Copy** both the generated **Access ID** and **Access Key**, as you’ll need to enter them in Scrut in the next step.
+
+**Important**: These values will not be displayed after closing this screen. So, make sure to copy the ID and key and save them in a safe location.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431333994-oea3aitytgp-integrating-sumo-logic__03-important-these-values-will-not-be-displayed.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: These values will not be displayed after closing this screen" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to these guides from Sumo Logic for [more information on generating Access Keys](https://help.sumologic.com/docs/manage/security/access-keys/) and the [required role capabilities](https://help.sumologic.com/docs/manage/users-roles/roles/role-capabilities/#security).
+</Callout>
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Capacity & Usage Monitoring** in the **Categories** section.
+3. Scroll to the **Sumo Logic** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431335868-8067w5sjb3f-integrating-sumo-logic__04-scroll-to-the-sumo-logic-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Sumo Logic tile and click Integrate" caption=" " />
+4. On the integration page, paste the Access Key and ID obtained in Step 1.
+5. Enter the URL based on the location of your Sumo Logic deployment.
+  - AU: https://api.au.sumologic.com/
+  - CA: https://api.ca.sumologic.com/
+  - DE: https://api.de.sumologic.com/
+  - EU: https://api.eu.sumologic.com/
+  - FED: https://api.fed.sumologic.com/
+  - JP: https://api.jp.sumologic.com/
+  - KR: https://api.kr.sumologic.com/
+  - US1: https://api.sumologic.com/
+  - US2: https://api.us2.sumologic.com/
+
+    Note: Refer to the [Sumo Logic API help guide for more information](https://help.sumologic.com/docs/api/access-keys/).
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431337709-x0opfp2knak-integrating-sumo-logic__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431339883-zwiv5kclp1j-integrating-sumo-logic__06-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Sumo Logic. This process typically takes a few hours to complete. Check the Audit Log on the Sumo Logic integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs the sync once **every 24 hours** to fetch incremental data such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431341621-jgupzcz1mgs-integrating-sumo-logic__07-manual-sync-you-can-also-click-the-sync-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: You can also click the Sync Now button to trigger an immediate data refresh" caption=" " />
+
+## Data Fetched from Sumo Logic
+
+To view the data fetched from your Sumo Logic account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your Sumo Logic account. Click on it for more information.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431343650-oyxi59es9el-integrating-sumo-logic__08-to-view-the-data-fetched-from-your-sumo.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To view the data fetched from your Sumo Logic account, go to the People → Access → Overview tab" caption=" " />
+
+You can also create an Access Review (or edit an existing one) and include the Sumo Logic application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Sumo Logic:
+
+1. Go to **People → Access** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select Sumo Logic in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431345431-sqtbt7jipsh-integrating-sumo-logic__09-review-the-details-and-click-save-review.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the details and click Save Review" caption=" " />
+
+From the Access Review page, click Sumo Logic to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting Sumo Logic with Scrut, get in touch with the Scrut support team at support@scrut.io.

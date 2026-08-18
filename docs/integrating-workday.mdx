@@ -1,0 +1,214 @@
+---
+title: "Integrate Workday"
+description: "Learn how to integrate your Workday account with Scrut."
+---
+
+The **Scrut-Workday integration** seamlessly syncs employee data from your Workday account with Scrut. This article provides a step-by-step guide for integrating your Workday account with Scrut.
+
+## Prerequisites
+
+Before you begin the integration, make sure to have the following permissions for your Workday account:
+
+- **Account Information**: Login credentials
+- **Access Level**: Admin access to your company’s Workday account
+- **Permissions**: Scrut requires read access to the following data:
+  - Read: user_profile
+  - Read: employment_info
+  - Read: manager_info (wherever applicable)
+  - Read: leave_data
+
+<ExpandableGroup>
+
+<Expandable title="Read Permissions" default-open="false">
+
+| Read Permissions |
+| --- |
+| **Base Permissions** | **Integration** - Integration Build **Staffing** - Worker Data: Current Staffing Information, - Worker Data: All Positions - Worker Data: Public Worker Reports - Worker Data: Workers - Worker Data: Employment Data |
+| **Profile** | **Contact Information** - Person Data: Name - Person Data: Preferred Name - Person Data: Work Email - Person Data: Legal Name **Staffing** - Worker Data: Time in Position |
+| **Contact Information** | - Person Data: Work Phone - Person Data: Work Contact Information - Person Data: Home Email - Person Data: Home Phone |
+| **Location** | **Contact Information** - Person Data: Work Address - Person Data: Home Address **Organizations and Roles** - Manage: Location |
+| **Org Structure** | **Staffing** - Worker Data: Management Chain - Worker Data: Organization Information |
+| **Dependents** | **Benefits** - Worker Data: Benefit Elections **Personal Data** - Worker Data: Benefit Elections |
+| **Identification** | - Person Data: ID Information - Person Data: Government IDs - Person Data: Licenses - Person Data: Other IDs - Person Data: Passports and Visas |
+| **Documents** | - Worker Data: Edit and Delete Worker Documents - Worker Data: Add Worker Documents |
+| **Compensation** | - Worker Data: Compensation by Organization - Worker Data: Compensation for Managers - Worker Data: Market Position Details |
+| **Time Off** | **Time Off and Leave:** - Worker Data: Time Off (Adjustments and Overrides) - Worker Data: Time Off (Liability Reporting) - Worker Data: Time Off (Limit Overrides) - Worker Data: Time Off - Worker Data: Time Off (Time Off) - Worker Data: Leave of Absence (Leave of Absence Manager View) - Worker Data: Absence Case - Worker Data: Absence Occurrences - Worker Data: Time Off (Accrual and Time Off Adjustments/Overrides by Batch ID) - Worker Data: Time Off (Time Off Balances) - Worker Data: Time Off (Time Off Manager View) **Time Tracking** - Worker Data: Time Calendar |
+
+</Expandable>
+
+<Expandable title="Write Permissions" default-open="false">
+
+| Write Permissions |
+| --- |
+| **Update Employee Operations** | - Initiate (Change Job (Web Service)) - Initiate (Assign Organization (Web Service)) - Initiate (Change Organization Assignments (Web Service)) - Initiate (Maintain Contact Information (Web Service)) - Initiate (Edit Position (Web Service)) - Initiate (Edit Position Restrictions (Web Service)) - Initiate (Maintain Employee Contracts (Web Service)) - Initiate (Change Home Contact Information (Web Service)) - Initiate (Import Change Home Contact Information (WS Background Process)) - Initiate (Change Legal Name (Web Service)) - Cancel (Web Service) - Initiate (Change Personal Information (Web Service)) - Initiate (Change Business Title (Web Service)) - Initiate (Change Work Contact Information (Web Service)) |
+| **Create Employee Operations** | - Cancel (Web Service) - Initiate (Create Position (Web Service)) - Initiate (Hire Employee (Web Service)) |
+| **Update Compensation Operations** | - Initiate (Import Request Compensation Change (WS Background Process)) - Initiate (Request Compensation Change (Web Service)) |
+| **Request Leave Operations** | - Initiate (Request Leave of Absence (Web Service)) - Initiate (Enter Time Off (Web Service)) |
+
+</Expandable>
+
+</ExpandableGroup>
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Workday account with your admin credentials before beginning the integration to avoid doing so later.
+</Callout>
+
+## How to Connect Workday With Scrut
+
+### Step 1: Fetch the Required Details from Workday
+
+As part of the integration, you’ll need to copy-paste the following parameters from Workday in Scrut.
+
+#### 1: Workday URL
+
+To find your Workday Web Services URL, follow these steps:
+
+1. Log in to your Workday account.
+2. In the search bar, search for and click **Public Web Services**.
+3. At the top of the page, click the more options icon ( <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431412302-sjcj0ahqj4-integrating-workday__01-dots-3-horizontal.svg?rasterize-bypass=true" width="20" height="20" alt="dots-3-horizontal" caption=" " /> ) beside Public Web Services.
+4. Hover over **Web Service** and click **View WSDL**.
+5. An XML document opens in a new tab. Locate the `host` attribute.
+6. Copy the URL found in the `location` attribute of the `soapbind:address` element until the `/service`. For example, if the XML contains the URL, `soap:address location="https://example.workday.com/ccx/service/tenant/service/version"` the **Web Services URL** is `https://example.workday.com/ccx`.
+
+#### 2: Workday Integration System Username and Password
+
+To create an **Integration System User (ISU)** in Workday, follow these steps:
+
+1. In your Workday portal, log in to the Workday tenant.
+2. In the Search field, type **Create Integration System User**.
+3. Select the **Create Integration System User** task.
+4. Enter a username, such as Scrut Automation.
+5. Enter a password and click OK.
+6. Workday automatically sets the value of **Session Timeout Minutes** to **zero**, preventing the ISU from expiring. Expired sessions can cause the integration to stop before it completes.
+7. **Do Not Allow UI Sessions:** We recommend selecting this option, as there is no need for the integration system user to log in to the Workday UI as a regular user.
+
+**Note:** Add this user to the list of System Users to prevent the password from expiring.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431413937-fb0jz5t2nwu-integrating-workday__02-note-add-this-user-to-the-list-of-system.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: Add this user to the list of System Users to prevent the password from expiring" caption=" " />
+
+Ensure that you complete these instructions before proceeding to the next step.
+
+#### Create a Security Group and Assign an Integration System User
+
+1. On the Workday home page, type "**Create Security Group**" into the search bar.
+2. Click the **Create Security Group** task in the dropdown.
+3. In the dialog, enter the following:
+  - **Type of Tenanted Security Group**: Select Integration System Security Group (Unconstrained).
+  - **Name**: Enter a name for the security group.
+4. Click **Ok**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431415945-c4uochpn45j-integrating-workday__03-click-ok.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Ok" caption=" " />
+5. In the **Edit Integration System Security Group (Unconstrained)** dialog, enter the following:
+  - **Integration System Users**: Enter the name of the integration system user you created [above](/docs/integrating-workday#2-workday-integration-system-username-and-password) (such as Scrut Automation).
+6. Click **Ok**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431417809-loengvcqlgo-integrating-workday__04-click-ok.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Ok" caption=" " />
+
+#### Configure Domain Security Policy Permissions
+
+For the Security Group, you will need to edit the Domain Security Policy Permissions and add the following GET operations:
+
+| Parent Domains Required for HRIS | Parent Domains Required for ATS |
+| --- | --- |
+| - Job Requisition Data - Person Data: Name - Person Data: Personal Data - Person Data: Home Contact Information - Person Data: Work Contact Information - Worker Data: Workers - Worker Data: All Positions - Worker Data: Current Staffing Information - Worker Data: Public Worker Reports - Worker Data: Employment Data - Worker Data: Organization Information | - Candidate Data: Job Application - Candidate Data: Personal Information - Candidate Data: Other Information - Pre-Hire Process Data: Name and Contact Information - Job Requisition Data - Person Data: Personal Data - Person Data: Home Contact Information - Person Data: Work Contact Information - Manage: Location - Worker Data: Public Worker Reports |
+
+#### Activate Security Policy Changes
+
+1. On the Workday home page, type "**Activate Pending Security Policy Changes**" into the search bar.
+2. This provides a summary of the pending security policy changes awaiting approval.
+3. Review the policies and approve the pending security policy changes to activate them.
+
+#### 3: Workday Tenant Name
+
+Finding your Workday Tenant Name is easy. For example, if you sign in at`https://example.workday.com/acme`, your tenant name is "**acme**."
+
+<Callout kind="alert">
+  Important
+
+  Workday REST credentials (#4 Client ID and Client Secret, #5) are optional. You need them only to sync Leave APIs and Bank Account Details.
+</Callout>
+
+#### 4: Workday REST Client ID and Client Secret
+
+1. Log in to Workday and search for and click on "**Register API Client**."
+2. In the Client Name field, enter the name of the client.
+3. In the Client Grant Type field, select **Authorization Code Grant**.
+4. Select Access Token as **Bearer**.
+5. Select the following scope values from the Workday REST API:
+  - Scope (Functional Areas)
+  - Benefits
+  - Candidate Engagement
+  - Core Compensation
+  - Organizations and Roles
+  - Performance Enablement
+  - Pre-Hire Process
+  - Recruiting
+  - Staffing
+  - Time Off and Leave
+  - Time Tracking
+  - Worker Profile and Skills
+6. Click OK to generate the **Client ID** and **Client Secret**.
+7. Copy and save them in a safe location, as you’ll need to enter these values in Scrut in the [next step](/docs/integrating-workday#2-workday-integration-system-username-and-password).
+
+#### 5: Workday Refresh Token
+
+1. Log in to Workday, search for and then click on "**View API Client**."
+2. On the View API Clients page, click the **API Clients for Integrations** tab.
+3. Click the API Client that you created in the previous step and navigate to **Manage Refresh Tokens for Integrations**.
+4. On the Manage Refresh Tokens for Integrations page, in the Workday Account field, enter the Workday account of an admin.
+5. Click **OK** and return to the Workday home page.
+6. In the Search field, type "**Register API Client for Integration**".
+7. On the Delete or Regenerate Refresh Token page, select the **Generate New Refresh Token** option.
+8. Set **Non-Expiring Refresh Token** to **Yes**.
+9. Click **OK**.
+10. On the Successfully Regenerated Refresh Token Page, copy the Refresh Token.
+
+### Step 2: Connect Your Workday Account in Scrut
+
+1. [Log in to Scrut](https://app.scrut.io/login) and click **Integrations** on the left panel.
+2. Click the **Integrations Library** tab at the top, and in the **Categories** section, click **Human Resources Information Systems**.
+3. Locate the **Workday** card, or use the search bar at the top of the page to find it, and click the **Integrate** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431419732-44r8szqr0m8-integrating-workday__05-locate-the-workday-card-or-use-the-search.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Workday card, or use the search bar at the top of the page to find it, and click the Integrate" caption=" " />
+4. On the Workday integration page, click the **Connect** button at the top right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431421472-4mfw81di54h-integrating-workday__06-on-the-workday-integration-page-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Workday integration page, click the Connect button at the top right" caption=" " />
+5. Enter the details you fetched in Step 1: Workday URL, Integration System Username, Integration System User Password, and Tenant Name. Optionally, paste the REST Client ID, Client Secret, and Refresh Token, if required.
+6. Click **Submit**.
+
+That’s it. Once your Workday account is successfully integrated with Scrut, you will see a connected flag on the page.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync employee data from your Workday account.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync:** You can also initiate a manual sync by clicking the **Sync Now** button on the Workday integrations page.
+
+## Data Fetched From Workday
+
+Scrut fetches the following employee details from Workday:
+
+- **Contact Information**
+  - Employee Name (First and Last Name)
+  - Email Address
+- **Role Information**
+  - Employment Start Date
+  - Date of Exit (if applicable)
+  - Department (if available)
+  - Reporting Manager Name and Email (if available)
+- **Leave Data**
+  - Start and End Dates of Employee Leaves
+  - Status of Employee Leaves
+
+## Viewing Workday Data in Scrut
+
+To view Workday data in Scrut:
+
+1. Go to **People → Employees → All Employees**.
+2. Click on any employee to view their details, including name, email, joining date, reporting manager, and more.
+
+---
+
+If you encounter any difficulties connecting your Workday account with Scrut, please contact our support team at support@scrut.io for assistance.

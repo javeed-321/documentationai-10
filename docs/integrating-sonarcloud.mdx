@@ -1,0 +1,72 @@
+---
+title: "Integrate SonarCloud"
+description: "Learn how to connect your SonarCloud (SonarQube Cloud) account with Scrut."
+---
+
+The **Scrut-SonarCloud integration** enables Scrut to monitor code quality and security vulnerabilities across your repositories. It tracks code issues, security hotspots, and technical debt to ensure secure development practices are maintained as part of your compliance framework. Upon completing the integration, Scrut will display the fetched data in
+
+- [Vulnerabilities module](https://help.scrut.io/docs/vulnerabilities-walkthrough)
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your SonarCloud account:
+
+- You need **admin access** to your SonarCloud account to fetch the organization key and generate a token.
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your SonarCloud account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With SonarCloud
+
+### Step 1: Copy the Organization Key from SonarCloud
+
+1. [Log in to your SonarCloud account](https://sonarcloud.io/login), and go to **Your Organization → Administration → Organization Settings** and scroll to the **Edit Organization Key** settings section.
+2. Copy the organization key and save it in a safe location. You’ll need to input this in Scrut in [Step 3](/docs/integrating-sonarcloud#step-3-integrate-your-sonarcloud-account-with-scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431271969-jcraqr8avp-integrating-sonarcloud__01-copy-the-organization-key-and-save-it-in-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the organization key and save it in a safe location. You’ll need to input this in Scrut in Step 3" caption=" " />
+
+### Step 2: Copy the Access Key from SonarCloud
+
+1. Log in to your SonarCloud account, and go to **User → My Account → Security**.
+2. Enter a token name, such as Scrut.
+3. Click **Generate Token**.
+
+   **Note:** Make sure that you generate the token using an Admin account in SonarCloud.
+4. Copy the generated token and save it in a safe location. You’ll need to input this in Scrut in [Step 3](/docs/integrating-sonarcloud#step-3-integrate-your-sonarcloud-account-with-scrut).
+
+<Callout kind="alert">
+  Heads Up!
+
+  Make sure to copy and save the token as it won’t be shown again.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431273674-cdi8gxd7nir-integrating-sonarcloud__02-make-sure-to-copy-and-save-the-token-as-it.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Make sure to copy and save the token as it won’t be shown again" caption=" " />
+
+### Step 3: Integrate Your SonarCloud Account with Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Click the **Integrations Library** tab, and in the **Categories** section, click **Vulnerability Scanners**.
+3. Scroll to the **SonarCloud** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431275468-o1pdpyz43em-integrating-sonarcloud__03-scroll-to-the-sonarcloud-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the SonarCloud tile and click Integrate" caption=" " />
+4. On the SonarCloud Integrations page, copy-paste the **organization key** from Step 1.
+5. Copy and paste the **access key** from Step 2.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431277045-zq2yb9elby-integrating-sonarcloud__04-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Watch out for the **Integration Successful** notification message, and the **Connected** status button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431278859-om7lzugmasj-integrating-sonarcloud__05-watch-out-for-the-integration-successful.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the Integration Successful notification message, and the Connected status button" caption=" " />
+
+### Step 4: Configure Scope of Integration
+
+1. Click the **Configure Scope** button on the top right of the SonarCloud integration page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431280673-kfyrj5t6ag8-integrating-sonarcloud__06-click-the-configure-scope-button-on-the-top.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Configure Scope button on the top right of the SonarCloud integration page in Scrut" caption=" " />
+2. Select the projects you want to include in the integration scope and click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431282391-5z2ksidhlg-integrating-sonarcloud__07-select-the-projects-you-want-to-include-in.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the projects you want to include in the integration scope and click Save" caption=" " />

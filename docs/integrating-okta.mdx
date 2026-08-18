@@ -1,0 +1,112 @@
+---
+title: "Integrate Okta (SSO)"
+description: "Learn how to integrate Okta (SSO) with Scrut."
+---
+
+The **Scrut - Okta (SSO)** integration allows your organization’s users to log into Scrut using their Okta credentials. In this guide, we walk you through connecting your organization’s Okta account to **Scrut for SSO.**
+
+<Callout kind="alert">
+  Heads Up!
+
+  If you’re looking to connect **Okta as an IDP**, [see here](/docs/integrating-okta-idp).
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You need Admin access to your organization’s Okta account
+
+## How To Integrate Okta (SSO) With Scrut
+
+### Step 1: Install Scrut Automation Application in your Okta Account
+
+1. Log in to your Okta Admin Console.
+2. Navigate to **Applications → Applications → Browse App Catalog**.
+3. Search for **Scrut Automation (OIDC)**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431016890-zm2qpncklq-integrating-okta__01-search-for-scrut-automation-oidc.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for Scrut Automation (OIDC)" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431018936-lrbq4os42y-integrating-okta__02-search-for-scrut-automation-oidc.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for Scrut Automation (OIDC)" caption=" " />
+4. Click **Add Integration**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431020883-b29r7293vv-integrating-okta__03-click-add-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add Integration" caption=" " />
+5. Search for and choose **Scrut Automation.** Click **Next**.
+6. Enter an application label (e.g., Scrut Automation) and **Base URL** based on the region you signed up for Scrut.
+
+<Callout kind="danger">
+  Important Note:
+
+  Make sure the base url doesn’t include **https://**. Enter only the core domain, such as **app.us.scrut.io**.
+</Callout>
+  - US: **app.us.scrut.io**
+  - EU: **app.eu.scrut.io**
+  - IN: **app.scrut.io**
+7. Click **Done**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431022623-y043cnbjz09-integrating-okta__04-click-done.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Done" caption=" " />
+
+### Step 2: Assign Users
+
+1. Navigate to the **Assignments** tab in Okta.
+2. Assign the users and groups that require access to your Scrut organization.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431024467-ywpcm68woz-integrating-okta__05-assign-the-users-and-groups-that-require.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Assign the users and groups that require access to your Scrut organization" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431026226-ir3h7bdbbu-integrating-okta__06-assign-the-users-and-groups-that-require.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Assign the users and groups that require access to your Scrut organization" caption=" " />
+
+### Step 3: Retrieve Client ID and Secret
+
+1. Navigate to the **Sign On** tab and copy the **Client ID** and **Client Secret**.
+2. Save these details in a safe location. You’ll need to enter them in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431028056-ke7ssdpxbrq-integrating-okta__07-save-these-details-in-a-safe-location-youll.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Save these details in a safe location. You’ll need to enter them in Scrut" caption=" " />
+
+### Step 4: Copy your Okta Domain
+
+1. Click your username in the top-right corner of the Admin Console to find and copy the Okta domain.
+2. Save it in a safe location. You’ll need to enter it in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431029916-kh0u8d8va9g-integrating-okta__08-save-it-in-a-safe-location-youll-need-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Save it in a safe location. You’ll need to enter it in Scrut" caption=" " />
+
+### Step 5: Add Configuration Details in Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, choose **Identity Providers** in the **Categories** section.
+3. Scroll to the **Okta (SSO)** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431031742-wz569jqczu-integrating-okta__09-scroll-to-the-okta-sso-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Okta (SSO) tile and click Integrate" caption=" " />
+4. Enter the details you fetched in the previous step:
+  - Client ID
+  - Client Secret
+  - Okta Domain
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431033376-8763b3u0mrq-integrating-okta__10-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Watch for the success toast message and the Connected status flag indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431035529-afjh24t2nuv-integrating-okta__11-watch-for-the-success-toast-message-and-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the success toast message and the Connected status flag indicator" caption=" " />
+
+## What Next?
+
+[Enable Okta SSO in Settings](https://help.scrut.io/docs/configuring-sso-login-methods). This allows users and groups you selected in Okta to log in to Scrut via Okta (SSO).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431037470-vuu5ohbf0br-integrating-okta__12-enable-okta-sso-in-settings.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enable Okta SSO in Settings" caption=" " />
+
+Optionally, users can use the AppEmbedLink found in the **General** tab of the Scrut Automation app in Okta to sign in to the platform.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431039129-hsp3ait2la-integrating-okta__13-optionally-users-can-use-the-appembedlink.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Optionally, users can use the AppEmbedLink found in the General tab of the Scrut Automation app in Okta to" caption=" " />
+
+Additionally, users can add the Scrut Automation app to their End User Dashboard so everybody can launch from there.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431040956-wd3ykigmbj8-integrating-okta__14-additionally-users-can-add-the-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Additionally, users can add the Scrut Automation app to their End User Dashboard so everybody can launch from" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  The option to add the app to the End User dashboard is available only for premium Okta customers.
+</Callout>

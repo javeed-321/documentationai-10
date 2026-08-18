@@ -1,0 +1,127 @@
+---
+title: "July 2026"
+metaDescription: "See what's new in Scrut's July release: Scrut MCP for Claude Code, Cursor, and ChatGPT Codex, Shadow IT application governance, audit snapshots, and richer SoA exports."
+---
+
+## In this release
+
+Scrut’s July release connects Scrut to the AI tools your team already uses, brings Shadow IT into a governed inventory, and makes audit records more precise.
+
+- Scrut MCP connects live compliance data to Claude Code, Cursor, ChatGPT Codex, and other MCP-compatible apps.
+- Track and manage your Shadow IT applications and move them into a formal inventory.
+- Completed audits lock a point-in-time snapshot, so a report downloaded later still matches what was true at completion.
+- SoA exports carry Document Reference and Implementation Details.
+- Policies and evidence tasks clone with their mappings intact, and Tenable findings import into the vulnerability queue.
+
+## Key Features & Enhancements
+
+### Introducing Scrut MCP: Bring compliance work into your AI apps
+
+Compliance work today spans multiple surfaces. To answer a questionnaire, you copy context out of your GRC tool and paste it into an AI tool. Filing evidence involves managing documents in Google Drive or similar and reuploading them to your GRC tool later. Fixing a failing cloud test meant switching from your GRC platform to Terraform, Pulumi, or another infrastructure-as-code repo to find the context needed to make the fix.
+
+Scrut MCP connects Scrut directly to the MCP-compatible AI apps you already use, such as Claude Code, Cursor, or ChatGPT Codex.
+
+- Ask plain-language questions and get sourced answers pulled from your live compliance data, without opening Scrut separately.
+- Draft questionnaire responses grounded in your actual policies and evidence, with sources cited and gaps flagged instead of guessed.
+- File evidence directly from your AI app, recorded in Scrut's audit log and tied to your account.
+- Bring a failing test's remediation context into the same environment where the infrastructure fix needs to happen.
+- Keep every connection scoped to your existing Scrut role and permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432198791-pu85z3kju3b-july-2026__01-keep-every-connection-scoped-to-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Keep every connection scoped to your existing Scrut role and permissions" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Connect Scrut MCP](https://help.scrut.io/docs/connect-scrut-mcp)
+</Callout>
+
+### Discover and manage Shadow IT applications
+
+Unsanctioned SaaS and desktop applications are hard to inventory, yet frameworks such as SOC 2 and ISO/IEC 27001 expect organizations to have an updated inventory of all applications in use. Discovery alone is not enough; teams need ownership, restriction, and evidence that unknown apps moved into a governed state.
+
+Scrut adds an Application Governance experience under **People → Access Reviews → Applications** with Managed, Discovered, and Restricted apps. Assign an application owner and take actions such as ignore or restrict, individually or in bulk. The inventory covers both SaaS and desktop applications.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432200660-tdy1iszs14o-july-2026__02-scrut-adds-an-application-governance.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut adds an Application Governance experience under People → Access Reviews → Applications with Managed" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Quick start guide: Shadow IT](https://help.scrut.io/docs/quick-start-guide-shadow-it)
+</Callout>
+
+### Clone a policy or evidence task without re-linking every control
+
+Compliance teams often need several policies or evidence tasks that share the same control and requirement mappings but differ in title, entity, or content. Recreating each artifact through the full add flow and re-linking every mapping is slow and easy to get wrong.
+
+Scrut now supports one-click clone from a policy or evidence task detail page. The clone has the same control and requirement mappings as the original artifact. Reviewers update title, entity, or content on the copy while mappings stay intact.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432202478-nnit21bs01l-july-2026__03-scrut-now-supports-one-click-clone-from-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut now supports one-click clone from a policy or evidence task detail page" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432204236-20o7ipzf6ur-july-2026__04-scrut-now-supports-one-click-clone-from-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut now supports one-click clone from a policy or evidence task detail page" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Clone a policy](/docs/clone-a-policy) or [evidence task](https://help.scrut.io/docs/clone-an-evidence-task)
+</Callout>
+
+### Auto-fetch vendor compliance documents
+
+Vendor assessments usually start with nothing more than a website URL, and from there the real work begins: tracking down the vendor’s Privacy Policy, Trust Center, security pages, and then pasting each link into the vendor assessment module in your GRC tool.
+
+Scrut Teammates now automatically discovers vendor compliance documents as part of the vendor assessment workflow. Teammates surfaces relevant compliance pages such as the Privacy Policy, Trust Center, security page, and subprocessor list, right within the Vendor → Documents tab. You can then review and approve or decline the auto-fetched documents, as needed.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432206062-wa4bygpkn2-july-2026__05-scrut-teammates-now-automatically-discovers.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut Teammates now automatically discovers vendor compliance documents as part of the vendor assessment" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Auto-fetch Vendor Documents](https://help.scrut.io/docs/auto-fetch-documents-via-scrut-teammates)
+</Callout>
+
+### Preserve audit data at the point of completion
+
+Compliance is continuous, but audits are a point-in-time record. Once you mark an audit complete, its policy, evidence, and test completion percentages should reflect the state your program was in at that moment, not how it evolves afterward. When your live data keeps updating requirements or frameworks, a completed audit that showed 90% coverage can later appear to show a much lower number, even though nothing about that audit's outcome has changed. This makes historical audits look inaccurate and forces you to manually reconstruct past reports to explain what was actually true at the time.
+
+Scrut now preserves a completion snapshot the moment an audit is marked Complete, locking its dashboards and percentages at that point in time.
+
+- Shows the exact compliance state at completion when you revisit or download a completed audit, not today's live state.
+- Ensures downloaded audit reports always match what was true at completion.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432207813-fusb980w80u-july-2026__06-ensures-downloaded-audit-reports-always.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Ensures downloaded audit reports always match what was true at completion" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Mark an audit complete](https://help.scrut.io/docs/marking-audit-project-completed)
+</Callout>
+
+### Download SoA with document references and implementation details
+
+A Statement of Applicability (SoA) is useful only if reviewers can see which document backs each applicable requirement and how the organization implements it. Without those columns, teams have to cross-reference policies and maintain implementation notes in other documents outside the exported SoA.
+
+The SoA you can download in Scrut now includes a Document Reference column auto-fetched from policies linked to framework requirements, plus an Implementation Details field captured in the platform and included in the export. Open a framework that supports SOA under **Compliance → Frameworks** to update implementation details on requirements.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432209541-6uof3tf1iam-july-2026__07-the-soa-you-can-download-in-scrut-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The SoA you can download in Scrut now includes a Document Reference column auto-fetched from policies linked" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432211397-hnzyazxo6hi-july-2026__08-the-soa-you-can-download-in-scrut-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The SoA you can download in Scrut now includes a Document Reference column auto-fetched from policies linked" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Download SoA for ISO frameworks](/docs/download-soa-for-iso-frameworks)
+</Callout>
+
+### Import Tenable vulnerability scan findings
+
+Vulnerability findings lose urgency when they stay trapped in the scanner console while compliance owners work in a different system. Without an import path, findings cannot feed compliance reporting, evidence collection, or audit prep.
+
+Scrut now supports importing third-party scan findings from Tenable (previously Nessus) into the Scrut vulnerability workflow. Security and compliance teams can triage imported findings alongside other vulnerability work already managed in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432213261-32zlpdzdszv-july-2026__09-scrut-now-supports-importing-third-party.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut now supports importing third-party scan findings from Tenable (previously Nessus) into the Scrut" caption=" " />
+
+<Callout kind="info">
+  Learn more: [Integrate Tenable](/docs/integrating-tenable)
+</Callout>
+
+## Other Updates
+
+- [Essential Eight Maturity Model Level 2](/docs/framework-overview#essential-eight-level-2) mapping updated from the November 2022 guidance to the Australian Cyber Security Center November 2023 release, including fuller Application Control requirements.
+- [ISO 9001:2015](/docs/framework-overview#iso-90012015) mapping refreshed for cleaner alignment between quality-management requirements and controls or evidence.
+- [Teammates Chat](https://help.scrut.io/docs/ask-anything-to-scrut-teammates) now references your Answer Library and Trust Vault in addition to policies and Vault documents.
+- [Evidence Automation](https://help.scrut.io/docs/evidence-automation-workflow) is available for eligible accounts. Contact your CSM to check eligibility. For accounts with Evidence Automation, add or remove automated tests as automation sources on an evidence task.
+- Vendor [inherent and residual risk ratings](https://help.scrut.io/docs/understanding-vendor-details-page#4-vendor-details) now include a new tier, “**Critical**,” above High for a four-tier classification.
+- Attach [audit scope and audit plan documents](https://help.scrut.io/docs/add-audit-scope-and-plan-attachments) to the audit summary.
+- Trust Vault now positions your organization as the Consent Manager under DPDPA (India's Digital Personal Data Protection Act 2023). Visitors are required to accept your organization’s [ToS and privacy policy](https://help.scrut.io/docs/add-terms-of-service-tos-and-privacy-policy) while sending an access request or subscribing to updates.
+- Customize your [Risk Register table layout](https://help.scrut.io/docs/customize-risk-register-layout) by choosing column order and default column visibility.
+- Configure the [Add Risk form](https://help.scrut.io/docs/configure-add-risk-form) by choosing which default and custom fields appear, and which are mandatory.
+- Link an existing [Monday item](/docs/integrating-mondaycom) by ID or URL to a Scrut task, sync attachments (existing and later additions) to the evidence task, and keep ticket recreation aligned when statuses change.
+- Approve multiple policies in one single action. Navigate to Compliance → Policies → All Policies, select the policies you want to approve, and click Policy Actions → Approve.

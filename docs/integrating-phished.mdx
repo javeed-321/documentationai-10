@@ -1,0 +1,90 @@
+---
+title: "Integrate Phished"
+description: "Learn how to integrate Phished with Scrut."
+---
+
+The **Scrut - Phished** integration fetches user access data, permissions, and role assignments from your Phished account and syncs them with the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Phished flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You must have permissions to generate an Organisation Token in Phished
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Phished
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Phished account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Phished With Scrut
+
+### Step 1: Fetch Organisation Token from Phished
+
+1. Log in to the **Phished Zero Incident Rate (ZIR) Application**.
+2. Navigate to **Management → Organisation → API Tokens**.
+3. Enter the token name and description, then select the required scopes.
+4. Click **Save**.
+5. Copy the token, as you won’t be able to see this later. Save it in a safe location, as you’ll need to enter it in Scrut in the next step.
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Campaigns & Training** in the **Categories** section.
+3. Scroll to the **Phished** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431100759-n7m6t95xy5k-integrating-phished__01-scroll-to-the-phished-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Phished tile and click Integrate" caption=" " />
+4. On the integration page, paste the organisation token obtained in Step 1.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431102476-4re864a2at-integrating-phished__02-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Phished. This process typically takes a few hours to complete. Check the Audit Log on the Phished integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs a sync **every 24 hours** to fetch incremental data, such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+## Data Fetched from Phished
+
+Scrut fetches the following access-related data points from Phished:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Phished Data in Scrut
+
+To view the data fetched from your Phished account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your Phished account.
+
+You can also create an Access Review (or edit an existing one) and include the Phished application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Phished:
+
+1. Go to **People → Access** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select "Phished" in Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Phished to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting Phished with Scrut, please contact the Scrut support team at support@scrut.io.

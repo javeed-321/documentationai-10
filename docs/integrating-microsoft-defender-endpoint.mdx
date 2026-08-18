@@ -1,0 +1,250 @@
+---
+title: "Integrate Microsoft Defender Endpoint"
+description: "Learn how to connect Microsoft Defender Endpoint with Scrut."
+---
+
+Connecting Microsoft Defender Endpoint with Scrut enables your team to continuously monitor device security posture, surface endpoint vulnerabilities, and automate compliance evidence collection.
+
+## What This Integration Does in Scrut
+
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+- **Automated Tests:** Runs automated checks that continuously evaluate Microsoft Defender Endpoint for security misconfigurations and compliance checks against your applicable compliance frameworks.
+- **Vulnerability Management:** Ingests vulnerability and affected asset data into Scrut, enabling end-to-end vulnerability tracking, assignment, and remediation.
+
+## Prerequisites
+
+Before setting up the integration, make sure you have the following in place:
+
+- An active Microsoft Defender Endpoint account
+- Admin access to Microsoft Azure to register an application and configure API permissions
+- The Application (client) ID, Directory (tenant) ID, and Client Secret Value from the registered Azure application (you will retrieve these during setup)
+
+## Permissions and Access Requirements
+
+### For Microsoft Defender Endpoint
+
+The integration requires the following read-only API permissions, all as Application permissions (not Delegated):
+
+- **Software.Read.All**: Read threat and vulnerability management software information
+- **Machine.Read.All**: Read all machine profiles
+- **Vulnerability.Read.All**: Read threat and vulnerability management vulnerability information
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permission to the Integrations module
+
+## Data Collected
+
+- Devices: Machine name, operating system, and version
+- Software: Installed software (Software inventory per device)
+- Security findings
+  - Vulnerability name (CVE ID and finding title from Defender)
+  - Remediation status (Defender remediation state)
+  - Severity (Severity rating)
+  - Affected resources (Device name)
+  - Source (Visible as MS Defender in Scrut)
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your Microsoft Defender Endpoint account before starting the integration to avoid doing so later.
+</Callout>
+
+### Step #1: Create a Service Principal in Azure
+
+<Callout kind="alert">
+  Note:
+
+  To create a Service Principal, you must register an application in the Azure Active Directory. You need admin access to Microsoft Azure to complete this step.
+</Callout>
+
+1. Go to the Azure Home Page.
+2. Log in to Microsoft Azure (if required).
+3. Select **App registrations** from Microsoft services.
+4. Click **+ New registration** from the top menu.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430802687-e0tc55f7v6-integrating-microsoft-defender-endpoint__01-click-new-registration-from-the-top-menu.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click + New registration from the top menu" caption=" " />
+5. The **Register an Application** page opens.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430804515-okit2hb8fl-integrating-microsoft-defender-endpoint__02-the-register-an-application-page-opens.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The Register an Application page opens" caption=" " />
+6. In the **Application Name** field, enter the value **Scrut Defender**.
+7. Under **Account Type**, select **Accounts in this organizational directory only ([Default Directory] only - Single tenant)**.
+8. Click **Register**.
+9. On the application overview page, copy and save the **Application (client) ID** and **Directory (tenant) ID**.
+
+### Step #2: Add API Permissions to the Registered Application
+
+1. Select **API permissions** from the left navigation menu.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430806256-v7so3jerymb-integrating-microsoft-defender-endpoint__03-select-api-permissions-from-the-left.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select API permissions from the left navigation menu" caption=" " />
+
+2. Click **+ Add a permission**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430808008-97ij0unl0xm-integrating-microsoft-defender-endpoint__04-click-add-a-permission.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click + Add a permission" caption=" " />
+3. Select **APIs my Organization uses**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430810030-prbrxn3ijf-integrating-microsoft-defender-endpoint__05-select-apis-my-organization-uses.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select APIs my Organization uses" caption=" " />
+
+4. In the search field, enter **Windows** and select **WindowsDefenderATP.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430811854-3r43vv7gy03-integrating-microsoft-defender-endpoint__06-in-the-search-field-enter-windows-and-select.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the search field, enter Windows and select WindowsDefenderATP" caption=" " />
+5. Click **Application permissions**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430813657-flytzuujpph-integrating-microsoft-defender-endpoint__07-click-application-permissions.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Application permissions" caption=" " />
+
+6. In the **Select permissions** search software, select **Software.Read.All.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430815475-k0tefnpxnr-integrating-microsoft-defender-endpoint__08-in-the-select-permissions-search-software.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Select permissions search software, select Software.Read.All" caption=" " />
+
+7. Search **Machine** and select **Machine.Read.All.** <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430817205-nh5bfkaekd-integrating-microsoft-defender-endpoint__09-search-machine-and-select-machine-read-all.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search Machine and select Machine.Read.All" caption=" " />
+8. Search **Vulnerability** and select **Vulnerability.Read.All.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430818991-qqgzznsq3s-integrating-microsoft-defender-endpoint__10-search-vulnerability-and-select.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search Vulnerability and select Vulnerability.Read.All" caption=" " />
+
+9. Click **Add Permissions**.
+10. Click **Grant admin consent for Scrut**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430820585-qcuqp01igva-integrating-microsoft-defender-endpoint__11-click-grant-admin-consent-for-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Grant admin consent for Scrut" caption=" " />
+
+11. Click **Yes** to confirm.
+
+<Callout kind="alert">
+  Important:
+
+  All three permissions must show Granted status before proceeding. If any show Not granted, the integration will not function correctly.
+</Callout>
+
+### Step #3: Create a Client Secret for the Registered Application
+
+1. Select **Certificates & secrets** from the left navigation menu.
+2. Click **+ New Client Secret**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430822335-a7b45zwff8-integrating-microsoft-defender-endpoint__12-click-new-client-secret.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click + New Client Secret" caption=" " />
+
+3. Enter a **Description** for the secret.
+4. Select an expiry duration from the **Expires** dropdown menu.
+5. Click **Add** to save the new Client Secret.
+6. Copy the **Client Secret Value** (third column) for later use. This is your Client Secret Value.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430824212-x8m7ycnib1j-integrating-microsoft-defender-endpoint__13-copy-the-client-secret-value-third-column.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Client Secret Value (third column) for later use. This is your Client Secret Value" caption=" " />
+
+<Callout kind="alert">
+  Important:
+
+  Copy the Client Secret Value immediately after creation. Azure does not show this value again after you navigate away from the page. Do not copy the Secret ID; only the Value is required.
+</Callout>
+
+### Step #4: Connect the Integration in Scrut
+
+1. Sign in to Scrut, and click **Integrations** → **Integrations Library**.
+2. In the **Categories** section, scroll to **Vulnerability Scanners**.
+3. Click the **Integrate** button in the **Microsoft Defender Endpoint** tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430825917-v8o92aaecy-integrating-microsoft-defender-endpoint__14-click-the-integrate-button-in-the-microsoft.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Integrate button in the Microsoft Defender Endpoint tile" caption=" " />
+4. On the credentials form, enter the following:
+  - **Account Name:** The display name for this integration
+  - **Client ID:** The Application (client) ID from Step 1
+  - **Client Secret:** The Client Secret Value from Step 3
+  - **Tenant ID:** The Directory (tenant) ID from Step 1
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430827520-8s3jgjabcb3-integrating-microsoft-defender-endpoint__15-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Note:
+
+Do NOT enter the secret ID in place of the client secret value. Only enter the client secret value.
+
+Watch for the success toast and the Connected status indicator on the Microsoft Defender Endpoint integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430829193-9fgujcrss4n-integrating-microsoft-defender-endpoint__16-watch-for-the-success-toast-and-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the success toast and the Connected status indicator on the Microsoft Defender Endpoint integration" caption=" " />
+
+### Step #5: Configure Scope
+
+After completing the integration, configure the scope by selecting the devices to include in the scan.
+
+1. Go to **Integrations → Connected Integrations → Vulnerability Scanners**.
+2. Click the **Configure** button on the Microsoft Defender Endpoint integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430830819-fxeyl58xmr-integrating-microsoft-defender-endpoint__17-click-the-configure-button-on-the-microsoft.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Configure button on the Microsoft Defender Endpoint integration" caption=" " />
+3. On the MS Defender integration page, click the **three-dot icon** <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432302475-crxjzp6lqos-three-dots-icon-51c8d982.png?fm=auto&auto=compress%2Cformat" width="20" height="20" alt="Three-dots icon" caption=" " />in the **Actions** column, and choose the devices you want to include in the integration scope.
+4. Select the topmost checkbox to select all devices at once.
+5. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430832791-0mad7ysvyx2d-integrating-microsoft-defender-endpoint__19-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+The initial sync begins automatically after the integration is connected and the scope is saved. It takes up to 24 hours for the first scan results to appear in Scrut. To check sync status, navigate to Integrations, open the Microsoft Defender Endpoint integration page, and review the Audit Logs tab.
+
+### Review synced data
+
+Once the sync completes, you can find the data in the following locations:
+
+- Navigate **Vulnerabilities → Third-Party Scans** to view all vulnerabilities ingested from Defender. Use the Source filter and select MS Defender to view only Defender-sourced findings.
+- Navigate to **Tests → Automated Tests**, and use the Application filter to view only tests specific to Defender.
+- Navigate to **Compliance → Evidence Tasks**, open any evidence, and click Add Attachment to configure a Scrut Monitor to automated evidence collection from Defender.
+
+<Callout kind="alert">
+  Heads Up!
+
+  If results are not visible after 24 hours, check the Audit Logs on the Microsoft Defender Endpoint integration page to confirm whether the scan completed successfully.
+</Callout>
+
+## Common Errors and Troubleshooting
+
+### Integration fails to connect
+
+Possible solutions:
+
+- Verify that the Client ID, Client Secret Value, and Tenant ID are entered correctly. Do not enter the Secret ID in place of the Client Secret Value.
+- Confirm that admin consent has been granted for all three API permissions in Azure. All permissions must show Granted status.
+- Ensure the registered application in Azure is set to Single tenant and is associated with the correct directory.
+
+### Vulnerabilities not appearing in Scrut
+
+Possible solutions:
+
+- Allow up to 24 hours for the initial sync to complete.
+- Check the Audit Logs tab on the Microsoft Defender Endpoint integration page to confirm the scan ran successfully.
+- Verify that at least one device is selected in the Configure Scope panel. If no devices are in scope, no data is collected.
+
+### Missing devices in scope selection
+
+Possible solutions:
+
+- Confirm that the devices are enrolled and active in Microsoft Defender Endpoint.
+- Check that the Machine.Read.All permission is granted and active on the registered Azure application.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What data does Scrut collect from Microsoft Defender Endpoint?" default-open="false">
+
+Scrut collects device information, installed software, and vulnerability findings.
+
+</Expandable>
+
+<Expandable title="2: Can I control which devices are included in the sync?" default-open="false">
+
+Yes. After connecting the integration, use the Configure Scope option to select specific devices. You can update the scope at any time from the Connected Integrations page.
+
+</Expandable>
+
+<Expandable title="3: What happens if my Client Secret expires in Azure?" default-open="false">
+
+The integration will stop syncing data. You will need to create a new Client Secret in Azure, then update the credentials in Scrut by reconfiguring the integration with the new value.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

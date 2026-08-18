@@ -1,0 +1,113 @@
+---
+title: "Integrating Aikido"
+description: "Learn how to connect your Aikido account with Scrut."
+---
+
+In this article, we explain how to integrate your Aikido account with Scrut.
+
+## What Does this Integration Do in Scrut?
+
+- **Vulnerability Management:** This integration imports vulnerability data from Aikido into Scrut's [Third-Party Scans page](https://help.scrut.io/docs/populating-vulnerabilities-via-third-party-scans), enabling you to track, assign, and remediate vulnerabilities directly in Scrut.
+
+## Prerequisites
+
+Before setting up the integration, ensure you have:
+
+- An active Aikido account with permissions to set up an OAuth application
+- Admin access to Scrut (or Contributor with access to the Integration module)
+
+## Permissions and Access Requirements
+
+Scrut requires the following permissions in your Aikido instance:
+
+- users: read
+- repositories: read
+- issues: read
+
+## Sync Frequency
+
+Data is synced automatically **once every 24 hours**. You can also manually trigger a sync from the integration settings page when needed.
+
+## Integration Setup
+
+### Step 1: Generate Client ID & Client Secret in Aikido
+
+1. Navigate to your Aikido tenant’s application management or developer portal ([https://app.aikido.dev/login](https://app.aikido.dev/login)).
+2. Log in to your tenant administrator account.
+3. Click the **Add Client** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429954394-hopdsn33l4-integrating-aikido__01-click-the-add-client-button.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Add Client button" caption=" " />
+4. Enter the following basic details for your new application:
+  - **App Name:** Enter a descriptive name for the application (e.g., Scrut Integration)
+  - **App Scopes:** Set the following read-only scopes for the application:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429956090-pfc5u7sgvj7-integrating-aikido__02-app-scopes-set-the-following-read-only.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="App Scopes: Set the following read-only scopes for the application" caption=" " />
+    - users: read
+    - repositories: read
+    - issues: read
+  - **App Type:** Select Public
+  - **Redirect URI:** Enter the appropriate URL based on your Scrut instance region.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429957702-0nieq7drtz3a-integrating-aikido__03-redirect-uri-enter-the-appropriate-url-based.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Redirect URI: Enter the appropriate URL based on your Scrut instance region" caption=" " />
+    - India: [**https://app.scrut.io/settings/integration/aikido**](https://app.scrut.io/settings/integration/aikido)
+    - For US: [**https://app.us.scrut.io/settings/integration/aikido**](https://app.us.scrut.io/settings/integration/aikido)
+    - For EU: [**https://app.eu.scrut.io/settings/integration/aikido**](https://app.eu.scrut.io/settings/integration/aikido)
+    - For Australia: [**https://app.au.scrut.io/settings/integration/aikido**](https://app.au.scrut.io/settings/integration/aikido)
+          - 
+5. Click **Create Credentials** to generate the Client ID & Client Secret.
+
+<Callout kind="alert">
+  Note:
+
+  The Client ID & Client Secret will not be shown again. So, make sure to save these details safely in a secure location.
+</Callout>
+
+### Step 2: Navigate to Integrations in Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Go to the **Integrations Library** tab, and click **Vulnerability Scanners** in the **Categories** section.
+3. Search for the **Aikido** tile, then click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429959352-k7ay65io52-integrating-aikido__04-search-for-the-aikido-tile-then-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for the Aikido tile, then click Integrate" caption=" " />
+4. Enter the Client ID & Client Secret you fetched in the previous step.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429960982-pjj5yedtji-integrating-aikido__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Watch for the “Connected” status flag that indicates a successful integration.
+
+## What Happens Next?
+
+### Initial sync
+
+After integration, Scrut immediately starts syncing data from your Aikido instance. However, it might take several minutes for the initial sync to complete, depending on the volume of data in your Aikido instance.
+
+### View synced vulnerabilities in Scrut
+
+Once the initial sync is over,
+
+- In Scrut, navigate to **Vulnerabilities → Third-Party Scans**.
+- Filter the data by **Source: Aikido**.
+- Confirm whether vulnerabilities are listed with names, severities, CVEs (where applicable), and affected assets.
+
+## Troubleshooting
+
+### Invalid credentials
+
+Possible solutions: Verify Client ID and Client Secret are correct (no extra spaces). Confirm the client hasn’t been deleted in Aikido.
+
+### Insufficient permissions
+
+Ensure the API client has the [requisite permissions](/v1/docs/integrating-aikido#permissions-and-access-requirements) for the integration.
+
+### No vulnerabilities in Scrut
+
+Wait for the sync to complete. Verify there are open issues in your Aikido account.
+
+### Client secret not available
+
+Client secrets are only shown once. If you failed to copy it, create a new API client and [repeat the integration steps](/v1/docs/integrating-aikido#integration-setup).
+
+---
+
+If you face any issues while connecting Aikido with Scrut, please contact our support team at support@scrut.io.

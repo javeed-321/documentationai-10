@@ -1,0 +1,26 @@
+---
+title: "My integration stopped working. What should I check?"
+description: "A short checklist for the most common causes of a disconnected integration."
+---
+
+Work through these in order. The first two explain most cases.
+
+## Have the credentials expired?
+
+- Tokens and secrets expire. Reconnect the integration to issue fresh credentials.
+
+## Did someone change permissions?
+
+- If the connected account lost access, or was offboarded, evidence collection stops. Reconnect with an account that still has access.
+
+## Is the scope still correct?
+
+- If projects or accounts were renamed or removed, update the scope configuration.
+
+## Still stuck?
+
+- Disconnect and reconnect the integration. If it fails again, contact support with the integration name and the time it last succeeded.
+
+<Callout kind="alert">
+  Reconnecting does not delete previously collected evidence. It only restores future collection.
+</Callout>

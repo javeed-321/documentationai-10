@@ -1,0 +1,57 @@
+---
+title: "Integrate Auth0"
+description: "Learn how to integrate your Auth0 account with Scrut."
+---
+
+Scrut uses an inbuilt Auth0 Management API to connect with Auth0. To use this API, you must create an authorized machine-to-machine Application in Auth0 before integrating with Scrut.
+
+## Creating Auth0 Application
+
+1. In your Auth0 Dashboard, click **Create Application**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430040700-jec5otuzwwh-integrating-autho-1__01-in-your-auth0-dashboard-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In your Auth0 Dashboard, click Create Application" caption=" " />
+
+2. Name your new application, choose the *Machine To Machine Applications* click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430042783-9q1jd0qjtzc-integrating-autho-1__02-name-your-new-application-choose-the-machine.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Name your new application, choose the Machine To Machine Applications click Create" caption=" " />
+
+3. A dropdown with Authorized APIs should appear. Choose the **Auth0 Management API** option.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430044729-93rpmbmgshb-integrating-autho-1__03-a-dropdown-with-authorized-apis-should.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="A dropdown with Authorized APIs should appear. Choose the Auth0 Management API option" caption=" " />
+
+4. Enable the following permissions for your application by clicking on the checkboxes under the *Permissions* section:
+
+- read:client_grants
+- read:organizations
+- read:organization_members
+- read:users
+- read:roles
+- read:role_members
+
+5. To create the new application linked to the Auth0 Management API, click **Authorize**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430046733-ssnf247o1pa-integrating-autho-1__04-to-create-the-new-application-linked-to-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To create the new application linked to the Auth0 Management API, click Authorize" caption=" " />
+
+6. Once done, Auth0 will redirect you to the *Quick Start* tab from your newly created application.
+7. Go to Advanced Settings by navigating to the bottom of the Settings tab.
+8. Check if the *Client Credentials* grant type is enabled under the *Grant types* tab where the Client Credentials grant should be enabled.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430048455-lclli7plgs-integrating-autho-1__05-check-if-the-client-credentials-grant-type.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Check if the Client Credentials grant type is enabled under the Grant types tab where the Client Credentials" caption=" " />
+
+10. Navigate to the top of the *Settings* tab in your recently created application.
+11. Copy the **Domain, Client ID**, and **Client Secret** values from your application.
+
+## Integrating Auth0 with Scrut
+
+1. From the left navigation panel, select Integrations.
+2. Click on **Available**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432252556-duak5dzr19s-click-on-available-08e3709b.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click on Available" caption=" " />
+
+3. Scroll to the *Identity Providers* section and find *Auth0*. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430050175-vvdkwd23mgd-integrating-autho-1__07-scroll-to-the-identity-providers-section-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Identity Providers section and find Auth0. Click Integrate" caption=" " />
+
+4. Paste the *Domain, Client ID*, and *Client Secret* values from your application. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430051944-twiyps70a5-integrating-autho-1__08-paste-the-domain-client-id-and-client-secret.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Paste the Domain, Client ID, and Client Secret values from your application. Click Submit" caption=" " />

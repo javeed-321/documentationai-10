@@ -1,0 +1,137 @@
+---
+title: "Integrate HR Works"
+description: "Learn how to connect your HR Works account with Scrut."
+---
+
+This article covers how to connect your HR Works account with Scrut.
+
+## What this Integration Does in Scrut?
+
+This integration performs the following function in Scrut:
+
+- **Employee Directory:** Upon connecting, the integration automatically syncs your organization’s employee and group data from HR Works to Scrut's **People module** to support workforce compliance. After setup, any changes you make to employee data are automatically reflected in Scrut. The synced employees can then access Scrut’s employee portal to complete security training, review and accept company policies, and perform requisite device security checks.
+
+## Prerequisites
+
+To integrate HR Works with Scrut, you need the following credentials from HR Works:
+
+- **Access Key**: A unique key that identifies your HR Works instance.
+- **Secret Access Key**: A secure key that, together with your Access Key, authorizes API requests from Scrut.
+
+## Permissions and Access Requirements
+
+### For HR Works
+
+- Administrator access to your HR Works instance (or access shared by an admin).
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor with access to the Integration module)
+
+## Data Collected
+
+This integration fetches the following employee data from HR Works:
+
+- `firstName` Employee's first name
+- `lastName` Employee's last name
+- `workEmail` Primary work email address
+- `startDate` Employment start date
+- `terminationDate` Employment termination date (if applicable)
+- `isRecordMissing` Flag indicating if the record is incomplete
+- `department` Department/team assignment
+- `role` Job title or role
+- `manager.workEmail` Direct manager's email address
+- `leaveData` - Employee leave information, including:
+  - `startDate` Leave start date
+  - `endDate` Leave end date
+  - `status` Leave status (approved, pending, etc.)
+
+## Sync Frequency
+
+Data from HR Works is synced automatically **once every 24 hours**. You can also manually trigger a sync from the HR Works integration page in Scrut, as needed.
+
+## Integration Setup
+
+The HR Works - Scrut integration setup involves two main steps:
+
+### Step 1: Generate Your Access Key and Secret Access Key in HR Works
+
+1. Log in to your HR Works instance as an admin.
+2. On the sidebar, go to **Administrator 'Company name'** and click **Basics**. In some instances, **Basics** appears directly on the left sidebar.
+3. Click **Integrations**.
+4. Click on the tile **HR WORKS-API**.
+5. On the new page, click **New key pair**.
+6. Click **Download**. Your API credentials will be saved as a .txt file containing your **Access Key** and **Secret Access Key**.
+7. Back in HR Works, select the key pair you just generated, and provide the following permissions:
+  - Read access: General
+  - Read access: Persons
+8. Click **Save**.
+
+### Step 2: Enter Your HR Works Credentials in Scrut
+
+1. Log in to Scrut and click **Integrations** in the left navigation panel.
+2. Select **Human Resource Information Systems (HRIS)** in the **Categories** section of the **Integration Library**, and search for HR Works.
+3. Click the **Integrate** button in the HR Works tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430656956-bso7zhva9vr-integrating-hr-works__01-click-the-integrate-button-in-the-hr-works.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Integrate button in the HR Works tile" caption=" " />
+4. On the HR Works integration page, click **Connect** in the top-right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430658474-gxuwcv2ot4o-integrating-hr-works__02-on-the-hr-works-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the HR Works integration page, click Connect in the top-right" caption=" " />
+5. Select your HR Works Environment, enter the **Access Key** and **Secret Access Key** you copied in the previous step and click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430660145-mze6j5qy54s-integrating-hr-works__03-select-your-hr-works-environment-enter-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select your HR Works Environment, enter the Access Key and Secret Access Key you copied in the previous step" caption=" " />
+
+## What Happens Next?
+
+### Initial Data Sync
+
+Once you complete the integration steps, Scrut will initiate an initial sync of all employee data from HR Works. This may take up several minutes, depending on the number of employees. You can monitor sync status in the Audit Logs section of the HR Works integration.
+
+### View Employee Data in Scrut
+
+Once the sync is complete, your complete employee roster with all synced attributes will be available in the **People → Employees → All Employees** page in Scrut.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: How often does employee data sync from HR Works?" default-open="false">
+
+Automatic syncs occur once every 24 hours.
+
+</Expandable>
+
+<Expandable title="2: What happens when an employee is terminated in HR Works?" default-open="false">
+
+The employee's record in Scrut is updated with the termination date, and their status changes from “Active” to “Offboarding Needed.”
+
+</Expandable>
+
+<Expandable title="3: Does this integration support two-way sync?" default-open="false">
+
+No, this is a one-way sync from HR Works to Scrut. Changes made in Scrut do not sync back to HR Works.
+
+</Expandable>
+
+<Expandable title="4: What if an employee's email changes in HR Works?" default-open="false">
+
+Scrut will re-add the details as a new employee.
+
+</Expandable>
+
+<Expandable title="6: How do I disconnect the integration?" default-open="false">
+
+Click **Integrations** on the left navigation panel in Scrut. Search for HR Works and click the Disconnect button on the HR Works integration page.
+
+Note: Disconnecting the integration will stop future syncs but won't delete existing employee data.
+
+</Expandable>
+
+<Expandable title="7: Where can I see the last sync time?" default-open="false">
+
+Go to the Audit Logs in the HR Works integration page to view the last synced time.
+
+</Expandable>
+
+</ExpandableGroup>
+

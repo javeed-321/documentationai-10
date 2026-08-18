@@ -1,0 +1,137 @@
+---
+title: "Create Asana Tasks"
+description: "Learn how to create an Asana task from Scrut."
+---
+
+After completing the [Scrut - Asana integration](/docs/integrating-asana), you’ll be able to create or link Asana tasks directly from various compliance task modules within Scrut, including:
+
+- [Policies](/docs/policy-module-walkthrough)
+- [Evidence Tasks](https://help.scrut.io/docs/evidence-tasks-walkthrough)
+- [Tests](https://help.scrut.io/docs/getting-started-with-tests-in-scrut)
+- [Cloud](https://help.scrut.io/docs/accessing-the-cloud-module)
+- [Risk Management](https://help.scrut.io/docs/how-to-use-the-risk-dashboard)
+- [Audit → Audit Center → Requests](https://help.scrut.io/docs/creating-a-request-in-audit-centre)
+- [Audit → Audit Center → Findings](https://help.scrut.io/docs/reporting-an-audit-finding)
+- [Audit → Audit Center → Corrective Actions](https://help.scrut.io/docs/creating-corrective-action-from-audit-finding-2)
+- [Vulnerabilities → Findings](https://help.scrut.io/docs/take-actions-on-scan-findings#2-create-a-project-management-ticket)
+
+**Note:**
+
+- Any updates to linked Asana tasks will automatically reflect in Scrut. This maintains consistency across both platforms, closing the loop between evidence collection, remediation, and reporting.
+
+In this article, we explain how to create a ticket from Scrut to Asana and link an existing ticket from Asana to Scrut.
+
+## Data Synced With Asana
+
+### Standard Data Fields
+
+By default, Scrut sends the following ticket data to Asana:
+
+- Workspace: The Asana workspace where tasks will be created
+- Project: The specific project within the workspace
+- Task Name: The title of the created task
+- Description [Optional]: Detailed information about the task
+- Assignee: The team member responsible for the task
+
+### Optional Data Fields
+
+You can also configure these additional fields to be sent to Asana:
+
+- Collaborators: Team members who can view and comment on the task
+- Tags: Labels to categorize and filter tasks
+- Attach Files: Documents and other files related to the task
+- Due Date: Deadline for task completion
+
+## How To Create an Asana Task in Scrut
+
+1. [Log in to Scrut](https://app.scrut.io/) and navigate to the artifact you want to connect. This could be a Policy, Evidence Task, Risk, or Test.
+2. Click the three-dots icon on the top-right and select **Create Asana Task**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429871263-8q92xwqr9vn-creating-asana-ticket__01-click-the-three-dots-icon-on-the-top-right.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the three-dots icon on the top-right and select Create Asana Task" caption=" " />
+3. Enter the task details:
+  - Workspace
+  - Project
+  - Task Name
+  - Description (Optional)
+  - Assignee
+  - Collaborators
+  - Tags
+
+<Callout kind="alert">
+  Note:
+
+  Besides the tags in your Asana dashboard, you'll notice an additional tag labeled "**Scrut**." This tag is selected by default when you create an Asana task from Scrut. It helps you and your teammates easily identify tasks from Scrut in your Asana dashboard. If you don’t need this tag, you can unselect it.
+</Callout>
+4. Click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429873190-k1grqywk6q-creating-asana-ticket__02-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create" caption=" " />
+5. Watch out for the success notification, “**Asana Task Created Successfully**.”
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429874758-b07xd5jhm4p-creating-asana-ticket__03-watch-out-for-the-success-notification-asana.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the success notification, “Asana Task Created Successfully.”" caption=" " />
+6. Scrut will create a task within your specified Workspace and Project in Asana.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429876367-293tx2keua2-creating-asana-ticket__04-scrut-will-create-a-task-within-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut will create a task within your specified Workspace and Project in Asana" caption=" " />
+7. Scrut also adds the task link and creator’s details to the **Comments** and **Audit Logs** sections.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429877974-s3fir9szbtg-creating-asana-ticket__05-scrut-also-adds-the-task-link-and-creators.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut also adds the task link and creator’s details to the Comments and Audit Logs sections" caption=" " />
+
+Comments added for an Asana task creation
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429879745-3lxxauzn36a-creating-asana-ticket__06-comments-added-for-an-asana-task-creation.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Comments added for an Asana task creation" caption=" " />
+
+Sample audit log details for an Asana task creation
+
+8. The **Tickets (Asana)** tab provides details about all Asana tickets you’ve created from Scrut. It includes information such as:
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429881529-rg14207drhi-creating-asana-ticket__07-the-tickets-asana-tab-provides-details-about.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The Tickets (Asana) tab provides details about all Asana tickets you’ve created from Scrut" caption=" " />
+  - Asana ID
+  - Title
+  - Assignee
+  - Status
+  - Created On
+  - Action
+
+## Linking Existing Asana Tasks in Scrut
+
+Scrut allows you to link existing tickets in your Asana dashboard to specific artifacts. To do this:
+
+1. [Log in to Scrut](https://app.scrut.io/) and navigate to the artifact you want to connect. This could be a Policy, Evidence Task, Risk, or Test.
+2. Scroll to the **Tickets (Asana)** tab.
+3. Click the **Create** button and select **Link Existing Tickets**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429883177-qwcaqclqpqd-creating-asana-ticket__08-click-the-create-button-and-select-link.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Create button and select Link Existing Tickets" caption=" " />
+4. Copy the URL of the Asana ticket you want to link to the artifact.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429884803-ut4dkcoj8ai-creating-asana-ticket__09-copy-the-url-of-the-asana-ticket-you-want-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the URL of the Asana ticket you want to link to the artifact" caption=" " />
+5. Paste the copied URL and click **Link**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429886604-3u4y0o40cnj-creating-asana-ticket__10-paste-the-copied-url-and-click-link.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Paste the copied URL and click Link" caption=" " />
+
+The ticket will be linked to the artifact.
+
+## Updating Tasks in Asana
+
+The integration between Scrut and Asana is bidirectional and works in real time. **When you change any synced fields in your Asana tasks, those changes will automatically update in Scrut.** For example, if you mark a task as completed in Asana, that completion status will immediately appear in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429888268-f6vlirnm7dq-creating-asana-ticket__11-the-integration-between-scrut-and-asana-is.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The integration between Scrut and Asana is bidirectional and works in real time" caption=" " />
+
+## Further Insights
+
+<ExpandableGroup>
+
+<Expandable title="1: How do I unlink an Asana ticket in Scrut?" default-open="false">
+
+Open the artifact, scroll to the **Tickets (Asana)** section, and click the **unlink icon** next to the ticket you want to disconnect.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429890124-qhbk1zar1w-creating-asana-ticket__12-open-the-artifact-scroll-to-the-tickets.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Open the artifact, scroll to the Tickets (Asana) section, and click the unlink icon next to the ticket you" caption=" " />
+
+</Expandable>
+
+<Expandable title="2: Can I add multiple Asana tickets to an artifact?" default-open="false">
+
+Yes. You can link multiple tickets to a specific artifact. There are no restrictions.
+
+</Expandable>
+
+</ExpandableGroup>
+

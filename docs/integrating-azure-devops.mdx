@@ -1,0 +1,169 @@
+---
+title: "Integrate Azure DevOps"
+description: "Learn how to connect your Azure DevOps account with Scrut for automated evidence collection."
+---
+
+The Azure DevOps integration allows Scrut to monitor user access, repository permissions, and pipeline configurations to ensure secure CI/CD workflows. It tracks project-level roles, validates that pipelines follow secure deployment practices, and generates audit-ready evidence for compliance. In this article, you can learn how to connect your Azure DevOps account with Scrut.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+- **User Access Data:** Fetches user details, roles, and permissions from Azure DevOps for Access Reviews.
+- **Evidence Task:** Scrut automatically attaches the evidence to the **Code Review Results** evidence task on the 15th and last day of the month.
+
+## Prerequisites
+
+- An active Azure DevOps account with admin access
+- Third-party OAuth access enabled at the organization level in Azure DevOps (covered in the setup steps below)
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log in to your Azure DevOps account before starting the integration to avoid being prompted to sign in mid-setup.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For Azure DevOps
+
+The following read-only OAuth scopes are requested during the integration:
+
+- [vso.code](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops): Grants Scrut read access to source code and metadata about commits, changesets, branches, and other version control artifacts. Also, grants the ability to search code and be notified about version control events via service hooks.
+- [vso.project](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops): Grants Scrut read access to projects and teams.
+
+### For Scrut
+
+- Admin access to Scrut, or a Contributor role with access to the Integration module
+
+## Supported Versions
+
+- Scrut supports the Azure DevOps REST API v1 and v2. Features or data fields introduced in later API versions are not available.
+
+## Data Collected
+
+- Projects: All accessible projects in the connected organization
+- Code Repositories: Repositories within the selected projects
+- Branches: All branches within synced repositories
+- Pull Requests: Used for Code Review evidence collection
+
+## Sync Frequency
+
+Data syncs automatically every 24 hours. You can also trigger a manual sync from the Azure DevOps integration settings page in Scrut.
+
+## Integration Setup
+
+### Step 1: Enable OAuth Access in Azure DevOps
+
+1. Log in to Azure DevOps and go to **Organization Settings**.
+2. Navigate to **Security**, then select **Policies**.
+3. Turn on the **Third-party application access via OAuth** toggle.
+4. Repeat steps 1 through 3 for every organization you want to sync with Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430104298-0arvv2112oti-integrating-azure-devops__01-repeat-steps-1-through-3-for-every.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Repeat steps 1 through 3 for every organization you want to sync with Scrut" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  If this toggle is off, Scrut cannot authenticate with your Azure DevOps account. Confirm it is enabled before proceeding.
+</Callout>
+
+### Step 2: Connect the Integration in Scrut
+
+1. Sign in to Scrut and select **Integrations** from the left navigation menu.
+2. Go to the **Integrations Library** and select **Version Control** from the Categories panel.
+3. Find and select **Azure DevOps**, then click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430105972-ii3pk5vrghk-integrating-azure-devops__02-find-and-select-azure-devops-then-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Find and select Azure DevOps, then click Integrate" caption=" " />
+4. On the Azure DevOps integration page, click **Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430107670-1zfjq59144g-integrating-azure-devops__03-on-the-azure-devops-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Azure DevOps integration page, click Connect" caption=" " />
+5. Scrut redirects you to the Microsoft authentication page. Sign in with your Azure DevOps credentials and click **Accept** to grant the required permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430109359-bfwaurd4ze-integrating-azure-devops__04-scrut-redirects-you-to-the-microsoft.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut redirects you to the Microsoft authentication page" caption=" " />
+6. Watch for the success notification and the Connected status indicator on the integration page.
+
+### Step 3: Configure Scope
+
+1. On the Azure DevOps integration page in Scrut, click **Configure Scope**.
+2. Select the repositories from which you want to collect pull request evidence.
+3. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430110949-ng91v05p2ck-integrating-azure-devops__05-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After setup is complete, Scrut begins syncing data from Azure DevOps automatically. You can monitor sync activity in the Audit Log on the Azure DevOps integration settings page. To trigger an immediate sync, click Sync Now on the integration page.
+
+### Review synced data
+
+Navigate to the following locations in Scrut to verify that data has synced correctly:
+
+- Navigate to **Tests** to find automated test results tied to your Azure DevOps configurations.
+- Navigate to **People → Access Reviews** to create an access review to view synced user and access records.
+- Navigate to **Compliance → Evidence Tasks** and search for the Code Review Results evidence task. Scrut will automatically fetch and attach the required evidence from your Azure DevOps code repositories on the 15th and last day of the month.
+
+## Common Errors and Troubleshooting
+
+### Authentication failure
+
+Possible solutions:
+
+- Confirm that you have admin access to the Azure DevOps organization you are connecting.
+- Verify that the Third-party application access via OAuth toggle is enabled under Organization Settings → Security → Policies.
+- Disconnect the integration and reconnect to re-trigger the OAuth flow.
+
+### Data not appearing in Scrut
+
+Possible solutions:
+
+- Confirm that the correct repositories are selected under Configure Scope.
+- Wait up to 24 hours for the first sync to complete, or click Sync Now to trigger a manual sync.
+- Check the Audit Log on the integration page for any error entries.
+
+### Integration shows "Not Connected" after setup
+
+Possible solutions:
+
+- Confirm that you clicked Accept on the Microsoft permissions screen during OAuth.
+- Verify that your Azure DevOps account has admin-level access.
+- Try reconnecting from the Azure DevOps integration page in Scrut.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Why does Scrut request source code permissions for the Azure DevOps integration?" default-open="false">
+
+Azure DevOps bundles code repo access and pull request access under a single OAuth scope `Code (read)` with no option to grant pull request access independently. This is a platform-level limitation on Azure DevOps' end, and applies to other version control systems as well.
+
+Scrut uses this permission solely to read pull request data for evidence collection. We do not write to, modify, or store your source code.
+
+For reference, you can review the full list of Azure DevOps OAuth scopes in [Microsoft's official documentation](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/oauth?view=azure-devops) (search for `Code (read)` on the page).
+
+</Expandable>
+
+<Expandable title="2: What data does Scrut collect from Azure DevOps?" default-open="false">
+
+Scrut collects projects, code repositories, branches, and pull request records. This data is used for automated compliance checks and code review evidence collection.
+
+</Expandable>
+
+<Expandable title="3: Can I sync data from multiple Azure DevOps organizations?" default-open="false">
+
+Yes. Repeat the OAuth toggle setup ([Step 1](/v1/docs/integrating-azure-devops#step-1-enable-oauth-access-in-azure-devops)) for each organization you want to include, then select the relevant repositories under Configure Scope in Scrut.
+
+</Expandable>
+
+<Expandable title="4: When and how does Scrut collect code review evidence from Azure DevOps?" default-open="false">
+
+Scrut automatically fetches pull request and code review activity from your connected Azure DevOps repositories on the 15th and last day of each month, and attaches it to the **Code Review Results** evidence task under **Compliance → Evidence Tasks**. No manual action is required. Activity that occurs between collection dates is included in the next scheduled fetch.
+
+This evidence demonstrates that your team follows a consistent code review process, which is a control requirement under frameworks such as SOC 2 and ISO 27001. Having it collected and attached automatically reduces the manual effort involved in audit preparation.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

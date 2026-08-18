@@ -1,0 +1,24 @@
+---
+title: "Understand Scrut's Data Security Measures"
+---
+
+Scrut is committed to safeguarding customer data and ensuring uninterrupted business operations. Let’s take a closer look at our disaster recovery measures and data retention policy.
+
+## Designated Disaster Recovery Regions
+
+At Scrut, we leverage AWS to host all our production environments. Each of our four primary production regions is paired with a designated Disaster Recovery (DR) region, thus ensuring localization of data. This proactive strategy ensures your critical data is shielded against unexpected events and movement is restricted to these two regions.
+
+|  | Primary Prod Region | Designated DR Region |
+| --- | --- | --- |
+| 1 | ap-south-1 (Mumbai) | ap-south-2 (Hyderabad) |
+| 2 | us-east-2 (Ohio) | us-west-1 (N. California) |
+| 3 | eu-north-1 (Stockholm) | eu-central-1 (Frankfurt) |
+| 4 | ap-southeast-2 (Sydney) | ap-southeast-4 (Melbourne) |
+
+Our backup strategy covers all essential AWS resources, including databases, storage, authentication systems, and configuration data. Additionally, our production environments are isolated from development and staging environments, further elevating security.
+
+## Data Retention Policy
+
+Scrut maintains all customer data for a period of one year. We maintain a 35-day active backup window that allows for quick data restoration using our dedicated restoration scripts. This active window ensures minimal downtime if you need recent data recovered.
+
+Data older than 35 days resides in cold storage and requires additional processing time for retrieval. After the one-year retention period expires, data is permanently deleted from our systems following our data lifecycle management practices.

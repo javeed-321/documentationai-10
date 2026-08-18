@@ -1,0 +1,44 @@
+---
+title: "Integrate Paylocity"
+description: "Learn how to connect your Paylocity account with Scrut."
+---
+
+The **Scrut-Paylocity integration** fetches employee data from your Paylocity account and sends it to Scrut. Upon completing the integration, Scrut will display the fetched data in:
+
+- People module
+
+## Data Collected
+
+Scrut fetches the following data for all your employees from Paylocity:
+
+- Employee name
+- Email address
+- Joining date
+- Exit date (if applicable)
+- Department and Role (if available)
+- Email of reporting manager (if available)
+- Leave data (start date, end date, and status)
+
+## How To Integrate Paylocity With Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and select **Human Resource Information Systems** from the Categories section.
+3. Scroll to the **Paylocity** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431095507-gf5pp57yme-integrating-paylocity__01-scroll-to-the-paylocity-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Paylocity tile and click Integrate" caption=" " />
+4. Click **Connect** on the Paylocity integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431097273-uk3g73k3u0k-integrating-paylocity__02-click-connect-on-the-paylocity-integration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect on the Paylocity integration page" caption=" " />
+5. Fill in the following details:
+  - **Paylocity Client ID and Client Secret**: To generate your API credentials, email webservices@paylocity.com with the [attached form completed](https://docs.paylocity.com/knowledge/Partner%20Integration/Paylocity%20Web%20Services_Access%20Request.pdf).
+  - **Paylocity Company ID**: You can find your Company ID in the upper left-hand corner of your Paylocity portal.
+  - **Paylocity Environment:** Select whether your Paylocity environment is Sandbox or Production.
+6. Enter the required credentials and click **Submit**.
+7. Once your Paylocity account is successfully integrated with Scrut, you will see a connected flag on the screen.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431098928-o62g7hr1uq-integrating-paylocity__03-once-your-paylocity-account-is-successfully.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once your Paylocity account is successfully integrated with Scrut, you will see a connected flag on the screen" caption=" " />
+
+## What Happens Next?
+
+- Employee data will start syncing immediately. Incremental data will be synced every 24 hours.
+- Data can also be manually synced by clicking the Sync Now button on the Paylocity integration page in Scrut.

@@ -1,0 +1,115 @@
+---
+title: "Integrate Apollo.io"
+description: "Learn how to integrate your organization's Apollo.io account with Scrut."
+---
+
+The **Scrut - Apollo.io** integration fetches user access data, permissions, and role assignments from your Apollo.io account and sends them to the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Apollo.io flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You must have permissions to generate an API key in Apollo.io
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Apollo.io
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Apollo.io account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Apollo.io With Scrut
+
+### Step 1: Fetch API Key from Apollo.io
+
+1. Log in to your Apollo.io account and click **Admin** **Settings → Integrations**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430003325-int07k1rndf-integrating-apollo-io__01-log-in-to-your-apollo-io-account-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your Apollo.io account and click Admin Settings → Integrations" caption=" " />
+2. Find the **API** option and click **Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430005116-ygwor75t9a-integrating-apollo-io__02-find-the-api-option-and-click-connect.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Find the API option and click Connect" caption=" " />
+3. Click **API keys** and click **Create new key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430006940-5ajlsfzbmxp-integrating-apollo-io__03-click-api-keys-and-click-create-new-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click API keys and click Create new key" caption=" " />
+4. Enter the name for your API key**,** such as Scrut, and set it as a master key by toggling on the **Set as master key** slider.
+5. Click **Create API key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430008666-4fj0jr99dlo-integrating-apollo-io__04-click-create-api-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create API key" caption=" " />
+6. Copy and save the API key as you’ll need to enter it in Scrut in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430010408-lt44r0nps6-integrating-apollo-io__05-copy-and-save-the-api-key-as-youll-need-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy and save the API key as you’ll need to enter it in Scrut in the next step" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  Refer to this guide for more information on [how to create and manage API keys in Apollo.io](https://docs.apollo.io/docs/create-api-key).
+</Callout>
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Miscellaneous** in the **Categories** section.
+3. Scroll to the **Apollo.io** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430012147-73ifmr9na6m-integrating-apollo-io__06-scroll-to-the-apollo-io-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Apollo.io tile and click Integrate" caption=" " />
+4. On the integration page, paste the API key obtained in Step 1.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430013810-p7un4nryhy8-integrating-apollo-io__07-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430015526-xj332s3l9jt-integrating-apollo-io__08-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Apollo.io. This process typically takes a few hours to complete. Check the Audit Log on the Apollo.io integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs the sync once **every 24 hours** to fetch incremental data such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430017405-9khj5zaogrv-integrating-apollo-io__09-manual-sync-you-can-also-click-the-sync-now.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: You can also click the Sync Now button to trigger an immediate data refresh" caption=" " />
+
+## Data Fetched from Apollo.io
+
+Scrut fetches the following access-related data points from Apollo.io:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Apollo.io Data in Scrut
+
+To view the data fetched from your Apollo.io account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your Apollo.io account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430019232-85xqda3psyv-integrating-apollo-io__10-to-view-the-data-fetched-from-your-apollo-io.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To view the data fetched from your Apollo.io account, go to the People → Access → Overview tab" caption=" " />
+
+To view the data fetched from your Apollo.io account, you’ll need to create an Access Review (or edit an existing one) and include the Apollo.io application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Apollo.io:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select Apollo.io in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Apollo.io to view user details in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430020954-x6iqs5d016-integrating-apollo-io__11-from-the-access-review-page-click-apollo-io.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the Access Review page, click Apollo.io to view user details in Scrut" caption=" " />
+
+---
+
+If you face any difficulties connecting Apollo.io with Scrut, please contact the Scrut support team at support@scrut.io.

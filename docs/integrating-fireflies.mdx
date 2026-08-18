@@ -1,0 +1,89 @@
+---
+title: "Integrate Fireflies"
+description: "Learn how to connect your team's Fireflies.ai account with Scrut."
+---
+
+The **Scrut - Fireflies** integration fetches user access data, permissions, and role assignments from your Fireflies account and syncs them with the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Fireflies flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You must have permissions to generate an API key in Fireflies
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Fireflies
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Fireflies account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Fireflies With Scrut
+
+### Step 1: Fetch API Key from Fireflies
+
+1. Log in to your Fireflies account and navigate to the **Integrations** section.
+2. Click on **Fireflies API**.
+3. Copy and store your API key securely, as you’ll need to enter it in Scrut in the [next step](/docs/integrating-fireflies#step-2-go-to-integrations-in-scrut).
+
+**Note:** Refer to this guide from Fireflies for [more information on the API key and what it does](https://docs.fireflies.ai/fundamentals/authorization).
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Communication Tools** in the **Categories** section.
+3. Scroll to the **Fireflies** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430448683-uw2gi20rpmg-integrating-fireflies__01-scroll-to-the-fireflies-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Fireflies tile and click Integrate" caption=" " />
+4. On the integration page, paste the API key obtained in [Step 1](/docs/integrating-fireflies#step-1-fetch-api-key-from-fireflies).
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430450416-9csh8hoff04-integrating-fireflies__02-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Fireflies. This process typically takes a few hours to complete. Check the Audit Log on the Fireflies integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs the sync once **every 24 hours** to fetch incremental data such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+## Data Fetched from Fireflies
+
+Scrut fetches the following access-related data points from Fireflies:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Fireflies Data in Scrut
+
+To view the data fetched from your Fireflies account, you’ll need to create an Access Review (or edit an existing one) and include the Fireflies application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Fireflies:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select Fireflies in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Fireflies to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting Fireflies with Scrut, please contact the Scrut support team at support@scrut.io.

@@ -1,0 +1,179 @@
+---
+title: "Integrate JumpCloud"
+description: "Learn how to connect JumpCloud with Scrut for MDM and IDP."
+---
+
+<Callout kind="alert">
+  Heads Up!
+
+  If you’re looking to connect **JumpCloud SSO with Scrut**, [see here](/docs/jumpcloud-sso).
+</Callout>
+
+Connecting JumpCloud with Scrut brings your endpoint device data, employee records, and compliance evidence into Scrut, so your team spends less time on manual data collection and more time on staying audit-ready.
+
+## What This Integration Does in Scrut
+
+- **User Endpoint Devices:** Fetches employee device details, including security posture and installed software. These devices are mapped to employees and visible in their profile under People → Employees → Technical.
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered assets and supports the collection of asset-related compliance evidence.
+- **Employee Directory:** Syncs employee and group data into Scrut's People module. These users can then access the Employee Portal for training, policy acceptance, and device-related activities.
+
+## Prerequisites
+
+Before you begin, make sure you have the following in place:
+
+- An active JumpCloud account with administrator access
+- Employees enrolled in JumpCloud with valid email addresses
+
+## Permissions and Access Requirements
+
+### For JumpCloud
+
+JumpCloud uses API key-based authentication. No scope selection is required when generating the API key. You only need to set an expiration period for the key. Any admin-level JumpCloud user can generate and copy the API key from their profile settings.
+
+**Note:** For more information, refer to [JumpCloud’s documentation on the API and what it does](https://jumpcloud.com/support/jumpcloud-apis).
+
+### For Scrut
+
+Admin access to Scrut, or Contributor access with permissions for the Integrations module.
+
+## Data Collected
+
+**People module**
+
+- User Name: Pulled from JumpCloud user profile
+- User Email: Used to match and deduplicate employee records
+- JumpCloud user groups: Determines which employees sync to Scrut
+- Account status: Suspension in JumpCloud triggers offboarding notification in Scrut
+
+**Asset Management and People → Employees → Technicals**
+
+- device_name
+- os_version
+- serial_number
+- antivirus_installed (Yes / No)
+- hd_encrypted (Yes / No)
+- screenlock_enabled (Yes / No)
+- List of installed applications
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the JumpCloud integration page in Scrut.
+
+## Integration Setup
+
+### Step 1: Retrieve Your API Key from JumpCloud
+
+1. Log in to JumpCloud and click your profile icon in the top-right corner.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430721959-4qjvj0omx1o-integrating-jumpcloud__01-log-in-to-jumpcloud-and-click-your-profile.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to JumpCloud and click your profile icon in the top-right corner" caption=" " />
+2. Click **My API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430723789-32t0q30g00e-integrating-jumpcloud__02-click-my-api-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click My API Key" caption=" " />
+3. Copy the API key displayed in the dialog box.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430725356-yvb7vl9017a-integrating-jumpcloud__03-copy-the-api-key-displayed-in-the-dialog-box.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the API key displayed in the dialog box" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  Generating a new API key in JumpCloud immediately revokes the existing one. If you regenerate the key, update it in Scrut as well to avoid losing the connection.
+</Callout>
+
+### Step 2: Connect JumpCloud in Scrut
+
+1. Sign in to Scrut, and click **Integrations** on the left navigation panel.
+2. Click the **Integrations Library** tab at the top, and scroll to **Mobile Devices Management (MDM) Tools** in the **Categories** section.
+3. Search for **JumpCloud** and click the **Integrate** button in the JumpCloud tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430726993-cpejjlhecrt-integrating-jumpcloud__04-search-for-jumpcloud-and-click-the-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for JumpCloud and click the Integrate button in the JumpCloud tile" caption=" " />
+4. On the JumpCloud integration page, enter the API key you copied in the API Key field.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430728549-4tpt8mhrcts-integrating-jumpcloud__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Confirm that the Connected status indicator appears at the top right of the integration page.
+
+### Step 3: Configure Employee Groups (for JumpCloud as IdP)
+
+If you use **JumpCloud as your IdP to manage your employees**, you need to configure groups to import employee data into Scrut. Without it, Scrut cannot automatically sync employee records from JumpCloud groups.
+
+<Callout kind="alert">
+  Heads Up!
+
+  You must complete [Steps 1](/v1/docs/integrating-jumpcloud#step-1-retrieve-your-api-key-from-jumpcloud) and [2](/v1/docs/integrating-jumpcloud#step-2-connect-jumpcloud-in-scrut) before configuring groups. The Configure Groups option is only available after the integration is connected.
+</Callout>
+
+1. On the JumpCloud integration page, click **Configure Groups**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430730371-i7qfwfan8ra-integrating-jumpcloud__06-on-the-jumpcloud-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the JumpCloud integration page, click Configure Groups" caption=" " />
+2. Turn on the **Enable JumpCloud IDP** toggle.
+3. Use the **Groups** dropdown to select the JumpCloud groups from which you want to import employees.
+4. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430732141-df7wxlwa2i-integrating-jumpcloud__07-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After setup is complete, Scrut begins syncing data from JumpCloud automatically. The initial sync may take up to 24 hours. To monitor the sync status, navigate to Integrations, open the JumpCloud integration page, and click the Audit Log tab.
+
+### Review synced data
+
+Once the sync is complete, verify your data in the following locations:
+
+- Navigate to **People → Employees → Technicals** to view device records mapped to each employee.
+- Navigate to **Asset Management** to view devices populated as assets.
+- Navigate to **People → Employees** to verify employee records synced from JumpCloud groups. This is available only if you’ve completed [Step 3](/v1/docs/integrating-jumpcloud#step-3-configure-employee-groups-for-jumpcloud-as-idp).
+- Navigate to **Tests** to review automated test results tied to JumpCloud device data.
+
+## Common Errors and Troubleshooting
+
+### Invalid API key
+
+Possible solutions:
+
+- Confirm you copied the full API key from JumpCloud without extra spaces.
+- If a new API key was generated in JumpCloud after the initial setup, update it in Scrut by navigating to the JumpCloud integration page and re-entering the new key in the API Key field, then clicking Submit.
+
+### Integration shows connected, but no data appears
+
+Possible solutions:
+
+- Allow up to 24 hours for the initial sync to complete.
+- Check the Audit Log on the JumpCloud integration page for sync errors or status messages.
+- Trigger a manual sync by clicking Sync Now on the integration page.
+
+### Employees not syncing to Scrut
+
+Possible solutions:
+
+- Confirm that the Enable JumpCloud IDP toggle is turned on in Configure Groups.
+- Confirm that the correct groups are selected in the Groups dropdown.
+- Verify that employees in the selected groups have valid email addresses in JumpCloud, since Scrut uses email to match and deduplicate records.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens when an employee is suspended in JumpCloud?" default-open="false">
+
+When an employee's account is suspended in JumpCloud, Scrut sends a notification to prompt offboarding. Employee records already in Scrut are not automatically deleted.
+
+</Expandable>
+
+<Expandable title="2: What happens if I add a new employee to a JumpCloud group that is already synced to Scrut?" default-open="false">
+
+New employees added to a synced group in JumpCloud are automatically pulled into Scrut during the next scheduled sync. You can also trigger a manual sync from the integration page to import the employee immediately.
+
+</Expandable>
+
+<Expandable title="3: Can I sync data from more than one JumpCloud group?" default-open="false">
+
+Yes. Use the Groups dropdown in Configure Groups to select multiple groups. Employees from all selected groups are synced to Scrut.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

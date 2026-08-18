@@ -1,0 +1,286 @@
+---
+title: "Manage Jira Tickets"
+description: "Learn how to create a Jira ticket directly from Scrut."
+---
+
+<Callout kind="alert">
+  Heads Up!
+
+  The Jira integration must be connected before you can create or link tickets from Scrut. See How to Set Up the Jira Integration to get started.
+</Callout>
+
+Once your Jira integration is active, you can:
+
+- Create new Jira tickets directly from Scrut
+- Link an existing Jira ticket to an artifact in Scrut
+- Automatically create Jira tickets when artifacts move to a non-compliant status
+- Automatically sync attachments added to linked Jira tickets to the respective evidence tasks
+
+## Why Manage Compliance Tickets from Scrut
+
+Creating Jira tickets from Scrut keeps your compliance work and remediation efforts connected in one place. Instead of manually copying context across tools, Scrut pushes the relevant artifact details directly into the ticket and keeps both platforms in sync as work progresses.
+
+- **Traceability:** Every ticket is linked to the specific policy, test, evidence task, or finding it relates to, so nothing falls through the cracks.
+- **No** **context switching:** Your team picks up tickets in Jira and works within their existing workflow, while Scrut stays automatically updated.
+- **Bidirectional sync:** Changes made to synced fields in Jira - including status updates - are reflected in Scrut in real time.
+- **Automation:** Scrut can automatically create a new Jira ticket whenever a linked artifact moves to Needs Attention, ensuring your team is always notified when action is required.
+- **Attachment sync:** Files added to a Jira ticket are automatically imported back into the linked evidence task in Scrut, keeping your evidence collection complete.
+
+## Data Synced With Jira
+
+### Standard Fields
+
+By default, Scrut sends the following ticket metadata to Jira:
+
+- **Project**: The specific workspace where the ticket is added
+- **Board**: The board associated with the project (if available)
+- **Issue Type**: The classification of the work item (e.g., bug, task, etc.)
+- **Title**: In the following format [Scrut - Module] Artifact name
+- **Description**: [Optional] Detailed information about the compliance task
+- **Assignee:** The individual accountable for completing the ticket
+- **Due Date:** [Optional] The target date for the ticket's resolution
+
+### Optional Fields
+
+You can also configure these additional fields to be sent to Jira:
+
+- **Sprint:** The iteration the ticket is scheduled within
+- **Epic Link:** The larger initiative this ticket contributes to
+- **Priority:** This includes values like highest, high, medium, low, and lowest
+- **Components:** Specific functional areas the ticket relates to
+
+<Callout kind="info">
+  Pro Tip!
+
+  Use the optional fields to match your team's existing Jira workflow. Mapping tickets to the right Sprint or Epic helps keep compliance work visible in your project planning.
+</Callout>
+
+## How To Create a Jira Ticket
+
+You can create a Jira ticket from any of the following modules in Scrut: **Policies, Evidence Tasks, Tests, Cloud, Risk Management, Audit Center (Requests, Findings, and Corrective Actions), and Vulnerabilities.**
+
+1. Navigate to the artifact from which you want to create a ticket.
+2. Scroll down to the **Tickets (Jira)** tab.
+3. Click **Create** and select **Create Jira Ticket** from the dropdown.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429892031-opv08gsafbb-creating-jira-ticket__01-click-create-and-select-create-jira-ticket.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create and select Create Jira Ticket from the dropdown" caption=" " />
+4. In the Create Jira Ticket modal, fill in the following fields:
+  - **Issue Type**: Select the type of work item from the available options
+  - **Title**: Scrut auto-fills this based on the artifact. The default format is [Scrut - Module Name] Artifact Name. Edit it if needed
+  - **Description**: Click **Autofill** to let Scrut populate the description with relevant compliance metadata, such as the assignee, evidence links, and remediation steps. You can edit the autofilled text before creating the ticket.
+  - Select an **Assignee**: The team member who will work on the ticket in Jira.
+  - Optionally, select a **Due Date** and any additional fields using **Select optional fields**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429893762-wp9dmq2m4g-creating-jira-ticket__02-optionally-select-a-due-date-and-any.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Optionally, select a Due Date and any additional fields using Select optional fields" caption=" " />
+5. Select the **Enable Ticket Automation** checkbox if you want Scrut to automatically create a new Jira ticket each time this artifact's status moves to a non-compliant status. See [Enable Jira Ticket Automation for more details](/v1/docs/creating-jira-ticket#jira-ticket-automation).
+6. For evidence tasks only: select the **"Also sync attachments embedded in descriptions and comments"** checkbox to have Scrut import inline images and files from Jira ticket descriptions and comments into the linked evidence task. See [Sync Jira Attachments to Evidence Tasks for more details](/v1/docs/creating-jira-ticket#sync-jira-attachments-to-evidence-tasks).
+7. Click **Create**.
+8. Watch for the success notification.
+
+The ticket is now live in your Jira workspace.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429895440-fcjsplj131-creating-jira-ticket__03-the-ticket-is-now-live-in-your-jira-workspace.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The ticket is now live in your Jira workspace" caption=" " />
+
+Scrut logs the ticket link and creator details in the Comments and Audit Logs sections of the artifact. You can view all Jira tickets linked to an artifact from the Tickets (Jira) tab, which shows the Jira ID, Title, Assignee, Status, Created On date, and available Actions.
+
+<Callout kind="info">
+  Pro Tips!
+
+  - The Jira ticket includes a URL that links directly back to the corresponding artifact in Scrut, so your team has full context without searching for it.
+  - When creating a ticket from the Cloud module, Scrut automatically includes the AI code fix in the description to give your team more context for remediation.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429897217-l07xsvl01td-creating-jira-ticket__04-when-creating-a-ticket-from-the-cloud-module.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="When creating a ticket from the Cloud module, Scrut automatically includes the AI code fix in the description" caption=" " />
+
+## Create Multiple Jira Tickets Simultaneously
+
+<Callout kind="alert">
+  **Note:**
+
+  Bulk ticket creation is available only for the Vulnerabilities module. Ticket titles and descriptions are auto-generated in bulk mode and cannot be edited before creation. You can edit them individually in Jira after the tickets are created.
+</Callout>
+
+If you need to raise tickets for several findings at once, Scrut lets you create multiple Jira tickets in a single action.
+
+1. Navigate to **Vulnerabilities → Findings** and select **All Findings** or **Affected Resources**.
+2. Select the findings or affected resources for which you want to create tickets.
+3. Click **Create Jira Tickets**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429898911-kjmfespf24-creating-jira-ticket__05-click-create-jira-tickets.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create Jira Tickets" caption=" " />
+4. In the modal, select the **Project, Board, Issue Type**, and **Assignee**. Optionally, set a **Due Date** and any additional fields.
+5. Click **Create**.
+6. Watch for the success notification.
+
+Scrut creates the corresponding tickets in Jira. Each ticket title and description is auto-filled based on the finding or affected resource.
+
+## Link an Existing Jira Ticket
+
+If required, you can also link existing Jira tickets to an artifact, instead of creating a new one.
+
+1. Navigate to the artifact you want to link a ticket to.
+2. Scroll down to the **Tickets (Jira)** tab.
+3. Click **Create** and select **Link Existing Tickets** from the dropdown.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432250728-66dffvbp5tt-click-create-and-select-link-existing-9cb7a437.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create and select Link Existing Tickets from the dropdown" caption=" " />
+4. In the Link Ticket modal, search for the ticket by entering its **title** or **ID**.
+5. Select the ticket from the results.
+6. Select the **Enable Ticket Automation** checkbox to enable automation for this ticket.
+7. Click **Link**.
+
+The ticket appears in the Tickets (Jira) tab and is now linked to the artifact.
+
+**Points to note:**
+
+- You can link multiple Jira tickets to the same artifact.
+- You can also link the same Jira ticket to multiple artifacts, if required.
+- There is no limit on the number of linked tickets.
+
+## Jira Ticket Automation
+
+<Callout kind="alert">
+  Heads Up!
+
+  Ticket Automation is available for Evidence Tasks, Policies, and Tests only.
+</Callout>
+
+### How it works
+
+Ticket Automation enables Scrut to automatically create a new Jira ticket each time a linked artifact moves to a non-compliant status:
+
+- Policy status changes to **Needs Review**
+- Evidence Task status changes to **Needs Attention**
+- Test status changes to **Fix Required**
+
+This keeps your team's task queue up to date without any manual effort.
+
+### Auto-generated ticket details
+
+Each auto-generated ticket is a copy of the original ticket, with the same assignee, description, and metadata. The only difference is the title, which follows this format:
+
+[MM/YY] Original Ticket Name
+
+For example, if the original ticket is named "Review Quarterly Access Logs" and the status change happens in March 2025, the new ticket is titled "[03/25] Review Quarterly Access Logs."
+
+The new ticket is automatically linked to the same artifact as the original and appears in the Tickets (Jira) tab alongside all manually created and previously automated tickets.
+
+### How to enable ticket automation
+
+You can turn on automation in two ways:
+
+- **When creating a new Jira ticket**, select the **Enable Ticket Automation** checkbox before clicking Create. From this point, Scrut creates a new ticket each time the artifact's status changes to non-compliant.
+- **When linking an existing Jira ticket:** In the Link Ticket modal, select the **Enable Ticket Automation** checkbox before clicking Link. Automation applies going forward. The existing ticket is not modified.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429900636-1bo034ielmn-creating-jira-ticket__07-when-linking-an-existing-jira-ticket-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="When linking an existing Jira ticket: In the Link Ticket modal, select the Enable Ticket Automation checkbox" caption=" " />
+
+### Points to note:
+
+**#1:** A new automated ticket is created only once per day. If an artifact moves to a non-compliant status multiple times in the same day, Scrut creates a single ticket for that day.
+
+Here is an example of how this plays out:
+
+- Day 1 (Test moves to the Fix Required status): The first automated ticket is created
+- Day 2 (Test still in the Fix Required status after the scheduled scan): The second automated ticket is created
+- This continues until the test returns to the Passing status
+
+**#2:** If multiple tickets are linked to the same artifact and all have automation turned on, each ticket is duplicated individually when the status changes. Each new ticket retains its own metadata and follows the [MM/YY] naming convention.
+
+**#3:** Existing auto-generated tickets are not updated or closed automatically. Your team manages the ticket lifecycle in Jira as part of their normal workflow.
+
+**#4:** Scrut creates an audit-log entry every time a new ticket is auto-generated.
+
+**#5:** If an automated ticket fails to be created, a red warning icon appears next to the original ticket in the Tickets (Jira) tab. Hover over the icon to see the reason for the failure.
+
+### Stopping ticket automation
+
+To stop automation:
+
+- Unlink the original ticket from the artifact in Scrut
+- Delete the ticket in Jira
+
+Once the original ticket is removed, Scrut stops generating new tickets. Any previously auto-generated tickets remain linked to the artifact and are not affected. For example, if the original ticket has already triggered two automated tickets, those two remain visible in the Tickets (Jira) tab. Only future automated tickets will stop being created.
+
+## Sync Jira Attachments to Evidence Tasks
+
+<Callout kind="alert">
+  **Important**
+
+  Syncing Jira attachments is available for **Evidence Tasks only**. It has no effect on tickets created for other modules.
+</Callout>
+
+Scrut can automatically import attachments from linked Jira tickets into the corresponding evidence task. This keeps your evidence collection complete without requiring manual uploads on both sides. This feature works at two levels.
+
+### Turn On Automatic Attachment Import
+
+This is a global setting that applies to all Jira tickets linked to evidence tasks in your workspace. When turned on, any file explicitly uploaded via the Add Attachment button in a Jira ticket is automatically imported into the linked evidence task in Scrut.
+
+1. Navigate to **Integrations** in the left menu.
+2. Search and locate the **Jira** tile in the **Connected Integrations** tab.
+3. Click **Configure**.
+4. Navigate to the **Settings** tab.
+5. Turn on the **Automatically import attachments from Jira to Evidence Task** toggle.
+
+Attachments from linked Jira tickets will now automatically sync to the corresponding evidence tasks.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429902402-xtc1rwsp7r8-creating-jira-ticket__08-attachments-from-linked-jira-tickets-will.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Attachments from linked Jira tickets will now automatically sync to the corresponding evidence tasks" caption=" " />
+
+### Also Sync Embedded Attachments
+
+By default, files embedded inside Jira ticket descriptions and comments, such as inline images, are not synced, even when the global toggle is on. To include these, enable this option when creating the ticket.
+
+- In the Create Jira Ticket modal, select the **Also sync attachments embedded in descriptions and comments** checkbox before clicking Create.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429904320-3y3q8wuk0s3-creating-jira-ticket__09-in-the-create-jira-ticket-modal-select-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="In the Create Jira Ticket modal, select the Also sync attachments embedded in descriptions and comments" caption=" " />
+
+## Updating Tasks in Jira
+
+The integration between Scrut and Jira is bidirectional and syncs in real time. **When you change any synced fields in your Jira tickets, those changes will automatically update in Scrut.** For example, if you mark a task as completed in Jira, that completion status will immediately appear in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429905902-itsh115lt1-creating-jira-ticket__10-the-integration-between-scrut-and-jira-is.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The integration between Scrut and Jira is bidirectional and syncs in real time" caption=" " />
+
+## FAQs and Troubleshooting
+
+<ExpandableGroup>
+
+<Expandable title="1: How do I unlink a Jira ticket in Scrut?" default-open="false">
+
+Open the artifact, scroll to the Tickets (Jira) tab, and click the unlink icon next to the ticket you want to disconnect. The ticket remains in Jira but is no longer associated with the artifact in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429907616-asv3zaiej-creating-jira-ticket__11-open-the-artifact-scroll-to-the-tickets-jira.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Open the artifact, scroll to the Tickets (Jira) tab, and click the unlink icon next to the ticket you want to" caption=" " />
+
+</Expandable>
+
+<Expandable title="2: Can I add multiple Jira tickets to the same artifact?" default-open="false">
+
+Yes. You can link as many tickets as needed to a single artifact. If you create tickets with identical names, Scrut automatically appends a counter, for example, "Privacy Policy 1" and "Privacy Policy 2".
+
+</Expandable>
+
+<Expandable title="3: Why isn't the due date visible in Jira?" default-open="false">
+
+If you set a due date when creating the ticket, Scrut sends it to Jira. However, for it to appear in the Jira ticket view, the Due Date field must be enabled in your Jira screen settings. Refer to [Jira's documentation on how to enable this field](https://confluence.atlassian.com/jirakb/due-date-field-not-showing-when-i-create-or-view-a-jira-cloud-issue-189431917.html).
+
+</Expandable>
+
+<Expandable title="4: Can I edit the ticket title and description when creating multiple tickets at once?" default-open="false">
+
+No. Titles and descriptions are auto-generated in bulk mode and cannot be edited before the tickets are created. You can update them individually in Jira after creation.
+
+</Expandable>
+
+<Expandable title="5: Will Scrut sync images embedded in Jira descriptions and comments?" default-open="false">
+
+Not by default. Scrut automatically syncs files uploaded via the Add Attachment button in Jira for tickets linked to Evidence Tasks.
+
+To also sync inline images and files embedded in descriptions and comments, select the Also sync attachments embedded in descriptions and comments checkbox when creating the ticket in Scrut.
+
+</Expandable>
+
+<Expandable title="6: Does enabling Ticket Automation affect tickets that are already linked?" default-open="false">
+
+No. Automation applies going forward. A new Jira ticket is created each time the artifact's status changes to non-compliant.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

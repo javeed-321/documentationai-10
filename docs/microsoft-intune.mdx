@@ -1,0 +1,165 @@
+---
+title: "Integrate MS Intune"
+description: "Learn how to connect your Microsoft Intune account with Scrut."
+---
+
+Connect your Microsoft Intune (MS Intune) account with Scrut to automatically pull employee device data into your compliance workflows. In this guide, we walk you through connecting your Microsoft Intune account to Scrut.
+
+## What This Integration Does in Scrut
+
+- **User Endpoint Devices:** Fetches employee device details, including security posture and installed software. These devices are mapped to employees and visible in their profile under People → Employees → Technical.
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your device configurations against applicable compliance frameworks.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered devices and supports the collection of asset-related compliance evidence.
+
+## Prerequisites
+
+- An active Microsoft Intune account with administrator access
+- Devices enrolled and managed in Microsoft Intune
+
+<ExpandableGroup>
+
+<Expandable title="Why is administrator access required?" default-open="false">
+
+For the Scrut integration to work, it requires an administrator-level role (Global, Application, or Cloud Application Administrator) to grant the necessary tenant-wide, read-only permissions.
+
+</Expandable>
+
+</ExpandableGroup>
+
+## Permissions and Access Requirements
+
+### For MS Intune
+
+Scrut requires the following read-only OAuth scopes during authorization:
+
+- `openid`
+- `offline_access`
+- `https://graph.microsoft.com/User.Read.All`
+- `DeviceManagementManagedDevices.Read.All`
+- `DeviceManagementConfiguration.Read.All`
+
+**Note:** Refer to [Microsoft's documentation](https://learn.microsoft.com/en-us/graph/permissions-reference) for details on each permission scope.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integration module enabled
+
+## Data Collected
+
+Scrut fetches the following details for each device in your MS Intune account:
+
+- Device name
+- OS version
+- Serial number
+- Antivirus installed (Displayed as Yes/No)
+- HD Encrypted (Displayed as Yes/No)
+- Screenlock Enabled (Displayed as Yes/No)
+- List of installed applications
+
+## Sync Frequency
+
+Data syncs automatically every 24 hours. You can also trigger a manual sync from the MS Intune integration page.
+
+## Integration Setup
+
+### Step 1: Connect MS Intune in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Click the **Integrations Library** tab.
+3. Under **Categories**, select **Mobile Device Management (MDM) Tools**.
+4. Locate the **MS Intune** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431772093-942skuepfwd-microsoft-intune__01-locate-the-ms-intune-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the MS Intune tile and click Integrate" caption=" " />
+5. On the MS Intune integration page, click **Connect** in the top right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431773900-6gnoxggg3b-microsoft-intune__02-on-the-ms-intune-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the MS Intune integration page, click Connect in the top right" caption=" " />
+6. You are redirected to Microsoft's authentication page. Sign in with your Microsoft administrator account if prompted.
+7. On the Microsoft OAuth screen, review the requested permissions. Select the **Consent on behalf of your organization** checkbox and click **Accept**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431775698-n0wyes4d2e-microsoft-intune__03-on-the-microsoft-oauth-screen-review-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Microsoft OAuth screen, review the requested permissions" caption=" " />
+8. Watch for the success notification and confirm the status changes to **Connected**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431777439-ina8ue3mcd-microsoft-intune__04-watch-for-the-success-notification-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the success notification and confirm the status changes to Connected" caption=" " />
+
+### Step 2: Configure Scope
+
+1. On the MS Intune integration page, click **Configure Scope**.
+2. Select the device checks you want Scrut to monitor:
+  - Screen Lock Enabled
+  - Antivirus Installed
+3. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431779276-ro9b1cin55t-microsoft-intune__05-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+Scrut begins syncing device data from Microsoft Intune after the integration is connected. Full data population may take some time, depending on the size of your device inventory. Monitor sync progress in the **Audit Log** on the MS Intune integration page.
+
+### Review synced data
+
+- Navigate to **People → Employees → Technical** to view employee device records and security posture data.
+- Navigate to **Asset Management** to view devices populated from MS Intune.
+- Navigate to **Compliance → Evidence Tasks** to set up a Scrut Monitor to automate evidence collection from MS Intune.
+- Navigate to **Tests** to view automated test coverage driven by MS Intune data. Apply the Application filter with MS Intune selected to view only MS Intune tests.
+
+## Common Errors & Troubleshooting
+
+### Authentication failure
+
+Cause: The Microsoft account used during authorization does not have administrator privileges, or the consent checkbox was not selected.
+
+Possible solutions:
+
+- Confirm you are signing in with an account that has the Global Administrator or Intune Administrator role in Microsoft Entra ID.
+- Repeat the authorization flow and ensure **Consent on behalf of your organization** is checked before clicking **Accept**.
+
+### Device data not appearing in Scrut
+
+Possible solutions:
+
+- Check the **Audit Log** on the integration page to confirm the sync completed without errors.
+- Confirm that devices are enrolled and active in your Microsoft Intune account.
+- Trigger a manual sync by clicking **Sync Now** on the MS Intune integration page, and check again after a few minutes.
+
+### Device check fields show no data
+
+Cause: The device check policies may not be configured in the Configure Scope step, or the relevant policies are not assigned in Intune.
+
+Possible solutions:
+
+- Go to the MS Intune integration page, click **Configure Scope**, and confirm your desired checks are selected and saved.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if a device is removed from Microsoft Intune?" default-open="false">
+
+Devices removed from Intune are no longer synced to Scrut after the next scheduled sync. Existing records in Scrut are not automatically deleted.
+
+</Expandable>
+
+<Expandable title="2: Can I sync data more frequently than every 24 hours?" default-open="false">
+
+Scrut syncs device data every 24 hours on a recurring schedule. For an immediate update, click **Sync Now** on the MS Intune integration page to trigger a manual sync.
+
+</Expandable>
+
+<Expandable title='3: What does "Consent on behalf of your organization" mean?' default-open="false">
+
+Selecting this grants Scrut read-only access to device and user data across your entire organization, not just your own account. Administrator-level access in Microsoft Entra ID is required to grant this consent.
+
+</Expandable>
+
+<Expandable title="4: How do I find the synced device data in Scrut?" default-open="false">
+
+Device data appears in **People → Employees → Technical** within each employee's profile. Asset-level data is available in the **Asset Management** module.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

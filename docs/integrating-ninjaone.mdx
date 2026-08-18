@@ -1,0 +1,162 @@
+---
+title: "Integrate NinjaOne"
+description: "Learn how to integrate your NinjaOne account with Scrut."
+---
+
+The **Scrut-NinjaOne Integration** fetches your employees’ device/endpoint data from your NinjaOne account and sends it to Scrut. Upon successfully completing the integration, Scrut will display the fetched data in the following modules:
+
+- [People → Employee](https://help.scrut.io/docs/employees)
+- [Access Review](https://help.scrut.io/docs/what-is-access-review)
+
+## How To Integrate Scrut With NinjaOne
+
+### Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your NinjaOne account:
+
+- **Account Information:** Your NinjaOne login email address
+- **Admin Access:** You must be a NinjaOne admin to grant the following permissions:
+  - **Read access:** To allow Scrut to monitor data and the organization structure
+  - **Offline access:** To enable read access to your NinjaRMM account, even when you’re offline
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your NinjaOne account before starting the integration to avoid doing so later.
+</Callout>
+
+### Step 1: Copy Client ID and Client Secret from NinjaOne
+
+1. Log in to your NinjaOne account and click **Administration** in the left navigation panel.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430966148-7eoucih9vqa-integrating-ninjaone__01-log-in-to-your-ninjaone-account-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your NinjaOne account and click Administration in the left navigation panel" caption=" " />
+2. Go to **App → API → Client App ID**.
+3. Click **Add** to create an app.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430967858-8lssvueuih4-integrating-ninjaone__02-click-add-to-create-an-app.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Add to create an app" caption=" " />
+4. In the **Application Platform** dropdown, select **Web (PHP, Java, .Net Core, etc.)**.
+5. Enter and select the following information:
+  - NAME: Give an arbitrary name (e.g., Scrut)
+  - Redirect URLs: Enter the appropriate URL based on your Scrut instance region.
+    - India: [**https://app.scrut.io/settings/integration/ninjaone**](https://app.scrut.io/settings/integration/ninjaone)
+    - For US: [**https://app.us.scrut.io/settings/integration/ninjaone**](https://app.us.scrut.io/settings/integration/ninjaone)
+    - For EU: [**https://app.eu.scrut.io/settings/integration/ninjaone**](https://app.eu.scrut.io/settings/integration/ninjaone)
+    - For Australia: [**https://app.au.scrut.io/settings/integration/ninjaone**](https://app.au.scrut.io/settings/integration/ninjaone)
+  - Scopes: Select **Monitoring**
+  - Allowed Grant Types: **Authorization Code** and **Refresh Token**
+6. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430969505-up8hipu51f-integrating-ninjaone__03-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+7. Copy and save the **Client Secret** displayed on the screen.
+
+<Callout kind="danger">
+  Note:
+
+  The Client Secret will not be redisplayed. So, ensure that you store it in a safe location for easy access later.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430971275-mo84jzo1kpo-integrating-ninjaone__04-the-client-secret-will-not-be-redisplayed.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The Client Secret will not be redisplayed" caption=" " />
+8. Return to the API page, where you can see the API you generated for the Scrut integration in the list of Client App IDs.
+9. Copy and save the **Client ID**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430972876-mm3pkhmqgxi-integrating-ninjaone__05-copy-and-save-the-client-id.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy and save the Client ID" caption=" " />
+
+<Callout kind="danger">
+  Important:
+
+  To avoid token expiry and ensure continuous syncing with NinjaOne, request **NinjaOne support** to enable **sliding refresh tokens** for the **Scrut client ID**. If this is not enabled, the token will expire and may interrupt the integration.
+</Callout>
+
+### Step 2: Connect Your NinjaOne Account in Scrut
+
+1. Log in to your Scrut account and click **Integrations** on the left navigation panel.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430974702-k7xjcktwa6t-integrating-ninjaone__06-log-in-to-your-scrut-account-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Log in to your Scrut account and click Integrations on the left navigation panel" caption=" " />
+2. Navigate to the **Integrations Library** tab and choose **Mobile Device Management Tools** in the **Categories** section.
+3. Scroll to the **NinjaOne** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430976346-otbqivuwu6-integrating-ninjaone__07-scroll-to-the-ninjaone-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the NinjaOne tile and click Integrate" caption=" " />
+4. On the NinjaOne integration page, enter the following details from [Step 1](/v1/docs/integrating-ninjaone#step-1-copy-client-id-and-client-secret-from-ninjaone).
+  - **Client ID**
+  - **Client Secret**
+5. Select your **NinjaOne Domain** based on your instance region.
+  - North America: App
+  - EMEA: EU
+  - APAC: OC
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430977917-bsuv3zer5g7-integrating-ninjaone__08-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. Click **Authorize** to grant the required permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430979521-w53xl22zw1-integrating-ninjaone__09-click-authorize-to-grant-the-required.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Authorize to grant the required permissions" caption=" " />
+8. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430981105-vdelys56l1n-integrating-ninjaone__10-once-authorization-is-done-youll-see-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is done, you’ll see the “Connected Successfully” message and the Connected status indicator" caption=" " />
+
+### Step 3: Verify User Assignments in NinjaOne
+
+<Callout kind="danger">
+  Important:
+
+  User-to-device mapping is critical for data synchronization between NinjaOne and Scrut. **Only devices with assigned users will sync data with Scrut.** If you've already assigned users to all devices, you can skip this step.
+</Callout>
+
+To verify or create user assignments:
+
+1. Access your NinjaOne dashboard and select **Devices** from the left navigation menu.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430982792-s9zqm9hqicj-integrating-ninjaone__11-access-your-ninjaone-dashboard-and-select.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Access your NinjaOne dashboard and select Devices from the left navigation menu" caption=" " />
+2. Click any device that needs verification, then navigate to the **Settings** tab.
+3. Confirm a user is assigned to the device.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430984366-hjzcgw6k515-integrating-ninjaone__12-confirm-a-user-is-assigned-to-the-device.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Confirm a user is assigned to the device" caption=" " />
+
+Complete this verification for all devices to ensure comprehensive data integration with Scrut.
+
+## Synchronization Details
+
+- **Initial Sync**: On completing the integration, Scrut will sync employees’ device data from NinjaOne immediately.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+- **Manual Sync**: If you prefer, you can initiate a manual sync by clicking the **Sync Now** button on the NinjaOne integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430985986-93riakwhfeu-integrating-ninjaone__13-manual-sync-if-you-prefer-you-can-initiate-a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: If you prefer, you can initiate a manual sync by clicking the Sync Now button on the NinjaOne" caption=" " />
+
+## Device Data Fetched from NinjaOne
+
+Scrut fetches the following data points for each employee device from NinjaOne:
+
+- Device name
+- Serial Number
+- OS Version
+- Last Checked Date
+- Antivirus Installed (Names)
+- Password Manager (Names)
+- USB Disabled (Yes/No)
+- Count and List of Applications Installed on the Device (Click View Details to view the application name and version number)
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430987706-vjnoe855o8-integrating-ninjaone__14-count-and-list-of-applications-installed-on.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Count and List of Applications Installed on the Device (Click View Details to view the application name and" caption=" " />
+
+## Viewing NinjaOne Data in Scrut
+
+To view NinjaOne data in Scrut:
+
+1. Click **People → Employees** on the left navigation panel in Scrut.
+2. Navigate to the **All Employees** tab, search, and click on a specific employee.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432283020-t190c7up3p-navigate-to-the-all-employees-tab-search-and-aa66de6a.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to the All Employees tab, search, and click on a specific employee" caption=" " />
+3. On the Employee page, click the **Technicals** tab.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430989467-chi5ui7cmgs-integrating-ninjaone__16-on-the-employee-page-click-the-technicals-tab.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Employee page, click the Technicals tab" caption=" " />
+4. Here, you can view the data Scrut fetches from NinjaOne.
+
+## Limitations
+
+When using NinjaOne as your monitoring agent in Scrut (via **People → Employees → Checklists**), please be aware that the following device security checks cannot be automatically verified:
+
+- Encrypt Storage Devices (HDD/SSD)
+- Enable Screen Lock
+- Disable Device USB
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430991309-prgqii66mj8-integrating-ninjaone__17-disable-device-usb.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Disable Device USB" caption=" " />
+
+We recommend using an alternative monitoring agent, such as [Scrut Agent,](https://help.scrut.io/docs/what-is-the-scrut-agent) to verify these security measures.

@@ -1,0 +1,74 @@
+---
+title: "Configure Scope for Azure Integration"
+description: "Discover the changes to Scrut's Azure integration and the next steps to take."
+---
+
+## Important Update: Reconfiguration Required
+
+Scrut has enhanced the Azure integration to provide you with greater control over your compliance monitoring. We’ve modified the [**Scrut-Azure integration**](/docs/integrating-azure) from a broad tenant-based approach to a more granular, **subscription-based model**. This means you now have the flexibility to select which Azure subscriptions you want Scrut to monitor for each tenant connection.
+
+## How This Benefits You
+
+Previously, the Azure integration monitored all subscriptions within a connected tenant. With this enhancement, you can now:
+
+- **Configure scope**: Select only the Azure subscriptions that are relevant to your compliance requirements. For example, if your Azure tenant includes subscriptions for development, testing, and production environments, but only your production subscriptions are in scope for your ISO 27001 audit, you can now configure the integration to monitor only your production subscriptions.
+- **Improve performance**: Focus on subscriptions that matter, reducing noise and unnecessary data in the Cloud Tests module in Scrut.
+- **Better organization**: Assign custom nicknames to individual subscriptions for easier identification and management within Scrut.
+
+<Callout kind="tip">
+  Heads Up!
+
+  **Your current Azure integration will continue to function as intended**. Scrut will handle the migration in the background without any disruptions to your workflow. However, if you'd like to modify the integration scope to select specific subscriptions, you’ll need to complete the steps given below.
+</Callout>
+
+## Azure Reconfiguration Guide
+
+Follow these steps to modify the integration scope by choosing specific subscriptions within a connected tenant:
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Click **Connected Integrations** and search for Azure.
+3. Click the **Configure** button on the Azure integration tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432257892-20vyz8faptm-click-the-configure-button-on-the-azure-c5f03472.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Configure button on the Azure integration tile" caption=" " />
+4. Click the edit <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432288155-k9frmuyktv-pencil-icon-37db2f75.png?fm=auto&auto=compress%2Cformat" width="20" height="20" alt="Pencil icon" caption=" " />icon in your connected Azure integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432261518-uzlqh9miy2-click-the-edit-icon-in-your-connected-azure-08c9fab2.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the edit icon in your connected Azure integration" caption=" " />
+5. Scrut will automatically fill in the **Client ID, Tenant ID**, and **Client Secret**.
+  - However, if you need help finding these details, refer to our guide on [obtaining Azure credentials](/docs/integrating-azure).
+6. **Note:** You can also **edit the Client Secret**. Azure has a rule that the client-secret key changes every 90 days, so you may need to update it.
+7. Enter an **Account Nickname** and choose the Entities to which the integration applies.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432270472-mwo6dx0pvs-enter-an-account-nickname-and-choose-the-7e248d7c.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter an Account Nickname and choose the Entities to which the integration applies" caption=" " />
+8. Click **Save**.
+9. Watch out for the “Integration Successful” and “Fetched Azure subscriptions successfully” notifications.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432307848-0l4zvm3z8p2e-watch-out-for-the-integration-successful-and-5081e6a1.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the “Integration Successful” and “Fetched Azure subscriptions successfully” notifications" caption=" " />
+10. Select the Azure subscriptions you want to connect with Scrut.
+11. Enter a suitable nickname for each, and click **Finish**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432268627-4ri4mi37g2r-enter-a-suitable-nickname-for-each-and-click-c3379dcc.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter a suitable nickname for each, and click Finish" caption=" " />
+
+Watch out for the “Azure subscriptions saved successfully” message and the connected status flag.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429836520-bx3nf3y2fts-azure-integration-enhancement__07-watch-out-for-the-azure-subscriptions-saved.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the “Azure subscriptions saved successfully” message and the connected status flag" caption=" " />
+
+## Azure Integration Guide for First-Time Users
+
+If you’re connecting Azure for the first time with Scrut, follow the step-by-step instructions here.
+
+<Callout kind="info">
+  Azure Integration Guide
+
+  [Refer to the detailed instructions here](/docs/integrating-azure).
+</Callout>
+
+## Viewing Subscription-based Data in Scrut
+
+1. Go to the **Cloud** module and click the **Azure** filter.
+2. Use the **Subscription ID** filter to view data relevant to specific subscriptions.
+3. This filter is available for the following tabs in the Cloud Tests module:
+  - Dashboard
+  - Tests
+  - Resources
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429838273-lam5ion3mvs-azure-integration-enhancement__08-resources.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Resources" caption=" " />

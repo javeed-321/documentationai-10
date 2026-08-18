@@ -1,0 +1,117 @@
+---
+title: "Integrate JumpCloud SSO"
+description: "Learn how to integrate JumpCloud SSO with Scrut."
+---
+
+<Callout kind="alert">
+  Heads Up!
+
+  This guide covers the JumpCloud SSO integration only. If you want to integrate **JumpCloud as an MDM or IDP**, [see here](/docs/integrating-jumpcloud).
+</Callout>
+
+Connecting JumpCloud to Scrut as an SSO provider lets your admins and employees log in to Scrut and the Employee Portal using their JumpCloud accounts, without needing a one-time password each time.
+
+## What This Integration Does in Scrut
+
+- **SSO:** Enables admins and employees to log in to Scrut and the Employee Portal, respectively, using their JumpCloud accounts.
+
+## Prerequisites
+
+Before you begin, make sure you have an active JumpCloud account with administrator access
+
+## Permissions and Access Requirements
+
+### For JumpCloud
+
+Administrator access to create and configure an SSO application in JumpCloud (Only the email scope is consumed during authentication)
+
+### For Scrut
+
+Admin access to Scrut, or Contributor access with the Integrations module enabled
+
+## Data Collected
+
+- User identity: Email address (Pulled from the email scope in JumpCloud)
+- JumpCloud SSO session: Used to authenticate users into Scrut
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Configure the SSO Application in JumpCloud
+
+1. Log in to your JumpCloud Admin Portal.
+2. Follow the steps in the [JumpCloud SSO (OIDC) Guide](https://jumpcloud.com/support/sso-with-oidc) to create a new SSO application for Scrut. This generates your **Client ID** and **Client Secret**.
+3. Copy both values as you’ll need to enter them in Scrut in Step 2.
+4. In the SSO tab of the application, enter the Login URL that matches your Scrut account region:
+  - **India Region:** https://app.scrut.io/login/jumpcloud-sso/authorization-code/callback
+  - **Europe Region:** https://app.eu.scrut.io/login/jumpcloud-sso/authorization-code/callback
+  - **US Region:** https://app.us.scrut.io/login/jumpcloud-sso/authorization-code/callback
+5. In the **Redirect URI**s field, add the region-specific URL.
+
+**Important:** You must also add the following Redirect URI in addition to the links mentioned above. **https://scrut.eu.auth0.com/login/callback****.** This is critical to ensure that the integration works successfully with Scrut’s Auth0 migration. To know more, [see here](/docs/scrut-authentication-system-migration).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432279601-4bhk1ki9pkr-important-you-must-also-add-the-following-9cc46298.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Important: You must also add the following Redirect URI in addition to the links mentioned above" caption=" " />
+
+6. Scroll to the **Attribute Mapping** section in the **SSO** tab.
+7. Under **Standard Scopes**, select the **Email** checkbox.
+
+**Important:** Selecting the Email scope is mandatory. Without it, users will not be able to authenticate into Scrut.
+
+8. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431764925-94bne9oelaw-jumpcloud-sso__02-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+### Step 2: Connect JumpCloud in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Click the **Integrations Library** tab at the top of the page.
+3. In the **Category** panel on the left, scroll to **Identity Providers**. Search for JumpCloud in the search bar.
+4. Click **Integrate** on the **JumpCloud (SSO)** tile. This opens the JumpCloud (SSO) integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431766713-s2j4byi6ohg-jumpcloud-sso__03-click-integrate-on-the-jumpcloud-sso-tile.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate on the JumpCloud (SSO) tile. This opens the JumpCloud (SSO) integration page" caption=" " />
+5. In the Credentials section, paste the **Client ID** and **Client Secret** you copied from JumpCloud.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431768530-06ki3vfh5lia-jumpcloud-sso__04-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+7. A success toast message appears, and the status updates to Connected.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431770121-c5e8v7e3z1p-jumpcloud-sso__05-a-success-toast-message-appears-and-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="A success toast message appears, and the status updates to Connected" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is connected, Scrut begins syncing user data automatically. You can monitor sync activity from the Audit Log tab on the JumpCloud (SSO) integration page.
+
+### Review synced data
+
+- Navigate to **Settings → Administration** and turn on the [**JumpCloud (SSO) toggle**](https://help.scrut.io/docs/configuring-sso-login-methods#how-to-customize-sso-login-options). Once this is done, your team members will be able to access the Scrut platform (app.scrut.io) and the employee portal using their JumpCloud credentials.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What is the difference between JumpCloud SSO and JumpCloud as an IDP or MDM in Scrut?" default-open="false">
+
+The SSO integration is used only for authentication. It permits users to log in to Scrut using their JumpCloud credentials. The IDP and MDM integrations serve different purposes, such as syncing device data and running compliance checks. See [JumpCloud MDM/IDP help guide](/docs/integrating-jumpcloud) for those setup steps.
+
+</Expandable>
+
+<Expandable title="2: What happens if a user is removed from JumpCloud?" default-open="false">
+
+If a user is removed from JumpCloud, they will no longer be able to log in to Scrut via SSO. Their record in Scrut is not automatically deleted.
+
+</Expandable>
+
+<Expandable title="3: What happens if I update the Client Secret in JumpCloud?" default-open="false">
+
+If you rotate or update the Client Secret in JumpCloud, you must update it in Scrut as well. Go to Integrations, open the JumpCloud (SSO) integration, enter the new Client Secret in the Credentials section, and click Submit.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

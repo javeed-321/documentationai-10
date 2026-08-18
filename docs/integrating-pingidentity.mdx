@@ -1,0 +1,62 @@
+---
+title: "Integrate PingOne (Beta)"
+description: "Learn how to integrate PingOne SSO with Scrut."
+---
+
+PingOne SSO integration enables users and employees to log in to Scrut via single sign-on (SSO), eliminating the need to request an OTP each time.
+
+## Integrating PingOne
+
+1. From the left navigation panel, select Integrations.
+2. Click **Integrations Library**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431104291-cq5egqibdok-integrating-pingidentity__01-click-integrations-library.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrations Library" caption=" " />
+3. Scroll to the **Identity Provider** section and find **PingOne**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431106003-5uwgcevjz1g-integrating-pingidentity__02-scroll-to-the-identity-provider-section-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Identity Provider section and find PingOne" caption=" " />
+
+4. Click **Integrate**. The PingOne integration page opens.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431107676-rgjkbipjcxo-integrating-pingidentity__03-click-integrate-the-pingone-integration-page.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate. The PingOne integration page opens" caption=" " />
+
+5. Generate the **Client** **ID** and **Client Secret** as described in this [video guide](https://scrut.clueso.io/embed/8497fd2d-0f21-41a8-b9c6-20de6d484eb1).
+6. Enter the **Redirect URLs** based on the region your Scrut account belongs to.
+
+**INDIA**
+
+[https://app.scrut.io/settings/integration/PingOne](https://app.scrut.io/settings/integration/PingOne)
+
+[https://app.scrut.io/login](https://app.scrut.io/login)
+
+**US**
+
+[https://app.us.scrut.io/settings/integration/PingOne](https://app.us.scrut.io/settings/integration/PingOne)
+
+[https://app.us.scrut.io/login](https://app.us.scrut.io/login)
+
+**EU**
+
+[https://app.eu.scrut.io/settings/integration/PingOne](https://app.eu.scrut.io/settings/integration/PingOne)
+
+[https://app.eu.scrut.io/login](https://app.eu.scrut.io/login)
+
+**AUSTRALIA**
+
+[https://app.au.scrut.io/settings/integration/PingOne](https://app.au.scrut.io/settings/integration/PingOne)
+
+[https://app.au.scrut.io/login](https://app.au.scrut.io/login)
+
+**Note:** You need not enter the **Home Page** and **Sign-On URLs** while creating the Scrut application in the PingOne platform.
+
+<Callout kind="danger">
+  Important:
+
+  Make sure to add the following **Redirect URI** in addition to the ones mentioned above.
+
+  **https://scrut.eu.auth0.com/login/callback**
+
+  This is critical to ensure the integration works successfully with Scrut’s Auth0 migration. To learn more, [see here](/docs/scrut-authentication-system-migration).
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432300649-67stihdm92t-this-is-critical-to-ensure-the-integration-bb99603d.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="This is critical to ensure the integration works successfully with Scrut’s Auth0 migration" caption=" " />
+
+6. Once the credentials are generated, copy them and paste them into your Scrut platform's PingIdentity integration page.
+7. Click **Submit**.

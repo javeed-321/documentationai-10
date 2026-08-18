@@ -1,0 +1,53 @@
+---
+title: "Integrate Jamf Pro"
+description: "Learn how to connect your Jamf Pro account with Scrut."
+---
+
+Jamf Pro integration fetches employees' endpoint/device data to Scrut. This data is displayed in the People Dashboard and the People → Employee module. ​ The following data is fetched from Jamf Pro:
+
+- Device name
+- OS version
+- Serial number
+- Antivirus Installed(Yes/No)
+- HD Encrypted(Yes/No)
+- Screenlock Enabled(Yes/No)
+- List of Applications installed on the device
+
+## Integrating Jamf Pro
+
+### Step 1: Create a read-only user in JamfPro
+
+1. Log in to your Jamf Pro administrator account.
+2. Create a new user with the *Auditor* privilege set. If you have the option to select an access level, select *Full Access*. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430691243-6qogdesl7uh-integrating-jamf-pro__01-jamf-pro-2.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Jamf Pro-2" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430692840-qn7zzppiaq9-integrating-jamf-pro__02-jamf-pro-3.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Jamf Pro-3" caption=" " />
+
+3. Copy the username/password–you’ll need to add them to Scrut.
+
+### Step 2: Enter the user's credentials in Scrut
+
+1. From the left navigation menu, click Integrations. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430694370-aqa0t3g0sbj-integrating-jamf-pro__03-from-the-left-navigation-menu-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the left navigation menu, click Integrations" caption=" " />
+2. Click **Available**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430695999-dfj24i8bs17-integrating-jamf-pro__04-click-available.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Available" caption=" " />
+3. Scroll to *Mobile Device Management Tools* section and find *Jamf Pro*.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430697717-vlt4raamr5-integrating-jamf-pro__05-scroll-to-mobile-device-management-tools.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to Mobile Device Management Tools section and find Jamf Pro" caption=" " />
+
+4. Click **Integrate**. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430699468-ksaafbd9yej-integrating-jamf-pro__06-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+
+Jamf Pro integration page opens. <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430701222-ujfn7h4e69q-integrating-jamf-pro__07-jamf-pro-integration-page-opens.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Jamf Pro integration page opens" caption=" " />
+
+5. In *Jamf Cloud URL* field, enter the cloud url of your jamf pro instance.
+6. In *username* and *password* field, enter the credentials obtained in step 1.
+7. Click **Connect**.
+
+You will receive either a confirmation that the credentials are configured correctly or an error message explaining how they’re misconfigured.
+
+8. Once the integration is successful the user will have to click on the **Configure** icon in the integration page and select Configure Profiles in Jamf Pro.
+9. A list of Profiles will be displayed.
+10. Toggle On the Profiles you want to enable.
+11. Once configured, AV Installed and Screenlock details will be visible in the people section.
+
+**Info**:
+
+- Employees device data will start syncing immediately. Incremental data will be synced every 24 hours.
+- Data can also be manually synced by clicking the three dots and choosing the **Sync Now** option.

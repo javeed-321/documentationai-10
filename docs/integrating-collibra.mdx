@@ -1,0 +1,118 @@
+---
+title: "Integrate Collibra"
+description: "Learn how to connect your Collibra account with Scrut to fetch compliance data."
+---
+
+Learn how to connect your Collibra account with Scrut to automatically fetch compliance data.
+
+## What This Integration Does in Scrut
+
+- User Access Data: Fetches user details, roles, and permissions from Collibra for Access Reviews.
+- Automated Tests: Runs automated checks that continuously evaluate Collibra for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- A Collibra user account with the Sysadmin global role.
+- A dedicated Collibra service account to use for this integration.
+  - Note: We do not recommend using a personal admin account to avoid disruption due to password changes or the account getting deactivated.
+
+### Permissions and Access Requirements
+
+#### For Collibra
+
+The service account used for this integration must have the Sysadmin global role. This grants the System Administration permission required to fetch user records and support automated test execution.
+
+#### For Scrut
+
+Admin access to Scrut, or Contributor access with permission to manage Integrations.
+
+## Limitations
+
+Collibra does not support API key-based authentication. Scrut authenticates using a Collibra username and password via Basic Auth. If the service account's password changes, you must update the credentials in Scrut to restore the connection.
+
+## Data Collected
+
+- User name: Fetched from Collibra user records
+- User email: Used to match records in Scrut
+- User role: License type assigned to the user
+- Account activation status: Indicates whether the user is active or inactive
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Prepare Your Collibra Credentials
+
+1. Identify the service account you want to use for this integration. Scrut recommends using a dedicated service account rather than a personal admin account.
+2. Log in to Collibra with that account and go to **Settings**.
+3. Select **Roles** and confirm the service account has the **Sysadmin global role** assigned.
+4. Note the Base URL of your Collibra instance. You can find it in your browser's address bar when logged into Collibra (for example, `https://yourcompany.collibra.com`).
+5. Keep the service account's username, password, and Base URL ready for the next step.
+
+### Step 2: Connect Collibra in Scrut
+
+1. In Scrut, go to **Integrations** in the left navigation.
+2. Select the **Integrations Library** tab.
+3. Search for Collibra or scroll to the **Miscellaneous** category.
+4. Click **Integrate** on the Collibra card.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430306997-j10boor1idf-integrating-collibra__01-click-integrate-on-the-collibra-card.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate on the Collibra card" caption=" " />
+5. Under Credentials, enter your **Collibra Base URL, Username**, and **Password**.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430308716-8rg3gz5s3g8-integrating-collibra__02-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Scrut validates the credentials and establishes the connection. The integration status updates to Connected.
+
+## What Happens Next?
+
+### Initial data sync
+
+After you connect Collibra, the initial data sync begins automatically. You can monitor sync activity and check for errors by selecting the Audit Log tab on the Collibra integration page.
+
+### Review synced data
+
+- Navigate to **People → Access Reviews** module in Scrut to view the user records fetched from Collibra, including name, email address, license type, and activation status.
+- Navigate to **Tests → Automated Tests** to view the compliance checks that Scrut runs for Collibra.
+
+## Common Errors and Troubleshooting
+
+### Invalid credentials
+
+Possible solutions: Verify that the Base URL, username, and password you entered match the service account's Collibra credentials exactly. Confirm the Base URL does not have a trailing slash and follows the format `https://yourcompany.collibra.com`. If the service account password was recently changed, update the credentials in Scrut by returning to the integration settings.
+
+### Insufficient permissions
+
+Cause: The service account does not have the Sysadmin global role in Collibra.
+
+Possible solutions: Go to Settings in Collibra, select Roles, and verify the Sysadmin role is assigned to the service account. Contact your Collibra administrator if you cannot confirm or update the role assignment.
+
+### Users not appearing in Access Reviews
+
+Possible solutions: Wait for the next scheduled sync or manually trigger a sync from the integration settings. Check the Audit Log tab on the Collibra integration page for any sync errors. Confirm the connection status shows Connected on the Collibra integration page.
+
+### Connection fails after working previously
+
+Possible solutions: Check whether the service account password was changed. If so, update the credentials in Scrut. Confirm the Collibra instance URL has not changed. Check the Audit Log for specific error messages to identify the cause.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if the service account password is changed in Collibra?" default-open="false">
+
+Scrut will no longer be able to authenticate, and the sync will stop. Go to Integrations, open the Collibra integration, update the password under Credentials, and click Submit to restore the connection.
+
+</Expandable>
+
+<Expandable title="2: Why does Scrut recommend a dedicated service account?" default-open="false">
+
+Using a dedicated service account prevents disruption if a personal account is deactivated or its password changes. It also makes it easier to manage access independently of individual users.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to support@scrut.io or contact your CSM for further assistance.

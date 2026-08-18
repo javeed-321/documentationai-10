@@ -1,0 +1,237 @@
+---
+title: "Integrate Google Workspace"
+description: "Learn how to connect your Google Workspace with Scrut."
+---
+
+In this guide, we walk you through the process of connecting your Google Workspace account with Scrut.
+
+## What This Integration Does in Scrut
+
+The Google Workspace integration performs the following functions in Scrut:
+
+- **Employee Directory:** Syncs employee and group data into Scrut's People module. Synced employees can access the Employee portal for training, policy acceptance, and device-related activities.
+- **User Access Data:** Fetches user details, roles, and permissions from Google Workspace for Access Reviews.
+- **Automated Tests:** Runs automated compliance checks to continuously evaluate your Google Workspace configurations against applicable compliance frameworks.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+- **SSO:** Enables admins and employees to log in to Scrut and the Employee Portal, respectively, using their Google Workspace accounts.
+- **Vendor Management:** Surfaces applications your employees access using their Google Workspace accounts as prospective vendors in Risk → Vendors → Onboarding.
+
+## Prerequisites
+
+- An active Google Workspace account with [Super Admin or User Management Admin access](https://knowledge.workspace.google.com/admin/users/prebuilt-administrator-roles)
+- Your organization's users must have active Google Workspace accounts with work email addresses
+
+## Permissions and Access Requirements
+
+### For Google Workspace
+
+Scrut requires the following read-only OAuth scopes to fetch data from your Google Workspace. These are requested during the OAuth flow.
+
+- https://www.googleapis.com/auth/admin.directory.user.readonly - View profile details and metadata for users in your domain, including name, email, phone number, role, manager info, and last login time.
+- https://www.googleapis.com/auth/admin.directory.rolemanagement.readonly - View delegated admin roles currently defined for your domain.
+- https://www.googleapis.com/auth/admin.directory.group.readonly - View group details (name, members) and metadata on your domain.
+- https://www.googleapis.com/auth/admin.directory.user.security - View and manage data access permissions for users on your domain.
+- https://www.googleapis.com/auth/admin.reports.audit.readonly - View audit reports of admin and user activity in your Google Workspace domain.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430590834-n9jw57y2v6t-integrating-google-workspace__01-https-www-googleapis-com-auth-admin-reports.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="https://www.googleapis.com/auth/admin.reports.audit.readonly - View audit reports of admin and user activity" caption=" " />
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor role with access to the Integrations module)
+
+## Data Collected
+
+- Users
+  - Employee Name: User's display name as set in Google Workspace.
+  - Email Address: User's primary work email address.
+  - Joining Date: Date the user was added to Google Workspace. Scrut treats this as the employee's start date.
+  - Exit Date: Date the user was deleted from Google Workspace. Scrut treats this as the employee's exit date.
+- Groups and Group Members
+  - Group name and member list
+- Roles and Role Assignments
+  - Admin roles assigned to the user
+  - Role-to-user mappings across the domain
+- Vendors
+  - Vendor Name (Third-party applications accessed via "Sign in with Google")
+- Audit Logs
+  - User login audit logs
+  - Admin login audit logs
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also trigger a manual sync from the Google Workspace integration page in Scrut at any time.
+
+## Integration Setup
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend signing in to your Google Workspace account before starting the integration.
+</Callout>
+
+### Step 1: Connect Google Workspace in Scrut
+
+1. Sign in to Scrut and navigate to **Integrations** using the left side menu.
+2. Go to the **Integrations Library** tab and select **Identity Providers** under **Categories**.
+3. Locate the **Google Workspace** card and click **Integrate**. You can also use the search bar to find it quickly.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430592575-ma2qax43qq-integrating-google-workspace__02-locate-the-google-workspace-card-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Google Workspace card and click Integrate. You can also use the search bar to find it quickly" caption=" " />
+4. On the Google Workspace integration page, click **Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430594493-kyodgvn8nns-integrating-google-workspace__03-on-the-google-workspace-integration-page.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Google Workspace integration page, click Connect" caption=" " />
+5. You will be redirected to Google's authentication page. Select your Google Workspace account. If you are not already signed in, you will be prompted to log in first.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430596018-9f80iabbaf-integrating-google-workspace__04-you-will-be-redirected-to-googles.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="You will be redirected to Google's authentication page" caption=" " />
+6. Review the list of permissions Scrut is requesting and click **Allow**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430597628-edx3e82f2v9-integrating-google-workspace__05-review-the-list-of-permissions-scrut-is.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the list of permissions Scrut is requesting and click Allow" caption=" " />
+7. On successful authorization, you are redirected back to Scrut. A Connected status indicator appears on the Google Workspace integration page.
+
+### Step 2: Configure Settings in Scrut
+
+On the integration settings page, turn the toggles on or off based on your needs.
+
+- **Enable Google Workspace to populate the Employees page**: Turn on this toggle to automatically sync employee information from your Google Workspace directory into Scrut's People module. Scrut pulls the latest employee data directly from Google Workspace, so you do not need to add or update employee records manually.
+- **Enable vendor discovery**: Turn on this toggle to populate the vendor module with third-party applications your organization's users access using their work Google accounts.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430599202-obvh738ada-integrating-google-workspace__06-enable-vendor-discovery-turn-on-this-toggle.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enable vendor discovery: Turn on this toggle to populate the vendor module with third-party applications your" caption=" " />
+
+### Step 3: Configure Third-Party App Access in Google Admin
+
+To ensure Scrut has the access it needs, you must also configure app access from your Google Admin panel.
+
+1. Sign in to your Google Admin console and navigate to **Security → Access and data control → API Controls → Manage App Access**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430600908-en79r4vwh1u-integrating-google-workspace__07-sign-in-to-your-google-admin-console-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to your Google Admin console and navigate to Security → Access and data control → API Controls →" caption=" " />
+2. Click **Configure new app**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430602550-nlu9pp3ie8-integrating-google-workspace__08-click-configure-new-app.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Configure new app" caption=" " />
+3. Search for Scrut using one of the following verified Client IDs:
+  - 618603102503-271jf4ur5lbjtufijojvikpb7n7qpj4c.apps.googleusercontent.com
+  - 867036064227-qs01r28jmlotr3j65ti0t6uj4hp4urjs.apps.googleusercontent.com
+  - 713980123652-ilae3oaght9ko4cmsvjpduknj9458cvj.apps.googleusercontent.com
+4. Select the Scrut app from the search results.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430604161-lipm333q898-integrating-google-workspace__09-select-the-scrut-app-from-the-search-results.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the Scrut app from the search results" caption=" " />
+5. Set the scope to **All Users** and click **Continue**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430605698-26iy0tb2k-integrating-google-workspace__10-set-the-scope-to-all-users-and-click-continue.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Set the scope to All Users and click Continue" caption=" " />
+6. Under Access to Google data, select **Trusted** and click **Continue**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430607277-sx81gg7i14a-integrating-google-workspace__11-under-access-to-google-data-select-trusted.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under Access to Google data, select Trusted and click Continue" caption=" " />
+7. Review the configuration summary and click **Finish**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430609034-paa4o8cxllb-integrating-google-workspace__12-review-the-configuration-summary-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the configuration summary and click Finish" caption=" " />
+
+## What Happens Next?
+
+### Initial Data Sync
+
+After setup is complete, Scrut automatically begins fetching data from your Google Workspace. Allow some time for the initial sync to complete. You can monitor sync activity from the Audit Log tab on the Google Workspace integration page.
+
+### Recurring Sync
+
+Scrut automatically fetches incremental data every 24 hours.
+
+### Manual Sync
+
+If you need to sync data before the next scheduled run, click Sync Now on the integration page and select one of the following:
+
+- **Sync now for employee details**: Syncs user data from Google Workspace to the People module.
+- **Sync now for vendor discovery**: Syncs vendor data to the Onboarding Tab in the Vendor Management module.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430610685-lmqpafq8d0j-integrating-google-workspace__13-sync-now-for-vendor-discovery-syncs-vendor.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sync now for vendor discovery: Syncs vendor data to the Onboarding Tab in the Vendor Management module" caption=" " />
+
+### Review Synced Data
+
+Once the sync is complete, verify that the data has landed correctly in the following locations:
+
+- Navigate to **People → Employees** to view synced employee records.
+- Navigate to **People → Access Reviews** to set up an access review to validate user roles and permissions in your Google Workspace.
+- Navigate to **Settings → Administration** to enable Google Workspace SSO Login for your Scrut organization.
+- Navigate to **Compliance → Evidence Tasks** to set up a Scrut Monitor to automate evidence collection from Google Workspace.
+- Navigate to **Risk → Vendors → Onboarding → Discovered from Integration** to review vendor discovery results.
+- Navigate to **Tests** to view automated test coverage driven by Google Workspace data. Apply the Filter with G Suite selected to view tests only for Google Workspace.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430612337-4kepj1cqmns-integrating-google-workspace__14-navigate-to-tests-to-view-automated-test.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to Tests to view automated test coverage driven by Google Workspace data" caption=" " />
+
+## Common Errors and Troubleshooting
+
+### Integration does not connect
+
+Possible solutions:
+
+- Confirm that the Google account you are using has Super Admin or User Management Admin access in Google Workspace.
+- Make sure you are signing in with your work Google account, not a personal account.
+- Check that you clicked Allow on the Google permissions screen. If you clicked Cancel, restart the integration flow.
+
+### Employee data not appearing in Scrut
+
+Possible solutions:
+
+- Confirm that the Enable Google Workspace to populate the Employees page toggle is turned on in the integration settings.
+- Allow time for the initial sync to complete, then check the Audit Log tab for errors.
+- Trigger a manual sync by clicking Sync Now → Sync Now for Employee Details.
+
+### Vendor discovery list is empty
+
+Possible solutions:
+
+- Confirm that the Enable vendor discovery toggle is turned on.
+- Vendor discovery tracks "Sign in with Google" usage across your organization. If employees have not used their work accounts to access third-party apps, no vendors will appear.
+- Trigger a manual sync by clicking Sync Now → Sync Now for Vendor Discovery.
+
+### Third-party app access not configured
+
+Cause: Scrut was connected via OAuth, but app access was not configured in Google Admin. This may limit the data Scrut can retrieve. Possible solutions:
+
+- Complete Step 3 of the integration setup to configure Scrut as a trusted app in Google Admin.
+- Use the verified Client IDs listed in this guide to locate the correct Scrut app.
+
+### Incorrect or unexpected joining or exit dates
+
+Cause: Scrut derives the joining date from when a user was added to Google Workspace and the exit date from when the user was deleted. These may not reflect actual employment dates if Google Workspace records were created or removed at a different time.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens when an employee is removed from Google Workspace?" default-open="false">
+
+When a user is deleted from Google Workspace, Scrut records the deletion date as their exit date in the People module. However, the employee record is not automatically deleted from Scrut. Its status changes to **Offboarding Needed**.
+
+</Expandable>
+
+<Expandable title="2: Can I use the Google Workspace integration without enabling employee directory sync?" default-open="false">
+
+Yes. The SSO, Automated Tests, Scrut Monitor, and Vendor Management features work independently of the Enable Google Workspace to populate the Employees toggle. Turn on only the toggles that apply to your use case.
+
+</Expandable>
+
+<Expandable title="3: How does the Enable Vendor Discovery toggle work?" default-open="false">
+
+Turn on the **Enable Vendor Discovery toggle** to automatically identify potential vendors that your organization is using. Here's how it works:
+
+When your employees sign into external applications or websites using their work Google accounts (through "Sign in with Google"), Scrut tracks these sign-ins across your entire organization. It then:
+
+- Compiles a comprehensive list of all external services where employees have used their work credentials. Even a single employee sign-in is enough for a vendor to appear.
+- Identifies these services as potential vendors and surfaces them in the Risk → Vendors → Onboarding → Discovered from Integrations tab.
+- The vendor source is listed as Google Workspace.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430613963-f0bd5qzdkvd-integrating-google-workspace__15-the-vendor-source-is-listed-as-google.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The vendor source is listed as Google Workspace" caption=" " />
+
+**Example:** If any employee signs into services like "PDF Editor Pro," "Claude," or "Zoom" using their work Google account, these applications will automatically appear in your vendor discovery list.
+
+**How does this help?** Even if just one employee has signed into a service using their work email, that vendor will be discovered and made available for you to review and import into the Vendor module in Scrut. This ensures you don't miss any third-party services your organization is actually using, providing better visibility into your vendor ecosystem and comprehensive compliance coverage.
+
+</Expandable>
+
+<Expandable title="4: What if my Google Workspace credentials or admin account changes?" default-open="false">
+
+If the Google account used to authorize the integration loses admin access or is deactivated, the integration may stop syncing. Reconnect the integration using an active admin account.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance

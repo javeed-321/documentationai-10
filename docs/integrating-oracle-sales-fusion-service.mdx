@@ -1,0 +1,95 @@
+---
+title: "Integrate Oracle Sales & Fusion Service"
+description: "Learn how to connect your organization's Oracle Sales & Fusion Service account with Scrut."
+---
+
+The **Scrut - Oracle Sales & Fusion Service** integration fetches user access data, permissions, and role assignments from your Oracle Sales & Fusion Service account and sends them to the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Oracle Sales & Fusion Service flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a **Scrut Admin** (or Contributor with access to the Integrations module)
+- You must be an **Oracle Fusion Cloud User with API Access**
+- Login credentials and access to your organization’s Oracle Sales & Fusion Service account
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Oracle Sales & Fusion Service
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Oracle Sales & Fusion Service account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Oracle Sales & Fusion Service With Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and choose **Customer Relationship Management** in the **Categories** section.
+3. Scroll to the **Oracle Sales & Fusion Service** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431073027-497o0s8zrz7-integrating-oracle-sales-fusion-service__01-scroll-to-the-oracle-sales-fusion-service.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Oracle Sales & Fusion Service tile and click Integrate" caption=" " />
+4. Enter the required details: Baseurl, Username, and Password for your Oracle Sales & Fusion Service account.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to this help documentation from Oracle on [how to find your baseurl](https://docs.oracle.com/en/cloud/saas/enterprise-performance-management-common/prest/url_structure_overview.html). The &lt;BaseURL> is the first part of your service URL, before the context.
+
+  For example, if your service URL is
+
+  [https://epm-acme.epm.us-phoenix-.ocs.oraclecloud.com/epmcloud,](https://epm-acme.epm.us-phoenix-1.ocs.oraclecloud.com/epmcloud,)
+
+  your &lt;BaseURL> is [https://epm-acme.epm.us-phoenix-1.ocs.oraclecloud.com](https://epm-acme.epm.us-phoenix-1.ocs.oraclecloud.com.)
+</Callout>
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431074683-yblfr6dsohd-integrating-oracle-sales-fusion-service__02-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Scrut will redirect you to the Oracle Sales & Fusion Service authorization page. You’ll be prompted to sign into your Oracle Sales & Fusion Service account if you haven’t done so already.
+7. Click **Connect to Oracle Sales & Fusion Service** to continue.
+8. Once authorization is done, you’ll see the success notification and the **Connected** status indicator.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will start syncing user data from Oracle Sales & Fusion Service. This process typically takes a few hours to complete. Check the Audit Log on the Oracle Sales & Fusion Service integration page in Scrut to review the status.
+- **Recurring Sync**: After this, Scrut performs the sync once **every 24 hours** to fetch incremental data such as new users, role changes, and permission updates.
+- **Manual Sync**: You can also click the **Sync Now** button to trigger an immediate data refresh.
+
+## Data Fetched from Oracle Sales & Fusion Service
+
+Scrut fetches the following access-related data points from Oracle Sales & Fusion Service:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Oracle Sales & Fusion Service Data in Scrut
+
+To view the data fetched from your Oracle Sales & Fusion Service account, go to the **People → Access → Overview** tab. On this page, you can see the user details for your Oracle Sales & Fusion Service account.
+
+You can also create an Access Review (or edit an existing one) and include the Oracle Sales & Fusion Service application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Oracle Sales & Fusion Service:
+
+1. Go to **People → Access** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search for and select Oracle Sales & Fusion Service in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Oracle Sales & Fusion Service to view user details in Scrut.
+
+---
+
+If you face any difficulties connecting Oracle Sales & Fusion Service with Scrut, get in touch with the Scrut support team at support@scrut.io.

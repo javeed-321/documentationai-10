@@ -1,0 +1,79 @@
+---
+title: "Integrate OpenProject"
+description: "Learn how to connect your OpenProject instance with Scrut."
+---
+
+This article covers how to connect your OpenProject instance with Scrut.
+
+## What Does this Integration Do in Scrut?
+
+It performs the following function in Scrut:
+
+- **Task Management:** This integration enables you to create project management tickets in Scrut and sync them to your OpenProject instance.
+
+## Prerequisites
+
+Before setting up the integration, ensure you have:
+
+- An active OpenProject account with access to generate an API key
+
+## Permissions and Access Requirements
+
+### For OpenProject
+
+- Access to generate API keys in OpenProject
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor with access to the Integration module)
+
+## Sync Frequency
+
+Data is synced automatically **once every 24 hours**. You can also manually trigger a sync from the integration settings page when needed.
+
+## Integration Setup
+
+### Step 1: Generate & Retrieve Your API Key in OpenProject
+
+1. Log in to your OpenProject MDM portal using your administrator credentials.
+2. Click your profile icon and select **Account Settings**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431054882-qpjgumnq6u-integrating-openproject__01-click-your-profile-icon-and-select-account.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click your profile icon and select Account Settings" caption=" " />
+3. Navigate to **Access Tokens** and click **+API Token**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431057031-vxupfueh6f8-integrating-openproject__02-navigate-to-access-tokens-and-click-api-token.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to Access Tokens and click +API Token" caption=" " />
+4. Enter a name for the token and click **Create**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431058773-iblixb7f0ws-integrating-openproject__03-enter-a-name-for-the-token-and-click-create.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter a name for the token and click Create" caption=" " />
+5. Copy the **Access Token**. It won’t be shown later, so make sure to copy and store it securely.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431060717-ovwhxhjsj4-integrating-openproject__04-copy-the-access-token-it-wont-be-shown-later.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Access Token. It won’t be shown later, so make sure to copy and store it securely" caption=" " />
+6. Next, note your OpenProject Base URL.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431062476-mzjaqvy4apn-integrating-openproject__05-next-note-your-openproject-base-url.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Next, note your OpenProject Base URL" caption=" " />
+  - It’s typically in the format: `https://yourcompany.openproject.com`
+7. You’ll need to enter the API Key and base URL in Scrut in the next step.
+
+### Step 2: Enter the API Key and Base URL in Scrut
+
+1. Click **Integrations** in the left navigation panel.
+2. Select **Project Management Platforms** in the **Categories** section in the **Integration Library**, and search for **OpenProject**.
+3. Click the **Integrate** button in the OpenProject tile.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431064127-qprps6cmto-integrating-openproject__06-click-the-integrate-button-in-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Integrate button in the OpenProject tile" caption=" " />
+4. Enter the **API Key** and **Base URL** you copied from OpenProject and click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431065944-loca5f0phbk-integrating-openproject__07-enter-the-api-key-and-base-url-you-copied.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter the API Key and Base URL you copied from OpenProject and click Submit" caption=" " />
+
+## What Happens Next?
+
+The initial data sync will begin automatically. This may take several minutes. You can monitor sync status in the **Audit Logs** section of the OpenProject integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431067782-08c7f3o9z0xt-integrating-openproject__08-the-initial-data-sync-will-begin.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The initial data sync will begin automatically" caption=" " />
+
+Once the data sync is completed, you can:
+
+- Create OpenProject tickets in Scrut from the following modules:
+  - Policies
+  - Evidence Tasks
+  - Risk Management

@@ -1,0 +1,136 @@
+---
+title: "Integrate 15Five"
+description: "Learn how to connect your organization's 15Five account with Scrut."
+---
+
+Connect 15Five with Scrut to bring user access data into your compliance workflows and run automated checks against your compliance frameworks.
+
+## What This Integration Does in Scrut
+
+- **User Access Data:** Fetches user details, roles, and permissions from 15Five for Access Reviews.
+- **Automated Tests:** Runs automated checks that continuously evaluate 15Five for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- An active 15Five account with IT Admin access
+- A 15Five Public API key (see Step 1 below for instructions on generating one)
+
+## Permissions and Access Requirements
+
+### For 15Five
+
+- IT Admin role on your 15Five account. This is required to access the Integrations settings and generate an API key.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permission to the Integrations module.
+
+## Data Collected
+
+- User Name: Pulled from the 15Five user profile
+- Email Address: Primary email associated with the account
+- User role: The role assigned to the user in 15Five
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Generate an API Key in 15Five
+
+1. Log in to your 15Five account.
+2. Click the **Settings** gear icon in the bottom-left corner.
+3. Select **Integrations** from the dropdown menu.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429925327-za7vlf9hzx-integrating-15five__01-select-integrations-from-the-dropdown-menu.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Integrations from the dropdown menu" caption=" " />
+4. Scroll to the **Public API** option and click **Enable**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429927154-ft8uw38nx3l-integrating-15five__02-scroll-to-the-public-api-option-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Public API option and click Enable" caption=" " />
+5. After enabling, you are taken to the Company API Keys page.
+6. Click **Create New Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429928895-vg5qry5cfx-integrating-15five__03-click-create-new-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create New Key" caption=" " />
+7. Enter a name for the key. Use something easily identifiable, such as "Scrut Integration."
+8. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429930561-89pb2sbpmed-integrating-15five__04-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+9. Copy the API key and store it securely. You will need it in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429932188-nxikd3m36ld-integrating-15five__05-copy-the-api-key-and-store-it-securely-you.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the API key and store it securely. You will need it in the next step" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  API keys expire after 1 year. 15Five sends a warning email 2 weeks before expiry. Generate a new key and update it in Scrut before the current key expires to avoid any disruption to the integration. To know more, refer to [15Five’s API documentation](https://my.15five.com/api/public/coreapi/).
+</Callout>
+
+### Step 2: Connect 15Five in Scrut
+
+1. Log in to your Scrut account.
+2. Navigate to **Integrations** → **Integrations Library** and scroll to the **Miscellaneous** section.
+3. Search for and select **15Five**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429933919-sb0msowt4ps-integrating-15five__06-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. Enter the API key you generated in Step 1.
+6. Click **Submit**. Scrut validates the credentials and activates the integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429935483-83tc0wb4xa-integrating-15five__07-click-submit-scrut-validates-the-credentials.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit. Scrut validates the credentials and activates the integration" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is activated, Scrut begins the initial data sync automatically. You can monitor sync status and review any errors in the Audit Logs section within the integration settings.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429937430-a8atwe0afk-integrating-15five__08-after-the-integration-is-activated-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="After the integration is activated, Scrut begins the initial data sync automatically" caption=" " />
+
+### Review synced data
+
+- Navigate to **People → Access Reviews → Applications** to view the user access data fetched from 15Five.
+- Navigate to **Tests → Automated Tests** to see the compliance checks running against your 15Five environment.
+
+## Common Errors and Troubleshooting
+
+### Invalid or expired API key
+
+The API key entered in Scrut is incorrect, has been revoked, or has passed its 1-year expiry. Possible solutions:
+
+- Verify that you copied the full API key without any extra spaces.
+- Log in to 15Five, navigate to Settings, then Integrations, then Company API Keys, and confirm the key is active.
+- If the key has expired or been revoked, generate a new key and update it in Scrut under the integration settings.
+
+### Data not appearing in Scrut
+
+Possible solutions:
+
+- Confirm the initial sync has completed by checking the Audit Logs in the integration settings.
+- Manually trigger a sync from the integration settings page and wait a few minutes for data to populate.
+- Verify that the users in 15Five have active account status. Inactive users may not be fetched.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if I regenerate my API key in 15Five?" default-open="false">
+
+The existing connection in Scrut stops working immediately. Go to the integration settings in Scrut, update the API key with the newly generated one, and save to restore the connection.
+
+</Expandable>
+
+<Expandable title="2: My API key is valid but the integration shows an error." default-open="false">
+
+Confirm that the Public API option is still enabled in your 15Five account under Settings, then Integrations. If it was disabled after the key was generated, re-enable it and retry the connection.
+
+</Expandable>
+
+<Expandable title="3: What user data does Scrut collect from 15Five?" default-open="false">
+
+Scrut collects user names, email addresses, and roles. This data is used to support Access Reviews in Scrut.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

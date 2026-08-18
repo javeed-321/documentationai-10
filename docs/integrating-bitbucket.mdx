@@ -1,0 +1,171 @@
+---
+title: "Integrate Bitbucket"
+description: "Learn how to connect your Bitbucket repository with Scrut."
+---
+
+The Scrut - Bitbucket integration connects your Bitbucket workspace with Scrut to automate the collection of compliance evidence and support access reviews and asset tracking. In this guide, we explain how to connect your Bitbucket repositories with Scrut.
+
+## What this Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your Bitbucket configurations against applicable compliance frameworks.
+- **Evidence Tasks:** Scrut automatically collects pull request data and uploads it to the Evidence Task "Code Review Results" on the 15th and last day of each month.
+- **User Access Data:** Fetches user details, roles, and permissions from Bitbucket for Access Reviews.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered repositories and supports the collection of asset-related compliance evidence.
+
+## Prerequisites
+
+- An active Bitbucket account with workspace admin access
+- At least one workspace and repository configured in Bitbucket
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log into your Bitbucket account before starting the setup to avoid being redirected mid-flow during authentication.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For Bitbucket
+
+Scrut requests read-only access to the following:
+
+- Account information
+- Repository issues
+- Workspace and project settings
+- Repositories contained within your workspace’s projects
+- Repository and pull request data
+- Team membership information
+
+<ExpandableGroup>
+
+<Expandable title="Why does Scrut require these permissions?" default-open="false">
+
+These permissions are essential for Scrut to collect the necessary evidence for your audits.
+
+- **Account Information**: This permission allows Scrut to read your basic account details and organizational information.
+- **Repository Issues**: Scrut requires read access to repository issues to monitor security-related tickets, track vulnerability remediation efforts, and compliance-related concerns.
+- **Workspace and Project Settings**: This permission enables Scrut to read your workspace's project configurations and repository settings, to understand your repository structure, access controls, and governance policies to ensure they align with compliance requirements.
+- **Repository and Pull Request Data**: Read access to repositories and their pull requests enables Scrut to monitor code changes, review processes, and development practices critical for security compliance.
+- **Team Membership Information**: This permission enables Scrut to read your team structure and access permissions, enabling a proper assessment of who has access to what repositories and ensuring that access controls meet compliance standards for your organization.
+
+Scrut has **read-only permissions and** **cannot modify or alter your code repos**.
+
+**OAuth Security:** Scrut uses the [OAuth 2.0 protocol](https://auth0.com/intro-to-iam/what-is-oauth-2) for secure authentication, which means:
+
+- Your Bitbucket username and password are never shared with or stored by Scrut
+- Authentication is handled directly by Bitbucket’s secure servers
+- Scrut only receives secure access tokens with limited, specific permissions
+- All data transmission is encrypted and follows industry security standards
+
+</Expandable>
+
+</ExpandableGroup>
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor role with access to the Integration module)
+
+## Data Collected
+
+- Bitbucket workspace details
+- Team membership and user profiles
+- Bitbucket project metadata
+- Repository metadata
+
+## Sync Frequency
+
+Data for Access Reviews, Automated Tests, and Asset Management syncs every 24 hours. You can also trigger a manual sync at any time by clicking **Sync Now** on the Bitbucket integration page.
+
+For evidence collection, Scrut uses a separate schedule. After connecting Bitbucket, Scrut automatically collects pull request data and uploads it to the Evidence Task "**Code Review Results**" on the 15th and last day of each month.
+
+## Integration Setup
+
+### Step 1: Connect Bitbucket in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab.
+3. In the **Categories** section, scroll to **Version Control**.
+4. Locate the **Bitbucket** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430193516-0skpsvzfkdac-integrating-bitbucket__01-locate-the-bitbucket-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Bitbucket tile and click Integrate" caption=" " />
+5. On the Bitbucket integration page, click **Connect** in the top right corner.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430195158-ttpmk1ajyy-integrating-bitbucket__02-on-the-bitbucket-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Bitbucket integration page, click Connect in the top right corner" caption=" " />
+
+### Step 2: Authenticate and Configure Scope
+
+1. Scrut redirects you to the Bitbucket authentication page. If you are not already logged in, complete the Bitbucket login before proceeding.
+2. Review the permissions Scrut is requesting and click **Grant Access**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430196980-d80yj7zgj6r-integrating-bitbucket__03-review-the-permissions-scrut-is-requesting.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Review the permissions Scrut is requesting and click Grant Access" caption=" " />
+3. Watch for the **Connected** status indicator on the Bitbucket integration page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430198828-rigift51y1-integrating-bitbucket__04-watch-for-the-connected-status-indicator-on.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the Connected status indicator on the Bitbucket integration page in Scrut" caption=" " />
+4. Click **Configure Scope** in the top right corner of the Bitbucket integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430200654-ofncufoii4s-integrating-bitbucket__05-click-configure-scope-in-the-top-right.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Configure Scope in the top right corner of the Bitbucket integration page" caption=" " />
+5. Select the repositories from which you want Scrut to collect evidence.
+6. Click **Save**.
+
+## What Happens Next?
+
+### Initial data sync
+
+Once the integration is connected and the scope is configured, Scrut begins collecting data from Bitbucket. You can monitor sync activity in the **Audit Log** tab on the Bitbucket integration page.
+
+### Review synced data
+
+- Navigate to **Tests** to view automated test results and flagged misconfigurations for Bitbucket. Use the Application filter to view tests only for Bitbucket.
+- Navigate to **Compliance → Evidence Tasks** to view the **Code Review Results** evidence task, where pull request evidence is uploaded on the 15th and the last day of each month.
+- Navigate to **People → Access Reviews** to create an access review and validate access data for your GitHub organization.
+- Navigate to **Asset Management** to view code repositories discovered through the integration.
+
+**Note:** You can trigger an on-demand sync at any time by clicking **Sync Now** on the Bitbucket integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430203021-jn5083av1zo-integrating-bitbucket__06-note-you-can-trigger-an-on-demand-sync-at.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: You can trigger an on-demand sync at any time by clicking Sync Now on the Bitbucket integration page" caption=" " />
+
+## Common Errors and Troubleshooting
+
+### Authentication failure
+
+Possible solutions:
+
+- Confirm you are logged into the correct Bitbucket account before clicking Connect.
+- Disconnect the integration and repeat the setup flow.
+- Check that your Bitbucket account has workspace admin access.
+
+### Data not appearing in Scrut
+
+Possible solutions:
+
+- Verify that the correct repositories are selected under Configure Scope.
+- Trigger a manual sync using the **Sync Now** button and check the Audit Log for errors.
+- Confirm that the integration status shows **Connected** on the Bitbucket integration page.
+
+### Users or repositories missing from Asset Management
+
+Possible solutions:
+
+- Check that the missing repositories fall within the configured scope.
+- Confirm that the relevant Bitbucket users are active members of the workspace.
+- Allow up to 24 hours after a scope change for data to reflect.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can I select which repositories Scrut collects data from?" default-open="false">
+
+Yes. After connecting, click **Configure Scope** on the Bitbucket integration page to select specific repositories. You can update this selection at any time.
+
+</Expandable>
+
+<Expandable title="2: What happens if I update my Bitbucket credentials or access tokens?" default-open="false">
+
+If your Bitbucket credentials change, the integration may stop syncing. Disconnect and reconnect the integration to re-authenticate with the updated credentials.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

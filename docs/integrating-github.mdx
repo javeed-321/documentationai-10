@@ -1,0 +1,283 @@
+---
+title: "Integrate GitHub"
+description: "Learn how to connect your GitHub account with Scrut."
+---
+
+Connect your GitHub organization with Scrut to automate evidence collection, run continuous compliance checks, and keep your user access and vulnerability data up to date. In this guide, we walk you through the step-by-step process of completing this integration.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your GitHub configurations against applicable compliance frameworks.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+  - **Code Review Results Evidence Task:** Scrut automatically collects pull request data and uploads it to the Evidence Task "Code Review Results" on the 15th and last day of each month.
+- **User Access Data:** Fetches user details, roles, and permissions from GitHub for Access Reviews.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered repositories and supports the collection of asset-related compliance evidence.
+- **Task Management:** Lets you create GitHub issues directly from Scrut or link existing issues to artifacts for end-to-end issue management.
+  - **Bidirectional Sync:** Changes made in GitHub are reflected in Scrut, and vice versa.
+- **Vulnerability Management:** Ingests vulnerability and affected asset data into Scrut, enabling end-to-end vulnerability tracking, assignment, and remediation.
+
+## Prerequisites
+
+- An active GitHub account with Organization Owner access. If you are not the organization owner, invite the owner to join Scrut as a Contributor to assist with the integration.
+
+<ExpandableGroup>
+
+<Expandable title="Why is this needed?" default-open="false">
+
+You need to be an organization owner in GitHub, as only Owners can view user information. To check if you’re an organization owner, visit the page: **https://github.com/settings/organizations**. If you’re an owner, you’ll see your organizations listed here.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430547998-eco1lrk9spu-integrating-github__01-you-need-to-be-an-organization-owner-in.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="You need to be an organization owner in GitHub, as only Owners can view user information" caption=" " />
+
+</Expandable>
+
+</ExpandableGroup>
+
+## Permissions and Access Requirements
+
+<Callout kind="alert">
+  Note:
+
+  - Scrut requires read-only access to your GitHub organization for compliance and evidence workflows, and cannot modify or alter your code repositories in any way.
+  - Issue creation requires read and write access to Issues.
+</Callout>
+
+### For GitHub
+
+- Read access to Dependabot alerts, actions, administration, members, metadata, and pull requests.
+- Read and write access to Issues (required for GitHub issue creation and tracking from Scrut).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430549672-s7dfwdrt2o-integrating-github__02-read-and-write-access-to-issues-required-for.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Read and write access to Issues (required for GitHub issue creation and tracking from Scrut)" caption=" " />
+
+<ExpandableGroup>
+
+<Expandable title="Why are these permissions required?" default-open="false">
+
+These permissions are essential for Scrut to collect the necessary evidence for your audits.
+
+- **Dependabot alerts:** Identifies and tracks security vulnerabilities within your dependencies.
+- **Actions, Issues, and Pull** **Requests:** Tracks the remediation of security issues and verifies that your development workflows comply with security policies.
+- **Administration, Metadata, and Members:** Enables automated user access reviews, monitors repository settings for compliance with security best practices, and collects general information about your repositories and organization.
+- **Issues (read and write):** Enables issue creation and tracking directly from Scrut.
+
+</Expandable>
+
+</ExpandableGroup>
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor role with the Integration module enabled)
+
+## Data Collected
+
+- Users: GitHub organization members, roles, and permissions
+- Code Repositories: Repository names, visibility, and settings
+- Branch names and configuration
+- Commits: Commit metadata
+- Pull Requests: PR details, status, and reviewers
+- Issues: Open and closed issue data
+- Workflows: GitHub Actions workflow details
+- Security Alerts: Dependabot and code scanning alerts
+- Pending Invitations: Pending org member invitations
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also trigger a manual sync at any time by clicking **Sync Now** on the GitHub integration page in Scrut.
+
+## Integration Setup
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log in to your GitHub account before starting the integration to avoid interruptions during the OAuth flow.
+</Callout>
+
+### Step 1: Configure Your Production Branch in GitHub
+
+Scrut uses a custom repository property, scrut_branch_name, to identify your production branch. Complete this step in GitHub before connecting.
+
+<ExpandableGroup>
+
+<Expandable title="Why is this needed?" default-open="false">
+
+Detecting your default branch automatically would require Scrut to have code-read access to your repositories. To keep your codebase private and ensure Scrut only accesses what's necessary for compliance, the `scrut_branch_name` custom property is used instead. It lets Scrut identify your production branch without accessing your code.
+
+</Expandable>
+
+</ExpandableGroup>
+
+1. Go to your GitHub organization settings at [https://github.com/settings/organizations](https://github.com/settings/organizations) and click on the organization you want to connect with Scrut.
+2. Navigate to **Settings → Repository → Custom Properties**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430551853-0t88npizaat-integrating-github__03-navigate-to-settings-repository-custom.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to Settings → Repository → Custom Properties" caption=" " />
+3. Click **New Property**.
+4. In the **Name** field, enter **scrut_branch_name**.
+5. In the **Type** dropdown, select **Text**.
+6. Select the checkbox **Require this property for all repositories**.
+7. In the Default value field, enter your default production branch name (for example, main or production).
+8. Click **Save Property**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430553533-denh7xppbta-integrating-github__04-click-save-property.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save Property" caption=" " />
+
+**Note:** You can also set the scrut_branch_name value at the individual repository level. Go to your custom properties page and click Set values next to the property.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430555376-t88pu8tg9iq-integrating-github__05-note-you-can-also-set-the-scrut-branch-name.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: You can also set the scrut_branch_name value at the individual repository level" caption=" " />
+
+<Callout kind="alert">
+  Heads Up!
+
+  If your production branch name changes in GitHub at any point after setup, repeat Step 1 to keep the integration working correctly.
+</Callout>
+
+### Step 2: Connect GitHub to Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Go to the **Integrations Library** tab and scroll to **Version Control** in the **Categories** section.
+3. Locate the **GitHub** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430557220-jmgg41ttbd-integrating-github__06-locate-the-github-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the GitHub tile and click Integrate" caption=" " />
+4. Click **Connect** in the top-right corner of the GitHub integration page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430558892-k0om022st4-integrating-github__07-click-connect-in-the-top-right-corner-of-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect in the top-right corner of the GitHub integration page" caption=" " />
+5. Follow the on-screen tutorial. On the **Organization Owner** step, confirm that you are an organization owner, then click **Next**.
+6. Review the Configure Production Branch instructions and click **Next**.
+7. On the Initiate Authentication step, click **Proceed To Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430561317-cw0fbzowghe-integrating-github__08-on-the-initiate-authentication-step-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Initiate Authentication step, click Proceed To Connect" caption=" " />
+8. GitHub will prompt you to authorize Scrut. Select your company's GitHub organization from the list.
+
+**Note:** The Scrut app name varies by data region. For EU accounts, the app name is Scrut Automation EU. For US, it is Scrut Automation US, and for India, it is Scrut Automation.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430563027-xpjl483811-integrating-github__09-note-the-scrut-app-name-varies-by-data-region.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: The Scrut app name varies by data region" caption=" " />
+
+9. Choose which repositories Scrut should monitor:
+  - **All repositories**: Scrut monitors all current and future repositories in the organization, including public repositories (read-only).
+  - **Only select repositories**: Scrut monitors only the repositories you select. New repositories are not included unless you update this setting later.
+10. Click **Install** and wait for the Connected status indicator to appear.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430549672-s7dfwdrt2o-integrating-github__02-read-and-write-access-to-issues-required-for.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Install and wait for the Connected status indicator to appear" caption=" " />
+
+### Step 3: Configure Scope
+
+Define which repositories Scrut should monitor by selecting individual repositories, filtering by topics, or using both.
+
+1. Click **Configure Scope** on the GitHub integration page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430564665-5l1jl2r5wja-integrating-github__11-click-configure-scope-on-the-github.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Configure Scope on the GitHub integration page in Scrut" caption=" " />
+2. Use one or both of the following methods:
+  - **Scope by Repositories:** Select individual repositories from the list. Scrut pulls evidence from the repositories you choose.
+  - **Scope by Topic:** Navigate to the Select by Topics tab and choose one or more GitHub topics from the dropdown. Scrut automatically includes all repositories tagged with those topics. Optionally, enable Auto-include future repos matching the selected topics to automatically bring newly created repositories into scope.
+3. Click **Save** to apply your scope configuration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430566333-03lh0hycqz87-integrating-github__12-click-save-to-apply-your-scope-configuration.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save to apply your scope configuration" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  Both scoping methods work together. You **can make selections in both tabs** and all applicable repos will be included in the integration scope. For example: If you select 3 repositories manually and a topic that covers 15 repositories, Scrut monitors all 18.
+</Callout>
+
+## Updating Your GitHub Connection (Existing Customers)
+
+If you connected GitHub to Scrut before the Issues scope update, your existing connection does not include the read and write access required for GitHub issue creation and tracking. You need to delete the Scrut app in GitHub and reconnect the integration to apply the updated permissions.
+
+<Callout kind="alert">
+  Important:
+
+  Reconnecting requires deleting the existing Scrut app from your GitHub organization. This temporarily interrupts data syncing until the reconnection is complete. Your historical sync data in Scrut is not affected.
+</Callout>
+
+### Step 1: Delete the Existing Scrut App from GitHub
+
+1. Go to your GitHub organization settings at [https://github.com/settings/organizations](https://github.com/settings/organizations) and click on your organization.
+2. Navigate to **Settings → Third-Party Access → GitHub Apps**.
+3. Locate the Scrut Automation app (Scrut Automation IN, Scrut Automation EU or Scrut Automation US, depending on your region) and click **Configure**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430568102-366gjda6hjl-integrating-github__13-locate-the-scrut-automation-app-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Scrut Automation app (Scrut Automation IN, Scrut Automation EU or Scrut Automation US, depending" caption=" " />
+4. Scroll to the bottom of the page and click **Uninstall**.
+5. Confirm the deletion when prompted.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430570040-tczt70a8yih-integrating-github__14-confirm-the-deletion-when-prompted.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Confirm the deletion when prompted" caption=" " />
+
+### Step 2: Reconnect GitHub in Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Locate the GitHub integration and click **Connect**.
+3. Follow the on-screen tutorial and complete the authentication flow as described in [Step 2: Connect GitHub to Scrut above](/v1/docs/integrating-github#step-2-connect-github-to-scrut).
+
+<Callout kind="alert">
+  Heads Up!
+
+  When GitHub prompts you to authorize Scrut, make sure you select All repositories or your relevant repository scope. The updated permissions include read and write access to Issues in addition to the existing read-only permissions.
+</Callout>
+
+4. Click **Install** and wait for the Connected status indicator to appear.
+
+Once reconnected, your integration will include the Issues scope, and you can create and link GitHub issues directly from Scrut.
+
+## What Happens Next?
+
+### Initial data sync
+
+Once the integration is connected and the scope is configured, Scrut begins gathering data from your GitHub organization. You can monitor sync status in the Audit Log on the GitHub integration page.
+
+### Review synced data
+
+Once the sync completes, verify that data has landed correctly in the following modules:
+
+- Navigate to **Tests** to view automated test results and flagged misconfigurations for GitHub. Use the Application filter to view tests only for GitHub.
+- Navigate to **Compliance → Evidence Tasks** to view the **Code Review Results** task, where pull request evidence is uploaded on the 15th and the last day of each month.
+- Navigate to **Compliance → Evidence Tasks** **to set up Scrut Monitors** to automate evidence collection from GitHub.
+- Navigate to **People → Access Reviews** to create an access review and validate access data for your GitHub organization.
+- Navigate to **Asset Management** to view code repositories discovered through the integration.
+- Navigate to **Vulnerabilities** to view security alert data ingested from GitHub.
+- Open an artifact (Policy, Evidence Task, Test, etc.) and create or link a GitHub issue. See here for detailed instructions on creating/linking GitHub Issues.
+
+## Common Errors and Troubleshooting
+
+### Integration fails at authentication
+
+Possible solutions: Confirm that the GitHub account used during setup is an Organization Owner. Non-owners cannot authorize the integration. Log out of GitHub and log back in before retrying the connection. If your organization enforces SAML SSO, authorize the Scrut app within your SSO settings in GitHub before connecting.
+
+### GitHub Organization Not Visible During Setup
+
+Possible solutions: Confirm that your GitHub account is a member of the organization you want to connect to. Check that the organization has not restricted access to third-party OAuth apps. An Organization Owner may need to approve the Scrut app under Settings → Third-party Access in GitHub.
+
+### Production Branch Data Not Reflecting in Scrut
+
+Possible solutions: Confirm that the scrut_branch_name custom property is saved correctly in GitHub and the default value matches your production branch exactly. If you recently renamed your production branch, update the scrut_branch_name value and allow up to 24 hours for the next sync to reflect the change.
+
+### Pull Request Evidence Not Appearing in Code Review Results
+
+Possible solutions: Confirm that the repositories containing the pull requests are included in your Configure Scope selection. Trigger a manual sync by clicking Sync Now on the GitHub integration page and checking the Audit Log for any errors.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Why do I need to be a GitHub Organization Owner to set up this integration?" default-open="false">
+
+Only Organization Owners can grant Scrut the necessary access to view member information and repository settings across the organization. If you are not an owner, invite the organization owner to Scrut as a Contributor and have them complete the integration.
+
+</Expandable>
+
+<Expandable title="2: What happens if I add new repositories to my GitHub organization after the integration is set up?" default-open="false">
+
+If you selected All repositories during setup, new repositories are included automatically. If you selected Only select repositories or used topic-based scoping, you need to update your scope settings in Scrut or enable the Auto-include future repos matching selected topics option.
+
+</Expandable>
+
+<Expandable title="3: Can I change which repositories Scrut monitors after setup?" default-open="false">
+
+Yes. Click Configure Scope on the GitHub integration page in Scrut at any time to update your repository selection or topic filters.
+
+</Expandable>
+
+<Expandable title="4: What happens if my GitHub credentials change?" default-open="false">
+
+If authentication is disrupted, the integration status changes to Not Connected. Reconnect by clicking Connect on the GitHub integration page and completing the authentication flow again.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

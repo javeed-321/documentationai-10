@@ -1,0 +1,100 @@
+---
+title: "Integrate Xero"
+description: "Learn how to integrate Xero with Scrut."
+---
+
+The **Scrut-Xero** integration fetches user access data, permissions, and role assignments from your [Xero account](https://www.xero.com/) and sends them to [Access Review](https://help.scrut.io/docs/what-is-access-review) in Scrut. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Xero flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- Admin access for your organization’s Xero account
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Xero:
+
+- User Accounts: View name, email, and user profile
+- Organization Data: View and manage your organization settings
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431423245-poivifpsujo-integrating-xero__01-organization-data-view-and-manage-your.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Organization Data: View and manage your organization settings" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Xero account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Connect Xero With Scrut
+
+### Step 1: Navigate to Integrations in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Go to the **Integrations Library** tab, and in the **Categories** section, click **Miscellaneous**.
+3. Find the Xero tile, and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431425267-v1h6wnknuya-integrating-xero__02-find-the-xero-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Find the Xero tile, and click Integrate" caption=" " />
+4. On the Xero integrations page, click the **Connect** button at the top right.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431426939-0rmsa1cqo48-integrating-xero__03-on-the-xero-integrations-page-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Xero integrations page, click the Connect button at the top right" caption=" " />
+5. Scrut will prompt you to log in to Xero using your credentials if you haven’t already done so.
+6. If you have more than one Xero organization, use the dropdown to select the one you want to connect with Scrut.
+7. Click **Allow Access** to grant the necessary permissions.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431428641-x3d8amnv8il-integrating-xero__04-click-allow-access-to-grant-the-necessary.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Allow Access to grant the necessary permissions" caption=" " />
+8. Watch for the **Connected Successfully** notification message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431430429-1wiyy1l2m3w-integrating-xero__05-watch-for-the-connected-successfully.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the Connected Successfully notification message and the Connected status indicator" caption=" " />
+
+### Step 2: Configure Integration Scope
+
+1. Click the **Configure Scope** button on the top right of the Xero integration page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431432344-21wxtpbpbk-integrating-xero__06-click-the-configure-scope-button-on-the-top.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Configure Scope button on the top right of the Xero integration page in Scrut" caption=" " />
+2. Choose the resources you want to include in this integration and click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431434094-geatcokaa6g-integrating-xero__07-choose-the-resources-you-want-to-include-in.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Choose the resources you want to include in this integration and click Save" caption=" " />
+3. Watch for the **Scope Updated Successfully** notification message.
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync user data from Xero.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+
+## Data Fetched from Xero
+
+Scrut fetches the following access-related data points from Xero:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Xero Data in Scrut
+
+To view the data fetched from your Xero account, you’ll need to create an Access Review (or edit an existing one) and include the Xero application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for Xero:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search and select **Xero** in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click Xero to view Xero user details in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431435759-7wvb1xr0nn8-integrating-xero__08-from-the-access-review-page-click-xero-to.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the Access Review page, click Xero to view Xero user details in Scrut" caption=" " />
+
+---
+
+If you face any difficulties connecting Xero with Scrut, please get in touch with the Scrut support team at support@scrut.io.

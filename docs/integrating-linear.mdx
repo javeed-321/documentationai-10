@@ -1,0 +1,133 @@
+---
+title: "Integrate Linear"
+description: "Learn how to connect your Linear organization with Scrut."
+---
+
+The Linear integration connects your Linear workspace to Scrut, enabling your team to create and sync compliance-related issues directly from the Scrut platform.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+- **User Access Data:** Fetches user details, roles, and permissions from Linear for Access Reviews.
+- **Task Management:** Enables you to create project management issues in Scrut and sync them to Linear.
+
+## Prerequisites
+
+- An active Linear account with admin access to your workspace
+
+## Permissions and Access Requirements
+
+### For Linear
+
+- Read access to your workspace
+- Create issues for your workspace
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor role with access to the Integrations module
+
+## Data Collected
+
+- User names
+- User emails
+- User roles
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Connect Linear in Scrut
+
+1. From the left navigation panel, select **Integrations**.
+2. Click **Integrations Library**.
+3. Scroll to the **Project Management Platforms** section and locate **Linear**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430793471-8ksjr4bbe5e-integrating-linear__01-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. On the Linear integration page, click **Connect**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430795401-kmhneaaecmf-integrating-linear__02-on-the-linear-integration-page-click-connect.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Linear integration page, click Connect" caption=" " />
+
+### Step 2: Authorize Scrut Access to Linear
+
+1. Log in to Linear using your Linear credentials, Google account, or SAML SSO.
+2. On the authorization screen, review the permissions Scrut Automation is requesting:
+  - Read access to your workspace and
+  - Create issues for your workspace
+3. Click **Authorize**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430797141-07a2z7wsmf37-integrating-linear__03-click-authorize.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Authorize" caption=" " />
+
+**Note:** You require admin access to the Linear workspace you are authorizing. If you do not have sufficient permissions, the authorization will fail.
+
+Once authorization is complete, the integration status updates to Connected on the Linear settings page in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430798798-7hq6sqtbfmp-integrating-linear__04-once-authorization-is-complete-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once authorization is complete, the integration status updates to Connected on the Linear settings page in" caption=" " />
+
+### Step 3: [Optional] Configure Additional Fields
+
+1. Click the **Configure Additional Fields** button on the Linear integration page in Scrut.
+2. Select any additional fields that you want to sync with Scrut.
+3. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430800830-dwifa34y6cn-integrating-linear__05-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+The initial data sync begins automatically after the integration is connected. You can monitor sync activity and integration events from the Audit Log tab on the Linear integration settings page.
+
+### Review synced data
+
+Once the sync completes, verify that data has landed correctly in the following modules:
+
+- Navigate to **Tests** to view automated test results and flagged misconfigurations.
+- Navigate to **People → Access Reviews** to create an access review and validate access data pulled from Linear.
+- Create or link Linear issues to track compliance issues. See here for [step-by-step instructions to create a Linear Issue](/docs/creating-linear-issue).
+
+## Common Errors and Troubleshooting
+
+### Authorization fails during setup
+
+Possible solutions:
+
+- Confirm you have admin access to the Linear workspace you are attempting to authorize. Authorization fails if your Linear account does not have sufficient workspace permissions.
+- Check that you are logged in to the correct Linear account before clicking Authorize Scrut Automation.
+
+### Connection shows as not connected after authorization
+
+Possible solutions:
+
+- Refresh the Linear integration settings page in Scrut and check the connection status indicator.
+- If the status remains Not Connected, disconnect and attempt the integration flow again from Step 1.
+- Check the Audit Log on the integration settings page for any error events logged during the connection attempt.
+
+### User data not appearing in Access Reviews
+
+Possible solutions:
+
+- Wait for the next scheduled sync. User data syncs every 24 hours after the initial connection.
+- Trigger a manual sync from the Linear integration settings page and allow a few minutes for data to populate.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if I change my Linear credentials or rotate my API access?" default-open="false">
+
+If your Linear credentials change, the integration may stop functioning. Disconnect the integration on the Linear settings page in Scrut, then reconnect using your updated credentials.
+
+</Expandable>
+
+<Expandable title="2: Can I see a history of integration activity?" default-open="false">
+
+Yes. The Audit Log tab on the Linear integration settings page shows a timestamped log of integration events, including successful syncs and disconnection actions.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

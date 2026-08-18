@@ -1,0 +1,105 @@
+---
+title: "Integrate New Relic"
+description: "Learn how to connect your New Relic account with Scrut."
+---
+
+The **Scrut-New Relic integration** fetches user access data, permissions, and role assignments from your New Relic account and sends it to [Access Review](https://help.scrut.io/docs/what-is-access-review) in Scrut. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from New Relic flows into the **Access Review** module in Scrut.
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following permissions for your New Relic account:
+
+- **Account Information**: New Relic account login credentials
+- **Access Level**: Admin or authentication domain manager access to fetch the User API key
+- **Permissions**: Scrut requires the following permissions to fetch access review data:
+  - Personal API key with user management permissions
+
+<Callout kind="info">
+  Pro Tip:
+
+  We recommend logging into your New Relic account before starting the integration to avoid doing so later.
+</Callout>
+
+## How To Integrate Scrut With New Relic
+
+### Step 1: Generate a User API Key in New Relic
+
+1. Sign in to your New Relic account, click your user name and select **API keys** from the user menu.
+2. Click **Create a key.**
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430950182-t95oohcd8v7-integrating-new-relic__01-click-create-a-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create a key" caption=" " />
+3. Choose the key type as **User**.
+4. Give it a descriptive name (such as Scrut Automation) and click **Create a key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430951765-0gex3lqxkz6-integrating-new-relic__02-give-it-a-descriptive-name-such-as-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Give it a descriptive name (such as Scrut Automation) and click Create a key" caption=" " />
+5. Copy and paste the key in a safe location. You’ll need to enter it in Scrut in Step 2.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430953768-rjztn23s7qr-integrating-new-relic__03-copy-and-paste-the-key-in-a-safe-location.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy and paste the key in a safe location. You’ll need to enter it in Scrut in Step 2" caption=" " />
+
+### Step 2: Connect Your New Relic Account in Scrut
+
+1. [Sign in to your Scrut account](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab and choose **Capacity & Usage Monitoring** in the **Categories** section.
+3. Scroll to the New Relic tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430955602-xe7w5j8dz2c-integrating-new-relic__04-scroll-to-the-new-relic-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the New Relic tile and click Integrate" caption=" " />
+4. Paste the API key you copied in step 1.
+5. Choose the region for your New Relic account:
+  - If you sign in at [one.newrelic.com](http://one.newrelic.com/), select **US**.
+  - If you sign in at [one.eu.newrelic.com](https://login.newrelic.com/?return_to=https%3A%2F%2Fone.eu.newrelic.com%2F), select **EU**.
+6. Then, click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430957382-i2jbue5j59-integrating-new-relic__05-then-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Then, click Submit" caption=" " />
+7. Watch for the **"Integration Successful"** notification message and the **Connected** tag.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430959052-tbaxwyx3dsb-integrating-new-relic__06-watch-for-the-integration-successful.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the 'Integration Successful' notification message and the Connected tag" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: On integration, Scrut will instantly fetch the scan results from your New Relic account.
+- **Recurring Sync**: After the initial scan, Scrut runs the scan once every 24 hours to fetch incremental data.
+- **Manual Sync:** If required, you can click the **Sync Now** button on the New Relic integration page to initiate a manual sync.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430960681-509veh5jlq-integrating-new-relic__07-manual-sync-if-required-you-can-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Manual Sync: If required, you can click the Sync Now button on the New Relic integration page to initiate a" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  Check the **Audit Logs** on the New Relic integration page to determine the timing of the last scan.
+
+  <Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430962535-ki1q3oj7qfk-integrating-new-relic__08-check-the-audit-logs-on-the-new-relic.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Check the Audit Logs on the New Relic integration page to determine the timing of the last scan" caption=" " />
+</Callout>
+
+## Data Fetched from New Relic
+
+Scrut fetches the following access-related data points from New Relic:
+
+- UserID
+- Email
+- First Name
+
+## Viewing New Relic User Data in Scrut
+
+To view the data fetched from your New Relic account, you’ll need to create an Access Review (or edit an existing one) and include the New Relic application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+Follow these steps to create a new access review for New Relic:
+
+1. Go to **People → Access Review** and click **Create New**.
+2. Enter Review Details: Name, Description, Owner, and Review Days.
+3. In step 2, search and select **New Relic** in the Applications in Scope.
+4. Select **Reviewer** and **Approver**.
+5. Review the details and click **Save Review**.
+
+From the Access Review page, click New Relic to view New Relic user details in Scrut.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430964250-8lfg0h0v2xd-integrating-new-relic__09-from-the-access-review-page-click-new-relic.gif?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="From the Access Review page, click New Relic to view New Relic user details in Scrut" caption=" " />
+
+---
+
+If you face any difficulties connecting New Relic with Scrut, please get in touch with the Scrut support team at support@scrut.io.

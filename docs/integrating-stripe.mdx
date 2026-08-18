@@ -1,0 +1,101 @@
+---
+title: "Integrate Stripe"
+description: "Learn how to integrate your Stripe account with Scrut."
+---
+
+The **Scrut-Stripe** integration fetches user access data, permissions, and role assignments from your Stripe account and sends the data to the [Access Review](https://help.scrut.io/docs/what-is-access-review) module in Scrut. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+<Callout kind="alert">
+  Heads Up!
+
+  The data synced from Stripe flows into the **Access Review** module in Scrut.
+</Callout>
+
+## How To Connect Stripe With Scrut
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You must have permissions to generate an API key in Stripe
+
+### Permissions
+
+Scrut requires **read-only access** to the following data in Stripe
+
+- User Accounts: View name, email, and user role
+
+<Callout kind="info">
+  Pro Tip!
+
+  We recommend logging into your Stripe account before starting the integration to avoid doing so later.
+</Callout>
+
+### Step 1: Fetch the API Key from Your Stripe Account
+
+1. Navigate to [https://dashboard.stripe.com/.](https://dashboard.stripe.com/.)
+2. Click **Developers** at the bottom left of the side panel.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431308834-unltq75h2sj-integrating-stripe__01-click-developers-at-the-bottom-left-of-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Developers at the bottom left of the side panel" caption=" " />
+3. Click **API Keys**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431310546-0glzz6dumi9k-integrating-stripe__02-click-api-keys.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click API Keys" caption=" " />
+4. Click **+Create Restricted Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431312301-x53h7z4vefa-integrating-stripe__03-click-create-restricted-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click +Create Restricted Key" caption=" " />
+5. For the question, “How will you use this API key?”, select the option “**Providing this key to another website**” and click **Continue**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431314156-ccwvowgmfkn-integrating-stripe__04-for-the-question-how-will-you-use-this-api.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="For the question, “How will you use this API key?”, select the option “Providing this key to another website”" caption=" " />
+6. Enter Scrut in the name field and “[https://www.scrut.io/](https://www.scrut.io/.)” in the URL field.
+7. Select the checkbox **Customize permissions for this key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431315942-bjsnrmdnutl-integrating-stripe__05-select-the-checkbox-customize-permissions.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the checkbox Customize permissions for this key" caption=" " />
+8. Set the permission to **Read** for the **Core** and **Connect** resource types. Set all other permissions to None.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431317745-jlx4rwspvt-integrating-stripe__06-set-the-permission-to-read-for-the-core-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Set the permission to Read for the Core and Connect resource types. Set all other permissions to None" caption=" " />
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431319483-sk28rfqt7p-integrating-stripe__07-set-the-permission-to-read-for-the-core-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Set the permission to Read for the Core and Connect resource types. Set all other permissions to None" caption=" " />
+9. Click **Create Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431321326-ahkhpn1b1en-integrating-stripe__08-click-create-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create Key" caption=" " />
+10. Copy the created key. You’ll need to enter it in Scrut in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431323115-f916x8h2hck-integrating-stripe__09-copy-the-created-key-youll-need-to-enter-it.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the created key. You’ll need to enter it in Scrut in the next step" caption=" " />
+
+### Step 2: Navigate to Integrations in Scrut
+
+1. Sign in to your Scrut account and click **Integrations** on the left navigation panel.
+2. Go to the **Integrations Library** tab, and in the **Categories** section, click **Miscellaneous**.
+3. Locate the Stripe tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431324824-lj0stl9pbn8-integrating-stripe__10-locate-the-stripe-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Stripe tile and click Integrate" caption=" " />
+4. On the Stripe integrations page, enter the API key you copied in the previous step and click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431326651-dnigko4qiw-integrating-stripe__11-on-the-stripe-integrations-page-enter-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Stripe integrations page, enter the API key you copied in the previous step and click Submit" caption=" " />
+5. Watch for the **Connected Successfully** notification message and the **Connected** status indicator.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431328595-46t2f31pzty-integrating-stripe__12-watch-for-the-connected-successfully.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the Connected Successfully notification message and the Connected status indicator" caption=" " />
+
+## Synchronization Details
+
+- **Initial Sync**: Upon completing the integration, Scrut will immediately sync user data from Stripe.
+- **Recurring Sync**: After this, Scrut performs the sync **every 24 hours** to fetch incremental data.
+
+## Data Fetched from Stripe
+
+Scrut fetches the following access-related data points from Stripe:
+
+- User Name
+- User Email
+- User Role
+
+## Viewing Stripe Data in Scrut
+
+To view the data fetched from your Stripe account, you’ll need to create an Access Review (or edit an existing one) and include the Stripe application in scope. Refer to this guide for step-by-step instructions on [creating an access review](https://help.scrut.io/docs/creating-a-new-access-review).
+
+---
+
+If you face any difficulties connecting Stripe with Scrut, please get in touch with the Scrut support team at support@scrut.io.

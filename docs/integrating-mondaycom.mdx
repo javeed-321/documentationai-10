@@ -1,0 +1,171 @@
+---
+title: "Integrate Monday.com"
+description: "Learn how to integrate your Monday.com account with Scrut."
+---
+
+Connecting your Monday.com account to Scrut lets you create and link project management tickets, sync ticket attachments to your evidence tasks, and automatically recreate tickets when a linked task's status turns non-compliant. In this article, we explain how to connect your Monday.com account with Scrut to sync compliance evidence.
+
+## What This Integration Does in Scrut
+
+- **Task Management:** Enables you to create project management tickets in Scrut and sync them to Monday.com.
+  - **Bidirectional status sync:** Status changes made to a linked item in Monday.com are automatically reflected in Scrut.
+  - **Ticket automation:** When a linked compliance item moves to a non-compliant status, Scrut automatically creates a new Monday item to keep your team notified.
+  - **Fetches attachments for evidence tasks:** Scrut automatically pulls attachments on items linked to evidence tasks from Monday.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+
+## Prerequisites
+
+Before starting the integration, make sure you have the following:
+
+- An active Monday.com account with admin access
+
+## Permissions and Access Requirements
+
+### For Monday.com
+
+- Admin permissions to generate the API v2 Token
+- Access to the boards and items you want to link or sync attachments from
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permissions to the Integrations module
+
+## Integration Setup
+
+### Step 1: Generate an API v2 Token in Monday.com
+
+1. Log in to your Monday.com account.
+2. Click your avatar in the top right corner of the screen.
+3. Select **Administration** from the menu. This requires admin permissions.
+4. Go to **Connections** → **Personal** **API Token**.
+5. Generate an **API v2 Token**.
+6. Copy the token. You will need it in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430843529-lwf8415eqps-integrating-mondaycom__01-copy-the-token-you-will-need-it-in-the-next.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the token. You will need it in the next step" caption=" " />
+
+### Step 2: Connect Monday.com in Scrut
+
+1. Sign in to Scrut and click **Integrations** in the left navigation panel.
+2. Go to the **Integrations Library** tab, scroll to the **Project Management Platform** section and find Monday.com.
+3. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430845272-dk19q172ka-integrating-mondaycom__02-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+4. On the Monday.com integration page, click the **Details** tab.
+5. In the API V2 Token field, paste the token you copied from Monday.com.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430847088-287lmy8rbbx-integrating-mondaycom__03-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Once the connection is successful, the status indicator changes from **Not Connected** to **Connected**.
+
+### Step 3: Enable Attachment Sync (Optional)
+
+1. On the Monday.com integration page, click the **Settings** tab.
+2. Turn on the **Automatically import ticket attachments** toggle. When enabled, this feature automatically fetches attachments from Monday items to the corresponding linked evidence tasks.
+
+**Note:** Enabling this toggle creates a webhook in your Monday.com account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430848800-gtx8ii4w3q-integrating-mondaycom__04-note-enabling-this-toggle-creates-a-webhook.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: Enabling this toggle creates a webhook in your Monday.com account" caption=" " />
+
+## What Happens Next?
+
+### Initial Data Sync
+
+After the integration is authorized, Scrut begins automatically syncing data from your Monday.com account. You can monitor sync activity and review connection events in the Audit Log tab on the Monday.com integration page. To manually trigger a sync, navigate to the Monday.com integration settings and use the Sync Now button.
+
+### Create a Monday Item from Scrut
+
+Once connected, you can create a new Monday item directly from any of the following artifacts in Scrut: Policies, Evidence Tasks, Tests, Cloud, Risk Management, Audit Requests, Audit Findings, Audit → Corrective Actions and Vulnerabilities → Findings.
+
+1. Open the artifact for which you want to create a Monday item.
+2. Scroll to the **Tickets (Monday.com)** tab and click **Create → Create** **Monday.com Ticket**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430850490-pj3g11rixl-integrating-mondaycom__05-scroll-to-the-tickets-monday-com-tab-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Tickets (Monday.com) tab and click Create → Create Monday.com Ticket" caption=" " />
+3. Enter the ticket details.
+4. Turn on the **Enable Ticket Automation** checkbox if you want Scrut to automatically create new tickets if the artifact moves to a non-compliant status.
+
+   For example, if the linked policy’s status changes from compliant (Uploaded) to non-compliant, Scrut automatically creates a duplicate of the linked Monday item in the same workspace, board, and group, keeping the original item name and parameters.
+5. Complete the **Create Ticket** tab and submit it.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430852146-rbqhjz2mjbo-integrating-mondaycom__06-complete-the-create-ticket-tab-and-submit-it.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Complete the Create Ticket tab and submit it" caption=" " />
+
+Scrut creates the item in Monday.com and links it to the Scrut task.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Clicking the Monday item ID takes you directly to the corresponding item in Monday.
+</Callout>
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430853885-ri8qluehv4-integrating-mondaycom__07-clicking-the-monday-item-id-takes-you.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Clicking the Monday item ID takes you directly to the corresponding item in Monday" caption=" " />
+
+### Link an Existing Monday Item to a Scrut Task
+
+1. Open the artifact for which you want to create a Monday item.
+2. Scroll to the **Tickets (Monday.com)** tab and click **Create → Link Existing Ticket.**
+3. Paste the full item URL and click **Link**.
+4. Scrut validates that the item exists in Monday.com and maps it to the corresponding Scrut artifact.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430855612-c24582f3sub-integrating-mondaycom__08-scrut-validates-that-the-item-exists-in.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut validates that the item exists in Monday.com and maps it to the corresponding Scrut artifact" caption=" " />
+
+### Create a Scrut Monitor for Monday.com
+
+A Scrut Monitor automatically fetches evidence from a Monday.com board and attaches it to an evidence task at a cadence you choose.
+
+1. Navigate to **Compliance → Evidence Tasks** and open the evidence task you want to automate.
+2. Click **Add Attachment**.
+3. Select the **Scrut Monitor** tab.
+4. Under **Connected Apps**, find **Monday.com** and click **Configure**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430857160-9uhsc4kbdom-integrating-mondaycom__09-under-connected-apps-find-monday-com-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under Connected Apps, find Monday.com and click Configure" caption=" " />
+5. In the **Configure Workflow** window, fill in the required details.
+6. In the **Cadence**, select how often Scrut should re-fetch evidence, for example, Weekly.
+7. Select the **Auto publish evidence task** checkbox to have Scrut automatically publish the evidence task each time new evidence is attached on the set cadence. Uncheck it if you want the task to move to Draft instead when new evidence is attached, so you can review it before publishing.
+8. Click **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430859020-bt6vd3ev9pr-integrating-mondaycom__10-click-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save" caption=" " />
+
+Evidence fetched by the monitor appears as new files on the evidence task each time it runs.
+
+## Common Errors and Troubleshooting
+
+### Invalid API Token
+
+Cause: The API v2 Token entered is incorrect, expired, or was generated without admin permissions. Possible solutions:
+
+- Regenerate a new API v2 Token in Monday.com using admin credentials
+- Re-enter the token on the **Details** tab and click **Submit**
+
+### Monday Item not found when linking
+
+Cause: The item ID or URL entered does not match an existing Monday item, or your account does not have access to it. Possible solutions:
+
+- Confirm the item ID or URL is correct
+- Confirm your Monday.com account has access to the board containing the item
+
+### Attachments not syncing
+
+Possible solutions:
+
+- Confirm the **Automatically import ticket attachments** toggle is turned on in the **Settings** tab
+- Reconnect the integration if your Monday.com API token has changed
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="Can I sync attachments that were added to a Monday item before I linked it?" default-open="false">
+
+Yes. When you turn on Automatically import ticket attachments, Scrut imports all existing attachments on the linked item first, then syncs any new files added later.
+
+</Expandable>
+
+<Expandable title="Which modules support automatic ticket recreation?" default-open="false">
+
+Automatic ticket recreation is currently available in the Tests, Policies, and Evidence Tasks modules.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

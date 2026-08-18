@@ -1,0 +1,88 @@
+---
+title: "Clone a Policy"
+description: "Learn how to clone a policy in Scrut to reuse control and requirement mappings, save time, and create new policies faster. See what gets copied, what doesn't, and key cloning considerations."
+---
+
+<Callout kind="info">
+  Who can use this feature
+
+  - Supported on **Foundation, Growth,** and **Scale** plans
+</Callout>
+
+Cloning creates a new policy from an existing one, carrying over the control and requirement mappings of the source policy, so you do not have to rebuild them from scratch.
+
+## How To Clone a Policy
+
+1. Navigate to **Compliance → Policies → All Policies** and open the policy for which you want to create a copy.
+2. On the policy detail page, click the three-dot icon at the top-right, and click **Clone Policy**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431850322-zeb40sch1mc-clone-a-policy__01-on-the-policy-detail-page-click-the-three.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the policy detail page, click the three-dot icon at the top-right, and click Clone Policy" caption=" " />
+3. Scrut opens the Policy Setup wizard, pre-filled with details from the source policy. Review the callout showing how many requirements and controls are already linked from the source policy.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431852173-7lnuy2knmrx-clone-a-policy__02-scrut-opens-the-policy-setup-wizard-pre.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut opens the Policy Setup wizard, pre-filled with details from the source policy" caption=" " />
+4. Select how you want to set up the new policy's document: Upload Policy Document, Link an Existing Policy, or Create a Policy.
+5. Complete the Document Setup step, if it’s applicable. This step depends on the option you chose in step 4.
+6. Update the Policy Name field. Scrut pre-fills this as "Clone - [Source Policy Name]."
+
+   **Note:** Policy names must be unique. If the name already exists, Scrut blocks you from cloning until you edit the name.
+7. Review the pre-filled fields, and edit any that need to change for the new policy.
+8. On the Link Requirements and Controls step, review the requirements and controls already selected based on the source policy. Select or clear checkboxes to adjust the mappings for the new policy.
+9. On the Review step, confirm all the details.
+10. Click Save.
+
+Scrut creates the new policy and takes you directly to it.
+
+## What Gets Copied
+
+The following details carry over from the source policy:
+
+- Linked controls and requirements
+- Description
+- Department
+- Assignee(s). The assigned user also receives a new task for the cloned policy.
+- Recurrence
+- Effort estimate
+- Relevance
+- Approvers, if the policy approval workflow is on. Approval status resets to pending.
+
+## What Does Not Get Copied
+
+- Policy document (The cloned policy starts with no policy document)
+- Inline editor body content (Scrut does not carry over drafted policy text)
+- Jira or other project management tool links
+- Comments and audit history
+- Version history
+
+### Points to Note:
+
+- Once created, the cloned policy is fully independent, with its own artifact ID. Editing, publishing, or deleting the source policy does not affect the clone, and changes to the clone do not carry back to the source.
+- The cloned policy starts in the Not Uploaded status, regardless of the source policy's status.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="Is the cloned policy linked to the source policy after creation?" default-open="false">
+
+No. Once created, the clone is a fully independent policy with its own artifact ID. Editing, publishing, or deleting the source policy does not affect the clone, and changes to the clone do not carry back to the source. The two are only related by the data that was copied at the moment of cloning.
+
+</Expandable>
+
+<Expandable title="Why clone a policy?" default-open="false">
+
+Cloning helps in two common situations:
+
+- **Per-entity policies:** If your organization uses Entities, you can clone a policy to assign it to a different entity with its own attachment and lifecycle, while keeping the same control mappings as the source policy.
+- **Splitting merged policies:** Some policies in Scrut's catalog are merged to reduce duplication in framework mappings. If your governance model needs these as separate documents, cloning splits them into individually titled policies without remapping controls from scratch.
+
+</Expandable>
+
+<Expandable title="What happens if I clone a policy that has an unresolved policy variable?" default-open="false">
+
+The cloning action completes. The new policy has no attachment or variables until you add content to it.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

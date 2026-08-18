@@ -1,0 +1,96 @@
+---
+title: "Integrate OpenAI"
+description: "Learn how to connect your organization's OpenAI developer account with Scrut."
+---
+
+The **Scrut-OpenAI** integration fetches user access data, permissions, and role assignments from your OpenAI account and syncs them with the [Access Review](https://help.scrut.io/docs/what-is-access-review) module. This integration enables your organization to maintain comprehensive visibility over user access rights and streamline periodic access reviews for compliance and security.
+
+## What This Integration Does in Scrut
+
+This integration performs the following functions in Scrut:
+
+- **User Access Data**: Fetches user details, roles, and permissions from OpenAI for Access Reviews.
+- **Automated Tests**: Runs automated checks that continuously evaluate OpenAI for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following credentials:
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You must have permissions to generate an API key in OpenAI
+
+<Callout kind="danger">
+  Important:
+
+  You must have [set up prepaid billing for your OpenAI account to use the API key](https://help.openai.com/en/articles/8264644-how-can-i-set-up-prepaid-billing). API keys generated without billing will fail.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For OpenAI
+
+- When generating your API key, keep the **Permissions** set to **Read only**.
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor with access to the Integrations module)
+
+## Data Collected
+
+- User Name: Full name of the OpenAI user
+- User Email: Primary email address on the OpenAI account
+- User Role: User's assigned role in OpenAI
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## How To Connect OpenAI With Scrut
+
+### Step 1: Fetch API Key from OpenAI
+
+1. Sign in to your OpenAI account and go to the API keys page. ([https://platform.openai.com/settings/organization/api-keys](https://platform.openai.com/settings/organization/api-keys)) .
+2. Click on **+Create new secret key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431046009-0tiqdi01c3li-integrating-openai__01-click-on-create-new-secret-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click on +Create new secret key" caption=" " />
+3. Enter a name for the key, such as Scrut Integration and choose the Project.
+4. Keep the Permissions set to **Read only,** then click **Create secret key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431047750-hm1nbnf5n4-integrating-openai__02-keep-the-permissions-set-to-read-only-then.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Keep the Permissions set to Read only, then click Create secret key" caption=" " />
+5. Copy the API key code, as you won’t be able to see this later. Save the code in a safe location, as you’ll need to enter it in Scrut in the next step.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431049488-ioec9e0nhi-integrating-openai__03-copy-the-api-key-code-as-you-wont-be-able-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the API key code, as you won’t be able to see this later" caption=" " />
+
+<Callout kind="info">
+  Pro Tip!
+
+  Refer to this guide from OpenAI for [more information on API key best practices](https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety).
+</Callout>
+
+### Step 2: Go To Integrations in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, and choose **Miscellaneous** in the **Categories** section.
+3. Scroll to the **OpenAI** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431051418-0ziyj26flsv-integrating-openai__04-scroll-to-the-openai-tile-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the OpenAI tile and click Integrate" caption=" " />
+4. On the integration page, paste the API key obtained in Step 1.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431053246-179f58umj9b-integrating-openai__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Once authorization is done, you’ll see the “**Connected Successfully**” message and the **Connected** status indicator.
+
+## What Happens Next?
+
+### Initial data sync
+
+After the integration is connected, Scrut begins the initial data sync automatically. You can monitor sync activity by navigating to the OpenAI integration card in Integrations and checking the Audit Logs tab.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431053246-179f58umj9b-integrating-openai__05-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="After the integration is connected, Scrut begins the initial data sync automatically" caption=" " />
+
+### Review synced data
+
+- Navigate to **People → Access Reviews** module in Scrut to view the user records fetched from OpenAI, including name, email address, and role.
+- Navigate to **Tests → Automated Tests** to view the compliance checks that Scrut runs for OpenAI.
+
+If you face any difficulties connecting OpenAI with Scrut, please contact the Scrut support team at support@scrut.io.

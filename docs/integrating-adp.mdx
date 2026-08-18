@@ -1,0 +1,54 @@
+---
+title: "Integrate ADP"
+---
+
+ADP is a human resources management system (HRMS) that covers a wide range of HR functions. Through integrating ADP with scrut platform, we can fetch the employee details in the scrut platform like Employee Name, email, department, reporting manager, joining date and exit date.
+
+## Integrating ADP
+
+1. From the left navigation panel, select Integrations.
+2. Click on **Available**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432252556-duak5dzr19s-click-on-available-08e3709b.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click on Available" caption=" " />
+
+3. Scroll to *Human Resource Information Systems* section and find *ADP*.
+4. Click **Integrate**.
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429949273-p0aasebn1v-integrating-adp__02-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+
+5. Click **Connect** button.
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429950928-dumdon2wwon-integrating-adp__03-click-connect-button.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Connect button" caption=" " />
+
+6. Fill in the following details:
+* **Enter your ADP WorkForceNow Client ID -** Client ID is your account identifier, assigned during account registration or at secret reset. Please contact your ADP Representative if you don't have that
+
+*  **Enter your ADP WorkForceNow Client Secret -** Client Secret is your account password, assigned during account registration or at secret reset. Please contact your ADP Representative if you don't have that
+
+*  **Enter your ADP WorkForceNow SSL Signed Certificate -** Please refer to [this link](https://developers.adp.com/learn/how-to-articles/generate-a-certificate-signing-request) to know how to generate your signed certificate.
+
+  
+<Callout kind="alert">
+  Warning
+
+   Copy only the string between ——BEGIN CERTIFICATE——- and —-END CERTIFICATE——- .
+   Do not copy ——BEGIN CERTIFICATE——- and —-END CERTIFICATE——-
+</Callout>
+
+*  **Enter your ADP WorkForceNow SSL Private Key -** Refer to [this link](https://developers.adp.com/learn/how-to-articles/generate-a-certificate-signing-request) to know how to generate your private key.
+
+<Callout kind="alert">
+  Warning
+
+  Copy only the string between ——BEGIN RSA PRIVATE KEY——- and —-END RSA PRIVATE KEY——-.
+  Do not copy ——BEGIN RSA PRIVATE KEY——- and —-END RSA PRIVATE KEY——-
+</Callout>
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429952622-lii061btfy-integrating-adp__04-do-not-copy-begin-rsa-private-key-and-end.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Do not copy ——BEGIN RSA PRIVATE KEY——- and —-END RSA PRIVATE KEY" caption=" " />
+
+7. Once the credentials are entered, click on **Submit**.
+
+8. Once your Freshteam account is successfully integrated with Scrut, you will see a connected flag on the screen.
+
+<Callout kind="info">
+  **Info**:
+  * Employee data will start syncing immediately. Incremental data will be synced every 24 hours.
+  * Data can also be manually synced by clicking the three dots and choosing the **Sync Now** option.
+</Callout>

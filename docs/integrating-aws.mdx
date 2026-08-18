@@ -1,0 +1,287 @@
+---
+title: "Integrate AWS"
+description: "Learn how to integrate your organization's AWS account with Scrut."
+---
+
+Connecting your Amazon Web Services (AWS) infrastructure to Scrut automates compliance evidence collection, eliminates manual configuration checks, and keeps your security posture continuously evaluated across your AWS environment. On successful integration, Scrut automatically scans your AWS infrastructure every 24 hours. You can integrate one or multiple AWS accounts, as needed.
+
+This guide walks you through the step-by-step process of connecting your AWS infrastructure with Scrut.
+
+## What This Integration Does in Scrut
+
+The AWS integration performs the following functions in Scrut:
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your AWS configurations against applicable compliance frameworks.
+- **Scrut Monitor:** Collects evidence through Scrut Monitor. This helps automate evidence gathering and significantly speeds up compliance workflows.
+- **User Access Data:** Fetches user details, roles, and permissions from AWS for Access Reviews.
+- **Asset Management:** Populates the Asset Management module in Scrut with discovered AWS assets and supports the collection of asset-related compliance evidence.
+- **Vulnerability Management:** Ingests vulnerability and affected asset data from AWS Inspector and Security Hub into Scrut, enabling end-to-end vulnerability tracking, assignment, and remediation.
+
+## Prerequisites
+
+- An active AWS account with administrator access.
+- IAM permissions to create and manage roles and policies in AWS.
+
+<Callout kind="info">
+  Pro Tip!
+
+  Log in to your AWS console before starting the integration setup. This keeps the CloudFormation steps uninterrupted.
+</Callout>
+
+## Permissions and Access Requirements
+
+### For AWS
+
+- An IAM Role with the following AWS Managed Policies attached:
+  - arn:aws:iam::aws:policy/SecurityAudit - Grants read access to security configuration metadata across AWS services.
+  - arn:aws:iam::aws:policy/ReadOnlyAccess - Grants read-only access to AWS services and resources for comprehensive visibility.
+
+### For Scrut
+
+- Admin access to Scrut (or Contributor Role with access to the Integration module).
+
+## Data Collected
+
+Scrut collects configuration metadata across the following AWS services:
+
+- IAM: Users, Groups, Roles, Policies, Password Policy
+- EC2: Instances, Images, Snapshots, Volumes, Network Compliance, Security Groups
+- VPC: VPCs, Subnets, VPN Endpoints
+- S3: Buckets
+- Backup: Backup Plans
+- EKS: Clusters, Workloads
+- RDS: Instances
+- Inspector: Findings
+- Security Hub: Findings
+- Code Commit: Repositories, Branches, Commits, Pull Requests
+- CloudWatch: Alarms, Log Groups
+- ELB: Load Balancers
+- SSM: Parameters
+- DocumentDB: Clusters
+- DLM: Lifecycle Policies
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours from your AWS infrastructure to Scrut.
+
+## Integration Setup
+
+The Scrut - AWS integration setup involves the following steps:
+
+### Step 1: Copy the Role ARN Value from AWS
+
+1. Open the CloudFormation template link: [https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://scrut.io.s3.us-east-1.amazonaws.com/scrut-cloudformation-templates/iam-role-based-access.yaml&stackName=ScrutIntegrationRole](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://scrut.io.s3.us-east-1.amazonaws.com/scrut-cloudformation-templates/iam-role-based-access.yaml&amp;stackName=ScrutIntegrationRole)
+2. This redirects you to the **Quick create stack** page on your AWS console.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430053541-v8bnu5hbl9n-integrating-aws__01-this-redirects-you-to-the-quick-create-stack.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="This redirects you to the Quick create stack page on your AWS console" caption=" " />
+3. In the **Stack name** field, enter the value “**ScrutIntegrationRole**.”
+4. Ensure you select the acknowledgment box to allow AWS CloudFormation to create IAM resources.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430055291-b9o7njf42xs-integrating-aws__02-ensure-you-select-the-acknowledgment-box-to.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Ensure you select the acknowledgment box to allow AWS CloudFormation to create IAM resources" caption=" " />
+5. Click **Create Stack**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430057039-70yn413jn7f-integrating-aws__03-click-create-stack.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Create Stack" caption=" " />
+6. Once the stack is created, open it, go to the **Outputs** tab, and copy the ARN value.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430059326-1gcxf2ro683-integrating-aws__04-once-the-stack-is-created-open-it-go-to-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Once the stack is created, open it, go to the Outputs tab, and copy the ARN value" caption=" " />
+7. You will need to enter this value in the AWS integration page on Scrut in the next step.
+
+### Step 2: Connect Your AWS Account in Scrut
+
+1. [Sign in to Scrut](https://app.scrut.io/) and click Integrations on the left navigation panel.
+2. Click the **Integrations Library** and navigate to **Cloud Providers** in the **Categories** section.
+3. Locate the **AWS** integration tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430061113-7wyaiy3nq39-integrating-aws__05-locate-the-aws-integration-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the AWS integration tile and click Integrate" caption=" " />
+4. On the AWS integration page, you must enter the following details:
+  - In the **Account Nickname** field, enter a suitable name for the AWS account you’re connecting with Scrut.
+  - In the Role ARN field, paste the Role ARN you fetched from AWS in Step 1.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430063041-f9v10ta19l6-integrating-aws__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+6. Watch out for the successfully connected notification and the Connected flag.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430064814-1pr5c50igjo-integrating-aws__07-watch-out-for-the-successfully-connected.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch out for the successfully connected notification and the Connected flag" caption=" " />
+
+### Step 3: Configure Scope
+
+After connecting your account, configure the AWS services, regions, and resources that Scrut scans.
+
+#### Services Configuration
+
+- Select or deselect specific AWS services (e.g., Redshift, S3, SES, etc.) you want Scrut to scan
+- Unselected services will not be scanned
+- Tests for unselected services will not appear in the [Cloud module](https://help.scrut.io/docs/accessing-the-cloud-module)
+
+#### Region Configuration
+
+- Configure specific production regions (e.g., Ohio, Mumbai) to scan
+- Exclude staging/development regions to avoid scanning test or dummy data
+- Only resources from selected regions will appear in the [Cloud module](https://help.scrut.io/docs/accessing-the-cloud-module)
+
+#### Tag-based Filtering
+
+- Filter resources based on tags (e.g., Environment: Production)
+- Only resources matching configured tags will be scanned and appear in Scrut
+- Use the "Refresh Tags" button to fetch the latest tags (Note: There is a 24-hour cooldown between refreshes)
+
+<Callout kind="alert">
+  Note:
+
+  - Your configuration directly affects test counts and compliance metrics. Deselecting services or excluding regions will decrease the total number of tests and flagged resources.
+  - Any new resources that you add to your AWS instance with matching tags are automatically picked up in the next scan.
+</Callout>
+
+#### Steps to Configure AWS Integration Scope
+
+1. On the AWS integration page, click the **Configure** icon in your connected AWS integration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430066556-ojrcs0arz4-integrating-aws__08-on-the-aws-integration-page-click-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the AWS integration page, click the Configure icon in your connected AWS integration" caption=" " />
+2. Select the **AWS services** you want Scrut to monitor (e.g., ACM, EC2, IAM, S3, VPC). You can select any number of services as required.
+3. Select the **AWS regions** where you want Scrut to monitor resources.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430068341-q79a07vs8ym-integrating-aws__09-select-the-aws-regions-where-you-want-scrut.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select the AWS regions where you want Scrut to monitor resources" caption=" " />
+4. Based on your selections, Scrut will fetch relevant tags, allowing you to select the ones needed to filter resources. To get the latest tags, click the **Refresh Tags** button (available once every 24 hours).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430069931-dorzzyvj2zv-integrating-aws__10-based-on-your-selections-scrut-will-fetch.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Based on your selections, Scrut will fetch relevant tags, allowing you to select the ones needed to filter" caption=" " />
+5. If you want to include resources without tags, check the **Include Untagged Resources** checkbox.
+6. Click **Save** to apply your scope configuration.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786432256136-74g0ay856gb-click-save-to-apply-your-scope-configuration-267ffee9.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Save to apply your scope configuration" caption=" " />
+7. Watch for the success notification.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430071642-31o7h0puxft-integrating-aws__12-watch-for-the-success-notification.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Watch for the success notification" caption=" " />
+
+Scrut will automatically trigger a resource discovery job to apply your new scope.
+
+<Callout kind="alert">
+  Note:
+
+  It might take some time for Scrut to fetch the resources based on your configuration. Check the Audit Logs tab on the AWS integration page to track the status.
+</Callout>
+
+## Connecting Multiple AWS Accounts
+
+Follow these steps to integrate another AWS account with Scrut:
+
+1. Click **Integrations** on the left navigation panel.
+2. Go to the **Connected** tab and navigate to **Cloud Providers** in the **Categories** section.
+3. Locate the **AWS** tile and click **Configure**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430073502-ybd39lutu8-integrating-aws__13-locate-the-aws-tile-and-click-configure.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the AWS tile and click Configure" caption=" " />
+4. Click the **Add** button.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430075236-phps4919r1-integrating-aws__14-click-the-add-button.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click the Add button" caption=" " />
+5. The remaining steps are the same as those for connecting your first AWS account. Enter the account nickname and Role ARN and click **Save & Close**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430076973-j5szgqduvem-integrating-aws__15-the-remaining-steps-are-the-same-as-those.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The remaining steps are the same as those for connecting your first AWS account" caption=" " />
+
+<Callout kind="tip">
+  Note:
+
+  You can add as many AWS accounts as needed. Scrut will monitor and fetch evidence automatically from all your connected AWS accounts.
+</Callout>
+
+## What Happens Next?
+
+### Initial Data Sync
+
+The initial sync begins automatically after setup. It may take up to 24 hours for Scrut to populate the first scan results. Check the Audit Logs tab on the AWS integration page to track the sync status.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430078640-gg0yfu122o-integrating-aws__16-the-initial-sync-begins-automatically-after.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="The initial sync begins automatically after setup" caption=" " />
+
+**Note:** If results are not available after 24 hours, contact [support@scrut.io](mailto:support@scrut.io) for help.
+
+### Review Synced Data
+
+Once the sync completes, verify that data has landed correctly in the following modules:
+
+- Navigate to **Cloud** to view automated test results and flagged misconfigurations.
+- Navigate to **Evidence Tasks** to set up Scrut Monitors to automate evidence collection from AWS.
+- Navigate to **People → Access Reviews** to create an access review and validate access data pulled from IAM.
+- Navigate to **Asset Management** to view discovered AWS assets.
+- Navigate to **Vulnerabilities** to track findings from AWS Inspector and Security Hub.
+
+## Common Errors and Troubleshooting
+
+### Integration shows as not connected after submitting
+
+Possible solutions:
+
+- Verify that the Role ARN was copied correctly from the Outputs tab in CloudFormation. Leading or trailing spaces can cause validation failures.
+- Confirm that the CloudFormation stack status shows CREATE_COMPLETE before copying the ARN.
+- Ensure the acknowledgment checkbox is selected before creating the stack. Without it, IAM resources are not created.
+
+### Data not appearing after 24 hours
+
+Possible solutions:
+
+- Check the Audit Logs tab on the AWS integration page to confirm whether the scan completed successfully.
+- Verify that the selected services and regions in your scope configuration match the resources in your AWS account.
+- If the scan shows errors in Audit Logs, contact [support@scrut.io](mailto:support@scrut.io) with the error details.
+
+### Resources are missing in the Cloud module
+
+Possible solutions:
+
+- Confirm that the relevant AWS service is selected in your scope configuration.
+- Confirm that the region where the resource is deployed is included in your region configuration.
+- If tag-based filtering is enabled, confirm that the resource has a matching tag. Resources without matching tags are excluded unless Include Untagged Resources is selected.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Where can I view the full list of automated tests and evidence collected for AWS?" default-open="false">
+
+Sign in to Scrut, click **Integrations** on the left navigation panel, and click the AWS integration tile to expand it. The expanded view lists all Automated Tests and Automated Evidence collected via Scrut Monitor for your connected AWS account.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430080448-p3c5an2g429-integrating-aws__17-sign-in-to-scrut-click-integrations-on-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Sign in to Scrut, click Integrations on the left navigation panel, and click the AWS integration tile to" caption=" " />
+
+</Expandable>
+
+<Expandable title="2: What AWS API calls does Scrut perform during evidence collection?" default-open="false">
+
+Scrut uses `Describe`, `List`, and `Get` Configuration calls across AWS services. Examples include:
+
+- **S3**: `list_buckets`, `get_bucket_policy`, `get_bucket_encryption`
+- **EC2/RDS/IAM**: `describe_instances`, `describe_security_groups`, `list_users`
+- **Secrets Manager / DynamoDB:** These services are not called
+
+For a comprehensive list of all API calls, refer to the [Cloud API calls documentation](https://scrutio.notion.site/Cloud-API-calls-2b0ae8dbdb5e80c08765c67f8f1cb645).
+
+</Expandable>
+
+<Expandable title="3: Does the Scrut - AWS integration access or require data-plane actions (e.g., GetObject, GetSecretValue, or DynamoDB reads)?" default-open="false">
+
+No. Our integration does not access or require data-plane actions such as GetObject (S3), GetSecretValue (Secrets Manager), or DynamoDB reads. The integration is designed to function strictly on the Control/Management Plane, reading only metadata and configuration settings.
+
+</Expandable>
+
+<Expandable title="4: What are the minimum IAM permissions required for the ScrutIntegrationRole?" default-open="false">
+
+The `ScrutIntegrationRole` requires two AWS Managed Policies:
+
+1. `arn:aws:iam::aws:policy/SecurityAudit` - Grants access to read security configuration metadata (e.g., Config, CloudTrail, IAM, S3 bucket policies)
+2. `arn:aws:iam::aws:policy/ReadOnlyAccess` - Grants read-only access to AWS services and resources for comprehensive visibility across the account
+
+We use AWS Managed Policies to ensure stability and ease of updates. The exact configuration can be reviewed in the attached CloudFormation template.
+
+[iam-role-based-access](https://cdn.document360.io/8e8877e6-4593-427e-8cd8-588b3226c39a/Images/Documentation/iam-role-based-access.yaml) (779 bytes)
+
+</Expandable>
+
+<Expandable title="5: How can I review all Scrut-initiated AWS API activity?" default-open="false">
+
+All Scrut-initiated AWS API calls are visible through your **CloudTrail logs**. Scrut does not display these API calls on our platform. Customers maintain full audit visibility of our integration's activity through their own AWS CloudTrail logs.
+
+</Expandable>
+
+<Expandable title="6: Does Scrut support AWS GovCloud?" default-open="false">
+
+Scrut does not currently support AWS GovCloud. To submit a feature request, reach out to your CSM.
+
+</Expandable>
+
+</ExpandableGroup>
+

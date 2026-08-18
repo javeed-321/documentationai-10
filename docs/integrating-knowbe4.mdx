@@ -1,0 +1,138 @@
+---
+title: "Integrate KnowBe4"
+---
+
+Connecting KnowBe4 with Scrut automatically collects evidence of employee security awareness training, saving your team hours of manual evidence gathering across compliance workflows.
+
+## What This Integration Does in Scrut
+
+- **Employee Training Campaigns:** Fetches employee training data from KnowBe4 and displays it in **People → Employees → Training**.
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your configurations against applicable compliance frameworks.
+
+## Prerequisites
+
+Before setting up this integration, make sure you have the following in place:
+
+- An active KnowBe4 account on a Diamond or Platinum plan (required for Reporting API Access)
+- A KnowBe4 API key with Reporting API Access enabled
+- At least one training campaign configured in KnowBe4 with enrolled employees
+
+## Permissions and Access Requirements
+
+### For KnowBe4
+
+- Reporting API Access must be enabled in your KnowBe4 account. This feature is available only on Diamond and Platinum plans.
+- You must have permission to access Account Settings and generate API keys.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permissions to the Integrations module.
+
+## Supported Versions / Limitations
+
+- Reporting API Access is available only on KnowBe4 Diamond and Platinum plans. Users on other plans cannot complete this integration.
+- Only training campaigns that are explicitly selected during scope configuration are synced to Scrut. Campaigns that are not selected are excluded.
+
+## Data Collected
+
+- Campaign name
+- Campaign ID (KnowBe4 campaign identifier)
+- Employee enrollment status
+- Completion status
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Retrieve Your KnowBe4 API Key
+
+1. Log in to your KnowBe4 account.
+2. Go to **Account Settings**.
+3. Navigate to the **API section**.
+4. Copy your existing API key, or select Generate New Key to create one.
+
+**Important:** Reporting API Access must be enabled before you generate or use the API key. If this option is not visible, confirm that your account is on a Diamond or Platinum plan.
+
+### Step 2: Connect KnowBe4 in Scrut
+
+1. In Scrut, select **Integrations** from the left navigation panel.
+2. Navigate to the **Integrations Library** tab.
+3. Scroll to the **Campaigns & Training** section and locate KnowBe4.
+4. Select **Integrate**. You are redirected to the KnowBe4 integration details page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430754507-sgssgemvepd-integrating-knowbe4__01-select-integrate-you-are-redirected-to-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Integrate. You are redirected to the KnowBe4 integration details page" caption=" " />
+5. Under **Credentials**, enter your API key in the API Key field.
+6. Select your account region from the **Region** dropdown.
+7. Select **Submit** to connect.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430756283-9qm42cdsx15-integrating-knowbe4__02-select-submit-to-connect.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Submit to connect" caption=" " />
+8. After the integration status shows as **Connected**, select **Configure Scope**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430758030-3qnzk92p1e6-integrating-knowbe4__03-after-the-integration-status-shows-as.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="After the integration status shows as Connected, select Configure Scope" caption=" " />
+9. In the Configure Campaigns panel, select the training campaigns you want to sync employee data for.
+10. Select **Save**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430759797-61vr6boxfjt-integrating-knowbe4__04-select-save.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Save" caption=" " />
+
+**Note:** You can return to Configure Scope at any time to add or remove campaigns from the sync.
+
+## What Happens Next?
+
+### Initial data sync
+
+After you save your campaign scope, Scrut begins syncing data from KnowBe4 automatically. The first sync may take a few minutes to complete. To monitor sync activity, go to the KnowBe4 integration page and select Audit Log.
+
+### Review synced data
+
+Once the sync is complete, you can review the data in the following locations:
+
+- Navigate to **People → Employees → Training** to view campaign enrollment and completion data for each employee.
+- Navigate to **Tests → Automated Tests** to review the test results automatically collected from the synced campaigns.
+
+## Common Errors and Troubleshooting
+
+### Invalid API Key
+
+Possible solutions:
+
+- Verify that you copied the full API key from KnowBe4 Account Settings > API without extra spaces or characters.
+- Generate a new API key in KnowBe4 and re-enter it in Scrut.
+- Confirm that Reporting API Access is enabled in your KnowBe4 account settings.
+
+### Integration Not Connecting
+
+Possible solutions:
+
+- Confirm that your KnowBe4 account is on a Diamond or Platinum plan, as Reporting API Access is required.
+- Check that you selected the correct region to match your KnowBe4 account.
+- Try disconnecting and reconnecting the integration.
+
+### Training Data Not Appearing in Scrut
+
+Possible solutions:
+
+- Confirm that the relevant campaigns are selected in Configure Scope. Only selected campaigns are synced.
+- Wait for the next scheduled sync, or manually trigger a sync from the integration settings page.
+- Verify that the employees are enrolled in the selected campaigns in KnowBe4.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can I sync all my KnowBe4 campaigns at once?" default-open="false">
+
+Yes. In the Configure Campaigns panel, select Mark All In to include all available campaigns in the sync. You can deselect campaigns at any time by returning to Configure Scope.
+
+</Expandable>
+
+<Expandable title="2: What happens if I change my KnowBe4 API key?" default-open="false">
+
+If you generate a new API key in KnowBe4, you need to update it in Scrut as well. Go to the KnowBe4 integration page, enter the new API key in the Credentials section, and select Submit.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

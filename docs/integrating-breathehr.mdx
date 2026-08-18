@@ -1,0 +1,133 @@
+---
+title: "Integrate Breathe HR"
+description: "Learn how to connect your Breathe HR account with Scrut."
+---
+
+Connecting your Breathe HR account with Scrut lets you sync your employee directory into Scrut's People module to support compliance workflows.
+
+## What This Integration Does in Scrut
+
+- **Employee Directory:** Syncs employee and group data into Scrut's [People module](https://help.scrut.io/docs/people). Employees can then access the Employee Portal for training, policy acceptance, and device-related activities.
+
+## Prerequisites
+
+- An active Breathe HR account with administrator access
+
+## Permissions and Access Requirements
+
+### For Breathe HR
+
+- Administrator role in Breathe HR to access the Configure section and enable the API
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor role with access to the Integrations module
+
+## Data Collected
+
+- Employee Name: First Name, Last Name
+- Email Address: Work Email
+- Date of Joining
+- Date of Exit (Populated only if applicable)
+- Department (Populated if available)
+- Role / Designation (Populated if available)
+- Reporting Manager Email: Manager's Work Email
+- Leave Data:
+  - Leave Start Date
+  - Leave End Date
+  - Leave Status
+
+## Sync Frequency
+
+Data syncs automatically once every 24 hours. You can also trigger a manual sync at any time from the Breathe HR integration settings page in Scrut.
+
+## Integration Setup
+
+### Step 1: Generate Your API Key in Breathe HR
+
+1. Log in to your Breathe HR account.
+2. In the left navigation, click **Configure → Settings**.
+3. Under the Integrations section, click **API Setup**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430204940-p3pl3gdr4za-integrating-breathehr__01-under-the-integrations-section-click-api.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Under the Integrations section, click API Setup" caption=" " />
+4. On the API Setup page, click **Enable API**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430206639-rke1lozjii-integrating-breathehr__02-on-the-api-setup-page-click-enable-api.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the API Setup page, click Enable API" caption=" " />
+5. A warning dialog appears, noting that sharing the API key grants access to sensitive employee information, including salary data and bank details. Select the I understand and want to continue checkbox, then click enable.
+6. Your production API key and sandbox API key are now displayed on the API Setup page.
+7. Copy your production API key. Keep this key secure.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430208363-xaouohkges-integrating-breathehr__03-copy-your-production-api-key-keep-this-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy your production API key. Keep this key secure" caption=" " />
+
+<Callout kind="alert">
+  Note:
+
+  Breathe HR API documentation is available at [developer.breathe HR.com](http://developer.breathehr.com) if you need additional context on the API.
+</Callout>
+
+### Step 2: Connect Breathe HR in Scrut
+
+1. Log in to Scrut and go to **Integrations** in the left navigation.
+2. Click the **Integrations Library** tab.
+3. In the left panel, select **Human Resource Information Systems**.
+4. Locate the **Breathe HR** card and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430210089-bjl5de3f0u-integrating-breathehr__04-locate-the-breathe-hr-card-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate the Breathe HR card and click Integrate" caption=" " />
+5. On the Breathe HR integration page, click **Connect** in the top-right corner.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430211726-0zx5ngwconob-integrating-breathehr__05-on-the-breathe-hr-integration-page-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="On the Breathe HR integration page, click Connect in the top-right corner" caption=" " />
+6. In the connection dialog, paste your **Breathe HR API key** into the Enter API key field.
+7. Optionally, select your application environment from the Enter your Breathe HR Environment dropdown. Select Production if you are using your production API key.
+8. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430213493-83aqomaygpu-integrating-breathehr__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Scrut validates the API key and establishes the connection. The integration status updates to Connected.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430215259-g16xcwf356s-integrating-breathehr__07-scrut-validates-the-api-key-and-establishes.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut validates the API key and establishes the connection. The integration status updates to Connected" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After a successful connection, Scrut begins the initial sync automatically. You can monitor sync activity from the Audit Log tab on the Breathe HR integration page.
+
+### Review synced data
+
+Navigate to **People → Employees** to view the employee records synced from Breathe HR. Verify that names, email addresses, departments, and job titles are populated correctly.
+
+## Common Errors and Troubleshooting
+
+### Invalid API Key
+
+Cause: The API key entered in Scrut does not match the active key in Breathe HR, or the key was reset after the connection was established. Possible solutions:
+
+- Return to Configure → API Setup in Breathe HR and verify that the API is still enabled.
+- Copy the production API key again and re-enter it in Scrut by disconnecting and reconnecting the integration.
+
+### API not enabled in Breathe HR
+
+Cause: The Breathe HR API is disabled, so Scrut cannot authenticate.
+
+Solution:
+
+- Log in to Breathe HR, go to Configure → API Setup, and confirm the API status shows "enabled."
+- If it shows "disabled," click Enable API and complete the confirmation step before retrying the connection in Scrut.
+
+### Employee data not appearing in Scrut
+
+Possible solutions:
+
+- Check the Audit Log on the Breathe HR integration page in Scrut to confirm the sync ran successfully.
+- Trigger a manual sync by clicking Sync Now on the integration page and allow a few minutes for data to populate.
+- Confirm the affected employees have an active status and a valid work email address in Breathe HR, as records without email addresses may not sync.
+
+### Wrong environment connected
+
+Possible solutions:
+
+- If you connected using the sandbox API key but intended to use production, disconnect the integration and reconnect using the production API key with the Production environment selected.
+
+---
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

@@ -1,0 +1,71 @@
+---
+title: "Integrate Okta (IDP)"
+description: "Learn how to connect your organization's Okta account as an Identity Provider in Scrut."
+---
+
+The **Scrut - Okta (IDP)** integration enables you to sync users and user group data from your Okta account to Scrut. In this guide, we walk you through the process of **connecting your organization’s Okta account with Scrut as an Identity Provider**.
+
+<Callout kind="alert">
+  Heads Up!
+
+  If you’re looking to connect Okta as an SSO provider, [see here](/docs/integrating-okta).
+</Callout>
+
+## Prerequisites
+
+Before starting the integration, ensure you have the following access and permissions:
+
+### Access
+
+- You must be a Scrut Admin (or Contributor with access to the Integrations module)
+- You need Admin access to your organization’s Okta account
+
+### Permissions
+
+Scrut requires the following read-only permissions:
+
+- okta.users.read: Allows Scrut to read existing users’ profiles and credentials
+- okta.groups.read: Allows Scrut to read information about groups and their members in your Okta organization
+- okta.roles.read: Allows Scrut to read administrative role assignments for users in your Okta organization
+
+To learn more about Okta permissions, [see here](https://developer.okta.com/docs/api/oauth2).
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431002041-oa53b9y58n-integrating-okta-idp__01-to-learn-more-about-okta-permissions-see-here.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To learn more about Okta permissions, see here" caption=" " />
+
+## How To Integrate Okta IDP With Scrut
+
+### Step 1: Fetch Client ID, Client Secret and Domain from Your Okta Account
+
+1. Log in to your Okta Admin Console.
+2. Navigate to **Applications → API Service Integration → Add Integration**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431003819-yu6nq8mg82-integrating-okta-idp__02-navigate-to-applications-api-service.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Navigate to Applications → API Service Integration → Add Integration" caption=" " />
+3. Search for and choose **Scrut Automation.** Click **Next**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431005834-3m2wztre4qp-integrating-okta-idp__03-search-for-and-choose-scrut-automation-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Search for and choose Scrut Automation. Click Next" caption=" " />
+4. Click **Install & Authorize**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431007880-x3stoyaloej-integrating-okta-idp__04-click-install-authorize.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Install & Authorize" caption=" " />
+5. Copy the **Client Secret** to a safe location. It will not be displayed again.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431009744-cebg4ni4htm-integrating-okta-idp__05-copy-the-client-secret-to-a-safe-location-it.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Client Secret to a safe location. It will not be displayed again" caption=" " />
+6. Copy the **Client ID** and **Okta Domain**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431011617-smmd6kwsjp9-integrating-okta-idp__06-copy-the-client-id-and-okta-domain.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the Client ID and Okta Domain" caption=" " />
+
+### Step 2: Go to Integrations in Scrut
+
+1. Sign in to Scrut and click **Integrations** on the left navigation panel.
+2. Navigate to the **Integrations Library** tab, choose **Identity Providers** in the **Categories** section.
+3. Scroll to the **Okta (IDP)** tile and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431013222-brwrsi50ku-integrating-okta-idp__07-scroll-to-the-okta-idp-tile-and-click.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scroll to the Okta (IDP) tile and click Integrate" caption=" " />
+4. Enter the details you fetched in the previous step:
+  - Client ID
+  - Client Secret
+  - Okta Domain
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786431015048-zlfcz5zefs-integrating-okta-idp__08-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Watch for the success toast message and the Connected status flag indicator.

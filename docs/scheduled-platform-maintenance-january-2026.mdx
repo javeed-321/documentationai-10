@@ -1,0 +1,102 @@
+---
+title: "Scheduled Maintenance: 3-4 January 2026"
+description: "Scrut will be unavailable from 3 to 4 January 2026 for scheduled maintenance."
+---
+
+[**Scrut (app.scrut.io)**](https://app.scrut.io/) will undergo scheduled maintenance on **3-4 January 2026** and will be temporarily unavailable during this period. We apologize for any inconvenience this may cause and have scheduled this maintenance during off-peak hours to minimize disruption to your operations.
+
+## Maintenance Schedule
+
+### Region: Australia
+
+- Date: 3 Jan 2026
+- Time: 03:30 AM to 01:30 PM GMT
+- Estimated Duration: 10 hours
+- Affected Services: Entire Scrut platform
+
+### Region: European Union (EU)
+
+- Date: 3 Jan 2026
+- Time: 03:30 AM to 01:30 PM GMT
+- Estimated Duration: 10 hours
+- Affected Services: Entire Scrut platform
+
+### Region: United States (US)
+
+- Date: 3 Jan 2026
+- Time: 09:00 AM to 03:00 PM GMT
+- Estimated Duration: 6 hours
+- Affected Services: Entire Scrut platform
+
+### Region: India
+
+- Date: 4 Jan 2026
+- Time: 03:30 AM GMT to 01:30 PM GMT
+- Estimated Duration: 10 hours
+- Affected Services: Entire Scrut platform
+
+## System Upgrades
+
+Our technical team will be implementing the following improvements during the downtime:
+
+### SSL Certificate Transition (SAN to SNI)
+
+Scrut is upgrading how we manage SSL certificates for trust vault domains, transitioning to an SNI (Server Name Indication)–based mechanism. This change is necessary to improve scalability and ensure the long-term reliability and security of certificate management.
+
+SNI allows multiple SSL certificates to be hosted on a single IP address, enabling better resource utilization and enhanced security protocols. This upgrade will provide a more robust and future-proof infrastructure for managing secure connections across the Scrut platform.
+
+### Database Optimization (PostgreSQL Reclustering) - Deferred
+
+We have decided to defer the PostgreSQL database reclustering to a later maintenance window. We will perform a re-clustering of our PostgreSQL databases to significantly improve overall query performance and responsiveness for all users. This optimization will:
+
+- Reduce query execution times across the platform
+- Enhance system responsiveness during peak usage
+- Improve data retrieval efficiency for compliance reports and dashboards
+- Provide a more stable foundation for future feature enhancements
+
+The re-clustering process reorganizes database structures to eliminate fragmentation and optimize data access patterns, resulting in faster load times and a smoother user experience across the platform.
+
+## What To Expect
+
+- [**Scrut (app.scrut.io)**](https://app.scrut.io/) will be temporarily unavailable during the maintenance window.
+- Users may experience brief, intermittent connection errors during the transition and may encounter issues accessing the Vendor and Trust portals.
+- No impact on your data; all information remains secure.
+- Services will be restored automatically once maintenance is complete.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Will my data be impacted?" default-open="false">
+
+No, all your data remains secure and will not be impacted by this maintenance.
+
+</Expandable>
+
+<Expandable title="2: Can I access Scrut during the maintenance window?" default-open="false">
+
+No, all Scrut services will be completely unavailable during the scheduled maintenance window for your region.
+
+</Expandable>
+
+<Expandable title="3: How will I know when services are restored?" default-open="false">
+
+Services will automatically resume after maintenance completion. You will be able to access the platform as usual once the maintenance window ends.
+
+</Expandable>
+
+<Expandable title="4: What if I have an urgent task during the maintenance window?" default-open="false">
+
+We apologize for the inconvenience. Please plan any critical activities outside the maintenance window. We recommend completing time-sensitive compliance tasks before the scheduled downtime.
+
+</Expandable>
+
+<Expandable title="5: Why are there different maintenance dates for different regions?" default-open="false">
+
+We have staggered the maintenance windows by region to ensure our support team can provide dedicated attention to each region during their respective upgrade periods and to minimize global impact.
+
+</Expandable>
+
+</ExpandableGroup>
+
+For questions about this maintenance or any assistance during the downtime, please contact [support@scrut.io](mailto:support@scrut.io).

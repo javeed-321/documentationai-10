@@ -1,0 +1,121 @@
+---
+title: "Email Notification Changes for March 2026"
+description: "Email notification changes for March 2026"
+---
+
+We're streamlining how Scrut sends email notifications to reduce inbox clutter and improve your workflow. This guide explains what's changing and why.
+
+## What’s Changing
+
+We’ve reviewed all email notifications and categorized them into the following groups:
+
+- **Mandatory Notifications:** Critical emails that will always be sent and cannot be turned off.
+- **Replaced by Digest:** Individual emails consolidated into daily or periodic digest emails.
+- **SLA-based emails:** Static reminder schedules (sent at 30, 15, and 7 days before the review date, and on the review date, etc.) will be replaced by SLA-based dynamic notifications once SLA is introduced for the respective modules.
+
+<Callout kind="alert">
+  Note:
+
+  We’ve eliminated low-value, redundant emails for notifications that are available in the Notification Center and in-app modules.
+</Callout>
+
+## Why are these changes needed?
+
+- **Reduce Email Overload:** Consolidating multiple individual notifications into digest emails means fewer interruptions and a cleaner inbox.
+- **Improve Efficiency:** SLA-driven reminders deliver smarter, context-aware notifications rather than fixed schedules that may not align with your workflow.
+- **Focus on What Matters:** Eliminating low-value notifications helps you focus on critical tasks and important updates.
+- **Better In-App Experience:** Many informational updates are better suited for in-app notifications, where you can access them when needed.
+
+## Notification Toggles Being Removed
+
+Below is the full list of notification toggles being removed, along with the reasons for removal.
+
+| Removed Toggle | Category |
+| --- | --- |
+| Email Notification for Overdue Risk Mitigation Task | Mandatory (Cannot be disabled) |
+| Email Reminders for Policy Review (sent at 30, 15, and 7 days before the review date, and on the review date) | Will be changed to SLA-based emails |
+| Email reminders for incomplete security tasks by employees | Replaced by Digest |
+| Welcome Email with Security Task Assignments For New Employees | Replaced by Digest |
+| Email Reminders for Evidence Review (sent at 30, 15, and 7 days before the review date, and on the review date) | Will be changed to SLA-based emails |
+| Email Notification for Questionnaire Submitted by Vendor | Replaced by Digest |
+| Email Notification for Cloud Risk mitigated | Eliminated |
+| Email Reminders for Vendor Reassessment (sent at 30, 15, and 7 days before the review date, and on the review date) | Will be changed to SLA-based emails |
+| Email Notification for Summary of MDM | Eliminated |
+| Email Notification for Inviting the Audit Team | Mandatory (Cannot be disabled) |
+| Email Notification for Daily Scheduled Scan | Eliminated |
+| Email Notification for Weekly Email Digest | Replaced by Digest |
+| Daily Auto-Reminder to Vendors when Security Questionnaire is Overdue | Will be changed to SLA-based emails |
+| Email Notification for Role ARN Update Reminder | Eliminated |
+| Email Notification for On-Demand Scan | Eliminated |
+
+## How does this Impact You
+
+### For Mandatory Notifications
+
+Some notifications are considered critical for workflow completion and SLA enforcement. These emails will always be sent going forward and will no longer be configurable.
+
+**Example:**
+
+- Overdue Risk Mitigation Task notifications will always send because they are tied to SLA breach flows.
+
+### For Individual Emails Replaced by Digest
+
+Individual notification emails will be removed and replaced with consolidated Digest emails. These Digest emails will include actionable line items such as task assignments, incomplete tasks, and review requests. This reduces email volume while ensuring key actions are still visible.
+
+**Examples:**
+
+- Security task reminders
+- Vendor questionnaire submission alerts
+- New employee task assignment messages
+- Legacy weekly digest email
+
+### SLA-based Emails
+
+Some reminders are currently based on fixed schedules (30, 15, and 7 days before the due date, plus the due date). These schedules will be removed once SLA functionality is introduced for the module. Once SLA is enabled, reminder timing will follow SLA rules rather than a static timeline.
+
+**Examples:**
+
+- Policy Review reminders
+- Evidence Review reminders
+- Vendor reassessment reminders
+- Vendor questionnaire overdue reminders
+
+### No Email Notifications
+
+Some notification types are being removed entirely because they are informational-only and do not require email delivery. For these notifications, the same information is already available in-app in the Notification Center.
+
+**Examples:**
+
+- Daily scheduled scan notifications
+- On-demand scan notifications
+- Summary of MDM notifications
+- Role ARN update reminders
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Will my team stop receiving notifications immediately?" default-open="false">
+
+- If the notification is **replaced by Digest**, you will continue to receive the same information via Digest emails instead of standalone notifications.
+- If the notification is eliminated completely, you will no longer receive that email. However, the information will be available in-app in the Notification Center.
+- If the notification is **Mandatory**, you will continue receiving it and will no longer be able to disable it.
+
+</Expandable>
+
+<Expandable title="2: What happens to my previous email notification settings?" default-open="false">
+
+If the toggle is being removed:
+
+- **Mandatory** notifications will be enabled for all users.
+- **Digest-based** notifications will be delivered via Digest regardless of the old toggle state.
+- **Eliminated** notifications will no longer be sent.
+- **SLA-based** reminders will follow SLA logic once available.
+
+</Expandable>
+
+</ExpandableGroup>
+
+---
+
+If you have further questions, reach out to your CSM or the Scrut support team (support@scrut.io).

@@ -1,0 +1,154 @@
+---
+title: "Integrate Datadog"
+description: "Learn how to connect your Datadog account with Scrut."
+---
+
+Connecting Datadog with Scrut enables daily automated scanning of your configurations to identify potential security risks. Scrut also pulls user and host data from Datadog to support compliance testing and access reviews.
+
+## What This Integration Does in Scrut
+
+- **Automated Tests:** Runs automated compliance checks that continuously evaluate your Datadog configurations against applicable compliance frameworks.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- An active Datadog account with administrator access
+- An Application Key and API Key generated in your Datadog account (see Step 1 below for instructions)
+- Your Datadog region (AP1, EU, US, US3, US5, or US1-FED)
+
+## Permissions and Access Requirements
+
+### For Datadog
+
+The Application Key used for this integration must include the following minimum scopes:
+
+- `monitors_read`
+- `user_access_read`
+- `hosts_read`
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with the Integrations module enabled
+
+## Data Collected
+
+- User name, email, and role from Datadog (for access reviews)
+- Host name (Host identifier from Datadog)
+- Host status
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Generate Credentials in Datadog
+
+To create an Application Key:
+
+1. Log in to your Datadog account.
+2. Go to **Organization Settings**.
+3. Select **Application Keys** from the left panel. If you are on an EU instance, navigate to the EU Application Keys page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430370624-vilqyn97gpe-integrating-datadog__01-select-application-keys-from-the-left-panel.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Select Application Keys from the left panel" caption=" " />
+4. Click **New Key** and assign it a name.
+5. Ensure the key includes the following scopes: `monitors_read`, `user_access_read`, and `hosts_read`.
+6. Copy the generated Application Key.
+
+**Note:** Datadog displays the Application Key and API key values only once. Copy and store it before closing the dialog.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430372391-np3fvwwrvm8-integrating-datadog__02-note-datadog-displays-the-application-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Note: Datadog displays the Application Key and API key values only once" caption=" " />
+7. To create an API Key: In Organization Settings, select **API Keys** from the left panel. If you are on an EU instance, navigate to the EU API Keys page.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430374141-flpa33lc66k-integrating-datadog__03-to-create-an-api-key-in-organization.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="To create an API Key: In Organization Settings, select API Keys from the left panel" caption=" " />
+8. Click **New Key**, assign it a name, and copy the generated value.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430375817-rudjsvwm3kb-integrating-datadog__04-click-new-key-assign-it-a-name-and-copy-the.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click New Key, assign it a name, and copy the generated value" caption=" " />
+
+### Step 2: Connect Datadog in Scrut
+
+1. From the left navigation panel in Scrut, select **Integrations**.
+2. Click **Integrations Library**.
+3. Scroll to the **Capacity & Usage Monitoring** section and locate **Datadog**.
+4. Click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430377547-qtvi2bexg9f-integrating-datadog__05-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Integrate" caption=" " />
+5. On the Datadog integration page, enter the following:
+  - **Application Key:** Paste the Application Key you generated in Step 1.
+  - **API Key:** Paste the API Key you generated in Step 1.
+  - **Region:** Select your Datadog region. Options are AP1, EU, US, US3, US5, or US1-FED. Refer to [Datadog's region documentation](https://docs.datadoghq.com/getting_started/site/) if you are unsure which applies to your account.
+6. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786430379271-8qurhjils39-integrating-datadog__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+The page updates to show Integration Successful, and the status badge changes to Connected.
+
+## What Happens Next?
+
+### Initial data sync
+
+Scrut begins pulling data from Datadog automatically after a successful connection. The initial sync may take some time, depending on the volume of users and hosts in your Datadog account. To monitor sync status, go to the Audit Log section on the Datadog integration settings page. You can also trigger a sync manually from the same page at any time.
+
+### Review synced data
+
+Once synced, verify that data has landed correctly in Scrut:
+
+- Navigate to **Tests** to confirm that automated tests linked to Datadog configurations are active and running.
+
+## Common Errors and Troubleshooting
+
+### Invalid credentials
+
+Cause: The Application Key or API Key entered in Scrut is incorrect, expired, or was regenerated in Datadog after the integration was connected.
+
+Possible solutions:
+
+- Verify that the Application Key and API Key are copied correctly with no leading or trailing spaces.
+- If either key was regenerated in Datadog, return to the Datadog integration settings page in Scrut and update the credentials.
+- Confirm that the Application Key has not been deleted or restricted in Datadog.
+
+### Insufficient scope on Application Key
+
+Cause: The Application Key was created without the required scopes.
+
+Possible solutions:
+
+- In Datadog, go to Organization Settings and open Application Keys.
+- Locate your key and check its scope. Confirm that `monitors_read`, `user_access_read`, and `hosts_read` are all included.
+- If any scope is missing, create a new Application Key with the correct scopes and update the credentials in Scrut.
+
+### Data not appearing in Scrut
+
+Possible solutions:
+
+- Check the Audit Log on the Datadog integration settings page for error entries.
+- Confirm that the integration status shows Connected.
+- Trigger a manual sync and wait for it to complete.
+- If the issue persists, contact [support@scrut.io](mailto:support@scrut.io).
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: What happens if I rotate my Datadog API Key or Application Key?" default-open="false">
+
+The integration will stop syncing data. Go to Integrations in Scrut, open the Datadog integration settings, and update the credentials with your new keys. Click Submit to reconnect.
+
+</Expandable>
+
+<Expandable title="2: What data does Scrut pull from Datadog?" default-open="false">
+
+Scrut collects user details, roles, and permissions for Access Reviews, and hosts data for Automated Tests. Data is synced every 24 hours.
+
+</Expandable>
+
+<Expandable title="3: What happens if a user or host is removed from Datadog?" default-open="false">
+
+Scrut reflects changes from Datadog on the next scheduled sync or when a manual sync is triggered. Removed records are updated accordingly in Scrut.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.

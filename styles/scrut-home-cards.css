@@ -1,0 +1,326 @@
+/* ==========================================================================
+   home.mdx — platform <Card> restyled to match the Scrut card design
+   ==========================================================================
+
+   Every value below is copied from the `.hc-card` family in scrut-home.css
+   (§5 MODULE CARDS, lines ~661-863) — the styles that already render home.mdx.
+   Nothing here is invented; each block names the rule it is porting.
+
+   Scoped to `:root:has(#scrut-home-cards)`. home.mdx carries an empty
+   <div id="scrut-home-cards" /> as a marker and no other page has that id, so
+   these overrides cannot leak.
+
+   ── WHY THE TITLES WERE RENDERING NEAR-INVISIBLE ────────────────────────────
+
+   On home.mdx the title is a plain <h3 class="hc-card__title"> with no
+   competing class, so `color: var(--card-ink)` simply applies.
+
+   The platform's Card renders it as
+       <p class="dai-card-title !font-semibold !text-base !text-heading">
+   and `!text-heading` is a Tailwind utility carrying `!important` from inside
+   `@layer utilities`. Per CSS Cascade Layers, *important* declarations invert
+   the layer order and UNLAYERED important ranks LOWEST — so our
+   `color: … !important` loses to theirs no matter how specific we make the
+   selector. That is why raising specificity did nothing.
+
+   The fix is to stop fighting the colour and redefine what it points at:
+   `!text-heading` resolves `var(--heading)`, so `--heading` is re-declared on
+   the card itself as the family ink. Same for `--body` (`!text-body`, used by
+   the description) and `--sub-text`. Custom properties inherit and are not
+   subject to the !important layer fight, so this holds. The direct `color`
+   rules are kept as well — harmless, and they cover the case where the
+   platform ever drops the utility class.
+   ========================================================================== */
+
+/* The four --scr-card-* families are NOT redeclared here. They are defined
+   once on :root in scrut-home.css, which is registered ahead of this file and
+   loads on every page, so the hand-written .hc-card cards and the platform
+   <Card> cards below read the same eight values from one place. Redeclaring
+   them here is how the two drifted apart before. */
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-categories` (band) + `.hc-grid` (tracks) onto one element.
+
+   On home.mdx the cards sit in `.hc-categories > .hc-shell > .hc-grid`:
+   the band supplies the white ground and 4rem/6rem vertical padding, the grid
+   supplies 3 tracks and 2.5rem gutters. <Columns> is the only element here, so
+   it carries both. The platform ships `gap-4` (1rem) and `my-4`, both wrong.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Columns"] {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 2.5rem !important;
+  /* .hc-shell — centres the grid on the same 1180px measure as the header and
+     hero. Without this the grid runs full-bleed and the third column falls off
+     the right edge of the viewport. */
+  width: min(78%, 1180px) !important;
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  /* .hc-categories: padding-top 4rem, padding-bottom 6rem */
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 4rem 0 6rem !important;
+  background: var(--scr-white) !important;
+  align-items: stretch !important;
+}
+
+/* The <a> is the grid item; it must stretch so every card in a row shares one
+   bottom edge regardless of how long its description runs. */
+:root:has(#scrut-home-cards) [data-component="Columns"] > a {
+  display: flex !important;
+  text-decoration: none !important;
+  border: none !important;
+  border-bottom: none !important;
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Colour cycle — ports `.hc-card--blue / --cream / --lilac / --mint`.
+   home.mdx sets the family with an explicit class per card; here it comes off
+   nth-child, which produces the identical sequence for all 14 cards
+   (blue, yellow, lavender, mint, repeating).
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Columns"] > a:nth-child(4n + 1) [data-component="Card"] {
+  --card-bg: var(--scr-card-blue-bg);
+  --card-ink: var(--scr-card-blue-ink);
+}
+:root:has(#scrut-home-cards) [data-component="Columns"] > a:nth-child(4n + 2) [data-component="Card"] {
+  --card-bg: var(--scr-card-yellow-bg);
+  --card-ink: var(--scr-card-yellow-ink);
+}
+:root:has(#scrut-home-cards) [data-component="Columns"] > a:nth-child(4n + 3) [data-component="Card"] {
+  --card-bg: var(--scr-card-lavender-bg);
+  --card-ink: var(--scr-card-lavender-ink);
+}
+:root:has(#scrut-home-cards) [data-component="Columns"] > a:nth-child(4n + 4) [data-component="Card"] {
+  --card-bg: var(--scr-card-mint-bg);
+  --card-ink: var(--scr-card-mint-ink);
+}
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-card`. Values identical: row, 20px gap, 24px padding,
+   16px radius, tinted ground, no border, no shadow, lift on hover.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Card"] {
+  /* THE FIX — see header. Point the platform's text tokens at the family ink
+     so `!text-heading` / `!text-body` land on the right colour by themselves. */
+  --heading: var(--card-ink);
+  --body: var(--card-ink);
+  --foreground: var(--card-ink);
+  --sub-text: var(--card-ink);
+
+  flex: 1 1 auto !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 20px !important;
+  background: var(--card-bg) !important;
+  border: none !important;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  transition: transform 0.25s ease !important;
+  cursor: pointer !important;
+}
+:root:has(#scrut-home-cards) [data-component="Columns"] > a:hover [data-component="Card"] {
+  transform: translateY(-3px) !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-card__icon` — 24px glyph, contained.
+
+   The platform wraps the image in a full-bleed band
+   (`div.w-full.overflow-hidden > img.w-full.h-auto`), so BOTH the wrapper and
+   the img have to be pinned or the SVG stretches to the card width. The
+   wrapper is the flex child, so `flex: 0 0 24px` belongs on it.
+   The icons are <img> SVGs from the CDN and already carry their family ink,
+   exactly as on home.mdx — CSS cannot recolour them.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Card"] > div:first-child {
+  flex: 0 0 24px !important;
+  width: 24px !important;
+  height: 24px !important;
+  overflow: visible !important;
+}
+:root:has(#scrut-home-cards) [data-component="Card"] img.dai-card-image {
+  width: 24px !important;
+  height: 24px !important;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  /* kill `group-hover:scale-105 transition-all` — home.mdx icons do not zoom */
+  transform: none !important;
+  transition: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-card__details` — normal flow, not a gapped flex column, because
+   the spacing comes from the children's own margins (title 6px below,
+   Learn More 1.5rem above), same as home.mdx.
+
+   The platform nests three wrappers here: `div.p-5.py-4` >
+   `div.flex.flex-col.gap-3.5` > `div.space-y-3.5` > `div.space-y-0.5`.
+   `space-y-*` is `> * + * { margin-top }`, which would stack on top of those
+   margins and inflate the card, so both are zeroed — by name, not with a
+   blanket `*`, so nothing else in the card is touched.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Card"] > div:last-child {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+:root:has(#scrut-home-cards) [data-component="Card"] .flex.flex-col.gap-3\.5 {
+  display: block !important;
+  gap: 0 !important;
+}
+:root:has(#scrut-home-cards) [data-component="Card"] .space-y-3\.5,
+:root:has(#scrut-home-cards) [data-component="Card"] .space-y-0\.5 {
+  display: block !important;
+  height: auto !important;
+}
+:root:has(#scrut-home-cards) [data-component="Card"] .space-y-3\.5 > * + *,
+:root:has(#scrut-home-cards) [data-component="Card"] .space-y-0\.5 > * + * {
+  margin-top: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-card__title` — Rethink Sans 700, 1.25rem/1.3, 6px below.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Card"] p.dai-card-title {
+  display: block !important;
+  margin: 0 0 6px !important;
+  padding: 0 !important;
+  font-family: 'Rethink Sans', sans-serif !important;
+  font-size: 1.25rem !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  letter-spacing: normal !important;
+  color: var(--card-ink) !important;
+  /* Belt and braces: -webkit-text-fill-color overrides `color` from any
+     origin, so the glyphs land on the family ink even if a layered
+     !important utility wins the `color` property outright. */
+  -webkit-text-fill-color: var(--card-ink) !important;
+  opacity: 1 !important;
+  word-break: break-word !important;
+}
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-card__text` — Inter 400, 0.9375rem/1.5.
+   The platform wraps the text in <span> containing a <p>, so both need it or
+   the inner <p> keeps the article prose styles.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Card"] span.dai-card-description,
+:root:has(#scrut-home-cards) [data-component="Card"] span.dai-card-description p {
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.5 !important;
+  font-weight: 400 !important;
+  color: var(--card-ink) !important;
+  -webkit-text-fill-color: var(--card-ink) !important;
+  opacity: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+   Ports `.hc-card__link` — Inter 500 1rem/1.5, 8px gap, 1.5rem above,
+   pulled away from the description so the card reads as two groups.
+   It renders as a <button> here, so the chrome reset must be explicit.
+   -------------------------------------------------------------------------- */
+:root:has(#scrut-home-cards) [data-component="Card"] button[data-slot="button"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 1.5rem 0 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: 'Inter', sans-serif !important;
+  /* Stepped down from the 1rem `.hc-card__link` carries, so the cta reads as
+     secondary to the 0.9375rem description rather than competing with it. */
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  font-weight: 500 !important;
+  color: var(--card-ink) !important;
+  -webkit-text-fill-color: var(--card-ink) !important;
+  opacity: 1 !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+/* Ports `.hc-card__link svg`, scaled 18px -> 16px to stay proportional to the
+   smaller label. */
+:root:has(#scrut-home-cards) [data-component="Card"] button[data-slot="button"] svg {
+  flex: none !important;
+  width: 16px !important;
+  height: 16px !important;
+  color: var(--card-ink) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Ports `.hc-card:focus-within` — the <a> is the focusable node here. */
+:root:has(#scrut-home-cards) [data-component="Columns"] > a:focus-visible {
+  outline: 2px solid var(--card-ink, var(--scr-card-blue-ink)) !important;
+  outline-offset: 2px !important;
+  border-radius: 16px !important;
+}
+:root:has(#scrut-home-cards) [data-component="Card"] *:focus {
+  outline: none !important;
+}
+
+:root:has(#scrut-home-cards) [data-component="Card"] .dai-card-image{
+  width: 18px !important;
+  height: 18px !important;
+}
+
+:root:has(#scrut-home-cards) [data-component="Columns"] {
+  gap: 20px !important;
+}
+
+/* --------------------------------------------------------------------------
+   Breakpoints — ports the @media blocks at 1024px, 991px and 767px.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  :root:has(#scrut-home-cards) [data-component="Columns"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* .hc-categories at <=991px: padding-top 3rem, padding-bottom 4rem */
+@media (max-width: 991px) {
+  :root:has(#scrut-home-cards) [data-component="Columns"] {
+    padding: 3rem 0 4rem !important;
+  }
+}
+
+@media (max-width: 767px) {
+  :root:has(#scrut-home-cards) [data-component="Columns"] {
+    grid-template-columns: minmax(0, 1fr) !important;
+    /* .hc-categories at <=767px: padding-top 4rem, padding-bottom 4rem */
+    padding: 4rem 0 !important;
+  }
+  :root:has(#scrut-home-cards) [data-component="Card"] p.dai-card-title {
+    font-size: 1.125rem !important;
+  }
+  :root:has(#scrut-home-cards) [data-component="Card"] span.dai-card-description,
+  :root:has(#scrut-home-cards) [data-component="Card"] span.dai-card-description p {
+    font-size: 1rem !important;
+  }
+}

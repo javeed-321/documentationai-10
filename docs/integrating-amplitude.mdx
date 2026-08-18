@@ -1,0 +1,144 @@
+---
+title: "Integrate Amplitude"
+description: "Learn how to connect your Amplitude account with Scrut."
+---
+
+Learn how to connect your Amplitude account with Scrut to fetch compliance data.
+
+## What This Integration Does in Scrut
+
+- User Access Data: Fetches user details, roles, and permissions from Amplitude for Access Reviews.
+- Automated Tests: Runs automated checks that continuously evaluate Amplitude for security misconfigurations and compliance checks against your applicable compliance frameworks.
+
+## Prerequisites
+
+- An active Amplitude account with Admin or Owner access.
+- An Amplitude project with users you want to sync to Scrut.
+
+## Permissions and Access Requirements
+
+### For Amplitude
+
+- Admin or Owner role on your Amplitude account.
+- Read access to users in the relevant Amplitude project.
+
+### For Scrut
+
+- Admin access to Scrut, or Contributor access with permission to the Integration module.
+
+## Data Collected
+
+- User display name: First and last name as configured in Amplitude
+- Email Address: Primary email associated with the Amplitude account
+- User role: Role associated with the user in Amplitude
+
+## Sync Frequency
+
+Data is synced automatically once every 24 hours. You can also manually trigger a sync from the integration settings page.
+
+## Integration Setup
+
+### Step 1: Retrieve Your Credentials From Amplitude
+
+1. Log in to your Amplitude account.
+2. Click the **Settings** icon in the top-right corner, scroll to the Connections section on the left sidebar, and click **API Keys**.
+3. Click **Generate API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429978654-d2gi0oeecn8-integrating-amplitude__01-click-generate-api-key.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Generate API Key" caption=" " />
+4. Enter a name such as Scrut Integration and click **Create API Key**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429980447-plhqscuyn9-integrating-amplitude__02-enter-a-name-such-as-scrut-integration-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Enter a name such as Scrut Integration and click Create API Key" caption=" " />
+5. Copy the API Key value and store it safely.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429982284-rkdyfrjhz2-integrating-amplitude__03-copy-the-api-key-value-and-store-it-safely.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Copy the API Key value and store it safely" caption=" " />
+6. Next, copy the Secret Key and store it safely.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429984013-p3urjg9kor-integrating-amplitude__04-next-copy-the-secret-key-and-store-it-safely.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Next, copy the Secret Key and store it safely" caption=" " />
+7. You’ll need to enter these values in Scrut in the next step.
+
+<Callout kind="alert">
+  Note:
+
+  Each Amplitude project has its own API Key and Secret Key. Make sure you are copying credentials from the correct project before proceeding.
+</Callout>
+
+### Step 2: Connect Amplitude in Scrut
+
+1. In Scrut, navigate to **Integrations** in the left sidebar.
+2. Click the **Integrations Library**, scroll to the **Miscellaneous** section.
+3. Locate **Amplitude** and click **Integrate**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429985832-szriueh8yam-integrating-amplitude__05-locate-amplitude-and-click-integrate.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Locate Amplitude and click Integrate" caption=" " />
+4. On the Amplitude integration page, under **Credentials**, enter the **API Key** and **Secret Key** you copied from Amplitude.
+5. Click **Submit**.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429987506-2mxp21qmy2-integrating-amplitude__06-click-submit.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Click Submit" caption=" " />
+
+Scrut validates the credentials and establishes the connection. The status indicator changes from **Not Connected** to **Connected** when the setup is complete.
+
+<Image src="https://blob-cdn.documentation.ai/org-be800fa3-4146-42bb-a54c-66f35fe883a5/doc-4eeb4bca-def5-4b53-9be4-c510946b0c05/1786429989314-hsgfass685-integrating-amplitude__07-scrut-validates-the-credentials-and.png?fm=auto&auto=compress%2Cformat" width="800" height="600" alt="Scrut validates the credentials and establishes the connection" caption=" " />
+
+## What Happens Next?
+
+### Initial data sync
+
+After you connect the integration, Scrut begins the initial data sync automatically. You can monitor sync activity and check for any errors under the **Audit Log** tab on the Amplitude integration page.
+
+### Review synced data
+
+Once the sync completes, verify the data in Scrut by navigating to the following:
+
+- Navigate to **People → Access Reviews → Applications** and verify if Scrut has synced the user records from Amplitude.
+- Navigate to **Tests →** **Automated Tests** to view automated test results for Amplitude.
+
+## Common Errors and Troubleshooting
+
+### Invalid credentials
+
+Cause: The API Key or Secret Key entered does not match the credentials in your Amplitude project. Possible solutions:
+
+- Return to your Amplitude project settings and re-copy both the API Key and Secret Key.
+- Confirm you are copying credentials from the correct Amplitude project.
+- Re-enter both values in Scrut and click Submit again.
+
+### Data not appearing after sync
+
+Possible solutions:
+
+- Check the Audit Log tab on the Amplitude integration page for any sync errors.
+- Confirm the integration status shows Connected.
+- Wait for the next scheduled sync (every 24 hours) or trigger a manual sync from the integration settings.
+- Verify that the Amplitude project you connected has active users.
+
+### Connection fails after credential rotation
+
+Cause: Amplitude API Keys and Secret Keys are project-specific. If credentials are rotated or regenerated, the existing connection breaks. Possible solutions:
+
+- Retrieve the new API Key and Secret Key from your Amplitude project settings.
+- Update the credentials in Scrut by navigating to Integrations, selecting Amplitude, and re-entering the new values under the Details tab.
+
+## FAQs
+
+<ExpandableGroup>
+
+<Expandable title="1: Can I connect multiple Amplitude projects to Scrut?" default-open="false">
+
+Each Amplitude integration in Scrut corresponds to one project. If you need to pull data from multiple Amplitude projects, contact your CSM to discuss your setup.
+
+</Expandable>
+
+<Expandable title="2: What happens if I rotate my Amplitude API Key?" default-open="false">
+
+The integration stops syncing until you update the credentials in Scrut. Go to Integrations, open Amplitude, and re-enter the new values under the Details tab.
+
+</Expandable>
+
+<Expandable title="3: What happens if a user is deleted in Amplitude?" default-open="false">
+
+Deleted users may no longer appear in subsequent syncs. Scrut reflects the state of user data as of the most recent sync. Review your Access Reviews data periodically to account for deprovisioned users.
+
+</Expandable>
+
+</ExpandableGroup>
+
+Reach out to [support@scrut.io](mailto:support@scrut.io) or contact your CSM for further assistance.
